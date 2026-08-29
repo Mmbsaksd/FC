@@ -1,2 +1,21 @@
+[project]
+name = "fc-market-scanner"
+version = "2.0.0"
+description = "AI Market Intelligence & Trading Signal System"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.100.0",
+    "uvicorn>=0.22.0",
+    "yfinance>=0.2.35",
+    "pandas>=2.0.0",
+    "numpy>=1.24.0",
+    "requests>=2.31.0",
+    "python-dotenv>=1.0.0",
+    "diskcache>=5.6.0",
+    "supabase>=2.0.0",
+    "google-generativeai>=0.4.0"
+]
+
 [tool.vercel]
-entrypoint = "app/api/server.py"
+entrypoint = "api/index.py"
