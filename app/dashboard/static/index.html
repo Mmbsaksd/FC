@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Market Intelligence & Trading Signal System</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Top App Header -->
+        <header class="app-header">
+            <div class="app-title">
+                <h1>📊 AI Market Intelligence & Trading Scanner</h1>
+                <span style="font-size: 0.85rem; color: var(--text-muted);">Alert-Only Quantitative Signal Engine & Dashboard</span>
+            </div>
+            <div style="display: flex; gap: 16px; align-items: center;">
+                <button class="btn-primary" onclick="triggerScan()">🚀 Run Live Scan</button>
+                <div class="status-badge">
+                    <span class="status-dot"></span>
+                    <span id="system-status">SYSTEM ONLINE</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="nav-tabs">
+            <button class="tab-btn active" onclick="switchTab('tab-overview')">📈 Overview & Live Market</button>
+            <button class="tab-btn" onclick="switchTab('tab-signals')">🚨 Signal Feed & Rationale</button>
+            <button class="tab-btn" onclick="switchTab('tab-paper')">💼 Paper Trading & P&L</button>
+            <button class="tab-btn" onclick="switchTab('tab-funnel')">🔻 Filter Funnel & Analytics</button>
+            <button class="tab-btn" onclick="switchTab('tab-settings')">⚙️ Configuration & Credentials</button>
+            <button class="tab-btn" onclick="switchTab('tab-health')">🩺 System Health & Logs</button>
+        </nav>
+
+        <!-- TAB 1: OVERVIEW -->
+        <div id="tab-overview" class="tab-content active">
+            <h3 style="margin-bottom: 12px; font-family: 'Outfit';">💪 Currency Strength Matrix (8 Majors)</h3>
+            <div class="card-grid" id="currency-strength-grid">
+                <!-- Dynamically Populated -->
+            </div>
+
+            <h3 style="margin: 24px 0 12px 0; font-family: 'Outfit';">📊 Tracked Market Monitor</h3>
+            <div class="glass-card">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Symbol</th>
+                            <th>Price</th>
+                            <th>Direction</th>
+                            <th>Tech Score</th>
+                            <th>RSI (14)</th>
+                            <th>ADX (14)</th>
+                            <th>Setup Type</th>
+                        </tr>
+                    </thead>
+                    <tbody id="market-monitor-body">
+                        <!-- Dynamically Populated -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- TAB 2: SIGNALS FEED -->
+        <div id="tab-signals" class="tab-content">
+            <h3 style="margin-bottom: 16px; font-family: 'Outfit';">🚨 Active Signals & Structured Rationale</h3>
+            <div class="signals-grid" id="signals-container">
+                <!-- Dynamically Populated Signal Cards -->
+            </div>
+        </div>
+
+        <!-- TAB 3: PAPER TRADING & P&L -->
+        <div id="tab-paper" class="tab-content">
+            <h3 style="margin-bottom: 16px; font-family: 'Outfit';">💼 Simulated Paper Trading Performance</h3>
+            <div class="card-grid">
+                <div class="glass-card">
+                    <div class="metric-title">Balance</div>
+                    <div class="metric-value" id="pt-balance">$10,000.00</div>
+                </div>
+                <div class="glass-card">
+                    <div class="metric-title">Net P&L</div>
+                    <div class="metric-value positive" id="pt-pnl">+$0.00</div>
+                </div>
+                <div class="glass-card">
+                    <div class="metric-title">Win Rate</div>
+                    <div class="metric-value" id="pt-winrate">65.0%</div>
+                </div>
+                <div class="glass-card">
+                    <div class="metric-title">Profit Factor</div>
+                    <div class="metric-value" id="pt-profit-factor">2.40</div>
+                </div>
+            </div>
+
+            <div class="glass-card" style="margin-top: 20px;">
+                <h4>Simulated Equity Curve</h4>
+                <canvas id="equityChart" style="max-height: 250px;"></canvas>
+            </div>
+        </div>
+
+        <!-- TAB 4: FILTER FUNNEL -->
+        <div id="tab-funnel" class="tab-content">
+            <h3 style="margin-bottom: 16px; font-family: 'Outfit';">🔻 Pipeline Filter Funnel & Rejection Analytics</h3>
+            <div class="glass-card">
+                <p style="color: var(--text-muted); margin-bottom: 16px;">Conversion counts across the 12 pipeline stages:</p>
+                <canvas id="funnelChart" style="max-height: 300px;"></canvas>
+            </div>
+        </div>
+
+        <!-- TAB 5: CONFIGURATION & CREDENTIALS -->
+        <div id="tab-settings" class="tab-content">
+            <h3 style="margin-bottom: 16px; font-family: 'Outfit';">⚙️ System Configuration & Credentials</h3>
+            
+            <div class="glass-card" style="margin-bottom: 20px;">
+                <h4 style="margin-bottom: 12px;">📱 Telegram Alert Configuration</h4>
+                <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                    <input type="password" id="tg-token" placeholder="Bot Token (e.g. 12345:ABC...)" style="flex: 1; padding: 10px; background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); color: white; border-radius: 8px;">
+                    <input type="text" id="tg-chatid" placeholder="Chat ID (e.g. -10012345)" style="flex: 1; padding: 10px; background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); color: white; border-radius: 8px;">
+                    <button class="btn-primary" onclick="testTelegram()">🧪 Test Connection</button>
+                </div>
+                <div id="tg-status-output" style="margin-top: 10px; font-size: 0.9rem;"></div>
+            </div>
+
+            <div class="glass-card">
+                <h4 style="margin-bottom: 12px;">🧠 LLM Provider Routing & Credentials Settings</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">Configure API keys for DeepSeek, Azure OpenAI, Google Gemini, and OpenAI. The system automatically routes across providers in order of availability.</p>
+                
+                <div style="display: flex; flex-direction: column; gap: 14px;">
+                    <!-- DeepSeek -->
+                    <div style="display: flex; gap: 12px; align-items: center; background: rgba(0,0,0,0.2); padding: 12px; border-radius: 10px;">
+                        <span style="width: 140px; font-weight: 600; font-size: 0.9rem;">DeepSeek (V3/R1)</span>
+                        <input type="password" id="llm-deepseek-key" placeholder="DeepSeek API Key (sk-...)" style="flex: 1; padding: 8px 12px; background: rgba(0,0,0,0.4); border: 1px solid var(--border-color); color: white; border-radius: 6px;">
+                    </div>
+
+                    <!-- Azure OpenAI -->
+                    <div style="display: flex; gap: 12px; align-items: center; background: rgba(0,0,0,0.2); padding: 12px; border-radius: 10px;">
+                        <span style="width: 140px; font-weight: 600; font-size: 0.9rem;">Azure OpenAI</span>
+                        <input type="password" id="llm-azure-key" placeholder="Azure API Key" style="flex: 1; padding: 8px 12px; background: rgba(0,0,0,0.4); border: 1px solid var(--border-color); color: white; border-radius: 6px;">
+                        <input type="text" id="llm-azure-endpoint" placeholder="Endpoint URL" style="flex: 1; padding: 8px 12px; background: rgba(0,0,0,0.4); border: 1px solid var(--border-color); color: white; border-radius: 6px;">
+                        <input type="text" id="llm-azure-deployment" placeholder="Deployment (e.g. gpt-4o)" style="width: 180px; padding: 8px 12px; background: rgba(0,0,0,0.4); border: 1px solid var(--border-color); color: white; border-radius: 6px;">
+                    </div>
+
+                    <!-- Google Gemini -->
+                    <div style="display: flex; gap: 12px; align-items: center; background: rgba(0,0,0,0.2); padding: 12px; border-radius: 10px;">
+                        <span style="width: 140px; font-weight: 600; font-size: 0.9rem;">Google Gemini</span>
+                        <input type="password" id="llm-gemini-key" placeholder="Gemini API Key (AIzaSy...)" style="flex: 1; padding: 8px 12px; background: rgba(0,0,0,0.4); border: 1px solid var(--border-color); color: white; border-radius: 6px;">
+                    </div>
+
+                    <!-- OpenAI -->
+                    <div style="display: flex; gap: 12px; align-items: center; background: rgba(0,0,0,0.2); padding: 12px; border-radius: 10px;">
+                        <span style="width: 140px; font-weight: 600; font-size: 0.9rem;">OpenAI Direct</span>
+                        <input type="password" id="llm-openai-key" placeholder="OpenAI API Key (sk-...)" style="flex: 1; padding: 8px 12px; background: rgba(0,0,0,0.4); border: 1px solid var(--border-color); color: white; border-radius: 6px;">
+                    </div>
+
+                    <div style="display: flex; gap: 12px; margin-top: 8px;">
+                        <button class="btn-primary" onclick="saveLLMConfig()">💾 Save LLM Credentials</button>
+                        <button class="btn-primary" style="background: linear-gradient(135deg, #06B6D4 0%, #0891B2 100%);" onclick="testLLMConnection()">🧪 Test LLM Routing</button>
+                    </div>
+                    <div id="llm-status-output" style="margin-top: 8px; font-size: 0.9rem;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 6: SYSTEM HEALTH -->
+        <div id="tab-health" class="tab-content">
+            <h3 style="margin-bottom: 16px; font-family: 'Outfit';">🩺 System Health & Resource Meters</h3>
+            <div class="card-grid">
+                <div class="glass-card">
+                    <div class="metric-title">System RAM Footprint</div>
+                    <div class="metric-value positive">~58 MB / 8.0 GB</div>
+                </div>
+                <div class="glass-card">
+                    <div class="metric-title">CPU Utilization</div>
+                    <div class="metric-value positive">&lt; 5%</div>
+                </div>
+                <div class="glass-card">
+                    <div class="metric-title">Data Quality Status</div>
+                    <div class="metric-value positive">GOOD</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for "WHY THIS TRADE?" Rationale -->
+    <div id="rationale-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h3 id="modal-title" style="margin-bottom: 12px; font-family: 'Outfit';">❓ WHY THIS TRADE?</h3>
+            <div id="modal-body" style="font-size: 0.95rem; line-height: 1.6; color: var(--text-secondary);">
+                <!-- Dynamic Content -->
+            </div>
+            <button class="btn-primary" style="margin-top: 20px; width: 100%;" onclick="closeModal()">Close Window</button>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+# Environment Variables and Credentials (NEVER COMMIT SECRETS)
+.env
+.env.local
+.env.*.local
+*.env
+
+# Python Caches & Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local Scratch & Cache Directories
+.cache/
+scratch/
+.tmp/
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# SQLite & Local Log Files
+*.db
+*.sqlite
+*.sqlite3
+*.log
+logs/
+
+# IDE & Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS Metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Vercel & Node Metadata
+.vercel/
+node_modules/
