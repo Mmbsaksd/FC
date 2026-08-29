@@ -7,6 +7,15 @@ env_path = Path(__file__).resolve().parent.parent.parent / '.env'
 if env_path.exists():
     load_dotenv(dotenv_path=env_path)
 
+def safe_float_env(key: str, default: float) -> float:
+    val = os.getenv(key)
+    if not val or not val.strip():
+        return default
+    try:
+        return float(val.strip())
+    except ValueError:
+        return default
+
 class Settings:
     SUPABASE_URL: str = os.getenv("SUPABASE_URL", "")
     SUPABASE_KEY: str = os.getenv("SUPABASE_KEY", "")
@@ -25,6 +34,6 @@ class Settings:
 
     ENVIRONMENT: str = os.getenv("ENVIRONMENT", "development")
     LOG_LEVEL: str = os.getenv("LOG_LEVEL", "INFO")
-    MIN_OPPORTUNITY_SCORE: float = float(os.getenv("MIN_OPPORTUNITY_SCORE", "70.0"))
+    MIN_OPPORTUNITY_SCORE: float = safe_float_env("MIN_OPPORTUNITY_SCORE", 70.0)
 
 settings = Settings()
