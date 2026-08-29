@@ -1,0 +1,14 @@
+# Ignore heavy local data, tests, caches, and dev requirements on Vercel
+.git
+.github
+tests/
+models/
+scratch/
+docs/
+.cache/
+*.log
+*.sqlite
+*.db
+requirements-dev.txt
+streamlit_app.py
+app/dashboard/dashboard.py
