@@ -1,0 +1,5 @@
+{
+  "interval_minutes": 5,
+  "interval_label": "5m",
+  "continuous_monitoring_enabled": true
+}

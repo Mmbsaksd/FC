@@ -16,11 +16,14 @@ class AzureOpenAIClient:
 
     def __init__(self):
         self.api_key = os.getenv("AZURE_OPENAI_API_KEY", settings.AZURE_OPENAI_API_KEY)
-        self.endpoint = os.getenv("AZURE_OPENAI_ENDPOINT", "https://moham-mi3bbwto-eastus2.cognitiveservices.azure.com/").rstrip("/")
-        self.deployment_name = os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME", "gpt-4o")
+        self.endpoint = os.getenv("AZURE_OPENAI_ENDPOINT", settings.AZURE_OPENAI_ENDPOINT).rstrip("/")
+        self.deployment_name = os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME", settings.AZURE_OPENAI_DEPLOYMENT_NAME)
         self.api_version = os.getenv("AZURE_OPENAI_API_VERSION", "2025-01-01-preview")
 
-        self.url = f"{self.endpoint}/openai/deployments/{self.deployment_name}/chat/completions?api-version={self.api_version}"
+        if self.endpoint:
+            self.url = f"{self.endpoint}/openai/deployments/{self.deployment_name}/chat/completions?api-version={self.api_version}"
+        else:
+            self.url = ""
 
     def analyze_opportunity(self, candidate: Dict[str, Any]) -> Dict[str, Any]:
         if not self.api_key:
@@ -40,7 +43,7 @@ class AzureOpenAIClient:
         prompt = f"""You are a senior quantitative risk manager. Analyze the following trading candidate and verify if technical evidence, currency strength, and market setup logically support the direction.
 
 CANDIDATE DATA:
-{json.dumps(candidate, indent=2)}
+{json.dumps(candidate, indent=2, default=str)}
 
 OUTPUT FORMAT: Return ONLY valid JSON with exact keys:
 {{

@@ -19,9 +19,9 @@ class OandaMarketDataProvider(MarketDataProvider):
         self.account_id = settings.OANDA_ACCOUNT_ID
         self.env = settings.OANDA_ENVIRONMENT
         self.base_url = (
-            "https://api-fxpractice.oanda.com/v20"
+            "https://api-fxpractice.oanda.com/v3"
             if self.env == "practice"
-            else "https://api-fxtrade.oanda.com/v20"
+            else "https://api-fxtrade.oanda.com/v3"
         )
         self.headers = {
             "Authorization": f"Bearer {self.api_key}",

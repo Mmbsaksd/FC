@@ -1,8 +1,18 @@
 import unittest
+from unittest.mock import patch
 from fastapi.testclient import TestClient
 from app.api.server import app
 
 class TestFastAPIServer(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.patcher = patch("app.api.server.SIGNALS_STORAGE_PATH", "non_existent_file.json")
+        cls.patcher.start()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.patcher.stop()
+
     def setUp(self):
         self.client = TestClient(app)
 

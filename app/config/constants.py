@@ -13,7 +13,11 @@ TRACKED_INSTRUMENTS = [
     {"symbol": "NZDUSD=X", "name": "NZD/USD", "type": "FOREX", "base": "NZD", "quote": "USD", "pip_size": 0.0001, "oanda_symbol": "NZD_USD"},
     {"symbol": "EURGBP=X", "name": "EUR/GBP", "type": "FOREX", "base": "EUR", "quote": "GBP", "pip_size": 0.0001, "oanda_symbol": "EUR_GBP"},
     {"symbol": "GC=F",     "name": "Gold",    "type": "COMMODITY", "base": "XAU", "quote": "USD", "pip_size": 0.10, "oanda_symbol": "XAU_USD"},
-    {"symbol": "CL=F",     "name": "Crude Oil", "type": "COMMODITY", "base": "WTI", "quote": "USD", "pip_size": 0.01, "oanda_symbol": "WTICO_USD"}
+    {"symbol": "CL=F",     "name": "Crude Oil", "type": "COMMODITY", "base": "WTI", "quote": "USD", "pip_size": 0.01, "oanda_symbol": "WTICO_USD"},
+    {"symbol": "BTC-USD",  "name": "Bitcoin (BTC)",  "type": "CRYPTO", "base": "BTC", "quote": "USD", "pip_size": 1.00, "oanda_symbol": "BTC_USD"},
+    {"symbol": "ETH-USD",  "name": "Ethereum (ETH)", "type": "CRYPTO", "base": "ETH", "quote": "USD", "pip_size": 0.10, "oanda_symbol": "ETH_USD"},
+    {"symbol": "SOL-USD",  "name": "Solana (SOL)",   "type": "CRYPTO", "base": "SOL", "quote": "USD", "pip_size": 0.01, "oanda_symbol": "SOL_USD"},
+    {"symbol": "XRP-USD",  "name": "XRP (Ripple)",   "type": "CRYPTO", "base": "XRP", "quote": "USD", "pip_size": 0.0001, "oanda_symbol": "XRP_USD"}
 ]
 
 # Major Currencies for Strength Matrix

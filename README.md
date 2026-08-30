@@ -8,7 +8,7 @@ Strictly **Alert-Only**. Does NOT automatically execute trades.
 
 ## 🛠️ Tech Stack & Architecture
 
-- **Backend API**: Python 3.11, FastAPI, Polars, TA-Lib, LightGBM, yfinance, OANDA v20 API, Supabase PostgreSQL.
+- **Backend API**: Python 3.11, FastAPI, yfinance, OANDA v20 API, DiskCache.
 - **Frontend Dashboard**: Dark Mode Glassmorphism single-page app (Inter & Outfit Google Fonts, Chart.js, Lucide Icons).
 - **AI & LLM Routing**: DeepSeek V3/R1 (Primary), Azure OpenAI `gpt-4o` (Secondary), Google Gemini 1.5/2.5 Flash (Tertiary).
 - **Alerting**: Telegram Bot API (`python-telegram-bot`) & Free SMTP Email.
@@ -25,8 +25,8 @@ pip install -r requirements.txt
 ### 2. Configure Credentials
 Copy `.env.example` to `.env` and enter your keys:
 ```ini
-TELEGRAM_BOT_TOKEN=8815174821:AAEVVwaPfglouNg2AHCQ0ZeLVIXtyndxbvo
-TELEGRAM_CHAT_ID=774794083
+TELEGRAM_BOT_TOKEN=your-telegram-bot-token
+TELEGRAM_CHAT_ID=your-telegram-chat-id
 AZURE_OPENAI_API_KEY=your-azure-key
 AZURE_OPENAI_ENDPOINT=https://your-endpoint.cognitiveservices.azure.com/
 AZURE_OPENAI_DEPLOYMENT_NAME=gpt-4o

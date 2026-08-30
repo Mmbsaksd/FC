@@ -11,7 +11,7 @@ class DataValidator:
     """
 
     @staticmethod
-    def validate_ohlcv(df: pd.DataFrame, max_latency_seconds: int = 3600) -> Tuple[str, float, str]:
+    def validate_ohlcv(df: pd.DataFrame, max_latency_seconds: int = 3600, is_crypto: bool = False) -> Tuple[str, float, str]:
         """
         Validates OHLCV DataFrame.
         Returns (status, quality_score, reason)
@@ -38,11 +38,11 @@ class DataValidator:
             now = pd.Timestamp.now(tz='UTC')
             latency = (now - last_timestamp).total_seconds()
 
-            # Weekend Market Close Check (Markets closed Fri 21:00 UTC - Sun 21:00 UTC)
+            # Weekend Market Close Check (Markets closed Fri 21:00 UTC - Sun 21:00 UTC for FX, Crypto is 24/7)
             is_weekend = (now.weekday() == 5) or (now.weekday() == 6) or (now.weekday() == 0 and now.hour < 1)
 
             if latency > max_latency_seconds * 3:
-                if is_weekend:
+                if is_weekend and not is_crypto:
                     return "GOOD", 85.0, f"Weekend market closure (Last candle: {last_timestamp})"
                 return "STALE", 30.0, f"Data stale by {latency / 3600:.1f} hours"
             elif latency > max_latency_seconds:

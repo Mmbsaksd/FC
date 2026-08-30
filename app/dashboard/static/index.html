@@ -12,7 +12,7 @@
         <!-- Top App Header -->
         <header class="app-header">
             <div class="app-title">
-                <h1>📊 AI Market Intelligence & Trading Scanner</h1>
+                <h1 style="display: flex; align-items: center; gap: 10px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-emerald);"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg> AI Market Intelligence & Trading Scanner</h1>
                 <span style="font-size: 0.85rem; color: var(--text-muted);">Alert-Only Quantitative Signal Engine & Dashboard</span>
             </div>
             <div style="display: flex; gap: 16px; align-items: center;">
@@ -29,7 +29,7 @@
             <button class="tab-btn active" onclick="switchTab('tab-overview')">📈 Overview & Live Market</button>
             <button class="tab-btn" onclick="switchTab('tab-signals')">🚨 Signal Feed & Rationale</button>
             <button class="tab-btn" onclick="switchTab('tab-paper')">💼 Paper Trading & P&L</button>
-            <button class="tab-btn" onclick="switchTab('tab-funnel')">🔻 Filter Funnel & Analytics</button>
+            <button class="tab-btn" onclick="switchTab('tab-funnel')">🎛️ System Mirror & Analytics</button>
             <button class="tab-btn" onclick="switchTab('tab-settings')">⚙️ Configuration & Credentials</button>
             <button class="tab-btn" onclick="switchTab('tab-health')">🩺 System Health & Logs</button>
         </nav>
@@ -98,12 +98,179 @@
             </div>
         </div>
 
-        <!-- TAB 4: FILTER FUNNEL -->
+        <!-- TAB 4: REAL-TIME SYSTEM MIRROR & PARALLEL ANALYTICS -->
         <div id="tab-funnel" class="tab-content">
-            <h3 style="margin-bottom: 16px; font-family: 'Outfit';">🔻 Pipeline Filter Funnel & Rejection Analytics</h3>
-            <div class="glass-card">
-                <p style="color: var(--text-muted); margin-bottom: 16px;">Conversion counts across the 12 pipeline stages:</p>
-                <canvas id="funnelChart" style="max-height: 300px;"></canvas>
+            <!-- Header & Control Bar -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+                <div>
+                    <h2 style="font-family: 'Outfit'; font-size: 1.5rem; display: flex; align-items: center; gap: 10px;">
+                        🎛️ System Mirror & Parallel Analysis Control Room
+                    </h2>
+                    <span style="font-size: 0.85rem; color: var(--text-muted);">Real-time telemetry, 10-engine parallel execution, decision lifecycle, and rejection analytics</span>
+                </div>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <button class="btn-primary" style="padding: 8px 16px; font-size: 0.85rem;" onclick="loadFunnel()">🔄 Refresh Telemetry</button>
+                    <span class="status-tag live" id="mirror-status-badge" style="display: flex; align-items: center; gap: 6px;">
+                        <span class="status-dot"></span> <span id="mirror-state-text">LIVE MIRROR</span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- SECTION 1: REAL-TIME SYSTEM STATUS TELEMETRY -->
+            <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); margin-bottom: 20px;">
+                <div class="glass-card">
+                    <div class="metric-title">Scan Cycle ID</div>
+                    <div class="metric-value" id="mirror-scan-id" style="font-size: 1.05rem; color: var(--accent-cyan);">scan-live</div>
+                </div>
+                <div class="glass-card">
+                    <div class="metric-title">Last Scan Started</div>
+                    <div class="metric-value" id="mirror-scan-time" style="font-size: 1.05rem;">--:--:--</div>
+                </div>
+                <div class="glass-card">
+                    <div class="metric-title">Parallel Pipeline Latency</div>
+                    <div class="metric-value positive" id="mirror-latency">18.2 ms</div>
+                </div>
+                <div class="glass-card">
+                    <div class="metric-title">Active Engines</div>
+                    <div class="metric-value" id="mirror-engines-active" style="color: var(--accent-emerald);">10 / 10</div>
+                </div>
+                <div class="glass-card">
+                    <div class="metric-title">Monitored Assets</div>
+                    <div class="metric-value" id="mirror-assets-count">14 Pairs</div>
+                </div>
+                <div class="glass-card">
+                    <div class="metric-title">System Health</div>
+                    <div class="metric-value positive" id="mirror-health">OPTIMAL</div>
+                </div>
+            </div>
+
+            <!-- SECTION 2: OPPORTUNITY DECISION LIFECYCLE (NOT SEQUENTIAL FUNNEL) -->
+            <div class="glass-card" style="margin-bottom: 20px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                    <h3 style="font-family: 'Outfit'; font-size: 1.15rem;">🔄 Opportunity Decision Lifecycle Flow</h3>
+                    <span style="font-size: 0.8rem; color: var(--text-muted); background: rgba(255,255,255,0.05); padding: 4px 10px; border-radius: 6px;">
+                        Snapshot ➔ Parallel Evidence ➔ Aggregation ➔ LLM ➔ Risk ➔ Alert
+                    </span>
+                </div>
+
+                <div class="lifecycle-flow-container" id="lifecycle-flow-grid">
+                    <!-- Dynamically Generated 8 Lifecycle Stages -->
+                </div>
+            </div>
+
+            <!-- SECTION 3: 10 PARALLEL ANALYSIS ENGINES ACTIVITY & CONTRIBUTION -->
+            <div class="glass-card" style="margin-bottom: 20px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                    <div>
+                        <h3 style="font-family: 'Outfit'; font-size: 1.15rem;">⚡ 10-Engine Parallel Evidence Matrix</h3>
+                        <span style="font-size: 0.85rem; color: var(--text-muted);">Concurrent engine execution, orthogonal weights, confidence ratings, and contribution status</span>
+                    </div>
+                    <span class="status-tag" style="background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald); font-weight: 600;">All 10 Engines Online</span>
+                </div>
+
+                <div class="engine-matrix-grid" id="engine-matrix-container">
+                    <!-- Dynamically Populated 10 Engine Cards -->
+                </div>
+            </div>
+
+            <!-- SECTION 4 & 5: REJECTION ANALYTICS & CANDIDATE EVALUATION INSPECTOR (WHY NO TRADE?) -->
+            <div style="display: grid; grid-template-columns: 1fr 1.4fr; gap: 20px; margin-bottom: 20px;">
+                <!-- Rejection Breakdown Card -->
+                <div class="glass-card">
+                    <h3 style="font-family: 'Outfit'; font-size: 1.15rem; margin-bottom: 12px;">🚫 Rejection Reason Analytics</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 14px;">Why market observations and candidate setups were filtered out:</p>
+                    
+                    <div id="rejection-reasons-list" style="display: flex; flex-direction: column; gap: 10px;">
+                        <!-- Dynamically Populated Rejection Items -->
+                    </div>
+
+                    <div style="margin-top: 16px; padding: 12px; background: rgba(0,0,0,0.25); border-radius: 8px; border-left: 3px solid var(--accent-amber);">
+                        <div style="font-size: 0.85rem; font-weight: 600; color: var(--accent-amber);">Deterministic Hard Gate Policy</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">
+                            Signals strictly require: Composite Score &ge; 70.0, Confidence &ge; 50%, Risk/Reward &ge; 1:2.0, Positive Expected Value (EV &gt; 0), and &le; 2 contradicting engines.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Why No Trade Candidate Inspector -->
+                <div class="glass-card">
+                    <h3 style="font-family: 'Outfit'; font-size: 1.15rem; margin-bottom: 12px;">🔍 "Why No Trade?" Candidate Inspector</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 14px;">Live evaluation log of candidates evaluated in the most recent scan cycle:</p>
+
+                    <div style="max-height: 280px; overflow-y: auto;">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Instrument</th>
+                                    <th>Direction</th>
+                                    <th>Score</th>
+                                    <th>Status</th>
+                                    <th>Filter / Invalidation Reason</th>
+                                </tr>
+                            </thead>
+                            <tbody id="candidate-eval-body">
+                                <!-- Dynamically Populated Candidate Evaluation Rows -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 6 & 7: MACHINE LEARNING, DATA QUALITY & SYSTEM HEALTH -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <!-- ML Model Telemetry Card -->
+                <div class="glass-card">
+                    <h3 style="font-family: 'Outfit'; font-size: 1.15rem; margin-bottom: 12px;">🧠 Machine Learning Model Monitor</h3>
+                    <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.85rem;">
+                        <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: rgba(0,0,0,0.25); border-radius: 6px;">
+                            <span style="color: var(--text-muted);">Model Architecture:</span>
+                            <span style="font-weight: 600; color: var(--accent-cyan);" id="ml-model-name">Calibrated Quantitative Logistic Factor Engine</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: rgba(0,0,0,0.25); border-radius: 6px;">
+                            <span style="color: var(--text-muted);">Inference Speed:</span>
+                            <span style="font-weight: 600; color: var(--accent-emerald);" id="ml-inference-speed">&lt; 0.8 ms / asset (RAM Vectorized)</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: rgba(0,0,0,0.25); border-radius: 6px;">
+                            <span style="color: var(--text-muted);">Probability Range:</span>
+                            <span style="font-weight: 600;">Calibrated Sigmoid [0.15, 0.85]</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: rgba(0,0,0,0.25); border-radius: 6px;">
+                            <span style="color: var(--text-muted);">Feature Weighting:</span>
+                            <span>RSI (25%), ADX (25%), Confluence (30%), CS Divergence (20%)</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: rgba(0,0,0,0.25); border-radius: 6px;">
+                            <span style="color: var(--text-muted);">Operational Status:</span>
+                            <span style="color: var(--accent-emerald); font-weight: 600;">● Active Real-Time Inference</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Quality & Concurrency Monitor -->
+                <div class="glass-card">
+                    <h3 style="font-family: 'Outfit'; font-size: 1.15rem; margin-bottom: 12px;">📡 Data Quality & Health Telemetry</h3>
+                    <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.85rem;">
+                        <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: rgba(0,0,0,0.25); border-radius: 6px;">
+                            <span style="color: var(--text-muted);">Market Data Feed:</span>
+                            <span style="font-weight: 600; color: var(--accent-emerald);" id="telemetry-market-feed">OANDA v20 REST API (Primary FX/Gold) + Yahoo Finance (Macro/Crypto)</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: rgba(0,0,0,0.25); border-radius: 6px;">
+                            <span style="color: var(--text-muted);">Forming Candle Truncation:</span>
+                            <span style="font-weight: 600; color: var(--accent-emerald);">ACTIVE (Look-Ahead Repaint Prevention)</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: rgba(0,0,0,0.25); border-radius: 6px;">
+                            <span style="color: var(--text-muted);">Macro Rates Baseline:</span>
+                            <span style="font-weight: 600;">Central Bank Policy Rates (8 Majors Synced)</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: rgba(0,0,0,0.25); border-radius: 6px;">
+                            <span style="color: var(--text-muted);">Parallel Worker Threads:</span>
+                            <span style="font-weight: 600; color: var(--accent-cyan);">4 Concurrent Thread Workers</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: rgba(0,0,0,0.25); border-radius: 6px;">
+                            <span style="color: var(--text-muted);">Fault Isolation:</span>
+                            <span style="color: var(--accent-emerald); font-weight: 600;">ISOLATED_FAILSAFE (10/10)</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -116,7 +283,8 @@
                 <div style="display: flex; gap: 16px; flex-wrap: wrap;">
                     <input type="password" id="tg-token" placeholder="Bot Token (e.g. 12345:ABC...)" style="flex: 1; padding: 10px; background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); color: white; border-radius: 8px;">
                     <input type="text" id="tg-chatid" placeholder="Chat ID (e.g. -10012345)" style="flex: 1; padding: 10px; background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); color: white; border-radius: 8px;">
-                    <button class="btn-primary" onclick="testTelegram()">🧪 Test Connection</button>
+                    <button class="btn-primary" onclick="saveTelegramConfig()">💾 Save Telegram Credentials</button>
+                    <button class="btn-primary" style="background: linear-gradient(135deg, #06B6D4 0%, #0891B2 100%);" onclick="testTelegram()">🧪 Test Connection</button>
                 </div>
                 <div id="tg-status-output" style="margin-top: 10px; font-size: 0.9rem;"></div>
             </div>
@@ -159,23 +327,238 @@
                     <div id="llm-status-output" style="margin-top: 8px; font-size: 0.9rem;"></div>
                 </div>
             </div>
+
+            <!-- OANDA Broker Configuration Card -->
+            <div class="glass-card" style="margin-top: 20px;">
+                <h4 style="margin-bottom: 12px;">📊 OANDA v20 Broker Integration Settings</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">Configure OANDA v20 REST API key, Account ID, and environment for live tick streams and order routing.</p>
+                
+                <div style="display: flex; flex-direction: column; gap: 14px;">
+                    <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                        <input type="password" id="oanda-key" placeholder="OANDA API Key (e.g. 1234567890abcdef...)" style="flex: 2; min-width: 260px; padding: 10px; background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); color: white; border-radius: 8px;">
+                        <input type="text" id="oanda-account" placeholder="Account ID (e.g. 101-001-1234567-001)" style="flex: 1; min-width: 200px; padding: 10px; background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); color: white; border-radius: 8px;">
+                        <select id="oanda-env" style="width: 150px; padding: 10px; background: #0F172A; border: 1px solid var(--border-color); color: white; border-radius: 8px;">
+                            <option value="practice">Practice (Demo)</option>
+                            <option value="live">Live Production</option>
+                        </select>
+                    </div>
+
+                    <div style="display: flex; gap: 12px; margin-top: 4px;">
+                        <button class="btn-primary" onclick="saveOANDAConfig()">💾 Save OANDA Credentials</button>
+                        <button class="btn-primary" style="background: linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%);" onclick="testOANDAConnection()">🧪 Test OANDA Connection</button>
+                    </div>
+                    <div id="oanda-status-output" style="margin-top: 8px; font-size: 0.9rem;"></div>
+                </div>
+            </div>
+
+            <!-- Scan Scheduler Interval Card -->
+            <div class="glass-card" style="margin-top: 20px;">
+                <h4 style="margin-bottom: 12px;">⏱️ Continuous Scan Scheduler Interval</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">Configure how frequently the background scanner evaluates the 14 tracked instruments across all 10 parallel engines.</p>
+                <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+                    <select id="scan-interval-select" style="padding: 10px 16px; background: #0F172A; border: 1px solid var(--border-color); color: white; border-radius: 8px; font-weight: 600;">
+                        <option value="1">1 Minute (Rapid Tick Mode)</option>
+                        <option value="5">5 Minutes (Scalp Horizon)</option>
+                        <option value="15" selected>15 Minutes (Default Swing Horizon)</option>
+                        <option value="30">30 Minutes (Medium Horizon)</option>
+                        <option value="60">1 Hour (Macro Horizon)</option>
+                    </select>
+                    <button class="btn-primary" onclick="saveSchedulerInterval()">💾 Save Scan Interval</button>
+                    <span id="scheduler-status-output" style="font-size: 0.9rem; color: var(--accent-emerald);"></span>
+                </div>
+            </div>
         </div>
 
-        <!-- TAB 6: SYSTEM HEALTH -->
+        <!-- TAB 6: SYSTEM HEALTH & FLIGHT RECORDER LOGS -->
         <div id="tab-health" class="tab-content">
-            <h3 style="margin-bottom: 16px; font-family: 'Outfit';">🩺 System Health & Resource Meters</h3>
-            <div class="card-grid">
-                <div class="glass-card">
-                    <div class="metric-title">System RAM Footprint</div>
-                    <div class="metric-value positive">~58 MB / 8.0 GB</div>
+            <!-- Header -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+                <div>
+                    <h2 style="font-family: 'Outfit'; font-size: 1.5rem; display: flex; align-items: center; gap: 10px;">
+                        🩺 System Flight Recorder & Observability Control Room
+                    </h2>
+                    <span style="font-size: 0.85rem; color: var(--text-muted);">Real-time structured event logs, lifecycle telemetry, error diagnostics, and engine performance tracking</span>
                 </div>
-                <div class="glass-card">
-                    <div class="metric-title">CPU Utilization</div>
-                    <div class="metric-value positive">&lt; 5%</div>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <button class="btn-primary" style="padding: 8px 16px; font-size: 0.85rem;" onclick="loadLogs(); loadLogsSummary();">🔄 Refresh Logs</button>
+                    <span class="status-tag live" style="display: flex; align-items: center; gap: 6px;">
+                        <span class="status-dot"></span> <span>FLIGHT RECORDER ACTIVE</span>
+                    </span>
                 </div>
+            </div>
+
+            <!-- SECTION 1: TOP OBSERVABILITY METRICS RIBBON -->
+            <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); margin-bottom: 20px;">
+                <div class="glass-card" style="padding: 14px 12px; text-align: center;">
+                    <div class="metric-title" style="font-size: 0.7rem;">Total Scans</div>
+                    <div class="metric-value" id="log-stat-scans" style="font-size: 1.3rem; color: var(--accent-cyan);">0</div>
+                </div>
+                <div class="glass-card" style="padding: 14px 12px; text-align: center;">
+                    <div class="metric-title" style="font-size: 0.7rem;">Candidates</div>
+                    <div class="metric-value" id="log-stat-candidates" style="font-size: 1.3rem;">0</div>
+                </div>
+                <div class="glass-card" style="padding: 14px 12px; text-align: center;">
+                    <div class="metric-title" style="font-size: 0.7rem;">Signals Created</div>
+                    <div class="metric-value positive" id="log-stat-signals" style="font-size: 1.3rem;">0</div>
+                </div>
+                <div class="glass-card" style="padding: 14px 12px; text-align: center;">
+                    <div class="metric-title" style="font-size: 0.7rem;">Telegram Sent</div>
+                    <div class="metric-value positive" id="log-stat-telegram" style="font-size: 1.3rem;">0</div>
+                </div>
+                <div class="glass-card" style="padding: 14px 12px; text-align: center;">
+                    <div class="metric-title" style="font-size: 0.7rem;">Email Sent</div>
+                    <div class="metric-value" id="log-stat-email" style="font-size: 1.3rem; color: var(--text-muted);">0</div>
+                </div>
+                <div class="glass-card" style="padding: 14px 12px; text-align: center;">
+                    <div class="metric-title" style="font-size: 0.7rem;">Errors</div>
+                    <div class="metric-value" id="log-stat-errors" style="font-size: 1.3rem; color: var(--accent-rose);">0</div>
+                </div>
+                <div class="glass-card" style="padding: 14px 12px; text-align: center;">
+                    <div class="metric-title" style="font-size: 0.7rem;">Warnings</div>
+                    <div class="metric-value" id="log-stat-warnings" style="font-size: 1.3rem; color: var(--accent-amber);">0</div>
+                </div>
+                <div class="glass-card" style="padding: 14px 12px; text-align: center;">
+                    <div class="metric-title" style="font-size: 0.7rem;">Engine Failures</div>
+                    <div class="metric-value" id="log-stat-engine-failures" style="font-size: 1.3rem; color: var(--accent-rose);">0</div>
+                </div>
+            </div>
+
+            <!-- SECTION 2: LIVE STATUS & CORRELATION BANNER -->
+            <div class="glass-card" style="margin-bottom: 20px; padding: 14px 20px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 14px; align-items: center; background: rgba(15, 23, 42, 0.7);">
+                <div style="display: flex; gap: 20px; align-items: center; font-size: 0.85rem;">
+                    <div><span style="color: var(--text-muted);">Current Scan ID:</span> <strong id="log-live-scan-id" style="color: var(--accent-cyan);">scan-idle</strong></div>
+                    <div><span style="color: var(--text-muted);">State:</span> <strong id="log-live-state" style="color: var(--accent-emerald);">IDLE</strong></div>
+                    <div><span style="color: var(--text-muted);">Last Scan:</span> <strong id="log-live-last-scan">--:--:--</strong></div>
+                </div>
+                <div style="font-size: 0.85rem;">
+                    <span style="color: var(--text-muted);">Last Error:</span> <span id="log-live-last-error" style="color: var(--accent-emerald);">None (All systems healthy)</span>
+                </div>
+            </div>
+
+            <!-- SECTION 3: REAL-TIME FLIGHT RECORDER LOGS TERMINAL WITH FILTERS -->
+            <div class="glass-card" style="margin-bottom: 20px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+                    <h3 style="font-family: 'Outfit'; font-size: 1.15rem;">📜 Real-Time Structured System Log Stream</h3>
+                    
+                    <!-- Filters Toolbar -->
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+                        <select id="log-filter-level" onchange="loadLogs()" style="padding: 6px 10px; background: #0F172A; border: 1px solid var(--border-color); color: white; border-radius: 6px; font-size: 0.8rem;">
+                            <option value="ALL">All Levels</option>
+                            <option value="INFO">INFO & Higher</option>
+                            <option value="WARNING">WARNING & ERROR</option>
+                            <option value="ERROR">ERROR / CRITICAL Only</option>
+                            <option value="DEBUG">DEBUG (All events)</option>
+                        </select>
+
+                        <select id="log-filter-component" onchange="loadLogs()" style="padding: 6px 10px; background: #0F172A; border: 1px solid var(--border-color); color: white; border-radius: 6px; font-size: 0.8rem;">
+                            <option value="ALL">All Components</option>
+                            <option value="ScannerDaemon">ScannerDaemon</option>
+                            <option value="ParallelEngine">ParallelEngine</option>
+                            <option value="ParallelOrchestrator">ParallelOrchestrator</option>
+                            <option value="EvidenceAggregator">EvidenceAggregator</option>
+                            <option value="LLMDecisionLayer">LLMDecisionLayer</option>
+                            <option value="FinalRiskGate">FinalRiskGate</option>
+                            <option value="SignalEngine">SignalEngine</option>
+                            <option value="TelegramDispatcher">TelegramDispatcher</option>
+                            <option value="PaperTrading">PaperTrading</option>
+                            <option value="MarketData">MarketData</option>
+                        </select>
+
+                        <input type="text" id="log-filter-search" placeholder="Search logs..." onkeyup="if(event.key==='Enter') loadLogs()" style="padding: 6px 10px; background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); color: white; border-radius: 6px; font-size: 0.8rem; width: 140px;">
+                        
+                        <button class="btn-primary" style="padding: 6px 12px; font-size: 0.8rem;" onclick="loadLogs()">Apply</button>
+                    </div>
+                </div>
+
+                <!-- Terminal Display -->
+                <div id="flight-recorder-terminal" style="background: #090D16; border: 1px solid var(--border-color); border-radius: 8px; padding: 14px; font-family: 'Consolas', monospace; font-size: 0.8rem; color: #CBD5E1; max-height: 380px; overflow-y: auto; line-height: 1.7;">
+                    <!-- Dynamically Populated with Real-Time Events -->
+                </div>
+            </div>
+
+            <!-- SECTION 4 & 5: ENGINE HEALTH & TOP RECURRING ERRORS -->
+            <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 20px; margin-bottom: 20px;">
+                <!-- Engine Health & Execution Latencies Table -->
                 <div class="glass-card">
-                    <div class="metric-title">Data Quality Status</div>
-                    <div class="metric-value positive">GOOD</div>
+                    <h3 style="font-family: 'Outfit'; font-size: 1.15rem; margin-bottom: 12px;">⚡ Engine Execution Telemetry & Health</h3>
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">Tracked execution metrics across all 10 analytical engines:</p>
+                    <div style="max-height: 260px; overflow-y: auto;">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Engine</th>
+                                    <th>Runs</th>
+                                    <th>Success</th>
+                                    <th>Failed</th>
+                                    <th>Avg Latency</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="engine-health-body">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Top Recurring Errors Table -->
+                <div class="glass-card">
+                    <h3 style="font-family: 'Outfit'; font-size: 1.15rem; margin-bottom: 12px;">🚨 Top Error & Failure Diagnostics</h3>
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">Tracked exceptions and failures with occurrence counts:</p>
+                    <div style="max-height: 260px; overflow-y: auto;">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Error Type</th>
+                                    <th>Component</th>
+                                    <th>Count</th>
+                                    <th>Last Seen</th>
+                                </tr>
+                            </thead>
+                            <tbody id="top-errors-body">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 6: NOTIFICATION DELIVERY & PAPER ENGINE TELEMETRY -->
+            <div class="card-grid" style="grid-template-columns: 1fr 1fr;">
+                <div class="glass-card">
+                    <h4 style="margin-bottom: 10px;">📱 Telegram Alert Dispatcher Telemetry</h4>
+                    <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.85rem;">
+                        <div style="display: flex; justify-content: space-between; padding: 6px 12px; background: rgba(0,0,0,0.2); border-radius: 6px;">
+                            <span style="color: var(--text-muted);">Attempted Deliveries:</span>
+                            <span style="font-weight: 600;" id="tg-stat-attempted">0</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 6px 12px; background: rgba(0,0,0,0.2); border-radius: 6px;">
+                            <span style="color: var(--text-muted);">Successful Deliveries:</span>
+                            <span style="font-weight: 600; color: var(--accent-emerald);" id="tg-stat-sent">0</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 6px 12px; background: rgba(0,0,0,0.2); border-radius: 6px;">
+                            <span style="color: var(--text-muted);">Failed Deliveries:</span>
+                            <span style="font-weight: 600; color: var(--accent-rose);" id="tg-stat-failed">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card">
+                    <h4 style="margin-bottom: 10px;">🛡️ Fault Isolation & Concurrency Metrics</h4>
+                    <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.85rem;">
+                        <div style="display: flex; justify-content: space-between; padding: 6px 12px; background: rgba(0,0,0,0.2); border-radius: 6px;">
+                            <span style="color: var(--text-muted);">Orchestrator Concurrency:</span>
+                            <span style="font-weight: 600; color: var(--accent-cyan);">4 Dedicated Worker Threads</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 6px 12px; background: rgba(0,0,0,0.2); border-radius: 6px;">
+                            <span style="color: var(--text-muted);">Engine Isolation Mode:</span>
+                            <span style="font-weight: 600; color: var(--accent-emerald);">ISOLATED_FAILSAFE (10/10)</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 6px 12px; background: rgba(0,0,0,0.2); border-radius: 6px;">
+                            <span style="color: var(--text-muted);">Log Ring Buffer:</span>
+                            <span style="font-weight: 600;">10,000 In-Memory Events + system.log</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -192,6 +575,6 @@
         </div>
     </div>
 
-    <script src="/static/app.js"></script>
+    <script src="/static/app.js?v=3.0"></script>
 </body>
 </html>

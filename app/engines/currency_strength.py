@@ -1,3 +1,4 @@
+import time
 import logging
 from typing import Dict, List, Any
 import pandas as pd
@@ -20,8 +21,14 @@ class CurrencyStrengthEngine:
     def calculate_currency_strength(self, timeframe: str = "1H") -> Dict[str, float]:
         """
         Calculates normalized currency strength score (-10 to +10) for each major currency.
-        Positive values = Strong, Negative values = Weak.
+        Uses Z-score relative return distribution across active currencies with caching.
         """
+        cache_key = f"cs_matrix_{timeframe}"
+        cached = getattr(self, "_cs_cache", {}).get(cache_key)
+        now_ts = time.time()
+        if cached and (now_ts - cached.get("time", 0)) < 60:
+            return cached.get("data", {})
+
         returns_matrix = {curr: [] for curr in MAJOR_CURRENCIES}
 
         # Fetch returns for available FX pairs
@@ -37,23 +44,33 @@ class CurrencyStrengthEngine:
             if df.empty or len(df) < 2:
                 continue
 
-            # Log return over recent 10 candles
-            start_price = df['close'].iloc[0]
-            end_price = df['close'].iloc[-1]
-            if start_price > 0:
-                ret = np.log(end_price / start_price) * 100.0
+            # Log return over lookback period
+            start_price = float(df['close'].iloc[0])
+            end_price = float(df['close'].iloc[-1])
+            if start_price > 0 and end_price > 0:
+                ret = float(np.log(end_price / start_price) * 100.0)
                 returns_matrix[base].append(ret)
                 returns_matrix[quote].append(-ret)
 
-        strength_scores = {}
+        raw_means = {}
         for curr, rets in returns_matrix.items():
-            if rets:
-                avg_ret = np.mean(rets)
-                # Scale to -10.0 ... +10.0
-                score = np.clip(avg_ret * 5.0, -10.0, 10.0)
-                strength_scores[curr] = round(float(score), 2)
-            else:
-                strength_scores[curr] = 0.0
+            raw_means[curr] = float(np.mean(rets)) if rets else 0.0
+
+        all_vals = list(raw_means.values())
+        mean_all = float(np.mean(all_vals)) if all_vals else 0.0
+        std_all = float(np.std(all_vals)) if all_vals else 1.0
+        if std_all < 1e-4:
+            std_all = 1.0
+
+        strength_scores = {}
+        for curr, m in raw_means.items():
+            z_score = (m - mean_all) / std_all
+            score = np.clip(z_score * 3.5, -10.0, 10.0)
+            strength_scores[curr] = round(float(score), 2)
+
+        if not hasattr(self, "_cs_cache"):
+            self._cs_cache = {}
+        self._cs_cache[cache_key] = {"time": now_ts, "data": strength_scores}
 
         return strength_scores
 

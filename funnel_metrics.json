@@ -1,0 +1,362 @@
+{
+  "system_status": {
+    "status": "HEALTHY",
+    "state": "IDLE",
+    "scan_id": "scan-20260830-150437",
+    "last_scan_time": "2026-08-30T15:05:26.131503+00:00",
+    "scan_interval_minutes": 15,
+    "monitored_assets": 14,
+    "active_engines": "10/10",
+    "completed_engines": 10,
+    "failed_engines": 0,
+    "pipeline_latency_ms": 48741.5,
+    "overall_health": "OPTIMAL"
+  },
+  "current_scan": {
+    "scan_id": "scan-20260830-150437",
+    "timestamp": "2026-08-30T15:05:26.131503+00:00",
+    "duration_ms": 48741.5,
+    "instruments_scanned": 14,
+    "total_observations": 840,
+    "valid_observations": 840,
+    "stale_observations": 0,
+    "rejected_observations": 0,
+    "analytical_jobs_launched": 140,
+    "analytical_jobs_completed": 140,
+    "failed_jobs": 0,
+    "candidates_detected": 8,
+    "candidates_sent_to_llm": 5,
+    "approved_opportunities": 0,
+    "rejected_opportunities": 14,
+    "alerts_generated": 0
+  },
+  "parallel_engines": [
+    {
+      "id": "tech",
+      "name": "Technical Analysis",
+      "status": "COMPLETED",
+      "weight": 0.25,
+      "role": "MOMENTUM & BREAKOUTS",
+      "contribution": "SUPPORT",
+      "latency_ms": 1.2,
+      "confidence": 0.82
+    },
+    {
+      "id": "candle",
+      "name": "Candle Structure",
+      "status": "COMPLETED",
+      "weight": 0.1,
+      "role": "MULTI-CANDLE PATTERNS",
+      "contribution": "SUPPORT",
+      "latency_ms": 0.8,
+      "confidence": 0.76
+    },
+    {
+      "id": "struct",
+      "name": "Market Structure",
+      "status": "COMPLETED",
+      "weight": 0.2,
+      "role": "BOS & CHOCH CONFIRMATION",
+      "contribution": "SUPPORT",
+      "latency_ms": 1.1,
+      "confidence": 0.84
+    },
+    {
+      "id": "currency",
+      "name": "Currency Strength",
+      "status": "COMPLETED",
+      "weight": 0.2,
+      "role": "8-CURRENCY MATRIX DIVERGENCE",
+      "contribution": "SUPPORT",
+      "latency_ms": 2.4,
+      "confidence": 0.8
+    },
+    {
+      "id": "ml",
+      "name": "ML Prediction",
+      "status": "COMPLETED",
+      "weight": 0.15,
+      "role": "CALIBRATED STATISTICAL MODEL",
+      "contribution": "SUPPORT",
+      "latency_ms": 0.6,
+      "confidence": 0.72
+    },
+    {
+      "id": "regime",
+      "name": "Market Regime",
+      "status": "COMPLETED",
+      "weight": 0.0,
+      "role": "VOLATILITY CONTEXT MODULATOR",
+      "contribution": "NEUTRAL",
+      "latency_ms": 0.9,
+      "confidence": 0.78
+    },
+    {
+      "id": "fund",
+      "name": "Fundamental Analysis",
+      "status": "COMPLETED",
+      "weight": 0.05,
+      "role": "CPI/NFP ECONOMIC SURPRISE",
+      "contribution": "SUPPORT",
+      "latency_ms": 0.5,
+      "confidence": 0.65
+    },
+    {
+      "id": "macro",
+      "name": "Macro Analysis",
+      "status": "COMPLETED",
+      "weight": 0.05,
+      "role": "10Y/2Y YIELDS & DXY MATRIX",
+      "contribution": "NEUTRAL",
+      "latency_ms": 1.5,
+      "confidence": 0.68
+    },
+    {
+      "id": "risk",
+      "name": "Risk Metrics",
+      "status": "COMPLETED",
+      "weight": 0.1,
+      "role": "ATR BRACKETS & R:R ENFORCER",
+      "contribution": "SUPPORT",
+      "latency_ms": 0.7,
+      "confidence": 0.9
+    },
+    {
+      "id": "sentiment",
+      "name": "Sentiment & Cross-Asset",
+      "status": "COMPLETED",
+      "weight": 0.05,
+      "role": "VIX, GOLD, OIL CONFLUENCE",
+      "contribution": "NEUTRAL",
+      "latency_ms": 1.8,
+      "confidence": 0.7
+    }
+  ],
+  "opportunity_lifecycle": [
+    {
+      "stage": "1. Market Snapshot",
+      "count": 14,
+      "pass_rate": 100.0,
+      "latency_ms": 120.0,
+      "description": "Ingested 60 bars of 15M candles for 14 instruments"
+    },
+    {
+      "stage": "2. Parallel Evidence",
+      "count": 140,
+      "pass_rate": 100.0,
+      "latency_ms": 48741.5,
+      "description": "10 independent analytical engines executed concurrently"
+    },
+    {
+      "stage": "3. Candidate Detection",
+      "count": 14,
+      "pass_rate": 100.0,
+      "latency_ms": 2.1,
+      "description": "Unified multi-engine context snapshots assembled"
+    },
+    {
+      "stage": "4. Evidence Aggregation",
+      "count": 8,
+      "pass_rate": 57.1,
+      "latency_ms": 1.4,
+      "description": "Orthogonal weighted composite scoring & regime filtering"
+    },
+    {
+      "stage": "5. LLM Decision Layer",
+      "count": 5,
+      "pass_rate": 62.5,
+      "latency_ms": 450.0,
+      "description": "Multi-provider AI rationale synthesis & hypothesis check"
+    },
+    {
+      "stage": "6. Deterministic Risk Gate",
+      "count": 4,
+      "pass_rate": 80.0,
+      "latency_ms": 0.5,
+      "description": "Hard validation: Score >= 70, R:R >= 2.0, EV > 0"
+    },
+    {
+      "stage": "7. Signal Generation",
+      "count": 0,
+      "pass_rate": 0.0,
+      "latency_ms": 0.8,
+      "description": "Structured JSON payload with complete WHY THIS TRADE rationale"
+    },
+    {
+      "stage": "8. Alert & Paper Trading",
+      "count": 0,
+      "pass_rate": 0.0,
+      "latency_ms": 85.0,
+      "description": "Telegram push notifications & simulated paper trade logging"
+    }
+  ],
+  "rejection_breakdown": [
+    {
+      "reason": "Opportunity Score < 70.0",
+      "count": 14,
+      "percentage": 100.0,
+      "description": "Composite multi-engine opportunity score failed to meet the minimum high-probability threshold of 70/100."
+    }
+  ],
+  "why_no_trade_list": [
+    {
+      "symbol": "EUR/USD",
+      "direction": "SHORT",
+      "score": 56.61,
+      "ml_prob": 0.691,
+      "reason": "Opportunity Score 56.6 Below Required Threshold (70.0)",
+      "status": "REJECTED"
+    },
+    {
+      "symbol": "GBP/USD",
+      "direction": "SHORT",
+      "score": 50.78,
+      "ml_prob": 0.49,
+      "reason": "Opportunity Score 50.8 Below Required Threshold (70.0)",
+      "status": "REJECTED"
+    },
+    {
+      "symbol": "USD/JPY",
+      "direction": "LONG",
+      "score": 56.63,
+      "ml_prob": 0.474,
+      "reason": "Opportunity Score 56.6 Below Required Threshold (70.0)",
+      "status": "REJECTED"
+    },
+    {
+      "symbol": "AUD/USD",
+      "direction": "SHORT",
+      "score": 56.04,
+      "ml_prob": 0.597,
+      "reason": "Opportunity Score 56.0 Below Required Threshold (70.0)",
+      "status": "REJECTED"
+    },
+    {
+      "symbol": "USD/CAD",
+      "direction": "LONG",
+      "score": 64.56,
+      "ml_prob": 0.61,
+      "reason": "Opportunity Score 64.6 Below Required Threshold (70.0)",
+      "status": "REJECTED"
+    },
+    {
+      "symbol": "USD/CHF",
+      "direction": "LONG",
+      "score": 60.28,
+      "ml_prob": 0.645,
+      "reason": "Opportunity Score 60.3 Below Required Threshold (70.0)",
+      "status": "REJECTED"
+    },
+    {
+      "symbol": "NZD/USD",
+      "direction": "SHORT",
+      "score": 56.66,
+      "ml_prob": 0.625,
+      "reason": "Opportunity Score 56.7 Below Required Threshold (70.0)",
+      "status": "REJECTED"
+    },
+    {
+      "symbol": "EUR/GBP",
+      "direction": "SHORT",
+      "score": 64.64,
+      "ml_prob": 0.668,
+      "reason": "Opportunity Score 64.6 Below Required Threshold (70.0)",
+      "status": "REJECTED"
+    },
+    {
+      "symbol": "Gold",
+      "direction": "SHORT",
+      "score": 55.12,
+      "ml_prob": 0.812,
+      "reason": "Opportunity Score 55.1 Below Required Threshold (70.0)",
+      "status": "REJECTED"
+    },
+    {
+      "symbol": "Crude Oil",
+      "direction": "LONG",
+      "score": 49.18,
+      "ml_prob": 0.485,
+      "reason": "Opportunity Score 49.2 Below Required Threshold (70.0)",
+      "status": "REJECTED"
+    },
+    {
+      "symbol": "Bitcoin (BTC)",
+      "direction": "LONG",
+      "score": 61.27,
+      "ml_prob": 0.734,
+      "reason": "Opportunity Score 61.3 Below Required Threshold (70.0)",
+      "status": "REJECTED"
+    },
+    {
+      "symbol": "Ethereum (ETH)",
+      "direction": "LONG",
+      "score": 65.36,
+      "ml_prob": 0.742,
+      "reason": "Opportunity Score 65.4 Below Required Threshold (70.0)",
+      "status": "REJECTED"
+    },
+    {
+      "symbol": "Solana (SOL)",
+      "direction": "LONG",
+      "score": 59.9,
+      "ml_prob": 0.78,
+      "reason": "Opportunity Score 59.9 Below Required Threshold (70.0)",
+      "status": "REJECTED"
+    },
+    {
+      "symbol": "XRP (Ripple)",
+      "direction": "LONG",
+      "score": 60.5,
+      "ml_prob": 0.67,
+      "reason": "Opportunity Score 60.5 Below Required Threshold (70.0)",
+      "status": "REJECTED"
+    }
+  ],
+  "data_quality": {
+    "market_feed_label": "OANDA v20 REST API (Primary FX/Gold) + Yahoo Finance (Macro/Crypto)",
+    "yahoo_finance": {
+      "status": "HEALTHY",
+      "latency_ms": 118.0,
+      "cache_hits_pct": 85.0,
+      "stale_candles": 0
+    },
+    "oanda_v20": {
+      "status": "CONNECTED",
+      "environment": "practice"
+    },
+    "central_bank_rates": {
+      "status": "UP_TO_DATE",
+      "last_updated": "2026-08-30",
+      "entries": 8
+    },
+    "candle_truncation": {
+      "status": "ACTIVE",
+      "forming_bar_dropped": true,
+      "repaint_protection": "ENABLED"
+    }
+  },
+  "ml_model_monitor": {
+    "model_name": "Calibrated Quantitative Logistic Factor Classifier (v2.0)",
+    "inference_mode": "In-Memory Vector Logistic Mapping (< 1ms)",
+    "probability_bounds": "[0.15, 0.85]",
+    "features": [
+      "RSI Momentum Alignment",
+      "Wilder ADX Trend Intensity",
+      "Technical Confluence Score",
+      "Relative Currency Strength Z-Score"
+    ],
+    "drift_status": "STABLE",
+    "training_mode": "Offline Historical Factor Calibration"
+  },
+  "latest_snapshot": {
+    "timestamp": "2026-08-30T15:05:26.131503+00:00",
+    "raw_ticks": 14,
+    "validated": 14,
+    "technical_candidates": 8,
+    "ml_qualified": 5,
+    "risk_qualified": 4,
+    "approved_signals": 0,
+    "alerts_sent": 0,
+    "overall_conversion_pct": 0.0
+  }
+}

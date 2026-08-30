@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import patch
 import json
 import os
 import sys
@@ -23,7 +24,13 @@ class EndToEndQATestSuite(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
+        cls.patcher = patch("app.api.server.SIGNALS_STORAGE_PATH", "non_existent_file.json")
+        cls.patcher.start()
         cls.client = TestClient(app)
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.patcher.stop()
 
     # ==========================================
     # 1. CLIENT / TRADER PERSPECTIVE TESTS

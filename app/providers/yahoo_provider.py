@@ -19,8 +19,8 @@ class YahooMarketDataProvider(MarketDataProvider):
     def __init__(self, cache_ttl: int = 60):
         self.cache_ttl = cache_ttl
 
-    def fetch_ohlcv(self, symbol: str, timeframe: str = "1H", limit: int = 100) -> pd.DataFrame:
-        cache_key = f"ohlcv_{symbol}_{timeframe}_{limit}"
+    def fetch_ohlcv(self, symbol: str, timeframe: str = "1H", limit: int = 100, complete_only: bool = True) -> pd.DataFrame:
+        cache_key = f"ohlcv_{symbol}_{timeframe}_{limit}_{complete_only}"
         cached_data = cache.get(cache_key)
         if cached_data is not None:
             return cached_data
@@ -70,6 +70,10 @@ class YahooMarketDataProvider(MarketDataProvider):
                     'close': 'last',
                     'volume': 'sum'
                 }).dropna().reset_index()
+
+            # Filter out active forming candle if requested to avoid indicator repaint
+            if complete_only and len(df) > 5:
+                df = df.iloc[:-1]
 
             df = df[['timestamp', 'open', 'high', 'low', 'close', 'volume']].tail(limit)
             cache.set(cache_key, df, expire=self.cache_ttl)

@@ -1,28 +1,62 @@
+import os
+import json
 import logging
 from typing import Dict, Any, List
 from datetime import datetime, timezone
 
 logger = logging.getLogger(__name__)
 
+PAPER_STORAGE_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../paper_trades_data.json"))
+
 class PaperTradingEngine:
     """
     Simulated Paper Trading Engine monitoring active signals against price action,
     logging simulated outcomes (WIN, LOSS, EXPIRED), realized R-multiples, and equity curves.
+    Persists simulated trades to JSON storage.
     """
 
     def __init__(self):
+        self.storage_path = PAPER_STORAGE_PATH
         self.active_paper_trades: List[Dict[str, Any]] = []
         self.closed_paper_trades: List[Dict[str, Any]] = []
         self.initial_balance = 10000.0 # $10,000 baseline simulation
         self.current_balance = 10000.0
+        self._load_state()
+
+    def _load_state(self):
+        if os.path.exists(self.storage_path):
+            try:
+                with open(self.storage_path, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                    self.active_paper_trades = data.get("active_trades", [])
+                    self.closed_paper_trades = data.get("closed_trades", [])
+                    self.current_balance = data.get("current_balance", 10000.0)
+            except Exception as e:
+                logger.error(f"Error loading paper trading state: {e}")
+
+    def _save_state(self):
+        try:
+            with open(self.storage_path, "w", encoding="utf-8") as f:
+                json.dump({
+                    "current_balance": self.current_balance,
+                    "active_trades": self.active_paper_trades,
+                    "closed_trades": self.closed_paper_trades
+                }, f, indent=2)
+        except Exception as e:
+            logger.error(f"Error saving paper trading state: {e}")
 
     def add_signal_to_paper_trading(self, signal: Dict[str, Any]):
         """
         Adds approved signal to active paper trading queue.
         """
+        # Avoid duplicate active trade for same signal
+        sig_id = signal.get("signal_id")
+        if any(t.get("signal_id") == sig_id for t in self.active_paper_trades):
+            return
+
         trade = {
-            "trade_id": f"pt-{signal.get('signal_id')}",
-            "signal_id": signal.get("signal_id"),
+            "trade_id": f"pt-{sig_id}",
+            "signal_id": sig_id,
             "symbol": signal.get("symbol"),
             "direction": signal.get("direction"),
             "entry_price": signal.get("entry_price"),
@@ -36,6 +70,7 @@ class PaperTradingEngine:
             "realized_r": 0.0
         }
         self.active_paper_trades.append(trade)
+        self._save_state()
         logger.info(f"Paper trade added: {trade['symbol']} {trade['direction']}")
 
     def evaluate_active_trades(self, current_quotes: Dict[str, float]):
@@ -94,6 +129,7 @@ class PaperTradingEngine:
 
                 self.closed_paper_trades.append(trade)
                 self.active_paper_trades.remove(trade)
+                self._save_state()
                 logger.info(f"Paper trade closed: {sym} -> {outcome} (P&L: ${trade['realized_pnl']})")
 
     def get_performance_summary(self) -> Dict[str, Any]:

@@ -41,7 +41,7 @@ class SignalGenerationEngine:
             ]),
             "technical_logic": f"Price near {candidate.get('entry_price')} with SL at {candidate.get('stop_loss')} and ATR dynamic spacing.",
             "macro_logic": "Macro yields and USD strength matrix confirm setup bias.",
-            "ml_logic": f"LightGBM classifier estimates {candidate.get('ml_probability', 0)*100:.1f}% win probability.",
+            "ml_logic": f"Calibrated statistical factor model estimates {candidate.get('ml_probability', 0)*100:.1f}% win probability.",
             "regime_logic": "Market regime favors trend continuation.",
             "risk_logic": f"Stop loss at {candidate.get('stop_loss')}, TP1 at {candidate.get('take_profit_1')}, TP2 at {candidate.get('take_profit_2')}.",
             "timing_logic": "Setup entry location active on 15M candle retest.",
