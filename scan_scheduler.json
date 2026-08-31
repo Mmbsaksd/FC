@@ -1,5 +1,5 @@
 {
-  "interval_minutes": 5,
-  "interval_label": "5m",
+  "interval_minutes": 15,
+  "interval_label": "15m",
   "continuous_monitoring_enabled": true
 }

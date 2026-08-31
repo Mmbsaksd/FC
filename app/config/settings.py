@@ -66,7 +66,8 @@ def update_env_file(updates: dict):
             lines.append(f"{k}={v}\n")
         # Update in-memory settings object directly
         if hasattr(settings, k):
-            setattr(settings, k, v)
+            val_to_set = float(v) if k == "MIN_OPPORTUNITY_SCORE" else v
+            setattr(settings, k, val_to_set)
         os.environ[k] = str(v)
 
     with open(env_file, 'w', encoding='utf-8') as f:

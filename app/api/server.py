@@ -1,6 +1,9 @@
 import os
 import sys
 import json
+import time
+import threading
+from datetime import datetime, timezone
 import logging
 from typing import Dict, Any, List, Optional
 from fastapi import FastAPI, HTTPException, Request
@@ -26,6 +29,7 @@ from app.engines.funnel_engine import PipelineFunnelEngine
 from app.engines.paper_trading import PaperTradingEngine
 from app.alerts.telegram_bot import TelegramAlertBot
 from app.llm.router import LLMRouter
+from app.storage.sqlite_manager import db_manager
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("FastAPIServer")
@@ -137,35 +141,136 @@ def index_page():
             return f.read()
     return "<h1>AI Market Intelligence System API</h1><p>Frontend static files loading...</p>"
 
+# Concurrency Lock for Market Scans
+scan_lock = threading.Lock()
+_overview_cache = {"data": None, "timestamp": 0}
+
+def get_market_session():
+    now_utc = datetime.now(timezone.utc)
+    hour = now_utc.hour
+    weekday = now_utc.weekday() # 0 = Monday, 6 = Sunday
+
+    is_weekend = (weekday == 5) or (weekday == 6 and hour < 21)
+    status = "WEEKEND CLOSED" if is_weekend else "MARKET OPEN"
+
+    sessions = []
+    if 0 <= hour < 9: sessions.append("Tokyo")
+    if 8 <= hour < 16: sessions.append("London")
+    if 13 <= hour < 21: sessions.append("New York")
+    if hour >= 21 or hour < 6: sessions.append("Sydney")
+    
+    session_str = " / ".join(sessions) if sessions else "Off-Peak"
+    if 13 <= hour < 16 and not is_weekend:
+        session_str += " (🔥 London/NY Overlap)"
+    return {
+        "session": session_str,
+        "status": status,
+        "is_open": not is_weekend,
+        "utc_time": now_utc.strftime("%H:%M:%S UTC")
+    }
+
+from app.config.asset_config import asset_config_manager
+from app.providers.provider_router import provider_router
+
+class AssetConfigPayload(BaseModel):
+    forex_enabled: bool = True
+    commodities_enabled: bool = True
+    crypto_enabled: bool = True
+
+@app.get("/api/config/assets")
+def get_asset_config():
+    return asset_config_manager.load_config()
+
+@app.post("/api/config/assets")
+def save_asset_config(payload: AssetConfigPayload):
+    global _overview_cache
+    _overview_cache = {"data": None, "timestamp": 0}
+    return asset_config_manager.save_config(
+        forex_enabled=payload.forex_enabled,
+        commodities_enabled=payload.commodities_enabled,
+        crypto_enabled=payload.crypto_enabled
+    )
+
 @app.get("/api/overview")
 def get_overview():
+    global _overview_cache
+    now = time.time()
+    if _overview_cache["data"] and (now - _overview_cache["timestamp"] < 20):
+        _overview_cache["data"]["market_session"] = get_market_session()
+        _overview_cache["data"]["provider_hierarchy"] = provider_router.get_provider_hierarchy_status()
+        return _overview_cache["data"]
+
     scores = cs_engine.calculate_currency_strength(timeframe="1H")
     macro = macro_engine.fetch_macro_state()
 
+    # Get active signals from SQLite to tag active setups
+    active_signals = db_manager.get_active_signals()
+    active_symbols = {s.get("symbol"): s for s in active_signals}
+    active_raw_symbols = {s.get("raw_symbol"): s for s in active_signals}
+
+    active_insts = asset_config_manager.get_active_instruments()
     monitor = []
-    for inst in TRACKED_INSTRUMENTS:
+    top_movers = []
+    for inst in active_insts:
         sym = inst["symbol"]
-        df = provider.fetch_ohlcv(sym, timeframe="15M", limit=30)
+        df, src = provider_router.fetch_ohlcv(sym, timeframe="15M", limit=30)
         if not df.empty:
             tech = TechnicalAnalysisEngine.evaluate_technical_score(df)
-            monitor.append({
+            close = float(tech.get("close", 0.0))
+            open_p = float(df["open"].iloc[0]) if len(df) > 1 else close
+            pct_change = round(((close - open_p) / open_p) * 100.0, 2) if open_p > 0 else 0.0
+
+            # Calculate authentic spread or clearly labeled estimate
+            pip_size = inst.get("pip_size", 0.0001)
+            atr = float(tech.get("atr", 0.001))
+            spread_info = provider_router.fetch_spread_info(sym, pip_size=pip_size, atr_estimate=atr)
+
+            # Signal state tag
+            sig = active_symbols.get(inst["name"]) or active_raw_symbols.get(sym)
+            if sig:
+                sig_status = f"ACTIVE ({sig.get('direction', 'LONG')})"
+            elif tech.get("score", 0) >= 70:
+                sig_status = "QUALIFIED"
+            else:
+                sig_status = "MONITORING"
+
+            item = {
                 "symbol": inst["name"],
                 "raw_symbol": sym,
-                "price": tech.get("close", 0.0),
+                "asset_type": inst.get("type", "FOREX"),
+                "price": close,
+                "change_pct": pct_change,
+                "spread_pips": spread_info["spread_pips"],
+                "spread_type": spread_info["spread_type"],
+                "spread_provider": spread_info["provider"],
                 "direction": tech.get("direction", "NEUTRAL"),
                 "score": tech.get("score", 50.0),
                 "rsi": round(tech.get("rsi", 50.0), 1),
                 "adx": round(tech.get("adx", 20.0), 1),
-                "setup": tech.get("setup_type", "NONE")
-            })
+                "setup": tech.get("setup_type", "NONE"),
+                "signal_status": sig_status
+            }
+            monitor.append(item)
+            top_movers.append(item)
 
-    return {
+    top_movers.sort(key=lambda x: x["change_pct"], reverse=True)
+    gainers = top_movers[:3]
+    decliners = list(reversed(top_movers[-3:]))
+
+    res_payload = {
         "status": "HEALTHY",
+        "market_session": get_market_session(),
+        "provider_hierarchy": provider_router.get_provider_hierarchy_status(),
         "currency_strength": scores,
         "macro_state": macro,
+        "top_gainers": gainers,
+        "top_decliners": decliners,
         "tracked_assets": monitor,
-        "active_signals_count": len(cached_signals)
+        "active_signals_count": len(active_signals)
     }
+
+    _overview_cache = {"data": res_payload, "timestamp": now}
+    return res_payload
 
 @app.get("/api/signals")
 def get_signals():
@@ -185,6 +290,18 @@ def get_signals():
     return {
         "signals": cached_signals,
         "count": len(cached_signals)
+    }
+
+@app.get("/api/signals/{signal_id}/revisions")
+def get_signal_revisions(signal_id: str):
+    """
+    Returns full stateful revision history (v1, v2, v3...) for a signal.
+    """
+    revisions = db_manager.get_signal_revisions(signal_id)
+    return {
+        "signal_id": signal_id,
+        "revision_count": len(revisions),
+        "revisions": revisions
     }
 
 @app.get("/api/paper-trading")
@@ -240,6 +357,20 @@ def get_configuration():
             "min_rr": 2.0,
             "min_ml_prob": 0.55
         }
+    }
+
+class ThresholdConfigPayload(BaseModel):
+    min_score: float = 70.0
+
+@app.post("/api/config/thresholds/save")
+def save_thresholds_config(payload: ThresholdConfigPayload):
+    clamped_score = max(50.0, min(100.0, float(payload.min_score)))
+    settings.MIN_OPPORTUNITY_SCORE = clamped_score
+    update_env_file({"MIN_OPPORTUNITY_SCORE": str(clamped_score)})
+    return {
+        "status": "SUCCESS",
+        "message": f"Final Opportunity Score threshold updated to {clamped_score:.1f}%",
+        "min_score": clamped_score
     }
 
 class TelegramConfigPayload(BaseModel):
@@ -354,11 +485,15 @@ def test_oanda_connection(payload: OANDAConfigPayload):
 @app.post("/api/scan/trigger")
 def trigger_market_scan():
     from scripts.run_scanner import run_market_scan
+    if not scan_lock.acquire(blocking=False):
+        return {"status": "BUSY", "message": "A market scan is already active in the background. Please wait for completion."}
     try:
         run_market_scan()
-        return {"status": "SUCCESS", "message": "Parallel evidence market scan triggered successfully."}
+        return {"status": "SUCCESS", "message": "Parallel evidence market scan completed successfully."}
     except Exception as e:
         return {"status": "ERROR", "message": str(e)}
+    finally:
+        scan_lock.release()
 
 from app.config.scheduler import ScanScheduler
 
@@ -428,6 +563,225 @@ def get_logs_summary():
     """
     return flight_recorder.get_summary_metrics()
 
+# -------------------------------------------------------------
+# ADVANCED ML, LEARNING, KNOWLEDGE & EXPERIENCE REST APIS
+# -------------------------------------------------------------
+from app.ml.model_registry import model_registry
+from app.ml.retraining_pipeline import retraining_pipeline
+from app.memory.training_memory import training_memory
+from app.memory.knowledge_base import knowledge_base
+from app.memory.experience_memory import experience_memory
+from app.vision.visual_verifier import visual_verifier
+from app.parallel.base_engine import MarketSnapshot
+from datetime import datetime, timezone
+
+@app.get("/api/ml/models")
+def get_ml_models():
+    """
+    Returns registered models, active production model, and evaluation metrics.
+    """
+    return {
+        "production_model": model_registry.get_production_model(),
+        "all_models": model_registry.models,
+        "readiness": retraining_pipeline.evaluate_retraining_readiness()
+    }
+
+@app.post("/api/ml/retrain")
+def trigger_retraining():
+    """
+    Triggers walk-forward retraining simulation and tests against 5 statistical promotion gates.
+    """
+    result = retraining_pipeline.run_retraining_experiment()
+    return result
+
+@app.post("/api/ml/promote")
+def promote_model(payload: Dict[str, str]):
+    version = payload.get("version")
+    if not version:
+        raise HTTPException(status_code=400, detail="Missing model version")
+    success = model_registry.promote_to_production(version)
+    if not success:
+        raise HTTPException(status_code=404, detail="Model version not found")
+    return {"status": "SUCCESS", "promoted_version": version}
+
+@app.post("/api/ml/rollback")
+def rollback_model():
+    rolled = model_registry.rollback_production()
+    if not rolled:
+        raise HTTPException(status_code=400, detail="No previous model available to rollback")
+    return {"status": "SUCCESS", "active_version": rolled}
+
+@app.get("/api/ml/dataset")
+def get_dataset_info():
+    return training_memory.get_dataset_summary()
+
+from app.memory.knowledge_discovery import knowledge_discovery_engine
+
+@app.get("/api/knowledge")
+def get_knowledge_items(
+    status: Optional[str] = None,
+    category: Optional[str] = None,
+    asset_class: Optional[str] = None,
+    timeframe: Optional[str] = None
+):
+    # Run dynamic decay evaluation on read
+    knowledge_base.evaluate_freshness_and_decay()
+    items = knowledge_base.list_knowledge(
+        status=status,
+        category=category,
+        asset_class=asset_class,
+        timeframe=timeframe
+    )
+    return {
+        "count": len(items),
+        "total_items": len(knowledge_base.items),
+        "items": items
+    }
+
+@app.get("/api/knowledge/analytics")
+def get_knowledge_analytics():
+    """
+    Returns empirical health, status distribution, and A/B attribution performance.
+    """
+    return knowledge_base.get_attribution_analytics()
+
+@app.post("/api/knowledge/discover")
+def trigger_knowledge_discovery():
+    """
+    Triggers automated cluster mining across Experience Memory outcomes.
+    """
+    res = knowledge_discovery_engine.run_discovery_scan()
+    return res
+
+@app.post("/api/knowledge/recalculate")
+def recalculate_knowledge_stats():
+    """
+    Recalculates dynamic rolling statistics (win rate, expectancy) across all knowledge items.
+    """
+    res = knowledge_base.recalculate_dynamic_statistics()
+    return {"status": "SUCCESS", "details": res}
+
+@app.post("/api/knowledge/add")
+def add_knowledge_item(item: Dict[str, Any]):
+    item_id = knowledge_base.add_knowledge_item(item)
+    return {"status": "SUCCESS", "item_id": item_id}
+
+@app.post("/api/knowledge/status")
+def update_knowledge_status(payload: Dict[str, str]):
+    item_id = payload.get("item_id")
+    new_status = payload.get("status")
+    reason = payload.get("reason", "Manual status update via dashboard")
+    if not item_id or not new_status:
+        raise HTTPException(status_code=400, detail="Missing item_id or status")
+    success = knowledge_base.update_item_status(item_id, new_status, reason=reason)
+    return {"status": "SUCCESS" if success else "FAILED"}
+
+@app.get("/api/knowledge/item/{item_id}")
+def get_knowledge_item_detail(item_id: str):
+    detail = knowledge_base.get_item_detail(item_id)
+    if detail:
+        return {"status": "SUCCESS", "item": detail}
+    raise HTTPException(status_code=404, detail="Knowledge item not found")
+
+@app.get("/api/memory/experience")
+def get_experience_records():
+    return {
+        "summary": experience_memory.get_summary_metrics(),
+        "records": experience_memory.records
+    }
+
+@app.get("/api/vision/verify/{symbol_name}")
+def get_visual_verification(symbol_name: str, direction: str = "LONG", entry: float = 1.0, sl: float = 0.99, tp: float = 1.02):
+    # Fetch real candles for the asset
+    sym = symbol_name
+    for inst in TRACKED_INSTRUMENTS:
+        if inst["name"].upper() == symbol_name.upper() or inst["symbol"].upper() == symbol_name.upper():
+            sym = inst["symbol"]
+            symbol_name = inst["name"]
+            break
+
+    df = provider.fetch_ohlcv(sym, timeframe="15M", limit=30)
+    snap = MarketSnapshot(
+        timestamp=datetime.now(timezone.utc).isoformat(),
+        symbol=sym,
+        symbol_name=symbol_name,
+        asset_class="FOREX",
+        price=entry,
+        bid=entry - 0.0001,
+        ask=entry + 0.0001,
+        spread_pips=1.2,
+        timeframe="15M",
+        candles=df,
+        session="LONDON",
+        pip_size=0.0001,
+        base_currency="EUR",
+        quote_currency="USD"
+    )
+    chart = visual_verifier.generate_chart_payload(snap, direction, entry, sl, tp)
+    verif = visual_verifier.verify_candidate_setup(snap, direction, entry, sl, tp)
+    return {
+        "chart": chart,
+        "verification": verif
+    }
+
+# -------------------------------------------------------------
+# POST-SIGNAL OUTCOME TRACKING & TARGET MONITORING REST APIS
+# -------------------------------------------------------------
+from app.engines.outcome_tracker import outcome_tracker
+
+@app.get("/api/signals/active")
+def get_active_signal_outcomes():
+    """
+    Returns active monitored signals with live distances to T1, T2, SL,
+    unrealized P&L, holding time, and current R from SQLite database.
+    """
+    active = outcome_tracker.get_active_signals()
+    return {
+        "count": len(active),
+        "active_signals": active
+    }
+
+@app.get("/api/signals/history")
+def get_signal_outcomes_history():
+    """
+    Returns completed historical signal outcomes with final R, P&L,
+    holding period, and full lifecycle events from SQLite database.
+    """
+    history = outcome_tracker.get_historical_signals(limit=200)
+    return {
+        "count": len(history),
+        "closed_signals": history
+    }
+
+@app.get("/api/signals/analytics")
+def get_signals_analytics():
+    """
+    Returns consolidated post-signal outcome analytics from authoritative SQLite database
+    (Win Rate, Loss Rate, T1 Rate, T2 Rate, Avg R, Expectancy, Asset breakdown).
+    """
+    return outcome_tracker.get_analytics()
+
+@app.get("/api/signals/events")
+def get_signal_lifecycle_events():
+    """
+    Returns real-time lifecycle event feed from SQLite database.
+    """
+    events = outcome_tracker.get_recent_events(limit=100)
+    return {
+        "count": len(events),
+        "events": events
+    }
+
+@app.get("/api/signals/detail/{signal_id}")
+def get_signal_detail(signal_id: str):
+    """
+    Returns full comprehensive details, lifecycle events, and outcome for a single signal from SQLite.
+    """
+    detail = outcome_tracker.get_signal_detail(signal_id)
+    if detail:
+        return {"status": detail.get("status", "ACTIVE"), "signal": detail}
+    raise HTTPException(status_code=404, detail="Signal ID not found")
+
 import threading
 import time
 
@@ -447,8 +801,14 @@ def background_scanner_daemon():
         try:
             config = scheduler.load_config()
             interval_mins = int(config.get("interval_minutes", 15))
-            logger.info(f"Auto-Scanner Daemon: Triggering automatic scheduled scan (interval: {interval_mins}m)...")
-            run_market_scan()
+            if scan_lock.acquire(blocking=False):
+                try:
+                    logger.info(f"Auto-Scanner Daemon: Triggering automatic scheduled scan (interval: {interval_mins}m)...")
+                    run_market_scan()
+                finally:
+                    scan_lock.release()
+            else:
+                logger.info("Auto-Scanner Daemon: Another scan pass currently active. Skipping overlapping run.")
         except Exception as e:
             logger.error(f"Auto-Scanner daemon error: {e}")
             flight_recorder.record_error(

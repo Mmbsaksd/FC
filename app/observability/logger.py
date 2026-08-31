@@ -170,7 +170,7 @@ class SystemLogger:
 
         # Log through Python logging system safely
         log_method = getattr(self.py_logger, level.lower(), self.py_logger.info)
-        log_method(f"[{event}] {record.message}")
+        log_method(f"[{component}] [{event}] {record.message}")
 
         return record
 
@@ -189,6 +189,35 @@ class SystemLogger:
     def critical(self, component: str, event: str, message: str, **kwargs):
         return self.log("CRITICAL", event, component, message, **kwargs)
 
+    def _parse_file_logs(self, max_lines: int = 1000) -> List[StructuredLogRecord]:
+        """Parses the most recent lines from system.log for cross-process synchronization."""
+        if not os.path.exists(self.log_file):
+            return []
+        
+        pat = re.compile(r'^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}) \[([A-Z]+)\] \[FC_SYSTEM\] (?:\[([A-Za-z0-9_]+)\] )?(?:\[([A-Za-z0-9_]+)\] )?(.+)$')
+        records = []
+        try:
+            with open(self.log_file, "r", encoding="utf-8", errors="ignore") as f:
+                lines = f.readlines()
+                for line in lines[-max_lines:]:
+                    line = line.strip()
+                    if not line: continue
+                    m = pat.match(line)
+                    if m:
+                        ts, lvl, comp_or_evt, evt_or_msg, msg = m.group(1), m.group(2), m.group(3), m.group(4), m.group(5)
+                        comp = comp_or_evt if comp_or_evt else "ScannerDaemon"
+                        evt = evt_or_msg if evt_or_msg else "LOG_EVENT"
+                        records.append(StructuredLogRecord(
+                            level=lvl,
+                            event=evt,
+                            component=comp,
+                            message=msg,
+                            timestamp=ts
+                        ))
+        except Exception:
+            pass
+        return records
+
     def get_logs(
         self,
         level: Optional[str] = None,
@@ -200,9 +229,17 @@ class SystemLogger:
         offset: int = 0
     ) -> List[Dict[str, Any]]:
         with self.lock:
-            filtered = list(self.ring_buffer)
+            in_mem = list(self.ring_buffer)
+
+        # Fallback to persistent log file if in-memory buffer has few records
+        if len(in_mem) < 50:
+            file_records = self._parse_file_logs(max_lines=1500)
+            combined = file_records + in_mem
+        else:
+            combined = in_mem
 
         # Apply filters in reverse chronological order
+        filtered = list(combined)
         filtered.reverse()
 
         if level and level.upper() != "ALL":
@@ -213,7 +250,8 @@ class SystemLogger:
                 filtered = [r for r in filtered if r.level == target_level]
 
         if component and component.upper() != "ALL":
-            filtered = [r for r in filtered if r.component.lower() == component.lower()]
+            c_target = component.lower()
+            filtered = [r for r in filtered if r.component.lower() == c_target or (c_target in r.component.lower())]
 
         if scan_id:
             filtered = [r for r in filtered if r.scan_id == scan_id]
@@ -230,3 +268,4 @@ class SystemLogger:
 
 # Global singleton instance
 sys_logger = SystemLogger()
+

@@ -248,14 +248,25 @@ class FlightRecorder:
                 "timestamp": datetime.now(timezone.utc).isoformat()
             }
 
+        sym_label = signal.get("symbol_name") or signal.get("symbol") or "Asset"
         sys_logger.info(
             component="SignalEngine",
             event="SIGNAL_CREATED",
             scan_id=scan_id,
             trace_id=trace_id,
             signal_id=signal.get("signal_id"),
-            instrument=signal.get("symbol_name"),
-            message=f"✨ HIGH-CONFLUENCE SIGNAL CREATED: {signal.get('symbol_name')} {signal.get('direction')} | Entry: {signal.get('entry_price')} | SL: {signal.get('stop_loss')} | TP1: {signal.get('take_profit_1')} | Score: {signal.get('opportunity_score')} | R:R 1:{signal.get('risk_reward')}"
+            instrument=sym_label,
+            message=f"✨ HIGH-CONFLUENCE SIGNAL CREATED: {sym_label} {signal.get('direction')} | Entry: {signal.get('entry_price')} | SL: {signal.get('stop_loss')} | TP1: {signal.get('take_profit_1')} | Score: {signal.get('opportunity_score')} | R:R 1:{signal.get('risk_reward')}"
+        )
+
+    def record_scan_event(self, component: str, event: str, duration_ms: float = 0.0, extra: Optional[Dict[str, Any]] = None):
+        """Records a structured scan, outcome, or lifecycle telemetry event."""
+        msg = extra.get("detail", "") if extra else ""
+        sys_logger.info(
+            component=component,
+            event=event,
+            duration_ms=duration_ms,
+            message=f"[{component}] {event}: {msg}" if msg else f"[{component}] {event}"
         )
 
     def record_notification(self, channel: str, status: str, signal_id: str, scan_id: str, trace_id: str, latency_ms: float = 0.0, error: Optional[str] = None):

@@ -29,30 +29,85 @@
             <button class="tab-btn active" onclick="switchTab('tab-overview')">📈 Overview & Live Market</button>
             <button class="tab-btn" onclick="switchTab('tab-signals')">🚨 Signal Feed & Rationale</button>
             <button class="tab-btn" onclick="switchTab('tab-paper')">💼 Paper Trading & P&L</button>
+            <button class="tab-btn" onclick="switchTab('tab-ml')">🧠 ML & Meta-Model Registry</button>
+            <button class="tab-btn" onclick="switchTab('tab-knowledge')">📚 Empirical Knowledge Base</button>
+            <button class="tab-btn" onclick="switchTab('tab-experience')">🔍 Experience & Outcomes</button>
             <button class="tab-btn" onclick="switchTab('tab-funnel')">🎛️ System Mirror & Analytics</button>
             <button class="tab-btn" onclick="switchTab('tab-settings')">⚙️ Configuration & Credentials</button>
             <button class="tab-btn" onclick="switchTab('tab-health')">🩺 System Health & Logs</button>
         </nav>
 
-        <!-- TAB 1: OVERVIEW -->
+        <!-- TAB 1: OVERVIEW & LIVE MARKET -->
         <div id="tab-overview" class="tab-content active">
+            <!-- SECTION 1: GLOBAL MARKET CLIMATE & SESSION RIBBON -->
+            <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); margin-bottom: 20px;">
+                <div class="glass-card">
+                    <div class="metric-title">Trading Session</div>
+                    <div class="metric-value" id="ov-session" style="font-size: 1.1rem; color: var(--accent-cyan);">Loading...</div>
+                </div>
+                <div class="glass-card">
+                    <div class="metric-title">Market Status</div>
+                    <div class="metric-value" id="ov-status" style="font-size: 1.1rem; color: var(--accent-emerald);">OPEN</div>
+                </div>
+                <div class="glass-card">
+                    <div class="metric-title">Risk Sentiment</div>
+                    <div class="metric-value" id="ov-risk-sentiment" style="font-size: 1.1rem; color: var(--accent-emerald);">RISK-ON</div>
+                </div>
+                <div class="glass-card">
+                    <div class="metric-title">Dollar Bias (DXY)</div>
+                    <div class="metric-value" id="ov-dxy-bias" style="font-size: 1.1rem; color: white;">NEUTRAL</div>
+                </div>
+                <div class="glass-card">
+                    <div class="metric-title">Active Opportunities</div>
+                    <div class="metric-value" id="ov-active-signals" style="font-size: 1.2rem; color: var(--accent-emerald);">0</div>
+                </div>
+            </div>
+
+            <!-- SECTION 2: TOP MOVERS & CURRENCY DIVERGENCE -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 20px;">
+                <div class="glass-card">
+                    <h4 style="color: var(--accent-emerald); margin-bottom: 10px; font-size: 0.95rem;">🚀 Top Gainers (Session)</h4>
+                    <div id="ov-top-gainers" style="display: flex; flex-direction: column; gap: 8px;">
+                        <!-- Dynamically Populated -->
+                    </div>
+                </div>
+                <div class="glass-card">
+                    <h4 style="color: var(--accent-rose); margin-bottom: 10px; font-size: 0.95rem;">🔻 Top Decliners (Session)</h4>
+                    <div id="ov-top-decliners" style="display: flex; flex-direction: column; gap: 8px;">
+                        <!-- Dynamically Populated -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 3: CURRENCY STRENGTH MATRIX -->
             <h3 style="margin-bottom: 12px; font-family: 'Outfit';">💪 Currency Strength Matrix (8 Majors)</h3>
-            <div class="card-grid" id="currency-strength-grid">
+            <div class="card-grid" id="currency-strength-grid" style="margin-bottom: 24px;">
                 <!-- Dynamically Populated -->
             </div>
 
-            <h3 style="margin: 24px 0 12px 0; font-family: 'Outfit';">📊 Tracked Market Monitor</h3>
+            <!-- SECTION 4: LIVE MARKET MONITOR & SPREAD TRACKER -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+                <h3 style="font-family: 'Outfit'; margin: 0;">📊 Tracked Market Monitor & Live Spreads</h3>
+                <div style="display: flex; gap: 12px; align-items: center;">
+                    <span id="ov-provider-badge" class="status-tag" style="background: rgba(6, 182, 212, 0.15); color: var(--accent-cyan); font-size: 0.75rem;">📡 Feed: Loading...</span>
+                    <span id="ov-last-updated" style="font-size: 0.8rem; color: var(--text-muted);">Last Updated: --:--:--</span>
+                </div>
+            </div>
             <div class="glass-card">
                 <table class="data-table">
                     <thead>
                         <tr>
                             <th>Symbol</th>
-                            <th>Price</th>
+                            <th>Class</th>
+                            <th>Live Price</th>
+                            <th>24h %</th>
+                            <th>Spread & Type</th>
                             <th>Direction</th>
                             <th>Tech Score</th>
                             <th>RSI (14)</th>
                             <th>ADX (14)</th>
                             <th>Setup Type</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody id="market-monitor-body">
@@ -62,29 +117,167 @@
             </div>
         </div>
 
-        <!-- TAB 2: SIGNALS FEED -->
+        <!-- TAB 2: POST-SIGNAL OUTCOME TRACKING & ACTIVE MONITORING -->
         <div id="tab-signals" class="tab-content">
-            <h3 style="margin-bottom: 16px; font-family: 'Outfit';">🚨 Active Signals & Structured Rationale</h3>
-            <div class="signals-grid" id="signals-container">
-                <!-- Dynamically Populated Signal Cards -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+                <div>
+                    <h2 style="font-family: 'Outfit'; font-size: 1.5rem;">🎯 Complete Signal Outcome Tracking & Target Monitor</h2>
+                    <span style="font-size: 0.85rem; color: var(--text-muted);">Real-time monitoring of all generated signals from creation through Target 1, Target 2, Stop Loss, and Expiry</span>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn-primary" style="padding: 8px 16px; font-size: 0.85rem;" onclick="loadSignalOutcomes()">🔄 Refresh Tracking</button>
+                </div>
+            </div>
+
+            <!-- Legacy container for signal cards -->
+            <div class="signals-grid" id="signals-container" style="display: none;"></div>
+
+            <!-- SECTION 1: OUTCOME PERFORMANCE SUMMARY RIBBON -->
+            <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); margin-bottom: 20px;">
+                <div class="glass-card">
+                    <div class="metric-title">Total Alerts</div>
+                    <div class="metric-value" id="so-total-alerts">0</div>
+                </div>
+                <div class="glass-card">
+                    <div class="metric-title">Active Monitored</div>
+                    <div class="metric-value" style="color: var(--accent-cyan);" id="so-active-count">0</div>
+                </div>
+                <div class="glass-card">
+                    <div class="metric-title">Target 1 Hits</div>
+                    <div class="metric-value positive" id="so-t1-hits">0 (0.0%)</div>
+                </div>
+                <div class="glass-card">
+                    <div class="metric-title">Target 2 Hits</div>
+                    <div class="metric-value positive" id="so-t2-hits">0 (0.0%)</div>
+                </div>
+                <div class="glass-card">
+                    <div class="metric-title">Stop Loss Hits</div>
+                    <div class="metric-value negative" id="so-sl-hits">0 (0.0%)</div>
+                </div>
+                <div class="glass-card">
+                    <div class="metric-title">Win Rate (R > 0)</div>
+                    <div class="metric-value positive" id="so-win-rate">0.0%</div>
+                </div>
+                <div class="glass-card">
+                    <div class="metric-title">Average R</div>
+                    <div class="metric-value positive" id="so-avg-r">+0.00R</div>
+                </div>
+                <div class="glass-card">
+                    <div class="metric-title">Expectancy</div>
+                    <div class="metric-value" style="color: var(--accent-cyan);" id="so-expectancy">+0.00R</div>
+                </div>
+            </div>
+
+            <!-- SECTION 2: LIVE ACTIVELY MONITORED SIGNALS -->
+            <div class="glass-card" style="margin-bottom: 20px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <h3 style="font-family: 'Outfit'; font-size: 1.15rem;">📡 Live Actively Monitored Signals</h3>
+                    <span class="status-tag live" style="font-size: 0.75rem;">● Continuous Price Tracking</span>
+                </div>
+                <div style="overflow-x: auto;">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Signal ID</th>
+                                <th>Instrument</th>
+                                <th>Direction</th>
+                                <th>Entry</th>
+                                <th>Current</th>
+                                <th>Dist to T1</th>
+                                <th>Dist to T2</th>
+                                <th>Dist to SL</th>
+                                <th>Unrealized P&L</th>
+                                <th>Current R</th>
+                                <th>Time in Trade</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="active-signals-table-body">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- SECTION 3: COMPLETED SIGNAL OUTCOME HISTORY -->
+            <div class="glass-card" style="margin-bottom: 20px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <h3 style="font-family: 'Outfit'; font-size: 1.15rem;">📜 Signal Outcome History & Lifecycle Records</h3>
+                    <span style="font-size: 0.8rem; color: var(--text-muted);">Immutable historical record of completed signals</span>
+                </div>
+                <div style="overflow-x: auto; max-height: 380px;">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Signal ID</th>
+                                <th>Instrument</th>
+                                <th>Direction</th>
+                                <th>Entry</th>
+                                <th>Target 1</th>
+                                <th>Target 2</th>
+                                <th>Stop Loss</th>
+                                <th>Status</th>
+                                <th>Realized P&L</th>
+                                <th>Final R</th>
+                                <th>Duration</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="closed-signals-table-body">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- SECTION 4: REAL-TIME EVENT FEED & ORIGINAL SIGNAL CARDS -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div class="glass-card">
+                    <h3 style="font-family: 'Outfit'; font-size: 1.15rem; margin-bottom: 12px;">⚡ Real-Time Lifecycle Event Feed</h3>
+                    <div id="lifecycle-event-feed" style="display: flex; flex-direction: column; gap: 8px; max-height: 320px; overflow-y: auto;">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+
+                <div class="glass-card">
+                    <h3 style="font-family: 'Outfit'; font-size: 1.15rem; margin-bottom: 12px;">📊 Outcomes by Monitored Asset</h3>
+                    <div style="overflow-x: auto; max-height: 320px;">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Asset</th>
+                                    <th>Signals</th>
+                                    <th>Win Rate</th>
+                                    <th>T1 Rate</th>
+                                    <th>T2 Rate</th>
+                                    <th>Avg R</th>
+                                </tr>
+                            </thead>
+                            <tbody id="asset-outcomes-table-body">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- TAB 3: PAPER TRADING & P&L -->
         <div id="tab-paper" class="tab-content">
-            <h3 style="margin-bottom: 16px; font-family: 'Outfit';">💼 Simulated Paper Trading Performance</h3>
+            <h3 style="margin-bottom: 16px; font-family: 'Outfit';">💼 Simulated Paper Trading Performance & Equity Curve</h3>
             <div class="card-grid">
                 <div class="glass-card">
-                    <div class="metric-title">Balance</div>
+                    <div class="metric-title">Simulated Balance</div>
                     <div class="metric-value" id="pt-balance">$10,000.00</div>
                 </div>
                 <div class="glass-card">
-                    <div class="metric-title">Net P&L</div>
+                    <div class="metric-title">Net P&L (USD)</div>
                     <div class="metric-value positive" id="pt-pnl">+$0.00</div>
                 </div>
                 <div class="glass-card">
-                    <div class="metric-title">Win Rate</div>
-                    <div class="metric-value" id="pt-winrate">65.0%</div>
+                    <div class="metric-title">Completed Win Rate</div>
+                    <div class="metric-value" id="pt-winrate">0.0%</div>
                 </div>
                 <div class="glass-card">
                     <div class="metric-title">Profit Factor</div>
@@ -93,8 +286,203 @@
             </div>
 
             <div class="glass-card" style="margin-top: 20px;">
-                <h4>Simulated Equity Curve</h4>
+                <h4>Simulated Equity Curve (Paper Trading)</h4>
                 <canvas id="equityChart" style="max-height: 250px;"></canvas>
+            </div>
+        </div>
+
+        <!-- TAB: 🧠 ML & META-MODEL REGISTRY -->
+        <div id="tab-ml" class="tab-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+                <div>
+                    <h2 style="font-family: 'Outfit'; font-size: 1.5rem;">🧠 ML & Central Meta-Model Registry</h2>
+                    <span style="font-size: 0.85rem; color: var(--text-muted);">Calibrated probability P(TP before SL), Brier reliability scores, version tracking & 5-gate promotion</span>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn-primary" style="padding: 8px 16px; font-size: 0.85rem; background: var(--accent-cyan); color: #000;" onclick="triggerRetraining()">🧪 Run Retraining Experiment</button>
+                    <button class="btn-secondary" style="padding: 8px 16px; font-size: 0.85rem;" onclick="rollbackModel()">⏪ Rollback Production</button>
+                </div>
+            </div>
+
+            <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+                <div class="glass-card">
+                    <div class="metric-title">Active Production Model</div>
+                    <div class="metric-value" style="color: var(--accent-emerald);" id="ml-prod-version">v2.1.0</div>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);" id="ml-prod-type">Calibrated Logistic Ensemble</span>
+                </div>
+                <div class="glass-card">
+                    <div class="metric-title">Out-of-Sample AUC-ROC</div>
+                    <div class="metric-value" id="ml-prod-auc">0.684</div>
+                    <span style="font-size: 0.75rem; color: var(--accent-emerald);">Gate: &ge; 0.60 (PASSED)</span>
+                </div>
+                <div class="glass-card">
+                    <div class="metric-title">Brier Reliability Score</div>
+                    <div class="metric-value" id="ml-prod-brier">0.142</div>
+                    <span style="font-size: 0.75rem; color: var(--accent-emerald);">Gate: &le; 0.18 (CALIBRATED)</span>
+                </div>
+                <div class="glass-card">
+                    <div class="metric-title">Labeled Dataset Samples</div>
+                    <div class="metric-value" id="ml-dataset-count">--</div>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);" id="ml-retrain-status">Checking readiness...</span>
+                </div>
+            </div>
+
+            <!-- Model Registry Table -->
+            <div class="glass-card" style="margin-top: 20px;">
+                <h3 style="font-family: 'Outfit'; margin-bottom: 12px;">📑 Versioned Model Registry</h3>
+                <div style="overflow-x: auto;">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Version</th>
+                                <th>Architecture</th>
+                                <th>Status</th>
+                                <th>OOS AUC-ROC</th>
+                                <th>Brier Score</th>
+                                <th>Expected Value</th>
+                                <th>Max Drawdown</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ml-models-table-body">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB: 📚 EMPIRICAL KNOWLEDGE BASE -->
+        <div id="tab-knowledge" class="tab-content">
+            <!-- Header & Control Bar -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+                <div>
+                    <h2 style="font-family: 'Outfit'; font-size: 1.5rem; display: flex; align-items: center; gap: 10px;">
+                        📚 Empirical Knowledge Base & Discovery Engine
+                    </h2>
+                    <span style="font-size: 0.85rem; color: var(--text-muted);">Self-improving empirical memory: automated pattern mining, sample-size promotion gates, and LLM reasoning rules</span>
+                </div>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+                    <button class="btn-primary" style="padding: 8px 14px; font-size: 0.85rem; background: linear-gradient(135deg, #06B6D4, #3B82F6);" onclick="triggerKnowledgeDiscovery()">🧪 Run Discovery</button>
+                    <button class="btn-primary" style="padding: 8px 14px; font-size: 0.85rem; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);" onclick="recalculateKnowledgeStats()">📊 Recalculate Stats</button>
+                    
+                    <!-- Filters -->
+                    <select id="kb-filter-status" class="form-control" style="width: auto; font-size: 0.85rem;" onchange="loadKnowledgeBase()">
+                        <option value="ALL">All Statuses</option>
+                        <option value="VALIDATED" selected>Validated Only</option>
+                        <option value="HYPOTHESIS">Hypotheses</option>
+                        <option value="EXPERIMENTAL">Experimental</option>
+                        <option value="REQUIRES_REVIEW">Requires Review</option>
+                        <option value="STALE">Stale</option>
+                        <option value="INVALIDATED">Invalidated</option>
+                    </select>
+
+                    <select id="kb-filter-asset" class="form-control" style="width: auto; font-size: 0.85rem;" onchange="loadKnowledgeBase()">
+                        <option value="ALL">All Asset Classes</option>
+                        <option value="FOREX">Forex</option>
+                        <option value="COMMODITIES">Commodities</option>
+                        <option value="CRYPTO">Crypto</option>
+                    </select>
+
+                    <select id="kb-filter-tf" class="form-control" style="width: auto; font-size: 0.85rem;" onchange="loadKnowledgeBase()">
+                        <option value="ALL">All Timeframes</option>
+                        <option value="15M">15M (Swing)</option>
+                        <option value="1H">1H (Trend)</option>
+                        <option value="4H">4H (Macro)</option>
+                    </select>
+
+                    <button class="btn-primary" style="padding: 8px 14px; font-size: 0.85rem;" onclick="loadKnowledgeBase()">🔄 Refresh</button>
+                </div>
+            </div>
+
+            <!-- Health & Empirical Attribution Ribbon -->
+            <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 20px;">
+                <div class="glass-card">
+                    <div class="metric-title">Total Knowledge Rules</div>
+                    <div class="metric-value" id="kb-stat-total">--</div>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);" id="kb-stat-breakdown">Loading status...</span>
+                </div>
+                <div class="glass-card">
+                    <div class="metric-title">Validated Rules (Active in LLM)</div>
+                    <div class="metric-value positive" id="kb-stat-validated">--</div>
+                    <span style="font-size: 0.75rem; color: var(--accent-emerald);">Sample Gate: N &ge; 25 Passed</span>
+                </div>
+                <div class="glass-card">
+                    <div class="metric-title">Discovery Hypotheses</div>
+                    <div class="metric-value" style="color: var(--accent-cyan);" id="kb-stat-hypotheses">--</div>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">Incubating until sample gate</span>
+                </div>
+                <div class="glass-card">
+                    <div class="metric-title">Knowledge-Attributed Win Rate</div>
+                    <div class="metric-value positive" id="kb-stat-winrate">--%</div>
+                    <span style="font-size: 0.75rem; color: var(--accent-cyan);" id="kb-stat-winrate-delta">vs Baseline 58.2%</span>
+                </div>
+                <div class="glass-card">
+                    <div class="metric-title">Attributed Average Expectancy</div>
+                    <div class="metric-value positive" id="kb-stat-avgr">+--R</div>
+                    <span style="font-size: 0.75rem; color: var(--accent-emerald);" id="kb-stat-avgr-delta">vs Baseline +1.15R</span>
+                </div>
+            </div>
+
+            <!-- Knowledge Items Grid -->
+            <div class="signals-grid" id="knowledge-items-container">
+                <!-- Dynamically Populated Knowledge Cards -->
+            </div>
+        </div>
+
+        <!-- TAB: 🔍 EXPERIENCE MEMORY & VERIFICATION -->
+        <div id="tab-experience" class="tab-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+                <div>
+                    <h2 style="font-family: 'Outfit'; font-size: 1.5rem;">🔍 Experience Memory & Trade Post-Mortems</h2>
+                    <span style="font-size: 0.85rem; color: var(--text-muted);">Full flight-recorder traces of every decision, prediction vs reality, realized R-multiples, MFE/MAE</span>
+                </div>
+                <div>
+                    <button class="btn-primary" style="padding: 8px 16px; font-size: 0.85rem;" onclick="loadExperienceMemory()">🔄 Refresh Experiences</button>
+                </div>
+            </div>
+
+            <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                <div class="glass-card">
+                    <div class="metric-title">Recorded Experiences</div>
+                    <div class="metric-value" id="exp-total">0</div>
+                </div>
+                <div class="glass-card">
+                    <div class="metric-title">Resolved Outcomes</div>
+                    <div class="metric-value" id="exp-resolved">0</div>
+                </div>
+                <div class="glass-card">
+                    <div class="metric-title">Average Realized R</div>
+                    <div class="metric-value positive" id="exp-avg-r">+0.00R</div>
+                </div>
+                <div class="glass-card">
+                    <div class="metric-title">Average MFE / MAE</div>
+                    <div class="metric-value" style="font-size: 1.1rem;" id="exp-mfe-mae">+0.0R / 0.0R</div>
+                </div>
+            </div>
+
+            <div class="glass-card" style="margin-top: 20px;">
+                <h3 style="font-family: 'Outfit'; margin-bottom: 12px;">📜 Signal Experience Trace Log</h3>
+                <div style="overflow-x: auto; max-height: 400px;">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Signal ID</th>
+                                <th>Symbol</th>
+                                <th>Direction</th>
+                                <th>ML Prob</th>
+                                <th>Outcome</th>
+                                <th>Realized R</th>
+                                <th>MFE (Max Fav)</th>
+                                <th>MAE (Max Adv)</th>
+                                <th>Classification</th>
+                            </tr>
+                        </thead>
+                        <tbody id="experience-table-body">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
@@ -278,6 +666,51 @@
         <div id="tab-settings" class="tab-content">
             <h3 style="margin-bottom: 16px; font-family: 'Outfit';">⚙️ System Configuration & Credentials</h3>
             
+            <!-- Asset Classes Configuration Switch Card -->
+            <div class="glass-card" style="margin-bottom: 20px; border-left: 4px solid var(--accent-cyan);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.1rem; color: white;">🌐 Active Asset Classes Configuration</h4>
+                        <span style="font-size: 0.85rem; color: var(--text-muted);">Enable or disable entire asset classes independently. Disabled classes are completely excluded from scanning, analysis, storage, and alerts.</span>
+                    </div>
+                    <span class="status-tag live" id="asset-active-count-tag" style="background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald);">3 / 3 Classes Active</span>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 16px 0;">
+                    <!-- Forex Switch -->
+                    <div style="background: rgba(0,0,0,0.3); padding: 14px 18px; border-radius: 8px; border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <div style="font-weight: 600; font-size: 1rem; color: white;">🌐 Forex (8 Majors)</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">EUR, GBP, JPY, AUD, CAD, CHF, NZD</div>
+                        </div>
+                        <input type="checkbox" id="asset-toggle-forex" checked style="width: 22px; height: 22px; accent-color: var(--accent-emerald); cursor: pointer;" onchange="saveAssetConfig()">
+                    </div>
+
+                    <!-- Commodities Switch -->
+                    <div style="background: rgba(0,0,0,0.3); padding: 14px 18px; border-radius: 8px; border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <div style="font-weight: 600; font-size: 1rem; color: white;">🏆 Commodities</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Gold (XAU/USD), Crude Oil (WTI)</div>
+                        </div>
+                        <input type="checkbox" id="asset-toggle-commodities" checked style="width: 22px; height: 22px; accent-color: var(--accent-emerald); cursor: pointer;" onchange="saveAssetConfig()">
+                    </div>
+
+                    <!-- Crypto Switch -->
+                    <div style="background: rgba(0,0,0,0.3); padding: 14px 18px; border-radius: 8px; border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <div style="font-weight: 600; font-size: 1rem; color: white;">⚡ Crypto Assets</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Bitcoin, Ethereum, Solana, XRP</div>
+                        </div>
+                        <input type="checkbox" id="asset-toggle-crypto" checked style="width: 22px; height: 22px; accent-color: var(--accent-emerald); cursor: pointer;" onchange="saveAssetConfig()">
+                    </div>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <button class="btn-primary" onclick="saveAssetConfig()">💾 Save Asset Configuration</button>
+                    <span id="asset-config-status" style="font-size: 0.85rem; color: var(--accent-emerald);"></span>
+                </div>
+            </div>
+
             <div class="glass-card" style="margin-bottom: 20px;">
                 <h4 style="margin-bottom: 12px;">📱 Telegram Alert Configuration</h4>
                 <div style="display: flex; gap: 16px; flex-wrap: wrap;">
@@ -348,6 +781,36 @@
                         <button class="btn-primary" style="background: linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%);" onclick="testOANDAConnection()">🧪 Test OANDA Connection</button>
                     </div>
                     <div id="oanda-status-output" style="margin-top: 8px; font-size: 0.9rem;"></div>
+                </div>
+            </div>
+
+            <!-- Final Opportunity Score Acceptance Threshold Card -->
+            <div class="glass-card" style="margin-top: 20px;">
+                <h4 style="margin-bottom: 8px;">🎯 Final Opportunity Score Acceptance Threshold</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">
+                    Configure the minimum composite opportunity score (50% – 100%) required for a candidate to be approved for live alerts and paper trading.
+                </p>
+                <div style="display: flex; flex-direction: column; gap: 14px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.3); padding: 12px 18px; border-radius: 8px; border: 1px solid var(--border-color);">
+                        <div>
+                            <span style="font-weight: 600; font-size: 1.05rem;">Required Threshold:</span>
+                            <span id="score-threshold-display" style="font-family: 'Outfit'; font-size: 1.25rem; font-weight: 700; color: var(--accent-emerald); margin-left: 8px;">70%</span>
+                        </div>
+                        <span class="status-tag live" style="font-size: 0.8rem; background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald);">
+                            ● Enforced by Hard Risk Gate
+                        </span>
+                    </div>
+
+                    <div style="display: flex; align-items: center; gap: 16px; margin: 6px 0;">
+                        <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">50%</span>
+                        <input type="range" id="score-threshold-slider" min="50" max="100" step="1" value="70" style="flex: 1; accent-color: var(--accent-emerald); cursor: pointer;" oninput="onScoreThresholdSliderChange(this.value)">
+                        <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">100%</span>
+                    </div>
+
+                    <div style="display: flex; gap: 12px; align-items: center;">
+                        <button class="btn-primary" onclick="saveScoreThreshold()">💾 Save Score Threshold</button>
+                        <span id="score-threshold-status" style="font-size: 0.9rem; color: var(--accent-emerald);"></span>
+                    </div>
                 </div>
             </div>
 
@@ -575,6 +1038,23 @@
         </div>
     </div>
 
-    <script src="/static/app.js?v=3.0"></script>
+    <!-- Modal for Empirical Knowledge Detail & Evidence Audit -->
+    <div id="knowledge-detail-modal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 750px; max-height: 85vh; overflow-y: auto;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
+                <div>
+                    <span id="kb-modal-category" style="font-size: 0.75rem; font-weight: 700; color: var(--accent-cyan); text-transform: uppercase;">CATEGORY</span>
+                    <h3 id="kb-modal-title" style="font-family: 'Outfit'; font-size: 1.3rem; margin-top: 4px;">Knowledge Rule Title</h3>
+                </div>
+                <span id="kb-modal-status-badge" style="padding: 4px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 700;">VALIDATED</span>
+            </div>
+            <div id="kb-modal-body" style="font-size: 0.9rem; line-height: 1.6; color: var(--text-secondary);">
+                <!-- Dynamic Content Populated by app.js -->
+            </div>
+            <button class="btn-primary" style="margin-top: 20px; width: 100%;" onclick="closeKnowledgeModal()">Close Knowledge Detail</button>
+        </div>
+    </div>
+
+    <script src="/static/app.js?v=3.1"></script>
 </body>
 </html>

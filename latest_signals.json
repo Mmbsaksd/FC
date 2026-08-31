@@ -1,5 +1,93 @@
 {
-  "timestamp": "2026-08-30T15:05:26.127284+00:00",
-  "count": 0,
-  "signals": []
+  "timestamp": "2026-08-31T13:21:07.744880+00:00",
+  "count": 1,
+  "signals": [
+    {
+      "signal_id": "SIG-202608311320-ETH-US",
+      "fingerprint": "3df72c5e1da4ece976a58120",
+      "scan_id": "scan-20260831-131956",
+      "trace_id": "trc-ef481c60",
+      "timestamp": "2026-08-31T13:20:49.132258+00:00",
+      "symbol": "Ethereum (ETH)",
+      "raw_symbol": "ETH-USD",
+      "direction": "LONG",
+      "setup_type": "MOMENTUM_CONTINUATION",
+      "opportunity_score": 70.43,
+      "ml_probability": 0.809,
+      "technical_score": 90.0,
+      "currency_strength_diff": 4.22,
+      "entry_price": 2452.6001,
+      "stop_loss": 2442.9617,
+      "take_profit_1": 2467.05769,
+      "take_profit_2": 2481.51528,
+      "risk_reward": 3.0,
+      "expected_value": 2.186,
+      "llm_reasoning": "The technical evidence, including bullish market structure, strong momentum indicators (RSI and ADX), and favorable risk/reward ratio, aligns with the LONG direction. Additionally, currency strength divergence (ETH strong vs. USD weak) and a risk-on sentiment environment further support the trade setup.",
+      "why_this_trade": {
+        "what": "Ethereum (ETH) LONG Trade Setup (15M)",
+        "why": "The technical evidence, including bullish market structure, strong momentum indicators (RSI and ADX), and favorable risk/reward ratio, aligns with the LONG direction. Additionally, currency strength divergence (ETH strong vs. USD weak) and a risk-on sentiment environment further support the trade setup.",
+        "why_now": "Candle close aligned with MOMENTUM_CONTINUATION structure on 15M timeframe",
+        "supporting_factors": [
+          "[FundamentalAnalysis] No high-impact economic releases scheduled in next 2 hours",
+          "[CurrencyStrength] Strong Currency Divergence: ETH (+0.00) vs USD (-4.22) -> Diff: +4.22",
+          "[CandleStructure] Pattern: Morning Star 3-Candle Bullish Reversal",
+          "[CandleStructure] Pattern: Bearish Pinbar / Shooting Star Rejection (After Rally) (77% upper wick)",
+          "[MarketStructure] Bullish Market Structure: Higher Highs & Higher Lows confirmed",
+          "[TechnicalAnalysis] Technical score 90.0/100 supports LONG (MOMENTUM_CONTINUATION)",
+          "[TechnicalAnalysis] RSI at 59.0 shows bullish room",
+          "[TechnicalAnalysis] Strong trend momentum (ADX: 27.6)",
+          "[MarketRegime] Market Regime classified as: LOW_VOLATILITY_CONSOLIDATION (Volatility: LOW)",
+          "[MacroAnalysis] Macro DXY Bias: BEARISH_USD (Yield 10Y: 4.75%, 2s10s: 0.00%)",
+          "[MLPrediction] Calibrated Statistical Win Probability: 68.3% (RSI: 59.0, ADX: 39.7)",
+          "[RiskMetrics] Favorable Risk/Reward 1:3.0 (LONG) - SL: 2442.9617, TP1: 2467.05769",
+          "[SentimentCrossAsset] Global Risk Sentiment: RISK-ON (VIX low at 15.4)",
+          "[SentimentCrossAsset] Crypto liquidity environment checked against BTC ($77,957)"
+        ],
+        "contradicting_factors": [],
+        "technical_logic": {
+          "rsi": 59.011825463078594,
+          "adx": 27.588080364801687,
+          "setup_type": "MOMENTUM_CONTINUATION",
+          "atr": 8.031994512442434
+        },
+        "macro_logic": {
+          "dxy_index": 99.55,
+          "us10y_yield": 4.754,
+          "us_short_yield": 3.732,
+          "yield_curve_slope": 1.022,
+          "dxy_bias": "BEARISH_USD",
+          "risk_sentiment": "RISK_OFF",
+          "base_rate": 0.0,
+          "quote_rate": 5.25,
+          "rate_diff": 0.0,
+          "macro_score": 44.0
+        },
+        "ml_logic": "Statistical Meta-Model Win Probability: 80.9%",
+        "regime_logic": "LOW_VOLATILITY_CONSOLIDATION",
+        "retrieved_knowledge": [
+          "USD/JPY Yield Spread & US 10Y Yield Correlation",
+          "London / New York Overlap SMC FVG Retest",
+          "GBP/USD Test Observation"
+        ],
+        "visual_confirmation": "CONFIRMED",
+        "invalidation": "Price touching or closing past Stop Loss level 2442.9617 (96.4 pips)",
+        "expected_holding_period": "4 to 8 candles (15M horizon)"
+      },
+      "retrieved_knowledge": [
+        "USD/JPY Yield Spread & US 10Y Yield Correlation",
+        "London / New York Overlap SMC FVG Retest",
+        "GBP/USD Test Observation"
+      ],
+      "visual_verification": {
+        "status": "CONFIRMED",
+        "visual_direction": "LONG",
+        "pattern_confirmation": true,
+        "structure_confirmation": "True",
+        "support_resistance_confirmation": true,
+        "contradictions": [],
+        "confidence": 0.82
+      },
+      "expires_at": "2026-08-31T17:20:49.132300+00:00"
+    }
+  ]
 }

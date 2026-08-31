@@ -9,6 +9,8 @@ from app.providers.yahoo_provider import YahooMarketDataProvider
 
 logger = logging.getLogger(__name__)
 
+_GLOBAL_CS_CACHE = {}
+
 class CurrencyStrengthEngine:
     """
     Computes relative currency strength (0 to 10 scale) across 8 major currencies.
@@ -18,14 +20,15 @@ class CurrencyStrengthEngine:
     def __init__(self, provider: YahooMarketDataProvider = None):
         self.provider = provider or YahooMarketDataProvider()
 
-    def calculate_currency_strength(self, timeframe: str = "1H") -> Dict[str, float]:
+    def calculate_currency_strength(self, timeframe: str = "1H", shared_dfs: Dict[str, pd.DataFrame] = None) -> Dict[str, float]:
         """
         Calculates normalized currency strength score (-10 to +10) for each major currency.
-        Uses Z-score relative return distribution across active currencies with caching.
+        Uses Z-score relative return distribution across active currencies with global caching.
         """
+        global _GLOBAL_CS_CACHE
         cache_key = f"cs_matrix_{timeframe}"
-        cached = getattr(self, "_cs_cache", {}).get(cache_key)
         now_ts = time.time()
+        cached = _GLOBAL_CS_CACHE.get(cache_key)
         if cached and (now_ts - cached.get("time", 0)) < 60:
             return cached.get("data", {})
 
@@ -40,8 +43,9 @@ class CurrencyStrengthEngine:
             base = inst["base"]
             quote = inst["quote"]
 
-            df = self.provider.fetch_ohlcv(symbol, timeframe=timeframe, limit=20)
-            if df.empty or len(df) < 2:
+            res = self.provider.fetch_ohlcv(symbol, timeframe=timeframe, limit=20)
+            df = res[0] if isinstance(res, tuple) else res
+            if df is None or getattr(df, 'empty', True) or len(df) < 2:
                 continue
 
             # Log return over lookback period
@@ -68,10 +72,7 @@ class CurrencyStrengthEngine:
             score = np.clip(z_score * 3.5, -10.0, 10.0)
             strength_scores[curr] = round(float(score), 2)
 
-        if not hasattr(self, "_cs_cache"):
-            self._cs_cache = {}
-        self._cs_cache[cache_key] = {"time": now_ts, "data": strength_scores}
-
+        _GLOBAL_CS_CACHE[cache_key] = {"time": now_ts, "data": strength_scores}
         return strength_scores
 
     def get_strong_weak_pairs(self, strength_scores: Dict[str, float], threshold: float = 2.0) -> List[Dict[str, Any]]:

@@ -51,11 +51,24 @@ class DeterministicFinalRiskGate:
             logger.warning(f"Final Risk Gate REJECTED {symbol}: Opportunity Score {score:.1f} < Threshold {min_score}")
             return False, f"Opportunity Score {score:.1f} Below Required Threshold ({min_score})"
 
-        # 5. LLM Decision Gate
+        # 5. ML Probability Hard Floor (Prevents calling low-probability trades 'High Quality')
+        ml_prob = float(candidate_decision.get("ml_probability", 0.50))
+        if ml_prob < 0.40:
+            logger.warning(f"Final Risk Gate REJECTED {symbol}: ML Win Probability {ml_prob*100:.1f}% < Floor (40.0%)")
+            return False, f"Weak ML Probability: {ml_prob*100:.1f}% Below Minimum Statistical Floor (40.0%)"
+
+        # 6. LLM Decision Gate
         decision = candidate_decision.get("decision", "NO_TRADE")
         if decision != "TRADE":
             logger.warning(f"Final Risk Gate REJECTED {symbol}: LLM Decision = {decision}")
             return False, f"LLM Decision = {decision} (Not APPROVED for trade)"
 
-        logger.info(f"✨ Final Risk Gate PASSED for {symbol} (Score: {score:.1f}, R:R: 1:{rr:.2f})")
+        # Assign explicit Quality Tier
+        if score >= 70.0 and ml_prob >= 0.50 and rr >= 2.0:
+            candidate_decision["quality_tier"] = "HIGH_QUALITY"
+        else:
+            candidate_decision["quality_tier"] = "MODERATE_QUALITY"
+
+        logger.info(f"✨ Final Risk Gate PASSED for {symbol} (Score: {score:.1f}, ML: {ml_prob*100:.1f}%, Tier: {candidate_decision['quality_tier']}, R:R: 1:{rr:.2f})")
         return True, "PASSED_ALL_GATES"
+

@@ -1,21 +1,21 @@
 {
   "system_status": {
     "status": "HEALTHY",
-    "state": "IDLE",
-    "scan_id": "scan-20260830-150437",
-    "last_scan_time": "2026-08-30T15:05:26.131503+00:00",
+    "state": "ACTIVE_SIGNALS",
+    "scan_id": "scan-20260831-131956",
+    "last_scan_time": "2026-08-31T13:21:07.747247+00:00",
     "scan_interval_minutes": 15,
     "monitored_assets": 14,
     "active_engines": "10/10",
     "completed_engines": 10,
     "failed_engines": 0,
-    "pipeline_latency_ms": 48741.5,
+    "pipeline_latency_ms": 71494.8,
     "overall_health": "OPTIMAL"
   },
   "current_scan": {
-    "scan_id": "scan-20260830-150437",
-    "timestamp": "2026-08-30T15:05:26.131503+00:00",
-    "duration_ms": 48741.5,
+    "scan_id": "scan-20260831-131956",
+    "timestamp": "2026-08-31T13:21:07.747247+00:00",
+    "duration_ms": 71494.8,
     "instruments_scanned": 14,
     "total_observations": 840,
     "valid_observations": 840,
@@ -26,9 +26,9 @@
     "failed_jobs": 0,
     "candidates_detected": 8,
     "candidates_sent_to_llm": 5,
-    "approved_opportunities": 0,
-    "rejected_opportunities": 14,
-    "alerts_generated": 0
+    "approved_opportunities": 1,
+    "rejected_opportunities": 13,
+    "alerts_generated": 1
   },
   "parallel_engines": [
     {
@@ -144,7 +144,7 @@
       "stage": "2. Parallel Evidence",
       "count": 140,
       "pass_rate": 100.0,
-      "latency_ms": 48741.5,
+      "latency_ms": 71494.8,
       "description": "10 independent analytical engines executed concurrently"
     },
     {
@@ -177,138 +177,138 @@
     },
     {
       "stage": "7. Signal Generation",
-      "count": 0,
-      "pass_rate": 0.0,
+      "count": 1,
+      "pass_rate": 25.0,
       "latency_ms": 0.8,
       "description": "Structured JSON payload with complete WHY THIS TRADE rationale"
     },
     {
       "stage": "8. Alert & Paper Trading",
-      "count": 0,
-      "pass_rate": 0.0,
+      "count": 1,
+      "pass_rate": 100.0,
       "latency_ms": 85.0,
       "description": "Telegram push notifications & simulated paper trade logging"
     }
   ],
   "rejection_breakdown": [
     {
-      "reason": "Opportunity Score < 70.0",
-      "count": 14,
+      "reason": "Opportunity Score < 60.0",
+      "count": 12,
       "percentage": 100.0,
-      "description": "Composite multi-engine opportunity score failed to meet the minimum high-probability threshold of 70/100."
+      "description": "Setup did not satisfy strict quantitative risk and confidence gates."
     }
   ],
   "why_no_trade_list": [
     {
       "symbol": "EUR/USD",
-      "direction": "SHORT",
-      "score": 56.61,
-      "ml_prob": 0.691,
-      "reason": "Opportunity Score 56.6 Below Required Threshold (70.0)",
+      "direction": "LONG",
+      "score": 38.2,
+      "ml_prob": 0.503,
+      "reason": "Opportunity Score 38.2 Below Required Threshold (60.0)",
       "status": "REJECTED"
     },
     {
       "symbol": "GBP/USD",
-      "direction": "SHORT",
-      "score": 50.78,
-      "ml_prob": 0.49,
-      "reason": "Opportunity Score 50.8 Below Required Threshold (70.0)",
+      "direction": "LONG",
+      "score": 38.86,
+      "ml_prob": 0.296,
+      "reason": "Opportunity Score 38.9 Below Required Threshold (60.0)",
       "status": "REJECTED"
     },
     {
       "symbol": "USD/JPY",
       "direction": "LONG",
-      "score": 56.63,
-      "ml_prob": 0.474,
-      "reason": "Opportunity Score 56.6 Below Required Threshold (70.0)",
+      "score": 51.51,
+      "ml_prob": 0.294,
+      "reason": "Opportunity Score 51.5 Below Required Threshold (60.0)",
       "status": "REJECTED"
     },
     {
       "symbol": "AUD/USD",
-      "direction": "SHORT",
-      "score": 56.04,
-      "ml_prob": 0.597,
-      "reason": "Opportunity Score 56.0 Below Required Threshold (70.0)",
+      "direction": "LONG",
+      "score": 50.42,
+      "ml_prob": 0.288,
+      "reason": "Opportunity Score 50.4 Below Required Threshold (60.0)",
       "status": "REJECTED"
     },
     {
       "symbol": "USD/CAD",
-      "direction": "LONG",
-      "score": 64.56,
-      "ml_prob": 0.61,
-      "reason": "Opportunity Score 64.6 Below Required Threshold (70.0)",
-      "status": "REJECTED"
+      "direction": "SHORT",
+      "score": 71.95,
+      "ml_prob": 0.177,
+      "reason": "Active setup already monitored (deduplicated)",
+      "status": "MONITORING_ACTIVE"
     },
     {
       "symbol": "USD/CHF",
-      "direction": "LONG",
-      "score": 60.28,
-      "ml_prob": 0.645,
-      "reason": "Opportunity Score 60.3 Below Required Threshold (70.0)",
+      "direction": "SHORT",
+      "score": 57.95,
+      "ml_prob": 0.19,
+      "reason": "Opportunity Score 58.0 Below Required Threshold (60.0)",
       "status": "REJECTED"
     },
     {
       "symbol": "NZD/USD",
-      "direction": "SHORT",
-      "score": 56.66,
-      "ml_prob": 0.625,
-      "reason": "Opportunity Score 56.7 Below Required Threshold (70.0)",
+      "direction": "LONG",
+      "score": 59.02,
+      "ml_prob": 0.598,
+      "reason": "Opportunity Score 59.0 Below Required Threshold (60.0)",
       "status": "REJECTED"
     },
     {
       "symbol": "EUR/GBP",
       "direction": "SHORT",
-      "score": 64.64,
-      "ml_prob": 0.668,
-      "reason": "Opportunity Score 64.6 Below Required Threshold (70.0)",
+      "score": 48.02,
+      "ml_prob": 0.482,
+      "reason": "Opportunity Score 48.0 Below Required Threshold (60.0)",
       "status": "REJECTED"
     },
     {
       "symbol": "Gold",
       "direction": "SHORT",
-      "score": 55.12,
-      "ml_prob": 0.812,
-      "reason": "Opportunity Score 55.1 Below Required Threshold (70.0)",
+      "score": 47.19,
+      "ml_prob": 0.776,
+      "reason": "Opportunity Score 47.2 Below Required Threshold (60.0)",
       "status": "REJECTED"
     },
     {
       "symbol": "Crude Oil",
-      "direction": "LONG",
-      "score": 49.18,
-      "ml_prob": 0.485,
-      "reason": "Opportunity Score 49.2 Below Required Threshold (70.0)",
+      "direction": "SHORT",
+      "score": 53.01,
+      "ml_prob": 0.843,
+      "reason": "Opportunity Score 53.0 Below Required Threshold (60.0)",
       "status": "REJECTED"
     },
     {
       "symbol": "Bitcoin (BTC)",
-      "direction": "LONG",
-      "score": 61.27,
-      "ml_prob": 0.734,
-      "reason": "Opportunity Score 61.3 Below Required Threshold (70.0)",
+      "direction": "SHORT",
+      "score": 46.54,
+      "ml_prob": 0.804,
+      "reason": "Opportunity Score 46.5 Below Required Threshold (60.0)",
       "status": "REJECTED"
     },
     {
       "symbol": "Ethereum (ETH)",
       "direction": "LONG",
-      "score": 65.36,
-      "ml_prob": 0.742,
-      "reason": "Opportunity Score 65.4 Below Required Threshold (70.0)",
-      "status": "REJECTED"
+      "score": 70.43,
+      "ml_prob": 0.809,
+      "reason": "Qualified LONG Opportunity (Score: 70.43, EV: +2.19R)",
+      "status": "APPROVED"
     },
     {
       "symbol": "Solana (SOL)",
-      "direction": "LONG",
-      "score": 59.9,
-      "ml_prob": 0.78,
-      "reason": "Opportunity Score 59.9 Below Required Threshold (70.0)",
+      "direction": "NEUTRAL",
+      "score": 70.84,
+      "ml_prob": 0.4,
+      "reason": "LLM Decision = NO_TRADE (Not APPROVED for trade)",
       "status": "REJECTED"
     },
     {
       "symbol": "XRP (Ripple)",
-      "direction": "LONG",
-      "score": 60.5,
-      "ml_prob": 0.67,
-      "reason": "Opportunity Score 60.5 Below Required Threshold (70.0)",
+      "direction": "SHORT",
+      "score": 53.94,
+      "ml_prob": 0.847,
+      "reason": "Opportunity Score 53.9 Below Required Threshold (60.0)",
       "status": "REJECTED"
     }
   ],
@@ -349,14 +349,14 @@
     "training_mode": "Offline Historical Factor Calibration"
   },
   "latest_snapshot": {
-    "timestamp": "2026-08-30T15:05:26.131503+00:00",
+    "timestamp": "2026-08-31T13:21:07.747247+00:00",
     "raw_ticks": 14,
     "validated": 14,
     "technical_candidates": 8,
     "ml_qualified": 5,
     "risk_qualified": 4,
-    "approved_signals": 0,
-    "alerts_sent": 0,
-    "overall_conversion_pct": 0.0
+    "approved_signals": 1,
+    "alerts_sent": 1,
+    "overall_conversion_pct": 7.14
   }
 }
