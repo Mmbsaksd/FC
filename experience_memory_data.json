@@ -1,5 +1,5612 @@
 [
   {
+    "experience_id": "exp-SIG-202608311531-XRP-US",
+    "signal_id": "SIG-202608311531-XRP-US",
+    "scan_id": "scan-20260831-153005",
+    "created_at": "2026-08-31T15:31:18.384971+00:00",
+    "symbol": "XRP (Ripple)",
+    "direction": "LONG",
+    "entry_price": 1.3728,
+    "stop_loss": 1.36288,
+    "take_profit": 1.38769,
+    "ml_predicted_win_prob": 0.85,
+    "composite_score": 73.19,
+    "llm_reasoning": "Technical evidence, currency strength divergence, and market structure strongly support the LONG direction, with favorable risk/reward metrics and bullish sentiment in a trending momentum regime. Contradictions are minimal, and visual confirmation aligns with the proposed trade setup.",
+    "engine_evidence": {
+      "CandleStructure": {
+        "status": "SUCCESS",
+        "score": 50.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.5,
+        "metrics": {
+          "body_ratio": 0.57,
+          "upper_wick_ratio": 0.2,
+          "lower_wick_ratio": 0.23,
+          "patterns_detected": []
+        },
+        "latency_ms": 0.8063999994192272
+      },
+      "MacroAnalysis": {
+        "status": "SUCCESS",
+        "score": 44.0,
+        "direction": "LONG",
+        "confidence": 0.75,
+        "metrics": {
+          "dxy_index": 99.45,
+          "us10y_yield": 4.758,
+          "us_short_yield": 3.732,
+          "yield_curve_slope": 1.026,
+          "dxy_bias": "BEARISH_USD",
+          "risk_sentiment": "RISK_OFF",
+          "base_rate": 0.0,
+          "quote_rate": 5.25,
+          "rate_diff": 0.0,
+          "macro_score": 44.0
+        },
+        "latency_ms": 0.026399997295811772
+      },
+      "FundamentalAnalysis": {
+        "status": "SUCCESS",
+        "score": 50.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.7,
+        "metrics": {
+          "event_risk": false,
+          "calendar_score": 50.0
+        },
+        "latency_ms": 0.0044000043999403715
+      },
+      "MarketRegime": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.8,
+        "metrics": {
+          "regime": "TRENDING_MOMENTUM",
+          "volatility_level": "MEDIUM"
+        },
+        "latency_ms": 0.2038000093307346
+      },
+      "CurrencyStrength": {
+        "status": "SUCCESS",
+        "score": 96.86,
+        "direction": "LONG",
+        "confidence": 0.9686,
+        "metrics": {
+          "base_currency": "XRP",
+          "quote_currency": "USD",
+          "base_strength": 0.0,
+          "quote_strength": -7.81,
+          "strength_diff": 7.81
+        },
+        "latency_ms": 0.042800005758181214
+      },
+      "TechnicalAnalysis": {
+        "status": "SUCCESS",
+        "score": 96.0,
+        "direction": "LONG",
+        "confidence": 0.96,
+        "metrics": {
+          "rsi": 53.606276300530645,
+          "adx": 23.418389152836895,
+          "setup_type": "TREND_PULLBACK_BOUNCE",
+          "atr": 0.008270045239611631
+        },
+        "latency_ms": 25.807799989706837
+      },
+      "RiskMetrics": {
+        "status": "SUCCESS",
+        "score": 95.0,
+        "direction": "LONG",
+        "confidence": 0.85,
+        "metrics": {
+          "valid": true,
+          "entry_price": 1.3728,
+          "stop_loss": 1.36288,
+          "take_profit_1": 1.38769,
+          "take_profit_2": 1.40257,
+          "risk_pips": 99.2,
+          "reward_pips": 297.7,
+          "risk_reward": 3.0,
+          "atr": 0.008270045239611631,
+          "long_parameters": {
+            "valid": true,
+            "entry_price": 1.3728,
+            "stop_loss": 1.36288,
+            "take_profit_1": 1.38769,
+            "take_profit_2": 1.40257,
+            "risk_pips": 99.2,
+            "reward_pips": 297.7,
+            "risk_reward": 3.0
+          },
+          "short_parameters": {
+            "valid": true,
+            "entry_price": 1.3728,
+            "stop_loss": 1.38272,
+            "take_profit_1": 1.35791,
+            "take_profit_2": 1.34303,
+            "risk_pips": 99.2,
+            "reward_pips": 297.7,
+            "risk_reward": 3.0
+          }
+        },
+        "latency_ms": 1.1168000055477023
+      },
+      "MarketStructure": {
+        "status": "SUCCESS",
+        "score": 80.0,
+        "direction": "LONG",
+        "confidence": 0.8,
+        "metrics": {
+          "higher_high": true,
+          "higher_low": true,
+          "lower_high": false,
+          "lower_low": false,
+          "bos_detected": false,
+          "choch_detected": false,
+          "total_swing_highs": 11,
+          "total_swing_lows": 8
+        },
+        "latency_ms": 0.07829999958630651
+      },
+      "MLPrediction": {
+        "status": "SUCCESS",
+        "score": 44.5,
+        "direction": "LONG",
+        "confidence": 0.445,
+        "metrics": {
+          "win_probability": 0.85,
+          "model_type": "Calibrated Statistical Factor Model",
+          "live_rsi": 53.61,
+          "live_adx": 13.92,
+          "dynamic_momentum_score": 0.93,
+          "brier_score": 0.142
+        },
+        "latency_ms": 6.16940000327304
+      },
+      "SentimentCrossAsset": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "LONG",
+        "confidence": 0.72,
+        "metrics": {
+          "vix": 15.16,
+          "gold_price": 4481.3,
+          "wti_price": 85.27,
+          "btc_price": 78433.5,
+          "is_risk_on": true
+        },
+        "latency_ms": 0.8973000076366588
+      }
+    },
+    "knowledge_references": [
+      "USD/JPY Yield Spread & US 10Y Yield Correlation",
+      "London / New York Overlap SMC FVG Retest",
+      "GBP/USD Test Observation"
+    ],
+    "outcome_status": "ACTIVE_PENDING",
+    "realized_r": null,
+    "mfe_r": 0.0,
+    "mae_r": 0.0,
+    "holding_period_mins": 0,
+    "error_classification": null
+  },
+  {
+    "experience_id": "exp-SIG-202608311531-ETH-US",
+    "signal_id": "SIG-202608311531-ETH-US",
+    "scan_id": "scan-20260831-153005",
+    "created_at": "2026-08-31T15:31:06.430057+00:00",
+    "symbol": "Ethereum (ETH)",
+    "direction": "LONG",
+    "entry_price": 2467.87988,
+    "stop_loss": 2455.33657,
+    "take_profit": 2486.69486,
+    "ml_predicted_win_prob": 0.85,
+    "composite_score": 73.95,
+    "llm_reasoning": "Technical evidence, currency strength divergence, and market setup strongly support the LONG direction, with favorable risk/reward and bullish momentum confirmed across multiple indicators. No contradictions or high-impact risks are present in the immediate timeframe, and sentiment aligns with a RISK-ON environment.",
+    "engine_evidence": {
+      "CurrencyStrength": {
+        "status": "SUCCESS",
+        "score": 96.86,
+        "direction": "LONG",
+        "confidence": 0.9686,
+        "metrics": {
+          "base_currency": "ETH",
+          "quote_currency": "USD",
+          "base_strength": 0.0,
+          "quote_strength": -7.81,
+          "strength_diff": 7.81
+        },
+        "latency_ms": 0.034599986975081265
+      },
+      "MarketRegime": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.8,
+        "metrics": {
+          "regime": "LOW_VOLATILITY_CONSOLIDATION",
+          "volatility_level": "LOW"
+        },
+        "latency_ms": 0.2789999998640269
+      },
+      "MLPrediction": {
+        "status": "SUCCESS",
+        "score": 75.9,
+        "direction": "LONG",
+        "confidence": 0.759,
+        "metrics": {
+          "win_probability": 0.85,
+          "model_type": "Calibrated Statistical Factor Model",
+          "live_rsi": 65.01,
+          "live_adx": 38.09,
+          "dynamic_momentum_score": 3.68,
+          "brier_score": 0.142
+        },
+        "latency_ms": 5.941400013398379
+      },
+      "CandleStructure": {
+        "status": "SUCCESS",
+        "score": 85.0,
+        "direction": "LONG",
+        "confidence": 0.85,
+        "metrics": {
+          "body_ratio": 0.77,
+          "upper_wick_ratio": 0.15,
+          "lower_wick_ratio": 0.09,
+          "patterns_detected": [
+            "Bullish Engulfing (Real Body Engulfing)",
+            "Strong Bullish Momentum Marubozu (77% body)"
+          ]
+        },
+        "latency_ms": 0.30280000646598637
+      },
+      "FundamentalAnalysis": {
+        "status": "SUCCESS",
+        "score": 50.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.7,
+        "metrics": {
+          "event_risk": false,
+          "calendar_score": 50.0
+        },
+        "latency_ms": 0.007799986633472145
+      },
+      "MarketStructure": {
+        "status": "SUCCESS",
+        "score": 68.0,
+        "direction": "LONG",
+        "confidence": 0.68,
+        "metrics": {
+          "higher_high": true,
+          "higher_low": false,
+          "lower_high": false,
+          "lower_low": true,
+          "bos_detected": false,
+          "choch_detected": false,
+          "total_swing_highs": 11,
+          "total_swing_lows": 9
+        },
+        "latency_ms": 0.4420000041136518
+      },
+      "TechnicalAnalysis": {
+        "status": "SUCCESS",
+        "score": 96.0,
+        "direction": "LONG",
+        "confidence": 0.96,
+        "metrics": {
+          "rsi": 65.00525148233444,
+          "adx": 31.43089167712087,
+          "setup_type": "MOMENTUM_CONTINUATION",
+          "atr": 10.452762864313685
+        },
+        "latency_ms": 25.482600001851097
+      },
+      "MacroAnalysis": {
+        "status": "SUCCESS",
+        "score": 44.0,
+        "direction": "LONG",
+        "confidence": 0.75,
+        "metrics": {
+          "dxy_index": 99.45,
+          "us10y_yield": 4.758,
+          "us_short_yield": 3.732,
+          "yield_curve_slope": 1.026,
+          "dxy_bias": "BEARISH_USD",
+          "risk_sentiment": "RISK_OFF",
+          "base_rate": 0.0,
+          "quote_rate": 5.25,
+          "rate_diff": 0.0,
+          "macro_score": 44.0
+        },
+        "latency_ms": 0.01610000617802143
+      },
+      "RiskMetrics": {
+        "status": "SUCCESS",
+        "score": 95.0,
+        "direction": "LONG",
+        "confidence": 0.85,
+        "metrics": {
+          "valid": true,
+          "entry_price": 2467.87988,
+          "stop_loss": 2455.33657,
+          "take_profit_1": 2486.69486,
+          "take_profit_2": 2505.50983,
+          "risk_pips": 125.4,
+          "reward_pips": 376.3,
+          "risk_reward": 3.0,
+          "atr": 10.452762864313685,
+          "long_parameters": {
+            "valid": true,
+            "entry_price": 2467.87988,
+            "stop_loss": 2455.33657,
+            "take_profit_1": 2486.69486,
+            "take_profit_2": 2505.50983,
+            "risk_pips": 125.4,
+            "reward_pips": 376.3,
+            "risk_reward": 3.0
+          },
+          "short_parameters": {
+            "valid": true,
+            "entry_price": 2467.87988,
+            "stop_loss": 2480.4232,
+            "take_profit_1": 2449.06491,
+            "take_profit_2": 2430.24994,
+            "risk_pips": 125.4,
+            "reward_pips": 376.3,
+            "risk_reward": 3.0
+          }
+        },
+        "latency_ms": 2.092299997457303
+      },
+      "SentimentCrossAsset": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "LONG",
+        "confidence": 0.72,
+        "metrics": {
+          "vix": 15.16,
+          "gold_price": 4481.3,
+          "wti_price": 85.27,
+          "btc_price": 78433.5,
+          "is_risk_on": true
+        },
+        "latency_ms": 1.8670999997993931
+      }
+    },
+    "knowledge_references": [
+      "USD/JPY Yield Spread & US 10Y Yield Correlation",
+      "London / New York Overlap SMC FVG Retest",
+      "GBP/USD Test Observation"
+    ],
+    "outcome_status": "ACTIVE_PENDING",
+    "realized_r": null,
+    "mfe_r": 0.0,
+    "mae_r": 0.0,
+    "holding_period_mins": 0,
+    "error_classification": null
+  },
+  {
+    "experience_id": "exp-SIG-202608311531-BTC-US",
+    "signal_id": "SIG-202608311531-BTC-US",
+    "scan_id": "scan-20260831-153005",
+    "created_at": "2026-08-31T15:31:00.669443+00:00",
+    "symbol": "Bitcoin (BTC)",
+    "direction": "LONG",
+    "entry_price": 78441.22656,
+    "stop_loss": 78091.35212,
+    "take_profit": 78966.03823,
+    "ml_predicted_win_prob": 0.85,
+    "composite_score": 66.95,
+    "llm_reasoning": "The trade direction is supported by strong currency divergence, bullish market structure, favorable risk/reward ratio, and high technical analysis score indicating momentum continuation. Contradicting evidence from MLPrediction suggests choppy market conditions but does not outweigh the supporting factors.",
+    "engine_evidence": {
+      "FundamentalAnalysis": {
+        "status": "SUCCESS",
+        "score": 50.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.7,
+        "metrics": {
+          "event_risk": false,
+          "calendar_score": 50.0
+        },
+        "latency_ms": 0.01030000566970557
+      },
+      "CurrencyStrength": {
+        "status": "SUCCESS",
+        "score": 96.86,
+        "direction": "LONG",
+        "confidence": 0.9686,
+        "metrics": {
+          "base_currency": "BTC",
+          "quote_currency": "USD",
+          "base_strength": 0.0,
+          "quote_strength": -7.81,
+          "strength_diff": 7.81
+        },
+        "latency_ms": 0.025600005756132305
+      },
+      "MarketStructure": {
+        "status": "SUCCESS",
+        "score": 80.0,
+        "direction": "LONG",
+        "confidence": 0.8,
+        "metrics": {
+          "higher_high": true,
+          "higher_low": true,
+          "lower_high": false,
+          "lower_low": false,
+          "bos_detected": false,
+          "choch_detected": false,
+          "total_swing_highs": 10,
+          "total_swing_lows": 8
+        },
+        "latency_ms": 0.3895999980159104
+      },
+      "TechnicalAnalysis": {
+        "status": "SUCCESS",
+        "score": 92.0,
+        "direction": "LONG",
+        "confidence": 0.92,
+        "metrics": {
+          "rsi": 56.45524608953207,
+          "adx": 18.587595691774077,
+          "setup_type": "MOMENTUM_CONTINUATION",
+          "atr": 291.56203648594595
+        },
+        "latency_ms": 32.81589999096468
+      },
+      "CandleStructure": {
+        "status": "SUCCESS",
+        "score": 50.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.5,
+        "metrics": {
+          "body_ratio": 0.44,
+          "upper_wick_ratio": 0.25,
+          "lower_wick_ratio": 0.31,
+          "patterns_detected": []
+        },
+        "latency_ms": 0.6214000022737309
+      },
+      "MLPrediction": {
+        "status": "SUCCESS",
+        "score": 49.9,
+        "direction": "LONG",
+        "confidence": 0.499,
+        "metrics": {
+          "win_probability": 0.85,
+          "model_type": "Calibrated Statistical Factor Model",
+          "live_rsi": 56.46,
+          "live_adx": 19.12,
+          "dynamic_momentum_score": 1.36,
+          "brier_score": 0.142
+        },
+        "latency_ms": 4.459999996470287
+      },
+      "MacroAnalysis": {
+        "status": "SUCCESS",
+        "score": 44.0,
+        "direction": "LONG",
+        "confidence": 0.75,
+        "metrics": {
+          "dxy_index": 99.45,
+          "us10y_yield": 4.758,
+          "us_short_yield": 3.732,
+          "yield_curve_slope": 1.026,
+          "dxy_bias": "BEARISH_USD",
+          "risk_sentiment": "RISK_OFF",
+          "base_rate": 0.0,
+          "quote_rate": 5.25,
+          "rate_diff": 0.0,
+          "macro_score": 44.0
+        },
+        "latency_ms": 0.05020000389777124
+      },
+      "MarketRegime": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.8,
+        "metrics": {
+          "regime": "LOW_VOLATILITY_CONSOLIDATION",
+          "volatility_level": "LOW"
+        },
+        "latency_ms": 0.367900007404387
+      },
+      "RiskMetrics": {
+        "status": "SUCCESS",
+        "score": 95.0,
+        "direction": "LONG",
+        "confidence": 0.85,
+        "metrics": {
+          "valid": true,
+          "entry_price": 78441.22656,
+          "stop_loss": 78091.35212,
+          "take_profit_1": 78966.03823,
+          "take_profit_2": 79490.84989,
+          "risk_pips": 349.9,
+          "reward_pips": 1049.6,
+          "risk_reward": 3.0,
+          "atr": 291.56203648594595,
+          "long_parameters": {
+            "valid": true,
+            "entry_price": 78441.22656,
+            "stop_loss": 78091.35212,
+            "take_profit_1": 78966.03823,
+            "take_profit_2": 79490.84989,
+            "risk_pips": 349.9,
+            "reward_pips": 1049.6,
+            "risk_reward": 3.0
+          },
+          "short_parameters": {
+            "valid": true,
+            "entry_price": 78441.22656,
+            "stop_loss": 78791.10101,
+            "take_profit_1": 77916.4149,
+            "take_profit_2": 77391.60323,
+            "risk_pips": 349.9,
+            "reward_pips": 1049.6,
+            "risk_reward": 3.0
+          }
+        },
+        "latency_ms": 3.122499998426065
+      },
+      "SentimentCrossAsset": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "LONG",
+        "confidence": 0.72,
+        "metrics": {
+          "vix": 15.16,
+          "gold_price": 4481.3,
+          "wti_price": 85.27,
+          "btc_price": 78433.5,
+          "is_risk_on": true
+        },
+        "latency_ms": 4.080900005646981
+      }
+    },
+    "knowledge_references": [
+      "USD/JPY Yield Spread & US 10Y Yield Correlation",
+      "London / New York Overlap SMC FVG Retest",
+      "GBP/USD Test Observation"
+    ],
+    "outcome_status": "ACTIVE_PENDING",
+    "realized_r": null,
+    "mfe_r": 0.0,
+    "mae_r": 0.0,
+    "holding_period_mins": 0,
+    "error_classification": null
+  },
+  {
+    "experience_id": "exp-SIG-202608311530-AUDUSD",
+    "signal_id": "SIG-202608311530-AUDUSD",
+    "scan_id": "scan-20260831-153005",
+    "created_at": "2026-08-31T15:30:25.713075+00:00",
+    "symbol": "AUD/USD",
+    "direction": "LONG",
+    "entry_price": 0.71654,
+    "stop_loss": 0.71614,
+    "take_profit": 0.71714,
+    "ml_predicted_win_prob": 0.624,
+    "composite_score": 65.54,
+    "llm_reasoning": "Technical evidence, currency strength divergence, and market setup align with the LONG direction, supported by favorable risk/reward metrics and a bullish macro bias against USD. No contradictions were identified, and visual confirmation further supports the trade setup.",
+    "engine_evidence": {
+      "MLPrediction": {
+        "status": "SUCCESS",
+        "score": 55.8,
+        "direction": "LONG",
+        "confidence": 0.558,
+        "metrics": {
+          "win_probability": 0.624,
+          "model_type": "Calibrated Statistical Factor Model",
+          "live_rsi": 51.72,
+          "live_adx": 26.21,
+          "dynamic_momentum_score": 0.29,
+          "brier_score": 0.142
+        },
+        "latency_ms": 6.512499996460974
+      },
+      "TechnicalAnalysis": {
+        "status": "SUCCESS",
+        "score": 86.0,
+        "direction": "LONG",
+        "confidence": 0.86,
+        "metrics": {
+          "rsi": 51.723194302846885,
+          "adx": 16.498960407042553,
+          "setup_type": "TREND_PULLBACK_BOUNCE",
+          "atr": 0.00033280093703878674
+        },
+        "latency_ms": 27.794199995696545
+      },
+      "CurrencyStrength": {
+        "status": "SUCCESS",
+        "score": 93.98,
+        "direction": "LONG",
+        "confidence": 0.9398000000000001,
+        "metrics": {
+          "base_currency": "AUD",
+          "quote_currency": "USD",
+          "base_strength": -0.48,
+          "quote_strength": -7.81,
+          "strength_diff": 7.33
+        },
+        "latency_ms": 0.020500010577961802
+      },
+      "MarketStructure": {
+        "status": "SUCCESS",
+        "score": 68.0,
+        "direction": "LONG",
+        "confidence": 0.68,
+        "metrics": {
+          "higher_high": false,
+          "higher_low": true,
+          "lower_high": false,
+          "lower_low": false,
+          "bos_detected": false,
+          "choch_detected": false,
+          "total_swing_highs": 17,
+          "total_swing_lows": 7
+        },
+        "latency_ms": 0.34070000401698053
+      },
+      "CandleStructure": {
+        "status": "SUCCESS",
+        "score": 50.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.5,
+        "metrics": {
+          "body_ratio": 0.71,
+          "upper_wick_ratio": 0.0,
+          "lower_wick_ratio": 0.29,
+          "patterns_detected": []
+        },
+        "latency_ms": 1.123800000641495
+      },
+      "MarketRegime": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.8,
+        "metrics": {
+          "regime": "LOW_VOLATILITY_CONSOLIDATION",
+          "volatility_level": "LOW"
+        },
+        "latency_ms": 0.39200000173877925
+      },
+      "MacroAnalysis": {
+        "status": "SUCCESS",
+        "score": 39.5,
+        "direction": "LONG",
+        "confidence": 0.75,
+        "metrics": {
+          "dxy_index": 99.45,
+          "us10y_yield": 4.758,
+          "us_short_yield": 3.732,
+          "yield_curve_slope": 1.026,
+          "dxy_bias": "BEARISH_USD",
+          "risk_sentiment": "RISK_OFF",
+          "base_rate": 4.35,
+          "quote_rate": 5.25,
+          "rate_diff": -0.9,
+          "macro_score": 39.5
+        },
+        "latency_ms": 0.01619999238755554
+      },
+      "FundamentalAnalysis": {
+        "status": "SUCCESS",
+        "score": 44.27,
+        "direction": "SHORT",
+        "confidence": 0.7,
+        "metrics": {
+          "event_risk": false,
+          "calendar_score": 44.27
+        },
+        "latency_ms": 0.20990001212339848
+      },
+      "RiskMetrics": {
+        "status": "SUCCESS",
+        "score": 95.0,
+        "direction": "LONG",
+        "confidence": 0.85,
+        "metrics": {
+          "valid": true,
+          "entry_price": 0.71654,
+          "stop_loss": 0.71614,
+          "take_profit_1": 0.71714,
+          "take_profit_2": 0.71774,
+          "risk_pips": 4.0,
+          "reward_pips": 12.0,
+          "risk_reward": 3.0,
+          "atr": 0.00033280093703878674,
+          "long_parameters": {
+            "valid": true,
+            "entry_price": 0.71654,
+            "stop_loss": 0.71614,
+            "take_profit_1": 0.71714,
+            "take_profit_2": 0.71774,
+            "risk_pips": 4.0,
+            "reward_pips": 12.0,
+            "risk_reward": 3.0
+          },
+          "short_parameters": {
+            "valid": true,
+            "entry_price": 0.71654,
+            "stop_loss": 0.71694,
+            "take_profit_1": 0.71594,
+            "take_profit_2": 0.71534,
+            "risk_pips": 4.0,
+            "reward_pips": 12.0,
+            "risk_reward": 3.0
+          }
+        },
+        "latency_ms": 3.4639000077731907
+      },
+      "SentimentCrossAsset": {
+        "status": "SUCCESS",
+        "score": 65.0,
+        "direction": "LONG",
+        "confidence": 0.72,
+        "metrics": {
+          "vix": 15.16,
+          "gold_price": 4481.3,
+          "wti_price": 85.27,
+          "btc_price": 78433.5,
+          "is_risk_on": true
+        },
+        "latency_ms": 2.1966999920550734
+      }
+    },
+    "knowledge_references": [
+      "USD/JPY Yield Spread & US 10Y Yield Correlation",
+      "London / New York Overlap SMC FVG Retest",
+      "GBP/USD Test Observation"
+    ],
+    "outcome_status": "ACTIVE_PENDING",
+    "realized_r": null,
+    "mfe_r": 0.0,
+    "mae_r": 0.0,
+    "holding_period_mins": 0,
+    "error_classification": null
+  },
+  {
+    "experience_id": "exp-SIG-202608311530-USDJPY",
+    "signal_id": "SIG-202608311530-USDJPY",
+    "scan_id": "scan-20260831-153005",
+    "created_at": "2026-08-31T15:30:20.688115+00:00",
+    "symbol": "USD/JPY",
+    "direction": "SHORT",
+    "entry_price": 159.74899,
+    "stop_loss": 159.85018,
+    "take_profit": 159.59721,
+    "ml_predicted_win_prob": 0.167,
+    "composite_score": 64.07,
+    "llm_reasoning": "The short direction is supported by strong technical evidence, bearish market structure, and significant currency strength divergence favoring JPY over USD. However, the ML prediction indicates a lower statistical win probability, suggesting potential choppiness in the market.",
+    "engine_evidence": {
+      "FundamentalAnalysis": {
+        "status": "SUCCESS",
+        "score": 51.73,
+        "direction": "LONG",
+        "confidence": 0.7,
+        "metrics": {
+          "event_risk": false,
+          "calendar_score": 51.73
+        },
+        "latency_ms": 0.15520000306423753
+      },
+      "MLPrediction": {
+        "status": "SUCCESS",
+        "score": 46.1,
+        "direction": "SHORT",
+        "confidence": 0.461,
+        "metrics": {
+          "win_probability": 0.167,
+          "model_type": "Calibrated Statistical Factor Model",
+          "live_rsi": 49.14,
+          "live_adx": 20.71,
+          "dynamic_momentum_score": -0.45,
+          "brier_score": 0.142
+        },
+        "latency_ms": 4.164199999650009
+      },
+      "CurrencyStrength": {
+        "status": "SUCCESS",
+        "score": 98.0,
+        "direction": "SHORT",
+        "confidence": 0.98,
+        "metrics": {
+          "base_currency": "USD",
+          "quote_currency": "JPY",
+          "base_strength": -7.81,
+          "quote_strength": 3.9,
+          "strength_diff": -11.709999999999999
+        },
+        "latency_ms": 0.009000010322779417
+      },
+      "TechnicalAnalysis": {
+        "status": "SUCCESS",
+        "score": 80.0,
+        "direction": "SHORT",
+        "confidence": 0.8,
+        "metrics": {
+          "rsi": 49.14414437677861,
+          "adx": 19.109379217648247,
+          "setup_type": "TREND_PULLBACK_REJECTION",
+          "atr": 0.08432611487263866
+        },
+        "latency_ms": 27.633000005153008
+      },
+      "CandleStructure": {
+        "status": "SUCCESS",
+        "score": 84.0,
+        "direction": "SHORT",
+        "confidence": 0.84,
+        "metrics": {
+          "body_ratio": 0.18,
+          "upper_wick_ratio": 0.69,
+          "lower_wick_ratio": 0.14,
+          "patterns_detected": [
+            "Bearish Pinbar / Shooting Star Rejection (After Rally) (69% upper wick)"
+          ]
+        },
+        "latency_ms": 0.4616999940481037
+      },
+      "MacroAnalysis": {
+        "status": "SUCCESS",
+        "score": 69.0,
+        "direction": "SHORT",
+        "confidence": 0.75,
+        "metrics": {
+          "dxy_index": 99.45,
+          "us10y_yield": 4.758,
+          "us_short_yield": 3.732,
+          "yield_curve_slope": 1.026,
+          "dxy_bias": "BEARISH_USD",
+          "risk_sentiment": "RISK_OFF",
+          "base_rate": 5.25,
+          "quote_rate": 0.25,
+          "rate_diff": 5.0,
+          "macro_score": 69.0
+        },
+        "latency_ms": 0.014199991710484028
+      },
+      "MarketStructure": {
+        "status": "SUCCESS",
+        "score": 80.0,
+        "direction": "SHORT",
+        "confidence": 0.8,
+        "metrics": {
+          "higher_high": false,
+          "higher_low": false,
+          "lower_high": true,
+          "lower_low": true,
+          "bos_detected": false,
+          "choch_detected": false,
+          "total_swing_highs": 8,
+          "total_swing_lows": 8
+        },
+        "latency_ms": 0.31149999995250255
+      },
+      "RiskMetrics": {
+        "status": "SUCCESS",
+        "score": 95.0,
+        "direction": "SHORT",
+        "confidence": 0.85,
+        "metrics": {
+          "valid": true,
+          "entry_price": 159.74899,
+          "stop_loss": 159.85018,
+          "take_profit_1": 159.59721,
+          "take_profit_2": 159.44542,
+          "risk_pips": 10.1,
+          "reward_pips": 30.4,
+          "risk_reward": 3.0,
+          "atr": 0.08432611487263866,
+          "long_parameters": {
+            "valid": true,
+            "entry_price": 159.74899,
+            "stop_loss": 159.6478,
+            "take_profit_1": 159.90078,
+            "take_profit_2": 160.05257,
+            "risk_pips": 10.1,
+            "reward_pips": 30.4,
+            "risk_reward": 3.0
+          },
+          "short_parameters": {
+            "valid": true,
+            "entry_price": 159.74899,
+            "stop_loss": 159.85018,
+            "take_profit_1": 159.59721,
+            "take_profit_2": 159.44542,
+            "risk_pips": 10.1,
+            "reward_pips": 30.4,
+            "risk_reward": 3.0
+          }
+        },
+        "latency_ms": 0.9961000032490119
+      },
+      "MarketRegime": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.8,
+        "metrics": {
+          "regime": "LOW_VOLATILITY_CONSOLIDATION",
+          "volatility_level": "LOW"
+        },
+        "latency_ms": 0.19619999511633068
+      },
+      "SentimentCrossAsset": {
+        "status": "SUCCESS",
+        "score": 72.0,
+        "direction": "LONG",
+        "confidence": 0.72,
+        "metrics": {
+          "vix": 15.16,
+          "gold_price": 4481.3,
+          "wti_price": 85.27,
+          "btc_price": 78433.5,
+          "is_risk_on": true
+        },
+        "latency_ms": 0.903200008906424
+      }
+    },
+    "knowledge_references": [
+      "USD/JPY Yield Spread & US 10Y Yield Correlation",
+      "London / New York Overlap SMC FVG Retest",
+      "GBP/USD Test Observation"
+    ],
+    "outcome_status": "ACTIVE_PENDING",
+    "realized_r": null,
+    "mfe_r": 0.0,
+    "mae_r": 0.0,
+    "holding_period_mins": 0,
+    "error_classification": null
+  },
+  {
+    "experience_id": "exp-SIG-202608311530-GBPUSD",
+    "signal_id": "SIG-202608311530-GBPUSD",
+    "scan_id": "scan-20260831-153005",
+    "created_at": "2026-08-31T15:30:15.731663+00:00",
+    "symbol": "GBP/USD",
+    "direction": "LONG",
+    "entry_price": 1.35518,
+    "stop_loss": 1.35441,
+    "take_profit": 1.35634,
+    "ml_predicted_win_prob": 0.57,
+    "composite_score": 68.05,
+    "llm_reasoning": "The technical evidence, currency strength divergence, and market structure confirm a bullish setup with favorable risk/reward metrics and momentum continuation. Supporting factors like bearish USD macro bias and risk-on sentiment further align with the long direction.",
+    "engine_evidence": {
+      "FundamentalAnalysis": {
+        "status": "SUCCESS",
+        "score": 47.27,
+        "direction": "SHORT",
+        "confidence": 0.7,
+        "metrics": {
+          "event_risk": false,
+          "calendar_score": 47.27
+        },
+        "latency_ms": 0.33370000892318785
+      },
+      "CurrencyStrength": {
+        "status": "SUCCESS",
+        "score": 84.25999999999999,
+        "direction": "LONG",
+        "confidence": 0.8425999999999999,
+        "metrics": {
+          "base_currency": "GBP",
+          "quote_currency": "USD",
+          "base_strength": -2.1,
+          "quote_strength": -7.81,
+          "strength_diff": 5.709999999999999
+        },
+        "latency_ms": 0.027799993404187262
+      },
+      "MarketRegime": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.8,
+        "metrics": {
+          "regime": "LOW_VOLATILITY_CONSOLIDATION",
+          "volatility_level": "LOW"
+        },
+        "latency_ms": 0.3001000004587695
+      },
+      "MarketStructure": {
+        "status": "SUCCESS",
+        "score": 68.0,
+        "direction": "LONG",
+        "confidence": 0.68,
+        "metrics": {
+          "higher_high": true,
+          "higher_low": false,
+          "lower_high": false,
+          "lower_low": false,
+          "bos_detected": true,
+          "choch_detected": false,
+          "total_swing_highs": 12,
+          "total_swing_lows": 12
+        },
+        "latency_ms": 0.4969000001437962
+      },
+      "TechnicalAnalysis": {
+        "status": "SUCCESS",
+        "score": 92.0,
+        "direction": "LONG",
+        "confidence": 0.92,
+        "metrics": {
+          "rsi": 58.68192643591674,
+          "adx": 17.96770335442826,
+          "setup_type": "MOMENTUM_CONTINUATION",
+          "atr": 0.0006434871259430877
+        },
+        "latency_ms": 25.696500000776723
+      },
+      "CandleStructure": {
+        "status": "SUCCESS",
+        "score": 68.0,
+        "direction": "LONG",
+        "confidence": 0.68,
+        "metrics": {
+          "body_ratio": 0.65,
+          "upper_wick_ratio": 0.19,
+          "lower_wick_ratio": 0.16,
+          "patterns_detected": [
+            "Inside Bar (Market Volatility Compression)"
+          ]
+        },
+        "latency_ms": 0.5928999889874831
+      },
+      "MLPrediction": {
+        "status": "SUCCESS",
+        "score": 67.4,
+        "direction": "LONG",
+        "confidence": 0.674,
+        "metrics": {
+          "win_probability": 0.57,
+          "model_type": "Calibrated Statistical Factor Model",
+          "live_rsi": 58.68,
+          "live_adx": 50.79,
+          "dynamic_momentum_score": 0.31,
+          "brier_score": 0.142
+        },
+        "latency_ms": 5.032499990193173
+      },
+      "RiskMetrics": {
+        "status": "SUCCESS",
+        "score": 95.0,
+        "direction": "LONG",
+        "confidence": 0.85,
+        "metrics": {
+          "valid": true,
+          "entry_price": 1.35518,
+          "stop_loss": 1.35441,
+          "take_profit_1": 1.35634,
+          "take_profit_2": 1.3575,
+          "risk_pips": 7.7,
+          "reward_pips": 23.2,
+          "risk_reward": 3.0,
+          "atr": 0.0006434871259430877,
+          "long_parameters": {
+            "valid": true,
+            "entry_price": 1.35518,
+            "stop_loss": 1.35441,
+            "take_profit_1": 1.35634,
+            "take_profit_2": 1.3575,
+            "risk_pips": 7.7,
+            "reward_pips": 23.2,
+            "risk_reward": 3.0
+          },
+          "short_parameters": {
+            "valid": true,
+            "entry_price": 1.35518,
+            "stop_loss": 1.35595,
+            "take_profit_1": 1.35402,
+            "take_profit_2": 1.35286,
+            "risk_pips": 7.7,
+            "reward_pips": 23.2,
+            "risk_reward": 3.0
+          }
+        },
+        "latency_ms": 1.5404000005219132
+      },
+      "MacroAnalysis": {
+        "status": "SUCCESS",
+        "score": 42.75,
+        "direction": "LONG",
+        "confidence": 0.75,
+        "metrics": {
+          "dxy_index": 99.45,
+          "us10y_yield": 4.758,
+          "us_short_yield": 3.732,
+          "yield_curve_slope": 1.026,
+          "dxy_bias": "BEARISH_USD",
+          "risk_sentiment": "RISK_OFF",
+          "base_rate": 5.0,
+          "quote_rate": 5.25,
+          "rate_diff": -0.25,
+          "macro_score": 42.75
+        },
+        "latency_ms": 0.016699996194802225
+      },
+      "SentimentCrossAsset": {
+        "status": "SUCCESS",
+        "score": 65.0,
+        "direction": "LONG",
+        "confidence": 0.72,
+        "metrics": {
+          "vix": 15.16,
+          "gold_price": 4481.3,
+          "wti_price": 85.27,
+          "btc_price": 78433.5,
+          "is_risk_on": true
+        },
+        "latency_ms": 1.1448000004747882
+      }
+    },
+    "knowledge_references": [
+      "London / New York Overlap SMC FVG Retest",
+      "GBP/USD Test Observation",
+      "GBP/USD Test Observation"
+    ],
+    "outcome_status": "ACTIVE_PENDING",
+    "realized_r": null,
+    "mfe_r": 0.0,
+    "mae_r": 0.0,
+    "holding_period_mins": 0,
+    "error_classification": null
+  },
+  {
+    "experience_id": "exp-SIG-202608311530-EURUSD",
+    "signal_id": "SIG-202608311530-EURUSD",
+    "scan_id": "scan-20260831-153005",
+    "created_at": "2026-08-31T15:30:10.303234+00:00",
+    "symbol": "EUR/USD",
+    "direction": "LONG",
+    "entry_price": 1.16184,
+    "stop_loss": 1.16129,
+    "take_profit": 1.16268,
+    "ml_predicted_win_prob": 0.732,
+    "composite_score": 66.75,
+    "llm_reasoning": "Technical evidence, currency strength, and market structure strongly support the LONG direction, with EUR showing significant strength divergence against USD and confirmed bullish breakout above prior resistance. Risk/reward ratio is favorable at 3.0, and no major economic events are expected to disrupt the setup in the short term.",
+    "engine_evidence": {
+      "TechnicalAnalysis": {
+        "status": "SUCCESS",
+        "score": 91.0,
+        "direction": "LONG",
+        "confidence": 0.91,
+        "metrics": {
+          "rsi": 71.2705559409638,
+          "adx": 24.128600743453937,
+          "setup_type": "MOMENTUM_CONTINUATION",
+          "atr": 0.0004659748471436163
+        },
+        "latency_ms": 26.437900000019
+      },
+      "MLPrediction": {
+        "status": "SUCCESS",
+        "score": 67.9,
+        "direction": "LONG",
+        "confidence": 0.679,
+        "metrics": {
+          "win_probability": 0.732,
+          "model_type": "Calibrated Statistical Factor Model",
+          "live_rsi": 71.27,
+          "live_adx": 56.49,
+          "dynamic_momentum_score": 0.61,
+          "brier_score": 0.142
+        },
+        "latency_ms": 5.946799996308982
+      },
+      "CandleStructure": {
+        "status": "SUCCESS",
+        "score": 68.0,
+        "direction": "LONG",
+        "confidence": 0.68,
+        "metrics": {
+          "body_ratio": 0.0,
+          "upper_wick_ratio": 0.5,
+          "lower_wick_ratio": 0.5,
+          "patterns_detected": [
+            "Inside Bar (Market Volatility Compression)"
+          ]
+        },
+        "latency_ms": 0.7734999962849542
+      },
+      "MarketStructure": {
+        "status": "SUCCESS",
+        "score": 68.0,
+        "direction": "LONG",
+        "confidence": 0.68,
+        "metrics": {
+          "higher_high": true,
+          "higher_low": false,
+          "lower_high": false,
+          "lower_low": false,
+          "bos_detected": true,
+          "choch_detected": false,
+          "total_swing_highs": 19,
+          "total_swing_lows": 16
+        },
+        "latency_ms": 0.18170000112149864
+      },
+      "MarketRegime": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.8,
+        "metrics": {
+          "regime": "LOW_VOLATILITY_CONSOLIDATION",
+          "volatility_level": "LOW"
+        },
+        "latency_ms": 0.5178999999770895
+      },
+      "FundamentalAnalysis": {
+        "status": "SUCCESS",
+        "score": 41.27,
+        "direction": "SHORT",
+        "confidence": 0.7,
+        "metrics": {
+          "event_risk": false,
+          "calendar_score": 41.27
+        },
+        "latency_ms": 0.6195000023581088
+      },
+      "RiskMetrics": {
+        "status": "SUCCESS",
+        "score": 95.0,
+        "direction": "LONG",
+        "confidence": 0.85,
+        "metrics": {
+          "valid": true,
+          "entry_price": 1.16184,
+          "stop_loss": 1.16129,
+          "take_profit_1": 1.16268,
+          "take_profit_2": 1.16352,
+          "risk_pips": 5.6,
+          "reward_pips": 16.8,
+          "risk_reward": 3.0,
+          "atr": 0.0004659748471436163,
+          "long_parameters": {
+            "valid": true,
+            "entry_price": 1.16184,
+            "stop_loss": 1.16129,
+            "take_profit_1": 1.16268,
+            "take_profit_2": 1.16352,
+            "risk_pips": 5.6,
+            "reward_pips": 16.8,
+            "risk_reward": 3.0
+          },
+          "short_parameters": {
+            "valid": true,
+            "entry_price": 1.16184,
+            "stop_loss": 1.1624,
+            "take_profit_1": 1.16101,
+            "take_profit_2": 1.16017,
+            "risk_pips": 5.6,
+            "reward_pips": 16.8,
+            "risk_reward": 3.0
+          }
+        },
+        "latency_ms": 2.9005000105826184
+      },
+      "MacroAnalysis": {
+        "status": "SUCCESS",
+        "score": 35.25,
+        "direction": "LONG",
+        "confidence": 0.75,
+        "metrics": {
+          "dxy_index": 99.45,
+          "us10y_yield": 4.758,
+          "us_short_yield": 3.732,
+          "yield_curve_slope": 1.026,
+          "dxy_bias": "BEARISH_USD",
+          "risk_sentiment": "RISK_OFF",
+          "base_rate": 3.5,
+          "quote_rate": 5.25,
+          "rate_diff": -1.75,
+          "macro_score": 35.25
+        },
+        "latency_ms": 1050.2735000045504
+      },
+      "SentimentCrossAsset": {
+        "status": "SUCCESS",
+        "score": 65.0,
+        "direction": "LONG",
+        "confidence": 0.72,
+        "metrics": {
+          "vix": 15.16,
+          "gold_price": 4481.3,
+          "wti_price": 85.27,
+          "btc_price": 78433.5,
+          "is_risk_on": true
+        },
+        "latency_ms": 1142.722300006426
+      },
+      "CurrencyStrength": {
+        "status": "SUCCESS",
+        "score": 98.0,
+        "direction": "LONG",
+        "confidence": 0.98,
+        "metrics": {
+          "base_currency": "EUR",
+          "quote_currency": "USD",
+          "base_strength": 1.67,
+          "quote_strength": -7.81,
+          "strength_diff": 9.48
+        },
+        "latency_ms": 1626.1682999902405
+      }
+    },
+    "knowledge_references": [
+      "London / New York Overlap SMC FVG Retest",
+      "EUR/USD Pre-ECB Breakout Spread Expansion",
+      "USD/JPY Yield Spread & US 10Y Yield Correlation"
+    ],
+    "outcome_status": "ACTIVE_PENDING",
+    "realized_r": null,
+    "mfe_r": 0.0,
+    "mae_r": 0.0,
+    "holding_period_mins": 0,
+    "error_classification": null
+  },
+  {
+    "experience_id": "exp-SIG-202608311515-XRP-US",
+    "signal_id": "SIG-202608311515-XRP-US",
+    "scan_id": "scan-20260831-151345",
+    "created_at": "2026-08-31T15:15:01.136026+00:00",
+    "symbol": "XRP (Ripple)",
+    "direction": "LONG",
+    "entry_price": 1.3759,
+    "stop_loss": 1.36652,
+    "take_profit": 1.38997,
+    "ml_predicted_win_prob": 0.85,
+    "composite_score": 80.05,
+    "llm_reasoning": "The trade is supported by strong technical evidence, including a bullish CHoCH, favorable risk/reward ratio, and momentum continuation setup with RSI and ADX confirming bullish conditions. Additionally, currency strength divergence and a bearish USD macro bias align with the long direction.",
+    "engine_evidence": {
+      "MarketRegime": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.8,
+        "metrics": {
+          "regime": "TRENDING_MOMENTUM",
+          "volatility_level": "MEDIUM"
+        },
+        "latency_ms": 0.18109999655280262
+      },
+      "CandleStructure": {
+        "status": "SUCCESS",
+        "score": 50.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.5,
+        "metrics": {
+          "body_ratio": 0.14,
+          "upper_wick_ratio": 0.39,
+          "lower_wick_ratio": 0.47,
+          "patterns_detected": []
+        },
+        "latency_ms": 0.27269999554846436
+      },
+      "RiskMetrics": {
+        "status": "SUCCESS",
+        "score": 95.0,
+        "direction": "LONG",
+        "confidence": 0.85,
+        "metrics": {
+          "valid": true,
+          "entry_price": 1.3759,
+          "stop_loss": 1.36652,
+          "take_profit_1": 1.38997,
+          "take_profit_2": 1.40403,
+          "risk_pips": 93.8,
+          "reward_pips": 281.3,
+          "risk_reward": 3.0,
+          "atr": 0.007814671560880487,
+          "long_parameters": {
+            "valid": true,
+            "entry_price": 1.3759,
+            "stop_loss": 1.36652,
+            "take_profit_1": 1.38997,
+            "take_profit_2": 1.40403,
+            "risk_pips": 93.8,
+            "reward_pips": 281.3,
+            "risk_reward": 3.0
+          },
+          "short_parameters": {
+            "valid": true,
+            "entry_price": 1.3759,
+            "stop_loss": 1.38528,
+            "take_profit_1": 1.36183,
+            "take_profit_2": 1.34777,
+            "risk_pips": 93.8,
+            "reward_pips": 281.3,
+            "risk_reward": 3.0
+          }
+        },
+        "latency_ms": 0.9102000040002167
+      },
+      "MarketStructure": {
+        "status": "SUCCESS",
+        "score": 82.0,
+        "direction": "LONG",
+        "confidence": 0.82,
+        "metrics": {
+          "higher_high": false,
+          "higher_low": true,
+          "lower_high": true,
+          "lower_low": false,
+          "bos_detected": false,
+          "choch_detected": true,
+          "total_swing_highs": 11,
+          "total_swing_lows": 8
+        },
+        "latency_ms": 0.17800000205170363
+      },
+      "CurrencyStrength": {
+        "status": "SUCCESS",
+        "score": 96.86,
+        "direction": "LONG",
+        "confidence": 0.9686,
+        "metrics": {
+          "base_currency": "XRP",
+          "quote_currency": "USD",
+          "base_strength": 0.0,
+          "quote_strength": -7.81,
+          "strength_diff": 7.81
+        },
+        "latency_ms": 0.011500000255182385
+      },
+      "TechnicalAnalysis": {
+        "status": "SUCCESS",
+        "score": 96.0,
+        "direction": "LONG",
+        "confidence": 0.96,
+        "metrics": {
+          "rsi": 58.503564683206655,
+          "adx": 25.294278561066836,
+          "setup_type": "MOMENTUM_CONTINUATION",
+          "atr": 0.007814671560880487
+        },
+        "latency_ms": 20.570300010149367
+      },
+      "MacroAnalysis": {
+        "status": "SUCCESS",
+        "score": 44.0,
+        "direction": "LONG",
+        "confidence": 0.75,
+        "metrics": {
+          "dxy_index": 99.44,
+          "us10y_yield": 4.752,
+          "us_short_yield": 3.732,
+          "yield_curve_slope": 1.02,
+          "dxy_bias": "BEARISH_USD",
+          "risk_sentiment": "RISK_OFF",
+          "base_rate": 0.0,
+          "quote_rate": 5.25,
+          "rate_diff": 0.0,
+          "macro_score": 44.0
+        },
+        "latency_ms": 0.011399999493733048
+      },
+      "FundamentalAnalysis": {
+        "status": "SUCCESS",
+        "score": 50.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.7,
+        "metrics": {
+          "event_risk": false,
+          "calendar_score": 50.0
+        },
+        "latency_ms": 0.0040000013541430235
+      },
+      "MLPrediction": {
+        "status": "SUCCESS",
+        "score": 71.4,
+        "direction": "LONG",
+        "confidence": 0.714,
+        "metrics": {
+          "win_probability": 0.85,
+          "model_type": "Calibrated Statistical Factor Model",
+          "live_rsi": 58.5,
+          "live_adx": 33.74,
+          "dynamic_momentum_score": 3.2,
+          "brier_score": 0.142
+        },
+        "latency_ms": 2.6126000011572614
+      },
+      "SentimentCrossAsset": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "LONG",
+        "confidence": 0.72,
+        "metrics": {
+          "vix": 15.15,
+          "gold_price": 4480.4,
+          "wti_price": 85.23,
+          "btc_price": 78319.68,
+          "is_risk_on": true
+        },
+        "latency_ms": 0.853999998071231
+      }
+    },
+    "knowledge_references": [
+      "USD/JPY Yield Spread & US 10Y Yield Correlation",
+      "London / New York Overlap SMC FVG Retest",
+      "GBP/USD Test Observation"
+    ],
+    "outcome_status": "ACTIVE_PENDING",
+    "realized_r": null,
+    "mfe_r": 0.0,
+    "mae_r": 0.0,
+    "holding_period_mins": 0,
+    "error_classification": null
+  },
+  {
+    "experience_id": "exp-SIG-202608311514-SOL-US",
+    "signal_id": "SIG-202608311514-SOL-US",
+    "scan_id": "scan-20260831-151345",
+    "created_at": "2026-08-31T15:14:55.889319+00:00",
+    "symbol": "Solana (SOL)",
+    "direction": "LONG",
+    "entry_price": 103.48,
+    "stop_loss": 102.83744,
+    "take_profit": 104.44384,
+    "ml_predicted_win_prob": 0.85,
+    "composite_score": 74.48,
+    "llm_reasoning": "Technical evidence, currency strength, and market setup align with the LONG direction, supported by favorable risk/reward metrics and bullish momentum indicators. No contradictions were identified, and macro conditions suggest USD weakness, further supporting SOL strength.",
+    "engine_evidence": {
+      "MarketStructure": {
+        "status": "SUCCESS",
+        "score": 68.0,
+        "direction": "LONG",
+        "confidence": 0.68,
+        "metrics": {
+          "higher_high": true,
+          "higher_low": false,
+          "lower_high": false,
+          "lower_low": true,
+          "bos_detected": false,
+          "choch_detected": false,
+          "total_swing_highs": 9,
+          "total_swing_lows": 9
+        },
+        "latency_ms": 0.2736000024015084
+      },
+      "FundamentalAnalysis": {
+        "status": "SUCCESS",
+        "score": 50.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.7,
+        "metrics": {
+          "event_risk": false,
+          "calendar_score": 50.0
+        },
+        "latency_ms": 0.008500006515532732
+      },
+      "CandleStructure": {
+        "status": "SUCCESS",
+        "score": 50.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.5,
+        "metrics": {
+          "body_ratio": 0.04,
+          "upper_wick_ratio": 0.53,
+          "lower_wick_ratio": 0.43,
+          "patterns_detected": [
+            "Doji Candle of Indecision (4% body)"
+          ]
+        },
+        "latency_ms": 0.27119999867863953
+      },
+      "MacroAnalysis": {
+        "status": "SUCCESS",
+        "score": 44.0,
+        "direction": "LONG",
+        "confidence": 0.75,
+        "metrics": {
+          "dxy_index": 99.44,
+          "us10y_yield": 4.752,
+          "us_short_yield": 3.732,
+          "yield_curve_slope": 1.02,
+          "dxy_bias": "BEARISH_USD",
+          "risk_sentiment": "RISK_OFF",
+          "base_rate": 0.0,
+          "quote_rate": 5.25,
+          "rate_diff": 0.0,
+          "macro_score": 44.0
+        },
+        "latency_ms": 0.03770001058001071
+      },
+      "MarketRegime": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.8,
+        "metrics": {
+          "regime": "TRENDING_MOMENTUM",
+          "volatility_level": "MEDIUM"
+        },
+        "latency_ms": 0.5843000108143315
+      },
+      "TechnicalAnalysis": {
+        "status": "SUCCESS",
+        "score": 86.0,
+        "direction": "LONG",
+        "confidence": 0.86,
+        "metrics": {
+          "rsi": 59.71943997718896,
+          "adx": 18.615769689791478,
+          "setup_type": "MOMENTUM_CONTINUATION",
+          "atr": 0.5354673238829739
+        },
+        "latency_ms": 20.0912000000244
+      },
+      "MLPrediction": {
+        "status": "SUCCESS",
+        "score": 64.0,
+        "direction": "LONG",
+        "confidence": 0.64,
+        "metrics": {
+          "win_probability": 0.85,
+          "model_type": "Calibrated Statistical Factor Model",
+          "live_rsi": 59.72,
+          "live_adx": 21.11,
+          "dynamic_momentum_score": 4.38,
+          "brier_score": 0.142
+        },
+        "latency_ms": 3.653200008557178
+      },
+      "RiskMetrics": {
+        "status": "SUCCESS",
+        "score": 95.0,
+        "direction": "LONG",
+        "confidence": 0.85,
+        "metrics": {
+          "valid": true,
+          "entry_price": 103.48,
+          "stop_loss": 102.83744,
+          "take_profit_1": 104.44384,
+          "take_profit_2": 105.40769,
+          "risk_pips": 64.3,
+          "reward_pips": 192.8,
+          "risk_reward": 3.0,
+          "atr": 0.5354673238829739,
+          "long_parameters": {
+            "valid": true,
+            "entry_price": 103.48,
+            "stop_loss": 102.83744,
+            "take_profit_1": 104.44384,
+            "take_profit_2": 105.40769,
+            "risk_pips": 64.3,
+            "reward_pips": 192.8,
+            "risk_reward": 3.0
+          },
+          "short_parameters": {
+            "valid": true,
+            "entry_price": 103.48,
+            "stop_loss": 104.12256,
+            "take_profit_1": 102.51616,
+            "take_profit_2": 101.55232,
+            "risk_pips": 64.3,
+            "reward_pips": 192.8,
+            "risk_reward": 3.0
+          }
+        },
+        "latency_ms": 1.2146000080974773
+      },
+      "SentimentCrossAsset": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "LONG",
+        "confidence": 0.72,
+        "metrics": {
+          "vix": 15.15,
+          "gold_price": 4480.4,
+          "wti_price": 85.23,
+          "btc_price": 78319.68,
+          "is_risk_on": true
+        },
+        "latency_ms": 2.9122999985702336
+      },
+      "CurrencyStrength": {
+        "status": "SUCCESS",
+        "score": 96.86,
+        "direction": "LONG",
+        "confidence": 0.9686,
+        "metrics": {
+          "base_currency": "SOL",
+          "quote_currency": "USD",
+          "base_strength": 0.0,
+          "quote_strength": -7.81,
+          "strength_diff": 7.81
+        },
+        "latency_ms": 1819.2713000025833
+      }
+    },
+    "knowledge_references": [
+      "USD/JPY Yield Spread & US 10Y Yield Correlation",
+      "London / New York Overlap SMC FVG Retest",
+      "GBP/USD Test Observation"
+    ],
+    "outcome_status": "ACTIVE_PENDING",
+    "realized_r": null,
+    "mfe_r": 0.0,
+    "mae_r": 0.0,
+    "holding_period_mins": 0,
+    "error_classification": null
+  },
+  {
+    "experience_id": "exp-SIG-202608311514-ETH-US",
+    "signal_id": "SIG-202608311514-ETH-US",
+    "scan_id": "scan-20260831-151345",
+    "created_at": "2026-08-31T15:14:48.088402+00:00",
+    "symbol": "Ethereum (ETH)",
+    "direction": "LONG",
+    "entry_price": 2466.29004,
+    "stop_loss": 2453.94234,
+    "take_profit": 2484.81158,
+    "ml_predicted_win_prob": 0.85,
+    "composite_score": 66.63,
+    "llm_reasoning": "The technical evidence, currency strength, and market sentiment strongly support the LONG direction, with a high technical score (96.0), favorable risk/reward ratio (1:3.0), and significant currency strength divergence (+7.81). While the market structure indicates a bearish trend, the confirmed bullish CHoCH and momentum continuation setup mitigate this contradiction.",
+    "engine_evidence": {
+      "FundamentalAnalysis": {
+        "status": "SUCCESS",
+        "score": 50.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.7,
+        "metrics": {
+          "event_risk": false,
+          "calendar_score": 50.0
+        },
+        "latency_ms": 0.012300006346777081
+      },
+      "RiskMetrics": {
+        "status": "SUCCESS",
+        "score": 95.0,
+        "direction": "LONG",
+        "confidence": 0.85,
+        "metrics": {
+          "valid": true,
+          "entry_price": 2466.29004,
+          "stop_loss": 2453.94234,
+          "take_profit_1": 2484.81158,
+          "take_profit_2": 2503.33313,
+          "risk_pips": 123.5,
+          "reward_pips": 370.4,
+          "risk_reward": 3.0,
+          "atr": 10.28974764630421,
+          "long_parameters": {
+            "valid": true,
+            "entry_price": 2466.29004,
+            "stop_loss": 2453.94234,
+            "take_profit_1": 2484.81158,
+            "take_profit_2": 2503.33313,
+            "risk_pips": 123.5,
+            "reward_pips": 370.4,
+            "risk_reward": 3.0
+          },
+          "short_parameters": {
+            "valid": true,
+            "entry_price": 2466.29004,
+            "stop_loss": 2478.63774,
+            "take_profit_1": 2447.76849,
+            "take_profit_2": 2429.24695,
+            "risk_pips": 123.5,
+            "reward_pips": 370.4,
+            "risk_reward": 3.0
+          }
+        },
+        "latency_ms": 3.100100002484396
+      },
+      "MacroAnalysis": {
+        "status": "SUCCESS",
+        "score": 44.0,
+        "direction": "LONG",
+        "confidence": 0.75,
+        "metrics": {
+          "dxy_index": 99.44,
+          "us10y_yield": 4.752,
+          "us_short_yield": 3.732,
+          "yield_curve_slope": 1.02,
+          "dxy_bias": "BEARISH_USD",
+          "risk_sentiment": "RISK_OFF",
+          "base_rate": 0.0,
+          "quote_rate": 5.25,
+          "rate_diff": 0.0,
+          "macro_score": 44.0
+        },
+        "latency_ms": 0.03599999763537198
+      },
+      "CurrencyStrength": {
+        "status": "SUCCESS",
+        "score": 96.86,
+        "direction": "LONG",
+        "confidence": 0.9686,
+        "metrics": {
+          "base_currency": "ETH",
+          "quote_currency": "USD",
+          "base_strength": 0.0,
+          "quote_strength": -7.81,
+          "strength_diff": 7.81
+        },
+        "latency_ms": 0.018800012185238302
+      },
+      "MarketRegime": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.8,
+        "metrics": {
+          "regime": "LOW_VOLATILITY_CONSOLIDATION",
+          "volatility_level": "LOW"
+        },
+        "latency_ms": 0.35119999665766954
+      },
+      "MLPrediction": {
+        "status": "SUCCESS",
+        "score": 81.9,
+        "direction": "LONG",
+        "confidence": 0.819,
+        "metrics": {
+          "win_probability": 0.85,
+          "model_type": "Calibrated Statistical Factor Model",
+          "live_rsi": 67.68,
+          "live_adx": 44.95,
+          "dynamic_momentum_score": 4.76,
+          "brier_score": 0.142
+        },
+        "latency_ms": 6.466700011515059
+      },
+      "TechnicalAnalysis": {
+        "status": "SUCCESS",
+        "score": 96.0,
+        "direction": "LONG",
+        "confidence": 0.96,
+        "metrics": {
+          "rsi": 67.67911746040473,
+          "adx": 30.514143239586907,
+          "setup_type": "MOMENTUM_CONTINUATION",
+          "atr": 10.28974764630421
+        },
+        "latency_ms": 13.100900003337301
+      },
+      "MarketStructure": {
+        "status": "SUCCESS",
+        "score": 88.0,
+        "direction": "SHORT",
+        "confidence": 0.88,
+        "metrics": {
+          "higher_high": false,
+          "higher_low": false,
+          "lower_high": true,
+          "lower_low": true,
+          "bos_detected": false,
+          "choch_detected": true,
+          "total_swing_highs": 11,
+          "total_swing_lows": 9
+        },
+        "latency_ms": 0.5329999985406175
+      },
+      "CandleStructure": {
+        "status": "SUCCESS",
+        "score": 68.0,
+        "direction": "LONG",
+        "confidence": 0.68,
+        "metrics": {
+          "body_ratio": 0.11,
+          "upper_wick_ratio": 0.4,
+          "lower_wick_ratio": 0.49,
+          "patterns_detected": [
+            "Inside Bar (Market Volatility Compression)"
+          ]
+        },
+        "latency_ms": 0.9079000010387972
+      },
+      "SentimentCrossAsset": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "LONG",
+        "confidence": 0.72,
+        "metrics": {
+          "vix": 15.15,
+          "gold_price": 4480.4,
+          "wti_price": 85.23,
+          "btc_price": 78319.68,
+          "is_risk_on": true
+        },
+        "latency_ms": 4.88480000058189
+      }
+    },
+    "knowledge_references": [
+      "USD/JPY Yield Spread & US 10Y Yield Correlation",
+      "London / New York Overlap SMC FVG Retest",
+      "GBP/USD Test Observation"
+    ],
+    "outcome_status": "ACTIVE_PENDING",
+    "realized_r": null,
+    "mfe_r": 0.0,
+    "mae_r": 0.0,
+    "holding_period_mins": 0,
+    "error_classification": null
+  },
+  {
+    "experience_id": "exp-SIG-202608311514-BTC-US",
+    "signal_id": "SIG-202608311514-BTC-US",
+    "scan_id": "scan-20260831-151345",
+    "created_at": "2026-08-31T15:14:41.322344+00:00",
+    "symbol": "Bitcoin (BTC)",
+    "direction": "LONG",
+    "entry_price": 78548.52344,
+    "stop_loss": 78207.74354,
+    "take_profit": 79059.69329,
+    "ml_predicted_win_prob": 0.85,
+    "composite_score": 73.79,
+    "llm_reasoning": "Technical evidence, currency strength, and market setup align with the LONG direction, supported by strong momentum continuation, favorable risk/reward, and bullish macro sentiment. No contradictions were identified, and the risk metrics validate the trade setup with a 3:1 reward-to-risk ratio.",
+    "engine_evidence": {
+      "MacroAnalysis": {
+        "status": "SUCCESS",
+        "score": 44.0,
+        "direction": "LONG",
+        "confidence": 0.75,
+        "metrics": {
+          "dxy_index": 99.44,
+          "us10y_yield": 4.752,
+          "us_short_yield": 3.732,
+          "yield_curve_slope": 1.02,
+          "dxy_bias": "BEARISH_USD",
+          "risk_sentiment": "RISK_OFF",
+          "base_rate": 0.0,
+          "quote_rate": 5.25,
+          "rate_diff": 0.0,
+          "macro_score": 44.0
+        },
+        "latency_ms": 0.02300000051036477
+      },
+      "MLPrediction": {
+        "status": "SUCCESS",
+        "score": 68.3,
+        "direction": "LONG",
+        "confidence": 0.683,
+        "metrics": {
+          "win_probability": 0.85,
+          "model_type": "Calibrated Statistical Factor Model",
+          "live_rsi": 61.07,
+          "live_adx": 30.81,
+          "dynamic_momentum_score": 2.61,
+          "brier_score": 0.142
+        },
+        "latency_ms": 7.78290000744164
+      },
+      "MarketRegime": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.8,
+        "metrics": {
+          "regime": "LOW_VOLATILITY_CONSOLIDATION",
+          "volatility_level": "LOW"
+        },
+        "latency_ms": 0.38019999919924885
+      },
+      "FundamentalAnalysis": {
+        "status": "SUCCESS",
+        "score": 50.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.7,
+        "metrics": {
+          "event_risk": false,
+          "calendar_score": 50.0
+        },
+        "latency_ms": 0.010800009476952255
+      },
+      "TechnicalAnalysis": {
+        "status": "SUCCESS",
+        "score": 92.0,
+        "direction": "LONG",
+        "confidence": 0.92,
+        "metrics": {
+          "rsi": 61.073614188756096,
+          "adx": 18.0670940499154,
+          "setup_type": "MOMENTUM_CONTINUATION",
+          "atr": 283.98324879833046
+        },
+        "latency_ms": 31.625700008589774
+      },
+      "CurrencyStrength": {
+        "status": "SUCCESS",
+        "score": 96.86,
+        "direction": "LONG",
+        "confidence": 0.9686,
+        "metrics": {
+          "base_currency": "BTC",
+          "quote_currency": "USD",
+          "base_strength": 0.0,
+          "quote_strength": -7.81,
+          "strength_diff": 7.81
+        },
+        "latency_ms": 0.02139998832717538
+      },
+      "CandleStructure": {
+        "status": "SUCCESS",
+        "score": 68.0,
+        "direction": "LONG",
+        "confidence": 0.68,
+        "metrics": {
+          "body_ratio": 0.17,
+          "upper_wick_ratio": 0.3,
+          "lower_wick_ratio": 0.54,
+          "patterns_detected": [
+            "Inside Bar (Market Volatility Compression)"
+          ]
+        },
+        "latency_ms": 1.0451999987708405
+      },
+      "MarketStructure": {
+        "status": "SUCCESS",
+        "score": 82.0,
+        "direction": "LONG",
+        "confidence": 0.82,
+        "metrics": {
+          "higher_high": false,
+          "higher_low": true,
+          "lower_high": true,
+          "lower_low": false,
+          "bos_detected": false,
+          "choch_detected": true,
+          "total_swing_highs": 10,
+          "total_swing_lows": 8
+        },
+        "latency_ms": 0.33290000283159316
+      },
+      "RiskMetrics": {
+        "status": "SUCCESS",
+        "score": 95.0,
+        "direction": "LONG",
+        "confidence": 0.85,
+        "metrics": {
+          "valid": true,
+          "entry_price": 78548.52344,
+          "stop_loss": 78207.74354,
+          "take_profit_1": 79059.69329,
+          "take_profit_2": 79570.86313,
+          "risk_pips": 340.8,
+          "reward_pips": 1022.3,
+          "risk_reward": 3.0,
+          "atr": 283.98324879833046,
+          "long_parameters": {
+            "valid": true,
+            "entry_price": 78548.52344,
+            "stop_loss": 78207.74354,
+            "take_profit_1": 79059.69329,
+            "take_profit_2": 79570.86313,
+            "risk_pips": 340.8,
+            "reward_pips": 1022.3,
+            "risk_reward": 3.0
+          },
+          "short_parameters": {
+            "valid": true,
+            "entry_price": 78548.52344,
+            "stop_loss": 78889.30334,
+            "take_profit_1": 78037.35359,
+            "take_profit_2": 77526.18374,
+            "risk_pips": 340.8,
+            "reward_pips": 1022.3,
+            "risk_reward": 3.0
+          }
+        },
+        "latency_ms": 3.13510000705719
+      },
+      "SentimentCrossAsset": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "LONG",
+        "confidence": 0.72,
+        "metrics": {
+          "vix": 15.15,
+          "gold_price": 4480.4,
+          "wti_price": 85.23,
+          "btc_price": 78319.68,
+          "is_risk_on": true
+        },
+        "latency_ms": 2.7028000040445477
+      }
+    },
+    "knowledge_references": [
+      "USD/JPY Yield Spread & US 10Y Yield Correlation",
+      "London / New York Overlap SMC FVG Retest",
+      "GBP/USD Test Observation"
+    ],
+    "outcome_status": "ACTIVE_PENDING",
+    "realized_r": null,
+    "mfe_r": 0.0,
+    "mae_r": 0.0,
+    "holding_period_mins": 0,
+    "error_classification": null
+  },
+  {
+    "experience_id": "exp-SIG-202608311514-USDCAD",
+    "signal_id": "SIG-202608311514-USDCAD",
+    "scan_id": "scan-20260831-151345",
+    "created_at": "2026-08-31T15:14:15.179966+00:00",
+    "symbol": "USD/CAD",
+    "direction": "SHORT",
+    "entry_price": 1.38634,
+    "stop_loss": 1.38764,
+    "take_profit": 1.38439,
+    "ml_predicted_win_prob": 0.186,
+    "composite_score": 70.06,
+    "llm_reasoning": "The SHORT direction is supported by strong currency divergence favoring CAD, bearish market structure, and high technical momentum continuation scores. Contradictions are minimal and do not outweigh the overall bearish evidence.",
+    "engine_evidence": {
+      "CandleStructure": {
+        "status": "SUCCESS",
+        "score": 84.0,
+        "direction": "LONG",
+        "confidence": 0.84,
+        "metrics": {
+          "body_ratio": 0.34,
+          "upper_wick_ratio": 0.01,
+          "lower_wick_ratio": 0.65,
+          "patterns_detected": [
+            "Bullish Pinbar / Hammer Rejection (After Pullback) (65% lower wick)"
+          ]
+        },
+        "latency_ms": 0.4349999944679439
+      },
+      "CurrencyStrength": {
+        "status": "SUCCESS",
+        "score": 98.0,
+        "direction": "SHORT",
+        "confidence": 0.98,
+        "metrics": {
+          "base_currency": "USD",
+          "quote_currency": "CAD",
+          "base_strength": -7.81,
+          "quote_strength": 3.53,
+          "strength_diff": -11.34
+        },
+        "latency_ms": 0.011600001016631722
+      },
+      "MarketStructure": {
+        "status": "SUCCESS",
+        "score": 88.0,
+        "direction": "SHORT",
+        "confidence": 0.88,
+        "metrics": {
+          "higher_high": false,
+          "higher_low": false,
+          "lower_high": true,
+          "lower_low": true,
+          "bos_detected": true,
+          "choch_detected": false,
+          "total_swing_highs": 8,
+          "total_swing_lows": 13
+        },
+        "latency_ms": 0.14509999891743064
+      },
+      "MacroAnalysis": {
+        "status": "SUCCESS",
+        "score": 49.0,
+        "direction": "SHORT",
+        "confidence": 0.75,
+        "metrics": {
+          "dxy_index": 99.44,
+          "us10y_yield": 4.752,
+          "us_short_yield": 3.732,
+          "yield_curve_slope": 1.02,
+          "dxy_bias": "BEARISH_USD",
+          "risk_sentiment": "RISK_OFF",
+          "base_rate": 5.25,
+          "quote_rate": 4.25,
+          "rate_diff": 1.0,
+          "macro_score": 49.0
+        },
+        "latency_ms": 0.012099990271963179
+      },
+      "MarketRegime": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.8,
+        "metrics": {
+          "regime": "LOW_VOLATILITY_CONSOLIDATION",
+          "volatility_level": "LOW"
+        },
+        "latency_ms": 0.14269999519456178
+      },
+      "MLPrediction": {
+        "status": "SUCCESS",
+        "score": 66.0,
+        "direction": "SHORT",
+        "confidence": 0.66,
+        "metrics": {
+          "win_probability": 0.186,
+          "model_type": "Calibrated Statistical Factor Model",
+          "live_rsi": 27.28,
+          "live_adx": 77.34,
+          "dynamic_momentum_score": -0.55,
+          "brier_score": 0.142
+        },
+        "latency_ms": 2.8728000033879653
+      },
+      "FundamentalAnalysis": {
+        "status": "SUCCESS",
+        "score": 55.73,
+        "direction": "LONG",
+        "confidence": 0.7,
+        "metrics": {
+          "event_risk": false,
+          "calendar_score": 55.73
+        },
+        "latency_ms": 0.17850000585895032
+      },
+      "TechnicalAnalysis": {
+        "status": "SUCCESS",
+        "score": 96.0,
+        "direction": "SHORT",
+        "confidence": 0.96,
+        "metrics": {
+          "rsi": 27.28199948276678,
+          "adx": 43.539566995725735,
+          "setup_type": "MOMENTUM_CONTINUATION",
+          "atr": 0.001083183740375741
+        },
+        "latency_ms": 17.732099993736483
+      },
+      "RiskMetrics": {
+        "status": "SUCCESS",
+        "score": 95.0,
+        "direction": "SHORT",
+        "confidence": 0.85,
+        "metrics": {
+          "valid": true,
+          "entry_price": 1.38634,
+          "stop_loss": 1.38764,
+          "take_profit_1": 1.38439,
+          "take_profit_2": 1.38244,
+          "risk_pips": 13.0,
+          "reward_pips": 39.0,
+          "risk_reward": 3.0,
+          "atr": 0.001083183740375741,
+          "long_parameters": {
+            "valid": true,
+            "entry_price": 1.38634,
+            "stop_loss": 1.38504,
+            "take_profit_1": 1.38829,
+            "take_profit_2": 1.39024,
+            "risk_pips": 13.0,
+            "reward_pips": 39.0,
+            "risk_reward": 3.0
+          },
+          "short_parameters": {
+            "valid": true,
+            "entry_price": 1.38634,
+            "stop_loss": 1.38764,
+            "take_profit_1": 1.38439,
+            "take_profit_2": 1.38244,
+            "risk_pips": 13.0,
+            "reward_pips": 39.0,
+            "risk_reward": 3.0
+          }
+        },
+        "latency_ms": 1.174599994556047
+      },
+      "SentimentCrossAsset": {
+        "status": "SUCCESS",
+        "score": 78.0,
+        "direction": "SHORT",
+        "confidence": 0.72,
+        "metrics": {
+          "vix": 15.15,
+          "gold_price": 4481.7,
+          "wti_price": 85.21,
+          "btc_price": 78385.0,
+          "is_risk_on": true
+        },
+        "latency_ms": 1.0637999948812649
+      }
+    },
+    "knowledge_references": [
+      "London / New York Overlap SMC FVG Retest",
+      "USD/JPY Yield Spread & US 10Y Yield Correlation",
+      "GBP/USD Test Observation"
+    ],
+    "outcome_status": "ACTIVE_PENDING",
+    "realized_r": null,
+    "mfe_r": 0.0,
+    "mae_r": 0.0,
+    "holding_period_mins": 0,
+    "error_classification": null
+  },
+  {
+    "experience_id": "exp-SIG-202608311514-AUDUSD",
+    "signal_id": "SIG-202608311514-AUDUSD",
+    "scan_id": "scan-20260831-151345",
+    "created_at": "2026-08-31T15:14:10.448976+00:00",
+    "symbol": "AUD/USD",
+    "direction": "LONG",
+    "entry_price": 0.71685,
+    "stop_loss": 0.71646,
+    "take_profit": 0.71742,
+    "ml_predicted_win_prob": 0.624,
+    "composite_score": 66.24,
+    "llm_reasoning": "The technical evidence, currency strength divergence, and market structure support the LONG direction with favorable risk/reward and momentum continuation. Macro and sentiment factors align with a bearish USD bias and risk-on environment, further supporting the trade setup.",
+    "engine_evidence": {
+      "TechnicalAnalysis": {
+        "status": "SUCCESS",
+        "score": 86.0,
+        "direction": "LONG",
+        "confidence": 0.86,
+        "metrics": {
+          "rsi": 58.456650895239285,
+          "adx": 16.34508995196313,
+          "setup_type": "MOMENTUM_CONTINUATION",
+          "atr": 0.000321621055190671
+        },
+        "latency_ms": 22.836499992990866
+      },
+      "FundamentalAnalysis": {
+        "status": "SUCCESS",
+        "score": 44.27,
+        "direction": "SHORT",
+        "confidence": 0.7,
+        "metrics": {
+          "event_risk": false,
+          "calendar_score": 44.27
+        },
+        "latency_ms": 0.21109999215696007
+      },
+      "CurrencyStrength": {
+        "status": "SUCCESS",
+        "score": 93.98,
+        "direction": "LONG",
+        "confidence": 0.9398000000000001,
+        "metrics": {
+          "base_currency": "AUD",
+          "quote_currency": "USD",
+          "base_strength": -0.48,
+          "quote_strength": -7.81,
+          "strength_diff": 7.33
+        },
+        "latency_ms": 0.02099999983329326
+      },
+      "CandleStructure": {
+        "status": "SUCCESS",
+        "score": 50.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.5,
+        "metrics": {
+          "body_ratio": 0.62,
+          "upper_wick_ratio": 0.0,
+          "lower_wick_ratio": 0.38,
+          "patterns_detected": []
+        },
+        "latency_ms": 0.40430000808555633
+      },
+      "MarketStructure": {
+        "status": "SUCCESS",
+        "score": 68.0,
+        "direction": "LONG",
+        "confidence": 0.68,
+        "metrics": {
+          "higher_high": false,
+          "higher_low": true,
+          "lower_high": false,
+          "lower_low": false,
+          "bos_detected": false,
+          "choch_detected": false,
+          "total_swing_highs": 17,
+          "total_swing_lows": 7
+        },
+        "latency_ms": 0.3681999951368198
+      },
+      "MLPrediction": {
+        "status": "SUCCESS",
+        "score": 61.7,
+        "direction": "LONG",
+        "confidence": 0.617,
+        "metrics": {
+          "win_probability": 0.624,
+          "model_type": "Calibrated Statistical Factor Model",
+          "live_rsi": 58.46,
+          "live_adx": 34.41,
+          "dynamic_momentum_score": 0.18,
+          "brier_score": 0.142
+        },
+        "latency_ms": 5.353100001229905
+      },
+      "RiskMetrics": {
+        "status": "SUCCESS",
+        "score": 95.0,
+        "direction": "LONG",
+        "confidence": 0.85,
+        "metrics": {
+          "valid": true,
+          "entry_price": 0.71685,
+          "stop_loss": 0.71646,
+          "take_profit_1": 0.71742,
+          "take_profit_2": 0.718,
+          "risk_pips": 3.9,
+          "reward_pips": 11.6,
+          "risk_reward": 3.0,
+          "atr": 0.000321621055190671,
+          "long_parameters": {
+            "valid": true,
+            "entry_price": 0.71685,
+            "stop_loss": 0.71646,
+            "take_profit_1": 0.71742,
+            "take_profit_2": 0.718,
+            "risk_pips": 3.9,
+            "reward_pips": 11.6,
+            "risk_reward": 3.0
+          },
+          "short_parameters": {
+            "valid": true,
+            "entry_price": 0.71685,
+            "stop_loss": 0.71723,
+            "take_profit_1": 0.71627,
+            "take_profit_2": 0.71569,
+            "risk_pips": 3.9,
+            "reward_pips": 11.6,
+            "risk_reward": 3.0
+          }
+        },
+        "latency_ms": 2.063599997200072
+      },
+      "MacroAnalysis": {
+        "status": "SUCCESS",
+        "score": 39.5,
+        "direction": "LONG",
+        "confidence": 0.75,
+        "metrics": {
+          "dxy_index": 99.44,
+          "us10y_yield": 4.752,
+          "us_short_yield": 3.732,
+          "yield_curve_slope": 1.02,
+          "dxy_bias": "BEARISH_USD",
+          "risk_sentiment": "RISK_OFF",
+          "base_rate": 4.35,
+          "quote_rate": 5.25,
+          "rate_diff": -0.9,
+          "macro_score": 39.5
+        },
+        "latency_ms": 0.026299996534362435
+      },
+      "MarketRegime": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.8,
+        "metrics": {
+          "regime": "LOW_VOLATILITY_CONSOLIDATION",
+          "volatility_level": "LOW"
+        },
+        "latency_ms": 0.2702000056160614
+      },
+      "SentimentCrossAsset": {
+        "status": "SUCCESS",
+        "score": 65.0,
+        "direction": "LONG",
+        "confidence": 0.72,
+        "metrics": {
+          "vix": 15.15,
+          "gold_price": 4481.7,
+          "wti_price": 85.21,
+          "btc_price": 78385.0,
+          "is_risk_on": true
+        },
+        "latency_ms": 1.8149000097764656
+      }
+    },
+    "knowledge_references": [
+      "USD/JPY Yield Spread & US 10Y Yield Correlation",
+      "London / New York Overlap SMC FVG Retest",
+      "GBP/USD Test Observation"
+    ],
+    "outcome_status": "ACTIVE_PENDING",
+    "realized_r": null,
+    "mfe_r": 0.0,
+    "mae_r": 0.0,
+    "holding_period_mins": 0,
+    "error_classification": null
+  },
+  {
+    "experience_id": "exp-SIG-202608311514-USDJPY",
+    "signal_id": "SIG-202608311514-USDJPY",
+    "scan_id": "scan-20260831-151345",
+    "created_at": "2026-08-31T15:14:00.040121+00:00",
+    "symbol": "USD/JPY",
+    "direction": "SHORT",
+    "entry_price": 159.703,
+    "stop_loss": 159.80614,
+    "take_profit": 159.5483,
+    "ml_predicted_win_prob": 0.166,
+    "composite_score": 69.53,
+    "llm_reasoning": "The technical evidence, currency strength divergence, and bearish market structure align with the SHORT direction, supported by a favorable risk/reward ratio and no immediate fundamental risks. The macro bias and momentum indicators further validate the trade setup in a low-volatility regime.",
+    "engine_evidence": {
+      "CandleStructure": {
+        "status": "SUCCESS",
+        "score": 68.0,
+        "direction": "SHORT",
+        "confidence": 0.68,
+        "metrics": {
+          "body_ratio": 0.14,
+          "upper_wick_ratio": 0.32,
+          "lower_wick_ratio": 0.54,
+          "patterns_detected": [
+            "Inside Bar (Market Volatility Compression)"
+          ]
+        },
+        "latency_ms": 0.6422000005841255
+      },
+      "TechnicalAnalysis": {
+        "status": "SUCCESS",
+        "score": 86.0,
+        "direction": "SHORT",
+        "confidence": 0.86,
+        "metrics": {
+          "rsi": 43.92362954519907,
+          "adx": 19.52127207139457,
+          "setup_type": "MOMENTUM_CONTINUATION",
+          "atr": 0.08594822728838052
+        },
+        "latency_ms": 23.958899997523986
+      },
+      "RiskMetrics": {
+        "status": "SUCCESS",
+        "score": 95.0,
+        "direction": "SHORT",
+        "confidence": 0.85,
+        "metrics": {
+          "valid": true,
+          "entry_price": 159.703,
+          "stop_loss": 159.80614,
+          "take_profit_1": 159.5483,
+          "take_profit_2": 159.39359,
+          "risk_pips": 10.3,
+          "reward_pips": 30.9,
+          "risk_reward": 3.0,
+          "atr": 0.08594822728838052,
+          "long_parameters": {
+            "valid": true,
+            "entry_price": 159.703,
+            "stop_loss": 159.59987,
+            "take_profit_1": 159.85771,
+            "take_profit_2": 160.01242,
+            "risk_pips": 10.3,
+            "reward_pips": 30.9,
+            "risk_reward": 3.0
+          },
+          "short_parameters": {
+            "valid": true,
+            "entry_price": 159.703,
+            "stop_loss": 159.80614,
+            "take_profit_1": 159.5483,
+            "take_profit_2": 159.39359,
+            "risk_pips": 10.3,
+            "reward_pips": 30.9,
+            "risk_reward": 3.0
+          }
+        },
+        "latency_ms": 2.36320000840351
+      },
+      "FundamentalAnalysis": {
+        "status": "SUCCESS",
+        "score": 51.73,
+        "direction": "LONG",
+        "confidence": 0.7,
+        "metrics": {
+          "event_risk": false,
+          "calendar_score": 51.73
+        },
+        "latency_ms": 0.4285000031813979
+      },
+      "MLPrediction": {
+        "status": "SUCCESS",
+        "score": 59.3,
+        "direction": "SHORT",
+        "confidence": 0.593,
+        "metrics": {
+          "win_probability": 0.166,
+          "model_type": "Calibrated Statistical Factor Model",
+          "live_rsi": 43.92,
+          "live_adx": 30.98,
+          "dynamic_momentum_score": -0.47,
+          "brier_score": 0.142
+        },
+        "latency_ms": 4.259499997715466
+      },
+      "CurrencyStrength": {
+        "status": "SUCCESS",
+        "score": 98.0,
+        "direction": "SHORT",
+        "confidence": 0.98,
+        "metrics": {
+          "base_currency": "USD",
+          "quote_currency": "JPY",
+          "base_strength": -7.81,
+          "quote_strength": 3.9,
+          "strength_diff": -11.709999999999999
+        },
+        "latency_ms": 0.01829999382607639
+      },
+      "MarketStructure": {
+        "status": "SUCCESS",
+        "score": 82.0,
+        "direction": "SHORT",
+        "confidence": 0.82,
+        "metrics": {
+          "higher_high": false,
+          "higher_low": true,
+          "lower_high": true,
+          "lower_low": false,
+          "bos_detected": false,
+          "choch_detected": true,
+          "total_swing_highs": 8,
+          "total_swing_lows": 7
+        },
+        "latency_ms": 0.09080000745598227
+      },
+      "MarketRegime": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.8,
+        "metrics": {
+          "regime": "LOW_VOLATILITY_CONSOLIDATION",
+          "volatility_level": "LOW"
+        },
+        "latency_ms": 0.3280000091763213
+      },
+      "MacroAnalysis": {
+        "status": "SUCCESS",
+        "score": 69.0,
+        "direction": "SHORT",
+        "confidence": 0.75,
+        "metrics": {
+          "dxy_index": 99.44,
+          "us10y_yield": 4.752,
+          "us_short_yield": 3.732,
+          "yield_curve_slope": 1.02,
+          "dxy_bias": "BEARISH_USD",
+          "risk_sentiment": "RISK_OFF",
+          "base_rate": 5.25,
+          "quote_rate": 0.25,
+          "rate_diff": 5.0,
+          "macro_score": 69.0
+        },
+        "latency_ms": 0.05119999696034938
+      },
+      "SentimentCrossAsset": {
+        "status": "SUCCESS",
+        "score": 72.0,
+        "direction": "LONG",
+        "confidence": 0.72,
+        "metrics": {
+          "vix": 15.15,
+          "gold_price": 4481.7,
+          "wti_price": 85.21,
+          "btc_price": 78385.0,
+          "is_risk_on": true
+        },
+        "latency_ms": 1.9357000128366053
+      }
+    },
+    "knowledge_references": [
+      "USD/JPY Yield Spread & US 10Y Yield Correlation",
+      "London / New York Overlap SMC FVG Retest",
+      "GBP/USD Test Observation"
+    ],
+    "outcome_status": "ACTIVE_PENDING",
+    "realized_r": null,
+    "mfe_r": 0.0,
+    "mae_r": 0.0,
+    "holding_period_mins": 0,
+    "error_classification": null
+  },
+  {
+    "experience_id": "exp-SIG-202608311513-GBPUSD",
+    "signal_id": "SIG-202608311513-GBPUSD",
+    "scan_id": "scan-20260831-151345",
+    "created_at": "2026-08-31T15:13:55.379276+00:00",
+    "symbol": "GBP/USD",
+    "direction": "LONG",
+    "entry_price": 1.35549,
+    "stop_loss": 1.35474,
+    "take_profit": 1.35662,
+    "ml_predicted_win_prob": 0.55,
+    "composite_score": 66.82,
+    "llm_reasoning": "Technical evidence, currency strength, and market structure strongly support the LONG direction, with favorable risk/reward and bullish indicators such as RSI and Donchian breakout. Macro and sentiment factors align with a bearish USD bias and risk-on environment, further validating the setup.",
+    "engine_evidence": {
+      "RiskMetrics": {
+        "status": "SUCCESS",
+        "score": 95.0,
+        "direction": "LONG",
+        "confidence": 0.85,
+        "metrics": {
+          "valid": true,
+          "entry_price": 1.35549,
+          "stop_loss": 1.35474,
+          "take_profit_1": 1.35662,
+          "take_profit_2": 1.35774,
+          "risk_pips": 7.5,
+          "reward_pips": 22.5,
+          "risk_reward": 3.0,
+          "atr": 0.0006248143998273094,
+          "long_parameters": {
+            "valid": true,
+            "entry_price": 1.35549,
+            "stop_loss": 1.35474,
+            "take_profit_1": 1.35662,
+            "take_profit_2": 1.35774,
+            "risk_pips": 7.5,
+            "reward_pips": 22.5,
+            "risk_reward": 3.0
+          },
+          "short_parameters": {
+            "valid": true,
+            "entry_price": 1.35549,
+            "stop_loss": 1.35624,
+            "take_profit_1": 1.35437,
+            "take_profit_2": 1.35324,
+            "risk_pips": 7.5,
+            "reward_pips": 22.5,
+            "risk_reward": 3.0
+          }
+        },
+        "latency_ms": 1.5328000008594245
+      },
+      "CurrencyStrength": {
+        "status": "SUCCESS",
+        "score": 84.25999999999999,
+        "direction": "LONG",
+        "confidence": 0.8425999999999999,
+        "metrics": {
+          "base_currency": "GBP",
+          "quote_currency": "USD",
+          "base_strength": -2.1,
+          "quote_strength": -7.81,
+          "strength_diff": 5.709999999999999
+        },
+        "latency_ms": 0.03429999924264848
+      },
+      "MarketRegime": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.8,
+        "metrics": {
+          "regime": "LOW_VOLATILITY_CONSOLIDATION",
+          "volatility_level": "LOW"
+        },
+        "latency_ms": 0.4259999986970797
+      },
+      "TechnicalAnalysis": {
+        "status": "SUCCESS",
+        "score": 92.0,
+        "direction": "LONG",
+        "confidence": 0.92,
+        "metrics": {
+          "rsi": 62.72010479745304,
+          "adx": 15.058730878147964,
+          "setup_type": "DONCHIAN_BREAKOUT_LONG",
+          "atr": 0.0006248143998273094
+        },
+        "latency_ms": 21.498399990377948
+      },
+      "MarketStructure": {
+        "status": "SUCCESS",
+        "score": 68.0,
+        "direction": "LONG",
+        "confidence": 0.68,
+        "metrics": {
+          "higher_high": true,
+          "higher_low": false,
+          "lower_high": false,
+          "lower_low": false,
+          "bos_detected": true,
+          "choch_detected": false,
+          "total_swing_highs": 12,
+          "total_swing_lows": 12
+        },
+        "latency_ms": 0.11130000348202884
+      },
+      "MLPrediction": {
+        "status": "SUCCESS",
+        "score": 68.1,
+        "direction": "LONG",
+        "confidence": 0.681,
+        "metrics": {
+          "win_probability": 0.55,
+          "model_type": "Calibrated Statistical Factor Model",
+          "live_rsi": 62.72,
+          "live_adx": 50.52,
+          "dynamic_momentum_score": 0.23,
+          "brier_score": 0.142
+        },
+        "latency_ms": 4.177700000582263
+      },
+      "MacroAnalysis": {
+        "status": "SUCCESS",
+        "score": 42.75,
+        "direction": "LONG",
+        "confidence": 0.75,
+        "metrics": {
+          "dxy_index": 99.44,
+          "us10y_yield": 4.752,
+          "us_short_yield": 3.732,
+          "yield_curve_slope": 1.02,
+          "dxy_bias": "BEARISH_USD",
+          "risk_sentiment": "RISK_OFF",
+          "base_rate": 5.0,
+          "quote_rate": 5.25,
+          "rate_diff": -0.25,
+          "macro_score": 42.75
+        },
+        "latency_ms": 0.011600001016631722
+      },
+      "FundamentalAnalysis": {
+        "status": "SUCCESS",
+        "score": 47.27,
+        "direction": "SHORT",
+        "confidence": 0.7,
+        "metrics": {
+          "event_risk": false,
+          "calendar_score": 47.27
+        },
+        "latency_ms": 0.2378999924985692
+      },
+      "CandleStructure": {
+        "status": "SUCCESS",
+        "score": 50.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.5,
+        "metrics": {
+          "body_ratio": 0.49,
+          "upper_wick_ratio": 0.51,
+          "lower_wick_ratio": 0.0,
+          "patterns_detected": []
+        },
+        "latency_ms": 0.5942999996477738
+      },
+      "SentimentCrossAsset": {
+        "status": "SUCCESS",
+        "score": 65.0,
+        "direction": "LONG",
+        "confidence": 0.72,
+        "metrics": {
+          "vix": 15.15,
+          "gold_price": 4481.7,
+          "wti_price": 85.21,
+          "btc_price": 78385.0,
+          "is_risk_on": true
+        },
+        "latency_ms": 1.0567999997874722
+      }
+    },
+    "knowledge_references": [
+      "London / New York Overlap SMC FVG Retest",
+      "GBP/USD Test Observation",
+      "GBP/USD Test Observation"
+    ],
+    "outcome_status": "ACTIVE_PENDING",
+    "realized_r": null,
+    "mfe_r": 0.0,
+    "mae_r": 0.0,
+    "holding_period_mins": 0,
+    "error_classification": null
+  },
+  {
+    "experience_id": "exp-SIG-202608311513-EURUSD",
+    "signal_id": "SIG-202608311513-EURUSD",
+    "scan_id": "scan-20260831-151345",
+    "created_at": "2026-08-31T15:13:50.737502+00:00",
+    "symbol": "EUR/USD",
+    "direction": "LONG",
+    "entry_price": 1.16171,
+    "stop_loss": 1.16113,
+    "take_profit": 1.16257,
+    "ml_predicted_win_prob": 0.715,
+    "composite_score": 65.55,
+    "llm_reasoning": "The trade direction is supported by strong technical evidence, favorable risk/reward, and significant currency strength divergence favoring EUR over USD. While RSI indicates overbought conditions, the overall setup aligns with a bullish continuation scenario in a low-volatility regime.",
+    "engine_evidence": {
+      "MLPrediction": {
+        "status": "SUCCESS",
+        "score": 68.9,
+        "direction": "LONG",
+        "confidence": 0.689,
+        "metrics": {
+          "win_probability": 0.715,
+          "model_type": "Calibrated Statistical Factor Model",
+          "live_rsi": 70.05,
+          "live_adx": 56.31,
+          "dynamic_momentum_score": 0.46,
+          "brier_score": 0.142
+        },
+        "latency_ms": 7.645999998203479
+      },
+      "CandleStructure": {
+        "status": "SUCCESS",
+        "score": 50.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.5,
+        "metrics": {
+          "body_ratio": 0.37,
+          "upper_wick_ratio": 0.38,
+          "lower_wick_ratio": 0.25,
+          "patterns_detected": []
+        },
+        "latency_ms": 0.46300000394694507
+      },
+      "MarketStructure": {
+        "status": "SUCCESS",
+        "score": 68.0,
+        "direction": "LONG",
+        "confidence": 0.68,
+        "metrics": {
+          "higher_high": true,
+          "higher_low": false,
+          "lower_high": false,
+          "lower_low": false,
+          "bos_detected": true,
+          "choch_detected": false,
+          "total_swing_highs": 19,
+          "total_swing_lows": 17
+        },
+        "latency_ms": 0.23010000586509705
+      },
+      "MarketRegime": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.8,
+        "metrics": {
+          "regime": "LOW_VOLATILITY_CONSOLIDATION",
+          "volatility_level": "LOW"
+        },
+        "latency_ms": 0.4575000057229772
+      },
+      "FundamentalAnalysis": {
+        "status": "SUCCESS",
+        "score": 41.27,
+        "direction": "SHORT",
+        "confidence": 0.7,
+        "metrics": {
+          "event_risk": false,
+          "calendar_score": 41.27
+        },
+        "latency_ms": 0.4526000120677054
+      },
+      "TechnicalAnalysis": {
+        "status": "SUCCESS",
+        "score": 91.0,
+        "direction": "LONG",
+        "confidence": 0.91,
+        "metrics": {
+          "rsi": 70.05285605323051,
+          "adx": 20.974813351103027,
+          "setup_type": "DONCHIAN_BREAKOUT_LONG",
+          "atr": 0.0004793564932975565
+        },
+        "latency_ms": 19.70170000276994
+      },
+      "RiskMetrics": {
+        "status": "SUCCESS",
+        "score": 95.0,
+        "direction": "LONG",
+        "confidence": 0.85,
+        "metrics": {
+          "valid": true,
+          "entry_price": 1.16171,
+          "stop_loss": 1.16113,
+          "take_profit_1": 1.16257,
+          "take_profit_2": 1.16344,
+          "risk_pips": 5.8,
+          "reward_pips": 17.3,
+          "risk_reward": 3.0,
+          "atr": 0.0004793564932975565,
+          "long_parameters": {
+            "valid": true,
+            "entry_price": 1.16171,
+            "stop_loss": 1.16113,
+            "take_profit_1": 1.16257,
+            "take_profit_2": 1.16344,
+            "risk_pips": 5.8,
+            "reward_pips": 17.3,
+            "risk_reward": 3.0
+          },
+          "short_parameters": {
+            "valid": true,
+            "entry_price": 1.16171,
+            "stop_loss": 1.16229,
+            "take_profit_1": 1.16085,
+            "take_profit_2": 1.15998,
+            "risk_pips": 5.8,
+            "reward_pips": 17.3,
+            "risk_reward": 3.0
+          }
+        },
+        "latency_ms": 3.2126000005519018
+      },
+      "SentimentCrossAsset": {
+        "status": "SUCCESS",
+        "score": 65.0,
+        "direction": "LONG",
+        "confidence": 0.72,
+        "metrics": {
+          "vix": 15.15,
+          "gold_price": 4481.7,
+          "wti_price": 85.21,
+          "btc_price": 78385.0,
+          "is_risk_on": true
+        },
+        "latency_ms": 5.219999991822988
+      },
+      "MacroAnalysis": {
+        "status": "SUCCESS",
+        "score": 35.25,
+        "direction": "LONG",
+        "confidence": 0.75,
+        "metrics": {
+          "dxy_index": 99.44,
+          "us10y_yield": 4.752,
+          "us_short_yield": 3.732,
+          "yield_curve_slope": 1.02,
+          "dxy_bias": "BEARISH_USD",
+          "risk_sentiment": "RISK_OFF",
+          "base_rate": 3.5,
+          "quote_rate": 5.25,
+          "rate_diff": -1.75,
+          "macro_score": 35.25
+        },
+        "latency_ms": 793.4415000054287
+      },
+      "CurrencyStrength": {
+        "status": "SUCCESS",
+        "score": 98.0,
+        "direction": "LONG",
+        "confidence": 0.98,
+        "metrics": {
+          "base_currency": "EUR",
+          "quote_currency": "USD",
+          "base_strength": 1.67,
+          "quote_strength": -7.81,
+          "strength_diff": 9.48
+        },
+        "latency_ms": 1247.9861999891
+      }
+    },
+    "knowledge_references": [
+      "London / New York Overlap SMC FVG Retest",
+      "EUR/USD Pre-ECB Breakout Spread Expansion",
+      "USD/JPY Yield Spread & US 10Y Yield Correlation"
+    ],
+    "outcome_status": "ACTIVE_PENDING",
+    "realized_r": null,
+    "mfe_r": 0.0,
+    "mae_r": 0.0,
+    "holding_period_mins": 0,
+    "error_classification": null
+  },
+  {
+    "experience_id": "exp-SIG-202608311458-XRP-US",
+    "signal_id": "SIG-202608311458-XRP-US",
+    "scan_id": "scan-20260831-145730",
+    "created_at": "2026-08-31T14:58:41.856269+00:00",
+    "symbol": "XRP (Ripple)",
+    "direction": "LONG",
+    "entry_price": 1.3766,
+    "stop_loss": 1.36713,
+    "take_profit": 1.39081,
+    "ml_predicted_win_prob": 0.85,
+    "composite_score": 69.38,
+    "llm_reasoning": "Technical evidence, currency strength, and risk metrics strongly support the LONG direction, with favorable risk/reward and bullish momentum indicators. Contradictions are minimal, and macro conditions align with USD weakness, enhancing the setup's validity.",
+    "engine_evidence": {
+      "MarketRegime": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.8,
+        "metrics": {
+          "regime": "TRENDING_MOMENTUM",
+          "volatility_level": "MEDIUM"
+        },
+        "latency_ms": 0.39429999014828354
+      },
+      "CurrencyStrength": {
+        "status": "SUCCESS",
+        "score": 94.75999999999999,
+        "direction": "LONG",
+        "confidence": 0.9475999999999999,
+        "metrics": {
+          "base_currency": "XRP",
+          "quote_currency": "USD",
+          "base_strength": 0.0,
+          "quote_strength": -7.46,
+          "strength_diff": 7.46
+        },
+        "latency_ms": 0.009800001862458885
+      },
+      "TechnicalAnalysis": {
+        "status": "SUCCESS",
+        "score": 96.0,
+        "direction": "LONG",
+        "confidence": 0.96,
+        "metrics": {
+          "rsi": 59.49925988927896,
+          "adx": 24.626343053833008,
+          "setup_type": "MOMENTUM_CONTINUATION",
+          "atr": 0.007894904074901057
+        },
+        "latency_ms": 17.635199998039752
+      },
+      "MLPrediction": {
+        "status": "SUCCESS",
+        "score": 72.4,
+        "direction": "LONG",
+        "confidence": 0.724,
+        "metrics": {
+          "win_probability": 0.85,
+          "model_type": "Calibrated Statistical Factor Model",
+          "live_rsi": 59.5,
+          "live_adx": 33.61,
+          "dynamic_momentum_score": 3.46,
+          "brier_score": 0.142
+        },
+        "latency_ms": 5.154099999344908
+      },
+      "MacroAnalysis": {
+        "status": "SUCCESS",
+        "score": 44.0,
+        "direction": "LONG",
+        "confidence": 0.75,
+        "metrics": {
+          "dxy_index": 99.46,
+          "us10y_yield": 4.76,
+          "us_short_yield": 3.732,
+          "yield_curve_slope": 1.028,
+          "dxy_bias": "BEARISH_USD",
+          "risk_sentiment": "RISK_OFF",
+          "base_rate": 0.0,
+          "quote_rate": 5.25,
+          "rate_diff": 0.0,
+          "macro_score": 44.0
+        },
+        "latency_ms": 0.023899992811493576
+      },
+      "MarketStructure": {
+        "status": "SUCCESS",
+        "score": 88.0,
+        "direction": "SHORT",
+        "confidence": 0.88,
+        "metrics": {
+          "higher_high": false,
+          "higher_low": false,
+          "lower_high": true,
+          "lower_low": true,
+          "bos_detected": false,
+          "choch_detected": true,
+          "total_swing_highs": 11,
+          "total_swing_lows": 7
+        },
+        "latency_ms": 0.13649999164044857
+      },
+      "FundamentalAnalysis": {
+        "status": "SUCCESS",
+        "score": 50.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.7,
+        "metrics": {
+          "event_risk": false,
+          "calendar_score": 50.0
+        },
+        "latency_ms": 0.008699993486516178
+      },
+      "CandleStructure": {
+        "status": "SUCCESS",
+        "score": 50.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.5,
+        "metrics": {
+          "body_ratio": 0.61,
+          "upper_wick_ratio": 0.24,
+          "lower_wick_ratio": 0.15,
+          "patterns_detected": []
+        },
+        "latency_ms": 0.30980000155977905
+      },
+      "RiskMetrics": {
+        "status": "SUCCESS",
+        "score": 95.0,
+        "direction": "LONG",
+        "confidence": 0.85,
+        "metrics": {
+          "valid": true,
+          "entry_price": 1.3766,
+          "stop_loss": 1.36713,
+          "take_profit_1": 1.39081,
+          "take_profit_2": 1.40502,
+          "risk_pips": 94.7,
+          "reward_pips": 284.2,
+          "risk_reward": 3.0,
+          "atr": 0.007894904074901057,
+          "long_parameters": {
+            "valid": true,
+            "entry_price": 1.3766,
+            "stop_loss": 1.36713,
+            "take_profit_1": 1.39081,
+            "take_profit_2": 1.40502,
+            "risk_pips": 94.7,
+            "reward_pips": 284.2,
+            "risk_reward": 3.0
+          },
+          "short_parameters": {
+            "valid": true,
+            "entry_price": 1.3766,
+            "stop_loss": 1.38607,
+            "take_profit_1": 1.36239,
+            "take_profit_2": 1.34818,
+            "risk_pips": 94.7,
+            "reward_pips": 284.2,
+            "risk_reward": 3.0
+          }
+        },
+        "latency_ms": 1.472999996622093
+      },
+      "SentimentCrossAsset": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "LONG",
+        "confidence": 0.72,
+        "metrics": {
+          "vix": 15.22,
+          "gold_price": 4484.7,
+          "wti_price": 85.46,
+          "btc_price": 78631.89,
+          "is_risk_on": true
+        },
+        "latency_ms": 1.352999999653548
+      }
+    },
+    "knowledge_references": [
+      "USD/JPY Yield Spread & US 10Y Yield Correlation",
+      "London / New York Overlap SMC FVG Retest",
+      "GBP/USD Test Observation"
+    ],
+    "outcome_status": "ACTIVE_PENDING",
+    "realized_r": null,
+    "mfe_r": 0.0,
+    "mae_r": 0.0,
+    "holding_period_mins": 0,
+    "error_classification": null
+  },
+  {
+    "experience_id": "exp-SIG-202608311458-SOL-US",
+    "signal_id": "SIG-202608311458-SOL-US",
+    "scan_id": "scan-20260831-145730",
+    "created_at": "2026-08-31T14:58:37.158329+00:00",
+    "symbol": "Solana (SOL)",
+    "direction": "LONG",
+    "entry_price": 103.44,
+    "stop_loss": 102.79851,
+    "take_profit": 104.40223,
+    "ml_predicted_win_prob": 0.85,
+    "composite_score": 73.6,
+    "llm_reasoning": "The trading candidate aligns with technical evidence, currency strength, and market setup, supported by a strong risk/reward ratio, bullish momentum continuation, and favorable macro conditions for USD weakness. No contradictions were identified, and the opportunity score and statistical win probability further validate the LONG direction.",
+    "engine_evidence": {
+      "MacroAnalysis": {
+        "status": "SUCCESS",
+        "score": 44.0,
+        "direction": "LONG",
+        "confidence": 0.75,
+        "metrics": {
+          "dxy_index": 99.46,
+          "us10y_yield": 4.76,
+          "us_short_yield": 3.732,
+          "yield_curve_slope": 1.028,
+          "dxy_bias": "BEARISH_USD",
+          "risk_sentiment": "RISK_OFF",
+          "base_rate": 0.0,
+          "quote_rate": 5.25,
+          "rate_diff": 0.0,
+          "macro_score": 44.0
+        },
+        "latency_ms": 0.01680001150816679
+      },
+      "MarketRegime": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.8,
+        "metrics": {
+          "regime": "TRENDING_MOMENTUM",
+          "volatility_level": "MEDIUM"
+        },
+        "latency_ms": 0.19039999460801482
+      },
+      "CandleStructure": {
+        "status": "SUCCESS",
+        "score": 50.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.5,
+        "metrics": {
+          "body_ratio": 0.66,
+          "upper_wick_ratio": 0.16,
+          "lower_wick_ratio": 0.18,
+          "patterns_detected": []
+        },
+        "latency_ms": 1.8138000014005229
+      },
+      "FundamentalAnalysis": {
+        "status": "SUCCESS",
+        "score": 50.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.7,
+        "metrics": {
+          "event_risk": false,
+          "calendar_score": 50.0
+        },
+        "latency_ms": 0.014600009308196604
+      },
+      "RiskMetrics": {
+        "status": "SUCCESS",
+        "score": 95.0,
+        "direction": "LONG",
+        "confidence": 0.85,
+        "metrics": {
+          "valid": true,
+          "entry_price": 103.44,
+          "stop_loss": 102.79851,
+          "take_profit_1": 104.40223,
+          "take_profit_2": 105.36447,
+          "risk_pips": 64.1,
+          "reward_pips": 192.4,
+          "risk_reward": 3.0,
+          "atr": 0.5345732016879148,
+          "long_parameters": {
+            "valid": true,
+            "entry_price": 103.44,
+            "stop_loss": 102.79851,
+            "take_profit_1": 104.40223,
+            "take_profit_2": 105.36447,
+            "risk_pips": 64.1,
+            "reward_pips": 192.4,
+            "risk_reward": 3.0
+          },
+          "short_parameters": {
+            "valid": true,
+            "entry_price": 103.44,
+            "stop_loss": 104.08149,
+            "take_profit_1": 102.47777,
+            "take_profit_2": 101.51554,
+            "risk_pips": 64.1,
+            "reward_pips": 192.4,
+            "risk_reward": 3.0
+          }
+        },
+        "latency_ms": 2.9803000070387498
+      },
+      "MLPrediction": {
+        "status": "SUCCESS",
+        "score": 60.1,
+        "direction": "LONG",
+        "confidence": 0.601,
+        "metrics": {
+          "win_probability": 0.85,
+          "model_type": "Calibrated Statistical Factor Model",
+          "live_rsi": 59.16,
+          "live_adx": 16.09,
+          "dynamic_momentum_score": 4.13,
+          "brier_score": 0.142
+        },
+        "latency_ms": 6.979300000239164
+      },
+      "TechnicalAnalysis": {
+        "status": "SUCCESS",
+        "score": 86.0,
+        "direction": "LONG",
+        "confidence": 0.86,
+        "metrics": {
+          "rsi": 59.15952737671291,
+          "adx": 18.800349557665914,
+          "setup_type": "MOMENTUM_CONTINUATION",
+          "atr": 0.5345732016879148
+        },
+        "latency_ms": 23.318599996855482
+      },
+      "MarketStructure": {
+        "status": "SUCCESS",
+        "score": 68.0,
+        "direction": "LONG",
+        "confidence": 0.68,
+        "metrics": {
+          "higher_high": true,
+          "higher_low": false,
+          "lower_high": false,
+          "lower_low": true,
+          "bos_detected": false,
+          "choch_detected": false,
+          "total_swing_highs": 9,
+          "total_swing_lows": 9
+        },
+        "latency_ms": 0.4391999973449856
+      },
+      "SentimentCrossAsset": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "LONG",
+        "confidence": 0.72,
+        "metrics": {
+          "vix": 15.22,
+          "gold_price": 4484.7,
+          "wti_price": 85.46,
+          "btc_price": 78631.89,
+          "is_risk_on": true
+        },
+        "latency_ms": 1.1175999970873818
+      },
+      "CurrencyStrength": {
+        "status": "SUCCESS",
+        "score": 94.75999999999999,
+        "direction": "LONG",
+        "confidence": 0.9475999999999999,
+        "metrics": {
+          "base_currency": "SOL",
+          "quote_currency": "USD",
+          "base_strength": 0.0,
+          "quote_strength": -7.46,
+          "strength_diff": 7.46
+        },
+        "latency_ms": 1316.4568000065628
+      }
+    },
+    "knowledge_references": [
+      "USD/JPY Yield Spread & US 10Y Yield Correlation",
+      "London / New York Overlap SMC FVG Retest",
+      "GBP/USD Test Observation"
+    ],
+    "outcome_status": "ACTIVE_PENDING",
+    "realized_r": null,
+    "mfe_r": 0.0,
+    "mae_r": 0.0,
+    "holding_period_mins": 0,
+    "error_classification": null
+  },
+  {
+    "experience_id": "exp-SIG-202608311458-ETH-US",
+    "signal_id": "SIG-202608311458-ETH-US",
+    "scan_id": "scan-20260831-145730",
+    "created_at": "2026-08-31T14:58:30.046493+00:00",
+    "symbol": "Ethereum (ETH)",
+    "direction": "LONG",
+    "entry_price": 2464.65991,
+    "stop_loss": 2451.9612,
+    "take_profit": 2483.70798,
+    "ml_predicted_win_prob": 0.85,
+    "composite_score": 64.98,
+    "llm_reasoning": "The technical evidence, currency strength, and risk metrics strongly support the LONG direction, with favorable risk/reward and bullish indicators such as RSI and ADX momentum. Contradictions are minimal, and macro conditions align with a bearish USD bias, enhancing ETH's relative strength.",
+    "engine_evidence": {
+      "MarketStructure": {
+        "status": "SUCCESS",
+        "score": 88.0,
+        "direction": "SHORT",
+        "confidence": 0.88,
+        "metrics": {
+          "higher_high": false,
+          "higher_low": false,
+          "lower_high": true,
+          "lower_low": true,
+          "bos_detected": false,
+          "choch_detected": true,
+          "total_swing_highs": 11,
+          "total_swing_lows": 9
+        },
+        "latency_ms": 0.33689998963382095
+      },
+      "TechnicalAnalysis": {
+        "status": "SUCCESS",
+        "score": 96.0,
+        "direction": "LONG",
+        "confidence": 0.96,
+        "metrics": {
+          "rsi": 66.73240038849119,
+          "adx": 29.917704967378683,
+          "setup_type": "DONCHIAN_BREAKOUT_LONG",
+          "atr": 10.58225731109609
+        },
+        "latency_ms": 23.802099996828474
+      },
+      "FundamentalAnalysis": {
+        "status": "SUCCESS",
+        "score": 50.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.7,
+        "metrics": {
+          "event_risk": false,
+          "calendar_score": 50.0
+        },
+        "latency_ms": 0.008400005754083395
+      },
+      "CurrencyStrength": {
+        "status": "SUCCESS",
+        "score": 94.75999999999999,
+        "direction": "LONG",
+        "confidence": 0.9475999999999999,
+        "metrics": {
+          "base_currency": "ETH",
+          "quote_currency": "USD",
+          "base_strength": 0.0,
+          "quote_strength": -7.46,
+          "strength_diff": 7.46
+        },
+        "latency_ms": 0.021500003640539944
+      },
+      "CandleStructure": {
+        "status": "SUCCESS",
+        "score": 50.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.5,
+        "metrics": {
+          "body_ratio": 0.67,
+          "upper_wick_ratio": 0.29,
+          "lower_wick_ratio": 0.03,
+          "patterns_detected": []
+        },
+        "latency_ms": 0.8955999946920201
+      },
+      "MacroAnalysis": {
+        "status": "SUCCESS",
+        "score": 44.0,
+        "direction": "LONG",
+        "confidence": 0.75,
+        "metrics": {
+          "dxy_index": 99.46,
+          "us10y_yield": 4.76,
+          "us_short_yield": 3.732,
+          "yield_curve_slope": 1.028,
+          "dxy_bias": "BEARISH_USD",
+          "risk_sentiment": "RISK_OFF",
+          "base_rate": 0.0,
+          "quote_rate": 5.25,
+          "rate_diff": 0.0,
+          "macro_score": 44.0
+        },
+        "latency_ms": 0.043799998820759356
+      },
+      "MarketRegime": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.8,
+        "metrics": {
+          "regime": "LOW_VOLATILITY_CONSOLIDATION",
+          "volatility_level": "LOW"
+        },
+        "latency_ms": 0.3662999952211976
+      },
+      "MLPrediction": {
+        "status": "SUCCESS",
+        "score": 82.0,
+        "direction": "LONG",
+        "confidence": 0.82,
+        "metrics": {
+          "win_probability": 0.85,
+          "model_type": "Calibrated Statistical Factor Model",
+          "live_rsi": 66.73,
+          "live_adx": 44.97,
+          "dynamic_momentum_score": 4.84,
+          "brier_score": 0.142
+        },
+        "latency_ms": 5.662700001266785
+      },
+      "RiskMetrics": {
+        "status": "SUCCESS",
+        "score": 95.0,
+        "direction": "LONG",
+        "confidence": 0.85,
+        "metrics": {
+          "valid": true,
+          "entry_price": 2464.65991,
+          "stop_loss": 2451.9612,
+          "take_profit_1": 2483.70798,
+          "take_profit_2": 2502.75604,
+          "risk_pips": 127.0,
+          "reward_pips": 381.0,
+          "risk_reward": 3.0,
+          "atr": 10.58225731109609,
+          "long_parameters": {
+            "valid": true,
+            "entry_price": 2464.65991,
+            "stop_loss": 2451.9612,
+            "take_profit_1": 2483.70798,
+            "take_profit_2": 2502.75604,
+            "risk_pips": 127.0,
+            "reward_pips": 381.0,
+            "risk_reward": 3.0
+          },
+          "short_parameters": {
+            "valid": true,
+            "entry_price": 2464.65991,
+            "stop_loss": 2477.35862,
+            "take_profit_1": 2445.61185,
+            "take_profit_2": 2426.56379,
+            "risk_pips": 127.0,
+            "reward_pips": 381.0,
+            "risk_reward": 3.0
+          }
+        },
+        "latency_ms": 3.0414000066230074
+      },
+      "SentimentCrossAsset": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "LONG",
+        "confidence": 0.72,
+        "metrics": {
+          "vix": 15.22,
+          "gold_price": 4484.7,
+          "wti_price": 85.46,
+          "btc_price": 78631.89,
+          "is_risk_on": true
+        },
+        "latency_ms": 4.680499987443909
+      }
+    },
+    "knowledge_references": [
+      "USD/JPY Yield Spread & US 10Y Yield Correlation",
+      "London / New York Overlap SMC FVG Retest",
+      "GBP/USD Test Observation"
+    ],
+    "outcome_status": "ACTIVE_PENDING",
+    "realized_r": null,
+    "mfe_r": 0.0,
+    "mae_r": 0.0,
+    "holding_period_mins": 0,
+    "error_classification": null
+  },
+  {
+    "experience_id": "exp-SIG-202608311458-BTC-US",
+    "signal_id": "SIG-202608311458-BTC-US",
+    "scan_id": "scan-20260831-145730",
+    "created_at": "2026-08-31T14:58:25.464409+00:00",
+    "symbol": "Bitcoin (BTC)",
+    "direction": "LONG",
+    "entry_price": 78492.71094,
+    "stop_loss": 78147.43192,
+    "take_profit": 79010.62946,
+    "ml_predicted_win_prob": 0.85,
+    "composite_score": 72.11,
+    "llm_reasoning": "The candidate aligns with strong technical evidence, favorable currency strength divergence, and a bullish market structure setup. Risk/reward ratio and statistical win probability further support the LONG direction.",
+    "engine_evidence": {
+      "CandleStructure": {
+        "status": "SUCCESS",
+        "score": 50.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.5,
+        "metrics": {
+          "body_ratio": 0.68,
+          "upper_wick_ratio": 0.23,
+          "lower_wick_ratio": 0.09,
+          "patterns_detected": []
+        },
+        "latency_ms": 0.8747999963816255
+      },
+      "MarketStructure": {
+        "status": "SUCCESS",
+        "score": 82.0,
+        "direction": "LONG",
+        "confidence": 0.82,
+        "metrics": {
+          "higher_high": false,
+          "higher_low": true,
+          "lower_high": true,
+          "lower_low": false,
+          "bos_detected": false,
+          "choch_detected": true,
+          "total_swing_highs": 10,
+          "total_swing_lows": 8
+        },
+        "latency_ms": 0.38699999277014285
+      },
+      "TechnicalAnalysis": {
+        "status": "SUCCESS",
+        "score": 92.0,
+        "direction": "LONG",
+        "confidence": 0.92,
+        "metrics": {
+          "rsi": 59.81988483851587,
+          "adx": 17.290530673423167,
+          "setup_type": "MOMENTUM_CONTINUATION",
+          "atr": 287.73251123554076
+        },
+        "latency_ms": 32.208800010266714
+      },
+      "FundamentalAnalysis": {
+        "status": "SUCCESS",
+        "score": 50.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.7,
+        "metrics": {
+          "event_risk": false,
+          "calendar_score": 50.0
+        },
+        "latency_ms": 0.0092999980552122
+      },
+      "CurrencyStrength": {
+        "status": "SUCCESS",
+        "score": 94.75999999999999,
+        "direction": "LONG",
+        "confidence": 0.9475999999999999,
+        "metrics": {
+          "base_currency": "BTC",
+          "quote_currency": "USD",
+          "base_strength": 0.0,
+          "quote_strength": -7.46,
+          "strength_diff": 7.46
+        },
+        "latency_ms": 0.0261999957729131
+      },
+      "MarketRegime": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.8,
+        "metrics": {
+          "regime": "LOW_VOLATILITY_CONSOLIDATION",
+          "volatility_level": "LOW"
+        },
+        "latency_ms": 0.4200000112177804
+      },
+      "MLPrediction": {
+        "status": "SUCCESS",
+        "score": 68.1,
+        "direction": "LONG",
+        "confidence": 0.681,
+        "metrics": {
+          "win_probability": 0.85,
+          "model_type": "Calibrated Statistical Factor Model",
+          "live_rsi": 59.82,
+          "live_adx": 30.85,
+          "dynamic_momentum_score": 2.6,
+          "brier_score": 0.142
+        },
+        "latency_ms": 10.88760000129696
+      },
+      "RiskMetrics": {
+        "status": "SUCCESS",
+        "score": 95.0,
+        "direction": "LONG",
+        "confidence": 0.85,
+        "metrics": {
+          "valid": true,
+          "entry_price": 78492.71094,
+          "stop_loss": 78147.43192,
+          "take_profit_1": 79010.62946,
+          "take_profit_2": 79528.54798,
+          "risk_pips": 345.3,
+          "reward_pips": 1035.8,
+          "risk_reward": 3.0,
+          "atr": 287.73251123554076,
+          "long_parameters": {
+            "valid": true,
+            "entry_price": 78492.71094,
+            "stop_loss": 78147.43192,
+            "take_profit_1": 79010.62946,
+            "take_profit_2": 79528.54798,
+            "risk_pips": 345.3,
+            "reward_pips": 1035.8,
+            "risk_reward": 3.0
+          },
+          "short_parameters": {
+            "valid": true,
+            "entry_price": 78492.71094,
+            "stop_loss": 78837.98995,
+            "take_profit_1": 77974.79242,
+            "take_profit_2": 77456.8739,
+            "risk_pips": 345.3,
+            "reward_pips": 1035.8,
+            "risk_reward": 3.0
+          }
+        },
+        "latency_ms": 5.620099997031502
+      },
+      "MacroAnalysis": {
+        "status": "SUCCESS",
+        "score": 44.0,
+        "direction": "LONG",
+        "confidence": 0.75,
+        "metrics": {
+          "dxy_index": 99.46,
+          "us10y_yield": 4.76,
+          "us_short_yield": 3.732,
+          "yield_curve_slope": 1.028,
+          "dxy_bias": "BEARISH_USD",
+          "risk_sentiment": "RISK_OFF",
+          "base_rate": 0.0,
+          "quote_rate": 5.25,
+          "rate_diff": 0.0,
+          "macro_score": 44.0
+        },
+        "latency_ms": 0.03429999924264848
+      },
+      "SentimentCrossAsset": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "LONG",
+        "confidence": 0.72,
+        "metrics": {
+          "vix": 15.22,
+          "gold_price": 4484.7,
+          "wti_price": 85.46,
+          "btc_price": 78631.89,
+          "is_risk_on": true
+        },
+        "latency_ms": 4.006399991340004
+      }
+    },
+    "knowledge_references": [
+      "USD/JPY Yield Spread & US 10Y Yield Correlation",
+      "London / New York Overlap SMC FVG Retest",
+      "GBP/USD Test Observation"
+    ],
+    "outcome_status": "ACTIVE_PENDING",
+    "realized_r": null,
+    "mfe_r": 0.0,
+    "mae_r": 0.0,
+    "holding_period_mins": 0,
+    "error_classification": null
+  },
+  {
+    "experience_id": "exp-SIG-202608311457-USDCAD",
+    "signal_id": "SIG-202608311457-USDCAD",
+    "scan_id": "scan-20260831-145730",
+    "created_at": "2026-08-31T14:57:58.690549+00:00",
+    "symbol": "USD/CAD",
+    "direction": "SHORT",
+    "entry_price": 1.38696,
+    "stop_loss": 1.38819,
+    "take_profit": 1.38511,
+    "ml_predicted_win_prob": 0.185,
+    "composite_score": 72.88,
+    "llm_reasoning": "The technical evidence, currency strength, and market structure strongly support the short direction, with a confirmed bearish break of structure, strong USD weakness against CAD, and favorable risk/reward metrics. No significant contradictions or high-impact events are present to invalidate the setup.",
+    "engine_evidence": {
+      "MarketRegime": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.8,
+        "metrics": {
+          "regime": "LOW_VOLATILITY_CONSOLIDATION",
+          "volatility_level": "LOW"
+        },
+        "latency_ms": 0.15770000754855573
+      },
+      "FundamentalAnalysis": {
+        "status": "SUCCESS",
+        "score": 55.73,
+        "direction": "LONG",
+        "confidence": 0.7,
+        "metrics": {
+          "event_risk": false,
+          "calendar_score": 55.73
+        },
+        "latency_ms": 0.5966000026091933
+      },
+      "CandleStructure": {
+        "status": "SUCCESS",
+        "score": 84.0,
+        "direction": "LONG",
+        "confidence": 0.84,
+        "metrics": {
+          "body_ratio": 0.16,
+          "upper_wick_ratio": 0.02,
+          "lower_wick_ratio": 0.82,
+          "patterns_detected": [
+            "Bullish Pinbar / Hammer Rejection (After Pullback) (82% lower wick)",
+            "Inside Bar (Market Volatility Compression)"
+          ]
+        },
+        "latency_ms": 0.3995000006398186
+      },
+      "TechnicalAnalysis": {
+        "status": "SUCCESS",
+        "score": 96.0,
+        "direction": "SHORT",
+        "confidence": 0.96,
+        "metrics": {
+          "rsi": 31.686568884929656,
+          "adx": 40.98257040652069,
+          "setup_type": "MOMENTUM_CONTINUATION",
+          "atr": 0.001027207094380324
+        },
+        "latency_ms": 19.953900002292357
+      },
+      "MarketStructure": {
+        "status": "SUCCESS",
+        "score": 88.0,
+        "direction": "SHORT",
+        "confidence": 0.88,
+        "metrics": {
+          "higher_high": false,
+          "higher_low": false,
+          "lower_high": true,
+          "lower_low": true,
+          "bos_detected": true,
+          "choch_detected": false,
+          "total_swing_highs": 9,
+          "total_swing_lows": 13
+        },
+        "latency_ms": 0.14570000348612666
+      },
+      "CurrencyStrength": {
+        "status": "SUCCESS",
+        "score": 98.0,
+        "direction": "SHORT",
+        "confidence": 0.98,
+        "metrics": {
+          "base_currency": "USD",
+          "quote_currency": "CAD",
+          "base_strength": -7.46,
+          "quote_strength": 3.8,
+          "strength_diff": -11.26
+        },
+        "latency_ms": 0.010799994925037026
+      },
+      "MLPrediction": {
+        "status": "SUCCESS",
+        "score": 64.5,
+        "direction": "SHORT",
+        "confidence": 0.645,
+        "metrics": {
+          "win_probability": 0.185,
+          "model_type": "Calibrated Statistical Factor Model",
+          "live_rsi": 31.69,
+          "live_adx": 69.79,
+          "dynamic_momentum_score": -0.54,
+          "brier_score": 0.142
+        },
+        "latency_ms": 5.603700003121048
+      },
+      "MacroAnalysis": {
+        "status": "SUCCESS",
+        "score": 49.0,
+        "direction": "SHORT",
+        "confidence": 0.75,
+        "metrics": {
+          "dxy_index": 99.46,
+          "us10y_yield": 4.76,
+          "us_short_yield": 3.732,
+          "yield_curve_slope": 1.028,
+          "dxy_bias": "BEARISH_USD",
+          "risk_sentiment": "RISK_OFF",
+          "base_rate": 5.25,
+          "quote_rate": 4.25,
+          "rate_diff": 1.0,
+          "macro_score": 49.0
+        },
+        "latency_ms": 0.01750000228639692
+      },
+      "RiskMetrics": {
+        "status": "SUCCESS",
+        "score": 95.0,
+        "direction": "SHORT",
+        "confidence": 0.85,
+        "metrics": {
+          "valid": true,
+          "entry_price": 1.38696,
+          "stop_loss": 1.38819,
+          "take_profit_1": 1.38511,
+          "take_profit_2": 1.38326,
+          "risk_pips": 12.3,
+          "reward_pips": 37.0,
+          "risk_reward": 3.0,
+          "atr": 0.001027207094380324,
+          "long_parameters": {
+            "valid": true,
+            "entry_price": 1.38696,
+            "stop_loss": 1.38573,
+            "take_profit_1": 1.38881,
+            "take_profit_2": 1.39066,
+            "risk_pips": 12.3,
+            "reward_pips": 37.0,
+            "risk_reward": 3.0
+          },
+          "short_parameters": {
+            "valid": true,
+            "entry_price": 1.38696,
+            "stop_loss": 1.38819,
+            "take_profit_1": 1.38511,
+            "take_profit_2": 1.38326,
+            "risk_pips": 12.3,
+            "reward_pips": 37.0,
+            "risk_reward": 3.0
+          }
+        },
+        "latency_ms": 1.9724000012502074
+      },
+      "SentimentCrossAsset": {
+        "status": "SUCCESS",
+        "score": 78.0,
+        "direction": "SHORT",
+        "confidence": 0.72,
+        "metrics": {
+          "vix": 15.22,
+          "gold_price": 4484.7,
+          "wti_price": 85.46,
+          "btc_price": 78631.89,
+          "is_risk_on": true
+        },
+        "latency_ms": 2.4701999936951324
+      }
+    },
+    "knowledge_references": [
+      "London / New York Overlap SMC FVG Retest",
+      "USD/JPY Yield Spread & US 10Y Yield Correlation",
+      "GBP/USD Test Observation"
+    ],
+    "outcome_status": "ACTIVE_PENDING",
+    "realized_r": null,
+    "mfe_r": 0.0,
+    "mae_r": 0.0,
+    "holding_period_mins": 0,
+    "error_classification": null
+  },
+  {
+    "experience_id": "exp-SIG-202608311457-AUDUSD",
+    "signal_id": "SIG-202608311457-AUDUSD",
+    "scan_id": "scan-20260831-145730",
+    "created_at": "2026-08-31T14:57:48.742056+00:00",
+    "symbol": "AUD/USD",
+    "direction": "LONG",
+    "entry_price": 0.71679,
+    "stop_loss": 0.71644,
+    "take_profit": 0.71733,
+    "ml_predicted_win_prob": 0.579,
+    "composite_score": 62.1,
+    "llm_reasoning": "The technical evidence, currency strength divergence, and risk-reward ratio strongly support the LONG direction, with favorable momentum continuation and bullish sentiment. Contradictions are minimal, and the market setup aligns with a low-volatility consolidation phase suitable for trend continuation.",
+    "engine_evidence": {
+      "MarketRegime": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.8,
+        "metrics": {
+          "regime": "LOW_VOLATILITY_CONSOLIDATION",
+          "volatility_level": "LOW"
+        },
+        "latency_ms": 0.1812999980757013
+      },
+      "MarketStructure": {
+        "status": "SUCCESS",
+        "score": 68.0,
+        "direction": "LONG",
+        "confidence": 0.68,
+        "metrics": {
+          "higher_high": false,
+          "higher_low": true,
+          "lower_high": false,
+          "lower_low": false,
+          "bos_detected": false,
+          "choch_detected": false,
+          "total_swing_highs": 17,
+          "total_swing_lows": 8
+        },
+        "latency_ms": 0.0838999985717237
+      },
+      "CandleStructure": {
+        "status": "SUCCESS",
+        "score": 72.0,
+        "direction": "LONG",
+        "confidence": 0.72,
+        "metrics": {
+          "body_ratio": 0.29,
+          "upper_wick_ratio": 0.14,
+          "lower_wick_ratio": 0.57,
+          "patterns_detected": [
+            "Bullish Pinbar / Hammer Rejection (57% lower wick)"
+          ]
+        },
+        "latency_ms": 0.3955000138375908
+      },
+      "CurrencyStrength": {
+        "status": "SUCCESS",
+        "score": 86.42,
+        "direction": "LONG",
+        "confidence": 0.8642,
+        "metrics": {
+          "base_currency": "AUD",
+          "quote_currency": "USD",
+          "base_strength": -1.39,
+          "quote_strength": -7.46,
+          "strength_diff": 6.07
+        },
+        "latency_ms": 0.016699996194802225
+      },
+      "MLPrediction": {
+        "status": "SUCCESS",
+        "score": 49.9,
+        "direction": "LONG",
+        "confidence": 0.499,
+        "metrics": {
+          "win_probability": 0.579,
+          "model_type": "Calibrated Statistical Factor Model",
+          "live_rsi": 57.61,
+          "live_adx": 25.0,
+          "dynamic_momentum_score": 0.22,
+          "brier_score": 0.142
+        },
+        "latency_ms": 2.9596999956993386
+      },
+      "MacroAnalysis": {
+        "status": "SUCCESS",
+        "score": 39.5,
+        "direction": "LONG",
+        "confidence": 0.75,
+        "metrics": {
+          "dxy_index": 99.46,
+          "us10y_yield": 4.76,
+          "us_short_yield": 3.732,
+          "yield_curve_slope": 1.028,
+          "dxy_bias": "BEARISH_USD",
+          "risk_sentiment": "RISK_OFF",
+          "base_rate": 4.35,
+          "quote_rate": 5.25,
+          "rate_diff": -0.9,
+          "macro_score": 39.5
+        },
+        "latency_ms": 0.018999999156221747
+      },
+      "TechnicalAnalysis": {
+        "status": "SUCCESS",
+        "score": 86.0,
+        "direction": "LONG",
+        "confidence": 0.86,
+        "metrics": {
+          "rsi": 57.613393325502926,
+          "adx": 14.859985541504296,
+          "setup_type": "MOMENTUM_CONTINUATION",
+          "atr": 0.00029496892993216756
+        },
+        "latency_ms": 15.241500004776753
+      },
+      "RiskMetrics": {
+        "status": "SUCCESS",
+        "score": 95.0,
+        "direction": "LONG",
+        "confidence": 0.85,
+        "metrics": {
+          "valid": true,
+          "entry_price": 0.71679,
+          "stop_loss": 0.71644,
+          "take_profit_1": 0.71733,
+          "take_profit_2": 0.71786,
+          "risk_pips": 3.5,
+          "reward_pips": 10.6,
+          "risk_reward": 3.0,
+          "atr": 0.00029496892993216756,
+          "long_parameters": {
+            "valid": true,
+            "entry_price": 0.71679,
+            "stop_loss": 0.71644,
+            "take_profit_1": 0.71733,
+            "take_profit_2": 0.71786,
+            "risk_pips": 3.5,
+            "reward_pips": 10.6,
+            "risk_reward": 3.0
+          },
+          "short_parameters": {
+            "valid": true,
+            "entry_price": 0.71679,
+            "stop_loss": 0.71715,
+            "take_profit_1": 0.71626,
+            "take_profit_2": 0.71573,
+            "risk_pips": 3.5,
+            "reward_pips": 10.6,
+            "risk_reward": 3.0
+          }
+        },
+        "latency_ms": 1.091800004360266
+      },
+      "FundamentalAnalysis": {
+        "status": "SUCCESS",
+        "score": 44.27,
+        "direction": "SHORT",
+        "confidence": 0.7,
+        "metrics": {
+          "event_risk": false,
+          "calendar_score": 44.27
+        },
+        "latency_ms": 0.26109999453183264
+      },
+      "SentimentCrossAsset": {
+        "status": "SUCCESS",
+        "score": 65.0,
+        "direction": "LONG",
+        "confidence": 0.72,
+        "metrics": {
+          "vix": 15.22,
+          "gold_price": 4484.7,
+          "wti_price": 85.46,
+          "btc_price": 78631.89,
+          "is_risk_on": true
+        },
+        "latency_ms": 0.9598000033292919
+      }
+    },
+    "knowledge_references": [
+      "USD/JPY Yield Spread & US 10Y Yield Correlation",
+      "London / New York Overlap SMC FVG Retest",
+      "GBP/USD Test Observation"
+    ],
+    "outcome_status": "ACTIVE_PENDING",
+    "realized_r": null,
+    "mfe_r": 0.0,
+    "mae_r": 0.0,
+    "holding_period_mins": 0,
+    "error_classification": null
+  },
+  {
+    "experience_id": "exp-SIG-202608311457-USDJPY",
+    "signal_id": "SIG-202608311457-USDJPY",
+    "scan_id": "scan-20260831-145730",
+    "created_at": "2026-08-31T14:57:43.754004+00:00",
+    "symbol": "USD/JPY",
+    "direction": "SHORT",
+    "entry_price": 159.72,
+    "stop_loss": 159.81782,
+    "take_profit": 159.57327,
+    "ml_predicted_win_prob": 0.176,
+    "composite_score": 67.69,
+    "llm_reasoning": "The technical evidence, currency strength divergence, and bearish market structure support the SHORT direction. Favorable risk/reward and macro bearish USD bias further validate the setup.",
+    "engine_evidence": {
+      "CurrencyStrength": {
+        "status": "SUCCESS",
+        "score": 98.0,
+        "direction": "SHORT",
+        "confidence": 0.98,
+        "metrics": {
+          "base_currency": "USD",
+          "quote_currency": "JPY",
+          "base_strength": -7.46,
+          "quote_strength": 4.13,
+          "strength_diff": -11.59
+        },
+        "latency_ms": 0.045599997974932194
+      },
+      "MarketStructure": {
+        "status": "SUCCESS",
+        "score": 82.0,
+        "direction": "SHORT",
+        "confidence": 0.82,
+        "metrics": {
+          "higher_high": false,
+          "higher_low": true,
+          "lower_high": true,
+          "lower_low": false,
+          "bos_detected": false,
+          "choch_detected": true,
+          "total_swing_highs": 8,
+          "total_swing_lows": 8
+        },
+        "latency_ms": 0.3603000077418983
+      },
+      "CandleStructure": {
+        "status": "SUCCESS",
+        "score": 84.0,
+        "direction": "LONG",
+        "confidence": 0.84,
+        "metrics": {
+          "body_ratio": 0.3,
+          "upper_wick_ratio": 0.11,
+          "lower_wick_ratio": 0.59,
+          "patterns_detected": [
+            "Bullish Pinbar / Hammer Rejection (After Pullback) (59% lower wick)"
+          ]
+        },
+        "latency_ms": 0.5804999964311719
+      },
+      "TechnicalAnalysis": {
+        "status": "SUCCESS",
+        "score": 86.0,
+        "direction": "SHORT",
+        "confidence": 0.86,
+        "metrics": {
+          "rsi": 45.384799509322995,
+          "adx": 19.65396615200917,
+          "setup_type": "MOMENTUM_CONTINUATION",
+          "atr": 0.08151575921963625
+        },
+        "latency_ms": 18.611999999848194
+      },
+      "MLPrediction": {
+        "status": "SUCCESS",
+        "score": 59.6,
+        "direction": "SHORT",
+        "confidence": 0.596,
+        "metrics": {
+          "win_probability": 0.176,
+          "model_type": "Calibrated Statistical Factor Model",
+          "live_rsi": 45.38,
+          "live_adx": 31.21,
+          "dynamic_momentum_score": -0.61,
+          "brier_score": 0.142
+        },
+        "latency_ms": 7.984199997736141
+      },
+      "MacroAnalysis": {
+        "status": "SUCCESS",
+        "score": 69.0,
+        "direction": "SHORT",
+        "confidence": 0.75,
+        "metrics": {
+          "dxy_index": 99.46,
+          "us10y_yield": 4.76,
+          "us_short_yield": 3.732,
+          "yield_curve_slope": 1.028,
+          "dxy_bias": "BEARISH_USD",
+          "risk_sentiment": "RISK_OFF",
+          "base_rate": 5.25,
+          "quote_rate": 0.25,
+          "rate_diff": 5.0,
+          "macro_score": 69.0
+        },
+        "latency_ms": 0.024499997380189598
+      },
+      "FundamentalAnalysis": {
+        "status": "SUCCESS",
+        "score": 51.73,
+        "direction": "LONG",
+        "confidence": 0.7,
+        "metrics": {
+          "event_risk": false,
+          "calendar_score": 51.73
+        },
+        "latency_ms": 0.7538999925600365
+      },
+      "MarketRegime": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.8,
+        "metrics": {
+          "regime": "LOW_VOLATILITY_CONSOLIDATION",
+          "volatility_level": "LOW"
+        },
+        "latency_ms": 0.5268000095384195
+      },
+      "RiskMetrics": {
+        "status": "SUCCESS",
+        "score": 95.0,
+        "direction": "SHORT",
+        "confidence": 0.85,
+        "metrics": {
+          "valid": true,
+          "entry_price": 159.72,
+          "stop_loss": 159.81782,
+          "take_profit_1": 159.57327,
+          "take_profit_2": 159.42654,
+          "risk_pips": 9.8,
+          "reward_pips": 29.3,
+          "risk_reward": 3.0,
+          "atr": 0.08151575921963625,
+          "long_parameters": {
+            "valid": true,
+            "entry_price": 159.72,
+            "stop_loss": 159.62218,
+            "take_profit_1": 159.86673,
+            "take_profit_2": 160.01346,
+            "risk_pips": 9.8,
+            "reward_pips": 29.3,
+            "risk_reward": 3.0
+          },
+          "short_parameters": {
+            "valid": true,
+            "entry_price": 159.72,
+            "stop_loss": 159.81782,
+            "take_profit_1": 159.57327,
+            "take_profit_2": 159.42654,
+            "risk_pips": 9.8,
+            "reward_pips": 29.3,
+            "risk_reward": 3.0
+          }
+        },
+        "latency_ms": 3.1774000090081245
+      },
+      "SentimentCrossAsset": {
+        "status": "SUCCESS",
+        "score": 72.0,
+        "direction": "LONG",
+        "confidence": 0.72,
+        "metrics": {
+          "vix": 15.22,
+          "gold_price": 4484.7,
+          "wti_price": 85.46,
+          "btc_price": 78631.89,
+          "is_risk_on": true
+        },
+        "latency_ms": 1.8109999946318567
+      }
+    },
+    "knowledge_references": [
+      "USD/JPY Yield Spread & US 10Y Yield Correlation",
+      "London / New York Overlap SMC FVG Retest",
+      "GBP/USD Test Observation"
+    ],
+    "outcome_status": "ACTIVE_PENDING",
+    "realized_r": null,
+    "mfe_r": 0.0,
+    "mae_r": 0.0,
+    "holding_period_mins": 0,
+    "error_classification": null
+  },
+  {
+    "experience_id": "exp-SIG-202608311457-EURUSD",
+    "signal_id": "SIG-202608311457-EURUSD",
+    "scan_id": "scan-20260831-145730",
+    "created_at": "2026-08-31T14:57:35.302976+00:00",
+    "symbol": "EUR/USD",
+    "direction": "LONG",
+    "entry_price": 1.1609,
+    "stop_loss": 1.1604,
+    "take_profit": 1.16166,
+    "ml_predicted_win_prob": 0.678,
+    "composite_score": 67.91,
+    "llm_reasoning": "The technical evidence, currency strength, and market structure align with the LONG direction, supported by a favorable risk/reward ratio and strong EUR/USD divergence. No high-impact economic events or contradictions were identified, and the market regime is conducive to continuation setups.",
+    "engine_evidence": {
+      "CandleStructure": {
+        "status": "SUCCESS",
+        "score": 72.0,
+        "direction": "LONG",
+        "confidence": 0.72,
+        "metrics": {
+          "body_ratio": 0.33,
+          "upper_wick_ratio": 0.0,
+          "lower_wick_ratio": 0.67,
+          "patterns_detected": [
+            "Bullish Pinbar / Hammer Rejection (67% lower wick)"
+          ]
+        },
+        "latency_ms": 0.5708999960916117
+      },
+      "TechnicalAnalysis": {
+        "status": "SUCCESS",
+        "score": 86.0,
+        "direction": "LONG",
+        "confidence": 0.86,
+        "metrics": {
+          "rsi": 62.142237013032556,
+          "adx": 17.957019748158572,
+          "setup_type": "DONCHIAN_BREAKOUT_LONG",
+          "atr": 0.00042112333228138527
+        },
+        "latency_ms": 37.61579999991227
+      },
+      "MarketStructure": {
+        "status": "SUCCESS",
+        "score": 68.0,
+        "direction": "LONG",
+        "confidence": 0.68,
+        "metrics": {
+          "higher_high": true,
+          "higher_low": false,
+          "lower_high": false,
+          "lower_low": false,
+          "bos_detected": true,
+          "choch_detected": false,
+          "total_swing_highs": 19,
+          "total_swing_lows": 18
+        },
+        "latency_ms": 0.35909999860450625
+      },
+      "FundamentalAnalysis": {
+        "status": "SUCCESS",
+        "score": 41.27,
+        "direction": "SHORT",
+        "confidence": 0.7,
+        "metrics": {
+          "event_risk": false,
+          "calendar_score": 41.27
+        },
+        "latency_ms": 0.5097999965073541
+      },
+      "MarketRegime": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.8,
+        "metrics": {
+          "regime": "LOW_VOLATILITY_CONSOLIDATION",
+          "volatility_level": "LOW"
+        },
+        "latency_ms": 0.6386000022757798
+      },
+      "MLPrediction": {
+        "status": "SUCCESS",
+        "score": 59.6,
+        "direction": "LONG",
+        "confidence": 0.596,
+        "metrics": {
+          "win_probability": 0.678,
+          "model_type": "Calibrated Statistical Factor Model",
+          "live_rsi": 62.14,
+          "live_adx": 29.52,
+          "dynamic_momentum_score": 0.35,
+          "brier_score": 0.142
+        },
+        "latency_ms": 7.438200002070516
+      },
+      "RiskMetrics": {
+        "status": "SUCCESS",
+        "score": 95.0,
+        "direction": "LONG",
+        "confidence": 0.85,
+        "metrics": {
+          "valid": true,
+          "entry_price": 1.1609,
+          "stop_loss": 1.1604,
+          "take_profit_1": 1.16166,
+          "take_profit_2": 1.16242,
+          "risk_pips": 5.1,
+          "reward_pips": 15.2,
+          "risk_reward": 3.0,
+          "atr": 0.00042112333228138527,
+          "long_parameters": {
+            "valid": true,
+            "entry_price": 1.1609,
+            "stop_loss": 1.1604,
+            "take_profit_1": 1.16166,
+            "take_profit_2": 1.16242,
+            "risk_pips": 5.1,
+            "reward_pips": 15.2,
+            "risk_reward": 3.0
+          },
+          "short_parameters": {
+            "valid": true,
+            "entry_price": 1.1609,
+            "stop_loss": 1.16141,
+            "take_profit_1": 1.16014,
+            "take_profit_2": 1.15938,
+            "risk_pips": 5.1,
+            "reward_pips": 15.2,
+            "risk_reward": 3.0
+          }
+        },
+        "latency_ms": 3.844899998512119
+      },
+      "CurrencyStrength": {
+        "status": "SUCCESS",
+        "score": 97.94,
+        "direction": "LONG",
+        "confidence": 0.9793999999999999,
+        "metrics": {
+          "base_currency": "EUR",
+          "quote_currency": "USD",
+          "base_strength": 0.53,
+          "quote_strength": -7.46,
+          "strength_diff": 7.99
+        },
+        "latency_ms": 24.23830000043381
+      },
+      "SentimentCrossAsset": {
+        "status": "SUCCESS",
+        "score": 65.0,
+        "direction": "LONG",
+        "confidence": 0.72,
+        "metrics": {
+          "vix": 15.22,
+          "gold_price": 4484.7,
+          "wti_price": 85.46,
+          "btc_price": 78631.89,
+          "is_risk_on": true
+        },
+        "latency_ms": 16.73540000047069
+      },
+      "MacroAnalysis": {
+        "status": "SUCCESS",
+        "score": 35.25,
+        "direction": "LONG",
+        "confidence": 0.75,
+        "metrics": {
+          "dxy_index": 99.46,
+          "us10y_yield": 4.76,
+          "us_short_yield": 3.732,
+          "yield_curve_slope": 1.028,
+          "dxy_bias": "BEARISH_USD",
+          "risk_sentiment": "RISK_OFF",
+          "base_rate": 3.5,
+          "quote_rate": 5.25,
+          "rate_diff": -1.75,
+          "macro_score": 35.25
+        },
+        "latency_ms": 894.8851000022842
+      }
+    },
+    "knowledge_references": [
+      "London / New York Overlap SMC FVG Retest",
+      "EUR/USD Pre-ECB Breakout Spread Expansion",
+      "USD/JPY Yield Spread & US 10Y Yield Correlation"
+    ],
+    "outcome_status": "ACTIVE_PENDING",
+    "realized_r": null,
+    "mfe_r": 0.0,
+    "mae_r": 0.0,
+    "holding_period_mins": 0,
+    "error_classification": null
+  },
+  {
+    "experience_id": "exp-SIG-202608311408-CLF",
+    "signal_id": "SIG-202608311408-CLF",
+    "scan_id": "scan-20260831-140806",
+    "created_at": "2026-08-31T14:08:51.900284+00:00",
+    "symbol": "Crude Oil",
+    "direction": "LONG",
+    "entry_price": 86.21,
+    "stop_loss": 85.64834,
+    "take_profit": 87.05249,
+    "ml_predicted_win_prob": 0.85,
+    "composite_score": 75.89,
+    "llm_reasoning": "The trade is supported by strong technical evidence, bullish market structure, favorable currency strength divergence, and a solid risk/reward ratio of 3.0. Contradictions are minimal and do not significantly undermine the overall bullish setup.",
+    "engine_evidence": {
+      "MacroAnalysis": {
+        "status": "SUCCESS",
+        "score": 44.0,
+        "direction": "LONG",
+        "confidence": 0.75,
+        "metrics": {
+          "dxy_index": 99.55,
+          "us10y_yield": 4.76,
+          "us_short_yield": 3.73,
+          "yield_curve_slope": 1.03,
+          "dxy_bias": "BEARISH_USD",
+          "risk_sentiment": "RISK_OFF",
+          "base_rate": 0.0,
+          "quote_rate": 5.25,
+          "rate_diff": 0.0,
+          "macro_score": 44.0
+        },
+        "latency_ms": 0.0109999964479357
+      },
+      "CurrencyStrength": {
+        "status": "SUCCESS",
+        "score": 94.75999999999999,
+        "direction": "LONG",
+        "confidence": 0.9475999999999999,
+        "metrics": {
+          "base_currency": "WTI",
+          "quote_currency": "USD",
+          "base_strength": 0.0,
+          "quote_strength": -7.46,
+          "strength_diff": 7.46
+        },
+        "latency_ms": 0.023899992811493576
+      },
+      "MarketStructure": {
+        "status": "SUCCESS",
+        "score": 80.0,
+        "direction": "LONG",
+        "confidence": 0.8,
+        "metrics": {
+          "higher_high": true,
+          "higher_low": true,
+          "lower_high": false,
+          "lower_low": false,
+          "bos_detected": false,
+          "choch_detected": false,
+          "total_swing_highs": 6,
+          "total_swing_lows": 5
+        },
+        "latency_ms": 0.20589999621734023
+      },
+      "MLPrediction": {
+        "status": "SUCCESS",
+        "score": 55.5,
+        "direction": "LONG",
+        "confidence": 0.555,
+        "metrics": {
+          "win_probability": 0.85,
+          "model_type": "Calibrated Statistical Factor Model",
+          "live_rsi": 53.49,
+          "live_adx": 11.09,
+          "dynamic_momentum_score": 3.95,
+          "brier_score": 0.142
+        },
+        "latency_ms": 4.905900001176633
+      },
+      "FundamentalAnalysis": {
+        "status": "SUCCESS",
+        "score": 50.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.7,
+        "metrics": {
+          "event_risk": false,
+          "calendar_score": 50.0
+        },
+        "latency_ms": 0.0037999998312443495
+      },
+      "CandleStructure": {
+        "status": "SUCCESS",
+        "score": 88.0,
+        "direction": "LONG",
+        "confidence": 0.88,
+        "metrics": {
+          "body_ratio": 0.75,
+          "upper_wick_ratio": 0.18,
+          "lower_wick_ratio": 0.07,
+          "patterns_detected": [
+            "Morning Star 3-Candle Bullish Reversal",
+            "Strong Bullish Momentum Marubozu (75% body)"
+          ]
+        },
+        "latency_ms": 0.6850000063423067
+      },
+      "TechnicalAnalysis": {
+        "status": "SUCCESS",
+        "score": 85.0,
+        "direction": "LONG",
+        "confidence": 0.85,
+        "metrics": {
+          "rsi": 53.487839477276886,
+          "adx": 21.889848807815294,
+          "setup_type": "TREND_PULLBACK_BOUNCE",
+          "atr": 0.4680530017667325
+        },
+        "latency_ms": 17.909800008055754
+      },
+      "MarketRegime": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.8,
+        "metrics": {
+          "regime": "TRENDING_MOMENTUM",
+          "volatility_level": "MEDIUM"
+        },
+        "latency_ms": 0.1779000012902543
+      },
+      "RiskMetrics": {
+        "status": "SUCCESS",
+        "score": 95.0,
+        "direction": "LONG",
+        "confidence": 0.85,
+        "metrics": {
+          "valid": true,
+          "entry_price": 86.21,
+          "stop_loss": 85.64834,
+          "take_profit_1": 87.05249,
+          "take_profit_2": 87.89499,
+          "risk_pips": 56.2,
+          "reward_pips": 168.5,
+          "risk_reward": 3.0,
+          "atr": 0.4680530017667325,
+          "long_parameters": {
+            "valid": true,
+            "entry_price": 86.21,
+            "stop_loss": 85.64834,
+            "take_profit_1": 87.05249,
+            "take_profit_2": 87.89499,
+            "risk_pips": 56.2,
+            "reward_pips": 168.5,
+            "risk_reward": 3.0
+          },
+          "short_parameters": {
+            "valid": true,
+            "entry_price": 86.21,
+            "stop_loss": 86.77166,
+            "take_profit_1": 85.3675,
+            "take_profit_2": 84.52501,
+            "risk_pips": 56.2,
+            "reward_pips": 168.5,
+            "risk_reward": 3.0
+          }
+        },
+        "latency_ms": 3.4592000010889024
+      },
+      "SentimentCrossAsset": {
+        "status": "SUCCESS",
+        "score": 65.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.72,
+        "metrics": {
+          "vix": 15.35,
+          "gold_price": 4473.7,
+          "wti_price": 86.03,
+          "btc_price": 77789.62,
+          "is_risk_on": true
+        },
+        "latency_ms": 2.0096000080229715
+      }
+    },
+    "knowledge_references": [
+      "USD/JPY Yield Spread & US 10Y Yield Correlation",
+      "London / New York Overlap SMC FVG Retest",
+      "GBP/USD Test Observation"
+    ],
+    "outcome_status": "ACTIVE_PENDING",
+    "realized_r": null,
+    "mfe_r": 0.0,
+    "mae_r": 0.0,
+    "holding_period_mins": 0,
+    "error_classification": null
+  },
+  {
+    "experience_id": "exp-SIG-202608311334-ETH-US",
+    "signal_id": "SIG-202608311334-ETH-US",
+    "scan_id": "scan-20260831-133339",
+    "created_at": "2026-08-31T13:34:38.042689+00:00",
+    "symbol": "Ethereum (ETH)",
+    "direction": "LONG",
+    "entry_price": 2449.95996,
+    "stop_loss": 2440.16592,
+    "take_profit": 2464.65102,
+    "ml_predicted_win_prob": 0.806,
+    "composite_score": 66.2,
+    "llm_reasoning": "The technical evidence, currency strength, and market structure strongly support the LONG direction, with a favorable risk/reward ratio of 3.0 and bullish macro DXY bias. Additionally, the market regime of low volatility consolidation aligns with the trend pullback bounce setup.",
+    "engine_evidence": {
+      "CandleStructure": {
+        "status": "SUCCESS",
+        "score": 88.0,
+        "direction": "SHORT",
+        "confidence": 0.88,
+        "metrics": {
+          "body_ratio": 0.36,
+          "upper_wick_ratio": 0.07,
+          "lower_wick_ratio": 0.57,
+          "patterns_detected": [
+            "Evening Star 3-Candle Bearish Reversal",
+            "Bearish Engulfing (Real Body Engulfing)",
+            "Bullish Pinbar / Hammer Rejection (57% lower wick)"
+          ]
+        },
+        "latency_ms": 0.4273999948054552
+      },
+      "MLPrediction": {
+        "status": "SUCCESS",
+        "score": 55.1,
+        "direction": "LONG",
+        "confidence": 0.551,
+        "metrics": {
+          "win_probability": 0.806,
+          "model_type": "Calibrated Statistical Factor Model",
+          "live_rsi": 54.88,
+          "live_adx": 22.74,
+          "dynamic_momentum_score": -2.17,
+          "brier_score": 0.142
+        },
+        "latency_ms": 4.923100001178682
+      },
+      "MacroAnalysis": {
+        "status": "SUCCESS",
+        "score": 44.0,
+        "direction": "LONG",
+        "confidence": 0.75,
+        "metrics": {
+          "dxy_index": 99.55,
+          "us10y_yield": 4.746,
+          "us_short_yield": 3.732,
+          "yield_curve_slope": 1.014,
+          "dxy_bias": "BEARISH_USD",
+          "risk_sentiment": "RISK_OFF",
+          "base_rate": 0.0,
+          "quote_rate": 5.25,
+          "rate_diff": 0.0,
+          "macro_score": 44.0
+        },
+        "latency_ms": 0.013199998647905886
+      },
+      "TechnicalAnalysis": {
+        "status": "SUCCESS",
+        "score": 90.0,
+        "direction": "LONG",
+        "confidence": 0.9,
+        "metrics": {
+          "rsi": 54.87803658448964,
+          "adx": 27.4317370311858,
+          "setup_type": "TREND_PULLBACK_BOUNCE",
+          "atr": 8.161698843298428
+        },
+        "latency_ms": 19.385100007639267
+      },
+      "MarketRegime": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.8,
+        "metrics": {
+          "regime": "LOW_VOLATILITY_CONSOLIDATION",
+          "volatility_level": "LOW"
+        },
+        "latency_ms": 0.17889999435283244
+      },
+      "CurrencyStrength": {
+        "status": "SUCCESS",
+        "score": 75.32,
+        "direction": "LONG",
+        "confidence": 0.7532,
+        "metrics": {
+          "base_currency": "ETH",
+          "quote_currency": "USD",
+          "base_strength": 0.0,
+          "quote_strength": -4.22,
+          "strength_diff": 4.22
+        },
+        "latency_ms": 0.02469999890308827
+      },
+      "MarketStructure": {
+        "status": "SUCCESS",
+        "score": 80.0,
+        "direction": "LONG",
+        "confidence": 0.8,
+        "metrics": {
+          "higher_high": true,
+          "higher_low": true,
+          "lower_high": false,
+          "lower_low": false,
+          "bos_detected": false,
+          "choch_detected": false,
+          "total_swing_highs": 10,
+          "total_swing_lows": 9
+        },
+        "latency_ms": 0.2406999992672354
+      },
+      "FundamentalAnalysis": {
+        "status": "SUCCESS",
+        "score": 50.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.7,
+        "metrics": {
+          "event_risk": false,
+          "calendar_score": 50.0
+        },
+        "latency_ms": 0.0053000112529844046
+      },
+      "RiskMetrics": {
+        "status": "SUCCESS",
+        "score": 95.0,
+        "direction": "LONG",
+        "confidence": 0.85,
+        "metrics": {
+          "valid": true,
+          "entry_price": 2449.95996,
+          "stop_loss": 2440.16592,
+          "take_profit_1": 2464.65102,
+          "take_profit_2": 2479.34208,
+          "risk_pips": 97.9,
+          "reward_pips": 293.8,
+          "risk_reward": 3.0,
+          "atr": 8.161698843298428,
+          "long_parameters": {
+            "valid": true,
+            "entry_price": 2449.95996,
+            "stop_loss": 2440.16592,
+            "take_profit_1": 2464.65102,
+            "take_profit_2": 2479.34208,
+            "risk_pips": 97.9,
+            "reward_pips": 293.8,
+            "risk_reward": 3.0
+          },
+          "short_parameters": {
+            "valid": true,
+            "entry_price": 2449.95996,
+            "stop_loss": 2459.754,
+            "take_profit_1": 2435.2689,
+            "take_profit_2": 2420.57785,
+            "risk_pips": 97.9,
+            "reward_pips": 293.8,
+            "risk_reward": 3.0
+          }
+        },
+        "latency_ms": 1.2547000078484416
+      },
+      "SentimentCrossAsset": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "LONG",
+        "confidence": 0.72,
+        "metrics": {
+          "vix": 15.29,
+          "gold_price": 4491.2,
+          "wti_price": 85.7,
+          "btc_price": 77869.85,
+          "is_risk_on": true
+        },
+        "latency_ms": 1.3189000019337982
+      }
+    },
+    "knowledge_references": [
+      "USD/JPY Yield Spread & US 10Y Yield Correlation",
+      "London / New York Overlap SMC FVG Retest",
+      "GBP/USD Test Observation"
+    ],
+    "outcome_status": "ACTIVE_PENDING",
+    "realized_r": null,
+    "mfe_r": 0.0,
+    "mae_r": 0.0,
+    "holding_period_mins": 0,
+    "error_classification": null
+  },
+  {
+    "experience_id": "exp-SIG-202608311334-NZDUSD",
+    "signal_id": "SIG-202608311334-NZDUSD",
+    "scan_id": "scan-20260831-133339",
+    "created_at": "2026-08-31T13:34:11.801575+00:00",
+    "symbol": "NZD/USD",
+    "direction": "LONG",
+    "entry_price": 0.59207,
+    "stop_loss": 0.59172,
+    "take_profit": 0.59259,
+    "ml_predicted_win_prob": 0.611,
+    "composite_score": 60.22,
+    "llm_reasoning": "The trade is supported by strong currency divergence favoring NZD over USD, a bullish market structure, and technical indicators confirming momentum continuation. However, the statistical win probability is relatively low, indicating potential market uncertainty.",
+    "engine_evidence": {
+      "CurrencyStrength": {
+        "status": "SUCCESS",
+        "score": 89.0,
+        "direction": "LONG",
+        "confidence": 0.89,
+        "metrics": {
+          "base_currency": "NZD",
+          "quote_currency": "USD",
+          "base_strength": 2.28,
+          "quote_strength": -4.22,
+          "strength_diff": 6.5
+        },
+        "latency_ms": 0.01819999306462705
+      },
+      "MacroAnalysis": {
+        "status": "SUCCESS",
+        "score": 44.0,
+        "direction": "LONG",
+        "confidence": 0.75,
+        "metrics": {
+          "dxy_index": 99.55,
+          "us10y_yield": 4.746,
+          "us_short_yield": 3.732,
+          "yield_curve_slope": 1.014,
+          "dxy_bias": "BEARISH_USD",
+          "risk_sentiment": "RISK_OFF",
+          "base_rate": 5.25,
+          "quote_rate": 5.25,
+          "rate_diff": 0.0,
+          "macro_score": 44.0
+        },
+        "latency_ms": 0.017600003047846258
+      },
+      "FundamentalAnalysis": {
+        "status": "SUCCESS",
+        "score": 44.27,
+        "direction": "SHORT",
+        "confidence": 0.7,
+        "metrics": {
+          "event_risk": false,
+          "calendar_score": 44.27
+        },
+        "latency_ms": 0.26440000510774553
+      },
+      "MarketStructure": {
+        "status": "SUCCESS",
+        "score": 68.0,
+        "direction": "LONG",
+        "confidence": 0.68,
+        "metrics": {
+          "higher_high": true,
+          "higher_low": false,
+          "lower_high": false,
+          "lower_low": true,
+          "bos_detected": false,
+          "choch_detected": false,
+          "total_swing_highs": 9,
+          "total_swing_lows": 9
+        },
+        "latency_ms": 0.2879999956348911
+      },
+      "CandleStructure": {
+        "status": "SUCCESS",
+        "score": 76.0,
+        "direction": "LONG",
+        "confidence": 0.76,
+        "metrics": {
+          "body_ratio": 0.91,
+          "upper_wick_ratio": 0.0,
+          "lower_wick_ratio": 0.09,
+          "patterns_detected": [
+            "Strong Bullish Momentum Marubozu (91% body)"
+          ]
+        },
+        "latency_ms": 0.3493999975034967
+      },
+      "TechnicalAnalysis": {
+        "status": "SUCCESS",
+        "score": 86.0,
+        "direction": "LONG",
+        "confidence": 0.86,
+        "metrics": {
+          "rsi": 56.468418150646414,
+          "adx": 8.55543072619706,
+          "setup_type": "MOMENTUM_CONTINUATION",
+          "atr": 0.00029178281925708354
+        },
+        "latency_ms": 15.126600002986379
+      },
+      "RiskMetrics": {
+        "status": "SUCCESS",
+        "score": 95.0,
+        "direction": "LONG",
+        "confidence": 0.85,
+        "metrics": {
+          "valid": true,
+          "entry_price": 0.59207,
+          "stop_loss": 0.59172,
+          "take_profit_1": 0.59259,
+          "take_profit_2": 0.59312,
+          "risk_pips": 3.5,
+          "reward_pips": 10.5,
+          "risk_reward": 3.0,
+          "atr": 0.00029178281925708354,
+          "long_parameters": {
+            "valid": true,
+            "entry_price": 0.59207,
+            "stop_loss": 0.59172,
+            "take_profit_1": 0.59259,
+            "take_profit_2": 0.59312,
+            "risk_pips": 3.5,
+            "reward_pips": 10.5,
+            "risk_reward": 3.0
+          },
+          "short_parameters": {
+            "valid": true,
+            "entry_price": 0.59207,
+            "stop_loss": 0.59242,
+            "take_profit_1": 0.59154,
+            "take_profit_2": 0.59102,
+            "risk_pips": 3.5,
+            "reward_pips": 10.5,
+            "risk_reward": 3.0
+          }
+        },
+        "latency_ms": 1.853800000390038
+      },
+      "MLPrediction": {
+        "status": "SUCCESS",
+        "score": 40.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.4,
+        "metrics": {
+          "win_probability": 0.611,
+          "model_type": "Calibrated Statistical Factor Model",
+          "live_rsi": 56.47,
+          "live_adx": 13.2,
+          "dynamic_momentum_score": 0.27,
+          "brier_score": 0.142
+        },
+        "latency_ms": 4.564100003335625
+      },
+      "MarketRegime": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.8,
+        "metrics": {
+          "regime": "LOW_VOLATILITY_CONSOLIDATION",
+          "volatility_level": "LOW"
+        },
+        "latency_ms": 0.3645999968284741
+      },
+      "SentimentCrossAsset": {
+        "status": "SUCCESS",
+        "score": 65.0,
+        "direction": "LONG",
+        "confidence": 0.72,
+        "metrics": {
+          "vix": 15.29,
+          "gold_price": 4491.2,
+          "wti_price": 85.7,
+          "btc_price": 77869.85,
+          "is_risk_on": true
+        },
+        "latency_ms": 1.1156999971717596
+      }
+    },
+    "knowledge_references": [
+      "USD/JPY Yield Spread & US 10Y Yield Correlation",
+      "London / New York Overlap SMC FVG Retest",
+      "GBP/USD Test Observation"
+    ],
+    "outcome_status": "ACTIVE_PENDING",
+    "realized_r": null,
+    "mfe_r": 0.0,
+    "mae_r": 0.0,
+    "holding_period_mins": 0,
+    "error_classification": null
+  },
+  {
+    "experience_id": "exp-SIG-202608311334-USDCAD",
+    "signal_id": "SIG-202608311334-USDCAD",
+    "scan_id": "scan-20260831-133339",
+    "created_at": "2026-08-31T13:34:02.865640+00:00",
+    "symbol": "USD/CAD",
+    "direction": "SHORT",
+    "entry_price": 1.38758,
+    "stop_loss": 1.38872,
+    "take_profit": 1.38588,
+    "ml_predicted_win_prob": 0.186,
+    "composite_score": 75.93,
+    "llm_reasoning": "Technical evidence, currency strength divergence, and bearish market structure strongly support the SHORT direction. No contradictions are present, and risk/reward metrics are favorable at 1:3.0.",
+    "engine_evidence": {
+      "FundamentalAnalysis": {
+        "status": "SUCCESS",
+        "score": 55.73,
+        "direction": "LONG",
+        "confidence": 0.7,
+        "metrics": {
+          "event_risk": false,
+          "calendar_score": 55.73
+        },
+        "latency_ms": 0.461499992525205
+      },
+      "MLPrediction": {
+        "status": "SUCCESS",
+        "score": 68.6,
+        "direction": "SHORT",
+        "confidence": 0.686,
+        "metrics": {
+          "win_probability": 0.186,
+          "model_type": "Calibrated Statistical Factor Model",
+          "live_rsi": 33.9,
+          "live_adx": 52.93,
+          "dynamic_momentum_score": -0.45,
+          "brier_score": 0.142
+        },
+        "latency_ms": 7.575299998279661
+      },
+      "TechnicalAnalysis": {
+        "status": "SUCCESS",
+        "score": 96.0,
+        "direction": "SHORT",
+        "confidence": 0.96,
+        "metrics": {
+          "rsi": 33.896688090286375,
+          "adx": 31.7955033382367,
+          "setup_type": "MOMENTUM_CONTINUATION",
+          "atr": 0.0009459523659284834
+        },
+        "latency_ms": 13.153799998690374
+      },
+      "RiskMetrics": {
+        "status": "SUCCESS",
+        "score": 95.0,
+        "direction": "SHORT",
+        "confidence": 0.85,
+        "metrics": {
+          "valid": true,
+          "entry_price": 1.38758,
+          "stop_loss": 1.38872,
+          "take_profit_1": 1.38588,
+          "take_profit_2": 1.38417,
+          "risk_pips": 11.4,
+          "reward_pips": 34.1,
+          "risk_reward": 3.0,
+          "atr": 0.0009459523659284834,
+          "long_parameters": {
+            "valid": true,
+            "entry_price": 1.38758,
+            "stop_loss": 1.38644,
+            "take_profit_1": 1.38928,
+            "take_profit_2": 1.39099,
+            "risk_pips": 11.4,
+            "reward_pips": 34.1,
+            "risk_reward": 3.0
+          },
+          "short_parameters": {
+            "valid": true,
+            "entry_price": 1.38758,
+            "stop_loss": 1.38872,
+            "take_profit_1": 1.38588,
+            "take_profit_2": 1.38417,
+            "risk_pips": 11.4,
+            "reward_pips": 34.1,
+            "risk_reward": 3.0
+          }
+        },
+        "latency_ms": 2.529700010200031
+      },
+      "MarketRegime": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.8,
+        "metrics": {
+          "regime": "LOW_VOLATILITY_CONSOLIDATION",
+          "volatility_level": "LOW"
+        },
+        "latency_ms": 0.4368999943835661
+      },
+      "MarketStructure": {
+        "status": "SUCCESS",
+        "score": 88.0,
+        "direction": "SHORT",
+        "confidence": 0.88,
+        "metrics": {
+          "higher_high": false,
+          "higher_low": false,
+          "lower_high": true,
+          "lower_low": true,
+          "bos_detected": true,
+          "choch_detected": false,
+          "total_swing_highs": 10,
+          "total_swing_lows": 14
+        },
+        "latency_ms": 0.19600000814534724
+      },
+      "CandleStructure": {
+        "status": "SUCCESS",
+        "score": 85.0,
+        "direction": "SHORT",
+        "confidence": 0.85,
+        "metrics": {
+          "body_ratio": 0.61,
+          "upper_wick_ratio": 0.05,
+          "lower_wick_ratio": 0.33,
+          "patterns_detected": [
+            "Bearish Engulfing (Real Body Engulfing)"
+          ]
+        },
+        "latency_ms": 0.22239999088924378
+      },
+      "MacroAnalysis": {
+        "status": "SUCCESS",
+        "score": 49.0,
+        "direction": "SHORT",
+        "confidence": 0.75,
+        "metrics": {
+          "dxy_index": 99.55,
+          "us10y_yield": 4.746,
+          "us_short_yield": 3.732,
+          "yield_curve_slope": 1.014,
+          "dxy_bias": "BEARISH_USD",
+          "risk_sentiment": "RISK_OFF",
+          "base_rate": 5.25,
+          "quote_rate": 4.25,
+          "rate_diff": 1.0,
+          "macro_score": 49.0
+        },
+        "latency_ms": 0.03470000228844583
+      },
+      "CurrencyStrength": {
+        "status": "SUCCESS",
+        "score": 98.0,
+        "direction": "SHORT",
+        "confidence": 0.98,
+        "metrics": {
+          "base_currency": "USD",
+          "quote_currency": "CAD",
+          "base_strength": -4.22,
+          "quote_strength": 7.02,
+          "strength_diff": -11.239999999999998
+        },
+        "latency_ms": 0.05040000542066991
+      },
+      "SentimentCrossAsset": {
+        "status": "SUCCESS",
+        "score": 78.0,
+        "direction": "SHORT",
+        "confidence": 0.72,
+        "metrics": {
+          "vix": 15.29,
+          "gold_price": 4491.2,
+          "wti_price": 85.7,
+          "btc_price": 77869.85,
+          "is_risk_on": true
+        },
+        "latency_ms": 1.8860999989556149
+      }
+    },
+    "knowledge_references": [
+      "London / New York Overlap SMC FVG Retest",
+      "USD/JPY Yield Spread & US 10Y Yield Correlation",
+      "GBP/USD Test Observation"
+    ],
+    "outcome_status": "ACTIVE_PENDING",
+    "realized_r": null,
+    "mfe_r": 0.0,
+    "mae_r": 0.0,
+    "holding_period_mins": 0,
+    "error_classification": null
+  },
+  {
+    "experience_id": "exp-SIG-202608311333-GBPUSD",
+    "signal_id": "SIG-202608311333-GBPUSD",
+    "scan_id": "scan-20260831-133339",
+    "created_at": "2026-08-31T13:33:49.080674+00:00",
+    "symbol": "GBP/USD",
+    "direction": "LONG",
+    "entry_price": 1.35479,
+    "stop_loss": 1.35424,
+    "take_profit": 1.35563,
+    "ml_predicted_win_prob": 0.316,
+    "composite_score": 61.61,
+    "llm_reasoning": "The technical evidence, currency strength, and market structure align with the LONG direction, supported by favorable risk/reward metrics and a bearish USD macro bias. No high-impact fundamental risks or contradictions were identified, and sentiment confirms a risk-on environment.",
+    "engine_evidence": {
+      "CandleStructure": {
+        "status": "SUCCESS",
+        "score": 50.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.5,
+        "metrics": {
+          "body_ratio": 0.69,
+          "upper_wick_ratio": 0.06,
+          "lower_wick_ratio": 0.26,
+          "patterns_detected": []
+        },
+        "latency_ms": 0.7856000011088327
+      },
+      "CurrencyStrength": {
+        "status": "SUCCESS",
+        "score": 58.76,
+        "direction": "LONG",
+        "confidence": 0.5876,
+        "metrics": {
+          "base_currency": "GBP",
+          "quote_currency": "USD",
+          "base_strength": -2.76,
+          "quote_strength": -4.22,
+          "strength_diff": 1.46
+        },
+        "latency_ms": 0.0295999925583601
+      },
+      "TechnicalAnalysis": {
+        "status": "SUCCESS",
+        "score": 92.0,
+        "direction": "LONG",
+        "confidence": 0.92,
+        "metrics": {
+          "rsi": 56.770762523756304,
+          "adx": 10.458645457994047,
+          "setup_type": "DONCHIAN_BREAKOUT_LONG",
+          "atr": 0.00046496911856716924
+        },
+        "latency_ms": 27.36759999243077
+      },
+      "MarketStructure": {
+        "status": "SUCCESS",
+        "score": 68.0,
+        "direction": "LONG",
+        "confidence": 0.68,
+        "metrics": {
+          "higher_high": true,
+          "higher_low": false,
+          "lower_high": false,
+          "lower_low": true,
+          "bos_detected": true,
+          "choch_detected": false,
+          "total_swing_highs": 11,
+          "total_swing_lows": 14
+        },
+        "latency_ms": 0.3890000079991296
+      },
+      "FundamentalAnalysis": {
+        "status": "SUCCESS",
+        "score": 47.27,
+        "direction": "SHORT",
+        "confidence": 0.7,
+        "metrics": {
+          "event_risk": false,
+          "calendar_score": 47.27
+        },
+        "latency_ms": 0.5939999973634258
+      },
+      "MLPrediction": {
+        "status": "SUCCESS",
+        "score": 58.7,
+        "direction": "LONG",
+        "confidence": 0.587,
+        "metrics": {
+          "win_probability": 0.316,
+          "model_type": "Calibrated Statistical Factor Model",
+          "live_rsi": 56.77,
+          "live_adx": 29.72,
+          "dynamic_momentum_score": 0.19,
+          "brier_score": 0.142
+        },
+        "latency_ms": 7.9637000017100945
+      },
+      "MacroAnalysis": {
+        "status": "SUCCESS",
+        "score": 42.75,
+        "direction": "LONG",
+        "confidence": 0.75,
+        "metrics": {
+          "dxy_index": 99.55,
+          "us10y_yield": 4.746,
+          "us_short_yield": 3.732,
+          "yield_curve_slope": 1.014,
+          "dxy_bias": "BEARISH_USD",
+          "risk_sentiment": "RISK_OFF",
+          "base_rate": 5.0,
+          "quote_rate": 5.25,
+          "rate_diff": -0.25,
+          "macro_score": 42.75
+        },
+        "latency_ms": 0.03999999898951501
+      },
+      "MarketRegime": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.8,
+        "metrics": {
+          "regime": "LOW_VOLATILITY_CONSOLIDATION",
+          "volatility_level": "LOW"
+        },
+        "latency_ms": 0.4938000056426972
+      },
+      "RiskMetrics": {
+        "status": "SUCCESS",
+        "score": 95.0,
+        "direction": "LONG",
+        "confidence": 0.85,
+        "metrics": {
+          "valid": true,
+          "entry_price": 1.35479,
+          "stop_loss": 1.35424,
+          "take_profit_1": 1.35563,
+          "take_profit_2": 1.35647,
+          "risk_pips": 5.6,
+          "reward_pips": 16.7,
+          "risk_reward": 3.0,
+          "atr": 0.00046496911856716924,
+          "long_parameters": {
+            "valid": true,
+            "entry_price": 1.35479,
+            "stop_loss": 1.35424,
+            "take_profit_1": 1.35563,
+            "take_profit_2": 1.35647,
+            "risk_pips": 5.6,
+            "reward_pips": 16.7,
+            "risk_reward": 3.0
+          },
+          "short_parameters": {
+            "valid": true,
+            "entry_price": 1.35479,
+            "stop_loss": 1.35535,
+            "take_profit_1": 1.35396,
+            "take_profit_2": 1.35312,
+            "risk_pips": 5.6,
+            "reward_pips": 16.7,
+            "risk_reward": 3.0
+          }
+        },
+        "latency_ms": 3.1813999958103523
+      },
+      "SentimentCrossAsset": {
+        "status": "SUCCESS",
+        "score": 65.0,
+        "direction": "LONG",
+        "confidence": 0.72,
+        "metrics": {
+          "vix": 15.29,
+          "gold_price": 4491.2,
+          "wti_price": 85.7,
+          "btc_price": 77869.85,
+          "is_risk_on": true
+        },
+        "latency_ms": 3.1260000105248764
+      }
+    },
+    "knowledge_references": [
+      "London / New York Overlap SMC FVG Retest",
+      "GBP/USD Test Observation",
+      "GBP/USD Test Observation"
+    ],
+    "outcome_status": "ACTIVE_PENDING",
+    "realized_r": null,
+    "mfe_r": 0.0,
+    "mae_r": 0.0,
+    "holding_period_mins": 0,
+    "error_classification": null
+  },
+  {
     "experience_id": "exp-SIG-202608311320-ETH-US",
     "signal_id": "SIG-202608311320-ETH-US",
     "scan_id": "scan-20260831-131956",
