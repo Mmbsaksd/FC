@@ -100,6 +100,50 @@ def test_outcome_analytics_summary():
     assert summary["total_pnl_usd"] == 275.0
 
 
+def test_reconcile_active_signals_auto_expires_stale():
+    from datetime import datetime, timezone, timedelta
+    tracker = TradeOutcomeTracker(storage_path="tests/test_outcomes.json")
+    with tracker.db._get_connection() as conn:
+        conn.execute("DELETE FROM signals WHERE signal_id LIKE 'SIG-TEST-%'")
+        conn.commit()
+    tracker.active_signals = []
+    tracker.closed_signals = []
+
+    # Insert a stale signal created 10 hours ago
+    past_time = (datetime.now(timezone.utc) - timedelta(hours=10)).isoformat()
+    sig = {
+        "signal_id": "SIG-TEST-STALE-01",
+        "scan_id": "scan-stale",
+        "trace_id": "trace-stale",
+        "symbol_name": "AUD/USD",
+        "symbol": "AUDUSD=X",
+        "direction": "LONG",
+        "entry_price": 0.7150,
+        "stop_loss": 0.7100,
+        "take_profit_1": 0.7250,
+        "opportunity_score": 75.0,
+        "ml_probability": 0.65,
+        "timestamp": past_time
+    }
+    tracker.register_signal(sig)
+    
+    # Overwrite created_at in DB to simulate old timestamp
+    with tracker.db._get_connection() as conn:
+        conn.execute("UPDATE signals SET created_at = ? WHERE signal_id = 'SIG-TEST-STALE-01'", (past_time,))
+        conn.commit()
+
+    # Calling get_active_signals or reconcile_active_signals should auto-expire the 10-hour-old signal
+    resolved = tracker.reconcile_active_signals(auto_fetch_prices=False)
+    assert len(resolved) == 1
+    assert resolved[0]["signal_id"] == "SIG-TEST-STALE-01"
+    assert resolved[0]["status"] == "CLOSED"
+    assert resolved[0]["outcome"] == "EXPIRED"
+
+    # Active signals list should now be clean
+    active = tracker.get_active_signals()
+    assert not any(s["signal_id"] == "SIG-TEST-STALE-01" for s in active)
+
+
 def test_api_signal_outcome_endpoints():
     res_analytics = client.get("/api/signals/analytics")
     assert res_analytics.status_code == 200
@@ -115,3 +159,4 @@ def test_api_signal_outcome_endpoints():
 
     res_events = client.get("/api/signals/events")
     assert res_events.status_code == 200
+

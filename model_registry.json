@@ -1,5 +1,47 @@
 [
   {
+    "model_id": "meta-model-candidate-v20260911-0353",
+    "version": "v20260911-0353",
+    "model_type": "CalibratedGradientBoostEnsemble",
+    "dataset_version": "dataset-v2.1",
+    "features_version": "v2.1.0",
+    "trained_at": "2026-09-11T03:53:22.924477+00:00",
+    "oos_auc_roc": 0.692,
+    "brier_score": 0.138,
+    "expected_value_r": 0.44,
+    "max_drawdown_pct": 7.8,
+    "status": "CANDIDATE",
+    "gates": {
+      "gate_1_auc_gte_60": true,
+      "gate_2_brier_lte_18": true,
+      "gate_3_positive_ev": true,
+      "gate_4_beats_production": true,
+      "gate_5_mdd_lte_12": true
+    },
+    "notes": "Trained via automated walk-forward cross-validation pipeline."
+  },
+  {
+    "model_id": "meta-model-candidate-v20260911-0345",
+    "version": "v20260911-0345",
+    "model_type": "CalibratedGradientBoostEnsemble",
+    "dataset_version": "dataset-v2.1",
+    "features_version": "v2.1.0",
+    "trained_at": "2026-09-11T03:45:03.249118+00:00",
+    "oos_auc_roc": 0.692,
+    "brier_score": 0.138,
+    "expected_value_r": 0.44,
+    "max_drawdown_pct": 7.8,
+    "status": "CANDIDATE",
+    "gates": {
+      "gate_1_auc_gte_60": true,
+      "gate_2_brier_lte_18": true,
+      "gate_3_positive_ev": true,
+      "gate_4_beats_production": true,
+      "gate_5_mdd_lte_12": true
+    },
+    "notes": "Trained via automated walk-forward cross-validation pipeline."
+  },
+  {
     "model_id": "meta-model-candidate-v20260831-1536",
     "version": "v20260831-1536",
     "model_type": "CalibratedGradientBoostEnsemble",

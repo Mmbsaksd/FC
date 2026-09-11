@@ -49,6 +49,7 @@ from app.engines.paper_trading import PaperTradingEngine
 from app.engines.signal_lifecycle_manager import signal_lifecycle_manager
 from app.alerts.telegram_bot import TelegramAlertBot
 from app.observability.flight_recorder import flight_recorder
+from app.observability.logger import sys_logger
 
 # Configure Logging
 logging.basicConfig(

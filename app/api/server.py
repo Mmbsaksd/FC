@@ -314,41 +314,49 @@ def get_funnel_metrics():
 
 from app.config.settings import settings, update_env_file
 
+def mask_secret(val: Optional[str]) -> str:
+    if not val:
+        return ""
+    val_str = str(val).strip()
+    if len(val_str) <= 6:
+        return "••••••••"
+    return f"{val_str[:3]}••••••••{val_str[-3:]}"
+
 @app.get("/api/config")
 def get_configuration():
     return {
         "telegram": {
-            "bot_token": settings.TELEGRAM_BOT_TOKEN,
+            "bot_token": mask_secret(settings.TELEGRAM_BOT_TOKEN),
             "chat_id": settings.TELEGRAM_CHAT_ID,
             "bot_token_set": bool(settings.TELEGRAM_BOT_TOKEN),
             "enabled": True
         },
         "llm_providers": {
             "azure_openai": {
-                "key": settings.AZURE_OPENAI_API_KEY,
+                "key": mask_secret(settings.AZURE_OPENAI_API_KEY),
                 "endpoint": settings.AZURE_OPENAI_ENDPOINT,
                 "deployment": settings.AZURE_OPENAI_DEPLOYMENT_NAME,
                 "enabled": bool(settings.AZURE_OPENAI_API_KEY),
                 "model": settings.AZURE_OPENAI_DEPLOYMENT_NAME
             },
             "deepseek": {
-                "key": settings.DEEPSEEK_API_KEY,
+                "key": mask_secret(settings.DEEPSEEK_API_KEY),
                 "enabled": bool(settings.DEEPSEEK_API_KEY),
                 "model": "deepseek-chat"
             },
             "gemini": {
-                "key": settings.GEMINI_API_KEY,
+                "key": mask_secret(settings.GEMINI_API_KEY),
                 "enabled": bool(settings.GEMINI_API_KEY),
                 "model": "gemini-1.5-flash"
             },
             "openai": {
-                "key": settings.OPENAI_API_KEY,
+                "key": mask_secret(settings.OPENAI_API_KEY),
                 "enabled": bool(settings.OPENAI_API_KEY),
                 "model": "gpt-4o"
             }
         },
         "oanda": {
-            "api_key": settings.OANDA_API_KEY,
+            "api_key": mask_secret(settings.OANDA_API_KEY),
             "account_id": settings.OANDA_ACCOUNT_ID,
             "environment": settings.OANDA_ENVIRONMENT
         },
@@ -380,15 +388,17 @@ class TelegramConfigPayload(BaseModel):
 @app.post("/api/config/telegram/save")
 def save_telegram_config(payload: TelegramConfigPayload):
     updates = {}
-    if payload.bot_token: updates["TELEGRAM_BOT_TOKEN"] = payload.bot_token
-    if payload.chat_id: updates["TELEGRAM_CHAT_ID"] = payload.chat_id
+    if payload.bot_token and "••••" not in payload.bot_token:
+        updates["TELEGRAM_BOT_TOKEN"] = payload.bot_token
+    if payload.chat_id:
+        updates["TELEGRAM_CHAT_ID"] = payload.chat_id
     if updates:
         update_env_file(updates)
     return {"status": "SUCCESS", "message": "Telegram credentials saved permanently to .env file and active runtime!"}
 
 @app.post("/api/config/telegram/test")
 def test_telegram_connection(payload: TelegramConfigPayload):
-    token = payload.bot_token or settings.TELEGRAM_BOT_TOKEN
+    token = payload.bot_token if (payload.bot_token and "••••" not in payload.bot_token) else settings.TELEGRAM_BOT_TOKEN
     chat_id = payload.chat_id or settings.TELEGRAM_CHAT_ID
 
     if not token or not chat_id:
@@ -416,12 +426,12 @@ class LLMConfigPayload(BaseModel):
 @app.post("/api/config/llm/save")
 def save_llm_config(payload: LLMConfigPayload):
     updates = {}
-    if payload.deepseek_key: updates["DEEPSEEK_API_KEY"] = payload.deepseek_key
-    if payload.azure_key: updates["AZURE_OPENAI_API_KEY"] = payload.azure_key
+    if payload.deepseek_key and "••••" not in payload.deepseek_key: updates["DEEPSEEK_API_KEY"] = payload.deepseek_key
+    if payload.azure_key and "••••" not in payload.azure_key: updates["AZURE_OPENAI_API_KEY"] = payload.azure_key
     if payload.azure_endpoint: updates["AZURE_OPENAI_ENDPOINT"] = payload.azure_endpoint
     if payload.azure_deployment: updates["AZURE_OPENAI_DEPLOYMENT_NAME"] = payload.azure_deployment
-    if payload.gemini_key: updates["GEMINI_API_KEY"] = payload.gemini_key
-    if payload.openai_key: updates["OPENAI_API_KEY"] = payload.openai_key
+    if payload.gemini_key and "••••" not in payload.gemini_key: updates["GEMINI_API_KEY"] = payload.gemini_key
+    if payload.openai_key and "••••" not in payload.openai_key: updates["OPENAI_API_KEY"] = payload.openai_key
     if updates:
         update_env_file(updates)
     return {"status": "SUCCESS", "message": "LLM Provider credentials saved permanently to .env file and active runtime!"}
@@ -452,7 +462,7 @@ class OANDAConfigPayload(BaseModel):
 @app.post("/api/config/oanda/save")
 def save_oanda_config(payload: OANDAConfigPayload):
     updates = {}
-    if payload.api_key: updates["OANDA_API_KEY"] = payload.api_key
+    if payload.api_key and "••••" not in payload.api_key: updates["OANDA_API_KEY"] = payload.api_key
     if payload.account_id: updates["OANDA_ACCOUNT_ID"] = payload.account_id
     if payload.environment: updates["OANDA_ENVIRONMENT"] = payload.environment
     if updates:
@@ -461,7 +471,7 @@ def save_oanda_config(payload: OANDAConfigPayload):
 
 @app.post("/api/config/oanda/test")
 def test_oanda_connection(payload: OANDAConfigPayload):
-    api_key = payload.api_key or settings.OANDA_API_KEY
+    api_key = payload.api_key if (payload.api_key and "••••" not in payload.api_key) else settings.OANDA_API_KEY
     account_id = payload.account_id or settings.OANDA_ACCOUNT_ID
     env = payload.environment or settings.OANDA_ENVIRONMENT
 
@@ -785,6 +795,26 @@ def get_signal_detail(signal_id: str):
 import threading
 import time
 
+def background_outcome_monitor_daemon():
+    """
+    Dedicated lightweight background daemon for active trade price monitoring.
+    Runs every 30 seconds to track live prices, evaluate TP1/TP2/SL, and enforce
+    the 4-hour max duration expiration independently from heavy AI market scans.
+    """
+    logger.info("Continuous live price & trade outcome monitoring daemon initialized.")
+    from app.engines.outcome_tracker import outcome_tracker
+    
+    # Initial sleep before first loop
+    time.sleep(5)
+    while True:
+        try:
+            active_signals = outcome_tracker.get_active_signals()
+            if active_signals:
+                outcome_tracker.reconcile_active_signals(auto_fetch_prices=True)
+        except Exception as e:
+            logger.error(f"Outcome monitor daemon error: {e}")
+        time.sleep(30)
+
 def background_scanner_daemon():
     """
     Continuous background daemon that automatically runs market scans
@@ -828,8 +858,19 @@ def background_scanner_daemon():
 @app.on_event("startup")
 def on_app_startup():
     flight_recorder.record_system_startup()
-    daemon_thread = threading.Thread(target=background_scanner_daemon, daemon=True)
-    daemon_thread.start()
+    # Startup reconciliation: Immediately expire stale signals and load active state
+    try:
+        from app.engines.outcome_tracker import outcome_tracker
+        outcome_tracker.reconcile_active_signals(auto_fetch_prices=False)
+    except Exception as e:
+        logger.error(f"Error during startup signal reconciliation: {e}")
+
+    # Launch background daemons
+    scanner_thread = threading.Thread(target=background_scanner_daemon, daemon=True)
+    scanner_thread.start()
+
+    monitor_thread = threading.Thread(target=background_outcome_monitor_daemon, daemon=True)
+    monitor_thread.start()
 
 if __name__ == "__main__":
     import uvicorn

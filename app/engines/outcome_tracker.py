@@ -59,8 +59,91 @@ class TradeOutcomeTracker:
                         self.db.save_signal(s)
                     for s in self.closed_signals:
                         self.db.save_signal(s)
+            
+            # Run startup reconciliation to immediately clean up stale signals past holding window
+            self.reconcile_active_signals(auto_fetch_prices=False)
         except Exception as e:
             logger.error(f"Error loading signal outcomes state: {e}")
+
+    def reconcile_active_signals(self, auto_fetch_prices: bool = True) -> List[Dict[str, Any]]:
+        """
+        Runs on startup, periodic sweeps, and on-read to reconcile active signals.
+        Automatically resolves any signals that have exceeded their maximum holding duration (>4 hours)
+        or evaluates them against latest available prices.
+        """
+        now = datetime.now(timezone.utc)
+        active = self.db.get_active_signals()
+        if not active:
+            self.active_signals = []
+            return []
+
+        resolved = []
+        current_prices = {}
+
+        for sig in active:
+            try:
+                created_dt = datetime.fromisoformat(sig["created_at"].replace("Z", "+00:00"))
+                holding_mins = int((now - created_dt).total_seconds() / 60.0)
+            except Exception:
+                holding_mins = sig.get("holding_minutes", 0)
+
+            max_dur_mins = int(float(sig.get("max_duration_hours", 4.0)) * 60)
+
+            # 1. Immediate Expiry for Stale Signals
+            if holding_mins >= max_dur_mins and not sig.get("expired"):
+                sig_id = sig["signal_id"]
+                curr_p = float(sig.get("current_price") or sig.get("entry_price") or 0.0)
+                entry_p = float(sig.get("entry_price") or 0.0)
+                sl_p = float(sig.get("stop_loss") or 0.0)
+                risk_dist = abs(entry_p - sl_p) if abs(entry_p - sl_p) > 0 else 0.0001
+                direction = sig.get("direction", "LONG")
+                final_r = round(((curr_p - entry_p) / risk_dist) if direction == "LONG" else ((entry_p - curr_p) / risk_dist), 2)
+                realized_pnl = round(final_r * 100.0, 2)
+
+                event_msg = f"Reconcile: Trade expired after {holding_mins} mins @ {curr_p:.5f} (Final R: {final_r:+.2f}R)."
+                self.record_lifecycle_event("EXPIRED", sig, event_msg)
+
+                self.db.update_signal_progress(sig_id, {
+                    "status": "CLOSED",
+                    "expired": 1,
+                    "realized_r": final_r,
+                    "realized_pnl": realized_pnl,
+                    "holding_minutes": holding_mins,
+                    "outcome": "EXPIRED",
+                    "current_price": curr_p
+                })
+                self.db.update_ml_training_outcome(sig_id, "EXPIRED", final_r, realized_pnl, sig.get("mfe_r", 0.0), sig.get("mae_r", 0.0), holding_mins)
+                self.kb.record_knowledge_outcome(sig_id, "EXPIRED", final_r)
+
+                sig["status"] = "CLOSED"
+                sig["outcome"] = "EXPIRED"
+                sig["realized_r"] = final_r
+                resolved.append(sig)
+
+        # Refresh local in-memory active list
+        self.active_signals = self.db.get_active_signals()
+        self.closed_signals = self.db.get_closed_signals(limit=300)
+        self._save_state()
+
+        # 2. If remaining active signals exist and auto_fetch_prices is True, run price update
+        if self.active_signals and auto_fetch_prices:
+            for s in self.active_signals:
+                raw_sym = s.get("raw_symbol") or s.get("symbol")
+                if raw_sym:
+                    try:
+                        df, _ = provider_router.fetch_ohlcv(raw_sym, limit=2)
+                        if df is not None and not df.empty and 'close' in df.columns:
+                            current_prices[s.get("symbol")] = float(df['close'].iloc[-1])
+                            current_prices[raw_sym] = float(df['close'].iloc[-1])
+                    except Exception:
+                        pass
+            if current_prices:
+                more_resolved = self.process_price_update([], current_prices)
+                resolved.extend(more_resolved)
+
+        if resolved:
+            logger.info(f"Signal Reconciliation: {len(resolved)} signals resolved, {len(self.active_signals)} remaining active.")
+        return resolved
 
     def _save_state(self):
         """Mirrors active/closed signals to JSON artifact for export and legacy backup."""
@@ -499,6 +582,24 @@ class TradeOutcomeTracker:
     def get_active_signals(self) -> List[Dict[str, Any]]:
         """Returns currently active signals with live distances and holding metrics."""
         db_signals = self.db.get_active_signals()
+        now = datetime.now(timezone.utc)
+        
+        # Check if any signal has exceeded holding duration
+        needs_reconcile = False
+        for s in db_signals:
+            try:
+                created_dt = datetime.fromisoformat(s["created_at"].replace("Z", "+00:00"))
+                holding_mins = int((now - created_dt).total_seconds() / 60.0)
+                if holding_mins >= int(float(s.get("max_duration_hours", 4.0)) * 60):
+                    needs_reconcile = True
+                    break
+            except Exception:
+                pass
+
+        if needs_reconcile:
+            self.reconcile_active_signals(auto_fetch_prices=False)
+            db_signals = self.db.get_active_signals()
+
         res = []
         for s in db_signals:
             entry = s.get("entry_price", 0.0)
@@ -520,7 +621,6 @@ class TradeOutcomeTracker:
             # Calculate real-time elapsed duration from created_at
             try:
                 created_dt = datetime.fromisoformat(s["created_at"].replace("Z", "+00:00"))
-                now = datetime.now(timezone.utc)
                 holding_mins = max(1, int((now - created_dt).total_seconds() / 60.0))
             except Exception:
                 holding_mins = s.get("holding_minutes", 0)

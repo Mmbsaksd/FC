@@ -37,14 +37,40 @@ class Settings:
 
 settings = Settings()
 
+ALLOWED_ENV_KEYS = {
+    "TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID",
+    "DEEPSEEK_API_KEY", "GEMINI_API_KEY", "OPENAI_API_KEY",
+    "AZURE_OPENAI_API_KEY", "AZURE_OPENAI_ENDPOINT", "AZURE_OPENAI_DEPLOYMENT_NAME",
+    "OANDA_API_KEY", "OANDA_ACCOUNT_ID", "OANDA_ENVIRONMENT",
+    "ENVIRONMENT", "LOG_LEVEL", "MIN_OPPORTUNITY_SCORE"
+}
+
 def update_env_file(updates: dict):
     """
     Safely updates or appends key-value pairs into the .env file on disk,
     and immediately reloads active runtime settings.
+    Enforces strict whitelist, CRLF sanitization, and type safety.
     """
     env_file = Path(__file__).resolve().parent.parent.parent / '.env'
     lines = []
     existing_keys = set()
+
+    # Filter and sanitize updates
+    clean_updates = {}
+    for k, v in updates.items():
+        if k in ALLOWED_ENV_KEYS:
+            clean_k = str(k).strip()
+            clean_v = str(v).replace("\r", "").replace("\n", "").strip()
+            if clean_k == "MIN_OPPORTUNITY_SCORE":
+                try:
+                    score_f = max(50.0, min(100.0, float(clean_v)))
+                    clean_v = str(score_f)
+                except ValueError:
+                    clean_v = "70.0"
+            clean_updates[clean_k] = clean_v
+
+    if not clean_updates:
+        return
 
     if env_file.exists():
         with open(env_file, 'r', encoding='utf-8') as f:
@@ -53,15 +79,15 @@ def update_env_file(updates: dict):
                 if stripped and not stripped.startswith('#') and '=' in stripped:
                     k, v = stripped.split('=', 1)
                     k = k.strip()
-                    if k in updates:
-                        lines.append(f"{k}={updates[k]}\n")
+                    if k in clean_updates:
+                        lines.append(f"{k}={clean_updates[k]}\n")
                         existing_keys.add(k)
                     else:
                         lines.append(line)
                 else:
                     lines.append(line)
 
-    for k, v in updates.items():
+    for k, v in clean_updates.items():
         if k not in existing_keys:
             lines.append(f"{k}={v}\n")
         # Update in-memory settings object directly

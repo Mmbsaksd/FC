@@ -37,8 +37,8 @@
     ],
     "created_at": "2026-08-01T12:00:00Z",
     "validated_at": "2026-08-01T12:00:00Z",
-    "last_reviewed_at": "2026-08-31T14:08:30.223287+00:00",
-    "last_confirmed_at": "2026-08-30T12:00:00Z",
+    "last_reviewed_at": "2026-09-11T03:52:40.932663+00:00",
+    "last_confirmed_at": "2026-09-11T03:39:04.129281+00:00",
     "status": "VALIDATED",
     "source_type": "EMPIRICAL_AUDIT",
     "source_reference": "ECB Macro Event Analysis 2024-2026",
@@ -48,20 +48,24 @@
     "validation_method": "CROSS_EVENT_OUT_OF_SAMPLE",
     "contradiction_count": 0,
     "supporting_evidence_count": 42,
-    "freshness_score": 0.986,
+    "freshness_score": 1.0,
     "usage_stats": {
-      "times_retrieved": 57,
-      "times_applied": 11,
+      "times_retrieved": 81,
+      "times_applied": 15,
       "signals_attributed": [
         "SIG-20260830-EURUSD",
         "SIG-202608311408-EURUSD",
         "SIG-202608311408-GBPUSD",
-        "SIG-202608311408-USDCAD"
+        "SIG-202608311408-USDCAD",
+        "SIG-202609110329-USDCAD",
+        "SIG-202609110346-EURUSD",
+        "SIG-202609110346-USDJPY",
+        "SIG-202609110352-USDCHF"
       ],
-      "attributed_wins": 6,
-      "attributed_losses": 2,
-      "attributed_win_rate": 75.0,
-      "attributed_avg_r": 1.45
+      "attributed_wins": 7,
+      "attributed_losses": 3,
+      "attributed_win_rate": 70.0,
+      "attributed_avg_r": 1.24
     },
     "version_history": [
       {
@@ -115,8 +119,8 @@
     ],
     "created_at": "2026-07-15T09:00:00Z",
     "validated_at": "2026-07-15T09:00:00Z",
-    "last_reviewed_at": "2026-08-31T14:08:30.224510+00:00",
-    "last_confirmed_at": "2026-08-30T12:00:00Z",
+    "last_reviewed_at": "2026-09-11T03:52:40.935543+00:00",
+    "last_confirmed_at": "2026-09-11T03:39:04.129302+00:00",
     "status": "VALIDATED",
     "source_type": "FACTOR_MODEL",
     "source_reference": "Yield Momentum Quantitative Study",
@@ -126,20 +130,24 @@
     "validation_method": "WALK_FORWARD_SPLIT",
     "contradiction_count": 2,
     "supporting_evidence_count": 74,
-    "freshness_score": 0.986,
+    "freshness_score": 1.0,
     "usage_stats": {
-      "times_retrieved": 65,
-      "times_applied": 18,
+      "times_retrieved": 89,
+      "times_applied": 22,
       "signals_attributed": [
         "SIG-20260831-USDJPY",
         "SIG-202608311408-EURUSD",
         "SIG-202608311408-GBPUSD",
-        "SIG-202608311408-USDCAD"
+        "SIG-202608311408-USDCAD",
+        "SIG-202609110329-USDCAD",
+        "SIG-202609110346-EURUSD",
+        "SIG-202609110346-USDJPY",
+        "SIG-202609110352-USDCHF"
       ],
-      "attributed_wins": 11,
-      "attributed_losses": 4,
-      "attributed_win_rate": 73.3,
-      "attributed_avg_r": 1.58
+      "attributed_wins": 12,
+      "attributed_losses": 5,
+      "attributed_win_rate": 70.6,
+      "attributed_avg_r": 1.43
     },
     "version_history": [
       {
@@ -197,9 +205,9 @@
     "validation_method": "ERROR_CLASSIFICATION",
     "contradiction_count": 1,
     "supporting_evidence_count": 114,
-    "freshness_score": 0.986,
+    "freshness_score": 0.836,
     "usage_stats": {
-      "times_retrieved": 52,
+      "times_retrieved": 74,
       "times_applied": 12,
       "signals_attributed": [
         "SIG-20260830-XAUUSD"
@@ -255,8 +263,8 @@
     ],
     "created_at": "2026-08-20T16:00:00Z",
     "validated_at": "2026-08-20T16:00:00Z",
-    "last_reviewed_at": "2026-08-31T14:08:30.221429+00:00",
-    "last_confirmed_at": "2026-08-30T12:00:00Z",
+    "last_reviewed_at": "2026-09-11T03:52:40.929374+00:00",
+    "last_confirmed_at": "2026-09-11T03:39:04.129307+00:00",
     "status": "VALIDATED",
     "source_type": "ORDER_FLOW_STUDY",
     "source_reference": "Smart Money Institutional Liquidity Research",
@@ -266,20 +274,24 @@
     "validation_method": "OUT_OF_SAMPLE_FORWARD_TEST",
     "contradiction_count": 3,
     "supporting_evidence_count": 91,
-    "freshness_score": 0.986,
+    "freshness_score": 1.0,
     "usage_stats": {
-      "times_retrieved": 74,
-      "times_applied": 27,
+      "times_retrieved": 98,
+      "times_applied": 31,
       "signals_attributed": [
         "SIG-20260831-EURUSD",
         "SIG-202608311408-EURUSD",
         "SIG-202608311408-GBPUSD",
-        "SIG-202608311408-USDCAD"
+        "SIG-202608311408-USDCAD",
+        "SIG-202609110329-USDCAD",
+        "SIG-202609110346-EURUSD",
+        "SIG-202609110346-USDJPY",
+        "SIG-202609110352-USDCHF"
       ],
-      "attributed_wins": 20,
-      "attributed_losses": 4,
-      "attributed_win_rate": 83.3,
-      "attributed_avg_r": 1.82
+      "attributed_wins": 21,
+      "attributed_losses": 5,
+      "attributed_win_rate": 80.8,
+      "attributed_avg_r": 1.69
     },
     "version_history": [
       {

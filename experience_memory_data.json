@@ -1,5 +1,777 @@
 [
   {
+    "experience_id": "exp-SIG-202609110352-USDCHF",
+    "signal_id": "SIG-202609110352-USDCHF",
+    "scan_id": "scan-20260911-035201",
+    "created_at": "2026-09-11T03:52:39.262316+00:00",
+    "symbol": "USD/CHF",
+    "direction": "LONG",
+    "entry_price": 0.81394,
+    "stop_loss": 0.81345,
+    "take_profit": 0.81468,
+    "ml_predicted_win_prob": 0.739,
+    "composite_score": 64.03,
+    "llm_reasoning": "The technical evidence, currency strength, and risk metrics strongly support the LONG direction, with USD showing significant strength over CHF and favorable risk/reward parameters. While macro analysis indicates bearish USD bias, it is outweighed by technical momentum and sentiment alignment in a low-volatility consolidation regime.",
+    "engine_evidence": {
+      "MarketRegime": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.8,
+        "metrics": {
+          "regime": "LOW_VOLATILITY_CONSOLIDATION",
+          "volatility_level": "LOW"
+        },
+        "latency_ms": 0.1425999216735363
+      },
+      "MarketStructure": {
+        "status": "SUCCESS",
+        "score": 88.0,
+        "direction": "SHORT",
+        "confidence": 0.88,
+        "metrics": {
+          "higher_high": false,
+          "higher_low": false,
+          "lower_high": true,
+          "lower_low": true,
+          "bos_detected": false,
+          "choch_detected": true,
+          "total_swing_highs": 7,
+          "total_swing_lows": 6
+        },
+        "latency_ms": 0.1278999261558056
+      },
+      "CandleStructure": {
+        "status": "SUCCESS",
+        "score": 68.0,
+        "direction": "LONG",
+        "confidence": 0.68,
+        "metrics": {
+          "body_ratio": 0.6,
+          "upper_wick_ratio": 0.03,
+          "lower_wick_ratio": 0.37,
+          "patterns_detected": [
+            "Inside Bar (Market Volatility Compression)"
+          ]
+        },
+        "latency_ms": 0.32540003303438425
+      },
+      "CurrencyStrength": {
+        "status": "SUCCESS",
+        "score": 98.0,
+        "direction": "LONG",
+        "confidence": 0.98,
+        "metrics": {
+          "base_currency": "USD",
+          "quote_currency": "CHF",
+          "base_strength": 7.45,
+          "quote_strength": -1.87,
+          "strength_diff": 9.32
+        },
+        "latency_ms": 0.013999990187585354
+      },
+      "MLPrediction": {
+        "status": "SUCCESS",
+        "score": 62.1,
+        "direction": "LONG",
+        "confidence": 0.621,
+        "metrics": {
+          "win_probability": 0.739,
+          "model_type": "Calibrated Statistical Factor Model",
+          "live_rsi": 65.74,
+          "live_adx": 32.7,
+          "dynamic_momentum_score": 0.29,
+          "brier_score": 0.142
+        },
+        "latency_ms": 4.414799972437322
+      },
+      "FundamentalAnalysis": {
+        "status": "SUCCESS",
+        "score": 55.73,
+        "direction": "LONG",
+        "confidence": 0.7,
+        "metrics": {
+          "event_risk": false,
+          "calendar_score": 55.73
+        },
+        "latency_ms": 0.561599968932569
+      },
+      "RiskMetrics": {
+        "status": "SUCCESS",
+        "score": 95.0,
+        "direction": "LONG",
+        "confidence": 0.85,
+        "metrics": {
+          "valid": true,
+          "entry_price": 0.81394,
+          "stop_loss": 0.81345,
+          "take_profit_1": 0.81468,
+          "take_profit_2": 0.81541,
+          "risk_pips": 4.9,
+          "reward_pips": 14.7,
+          "risk_reward": 3.0,
+          "atr": 0.00040840881823723434,
+          "long_parameters": {
+            "valid": true,
+            "entry_price": 0.81394,
+            "stop_loss": 0.81345,
+            "take_profit_1": 0.81468,
+            "take_profit_2": 0.81541,
+            "risk_pips": 4.9,
+            "reward_pips": 14.7,
+            "risk_reward": 3.0
+          },
+          "short_parameters": {
+            "valid": true,
+            "entry_price": 0.81394,
+            "stop_loss": 0.81443,
+            "take_profit_1": 0.8132,
+            "take_profit_2": 0.81247,
+            "risk_pips": 4.9,
+            "reward_pips": 14.7,
+            "risk_reward": 3.0
+          }
+        },
+        "latency_ms": 2.129000029526651
+      },
+      "MacroAnalysis": {
+        "status": "SUCCESS",
+        "score": 65.25,
+        "direction": "SHORT",
+        "confidence": 0.75,
+        "metrics": {
+          "dxy_index": 99.16,
+          "us10y_yield": 4.944,
+          "us_short_yield": 3.845,
+          "yield_curve_slope": 1.099,
+          "dxy_bias": "BEARISH_USD",
+          "risk_sentiment": "RISK_OFF",
+          "base_rate": 5.25,
+          "quote_rate": 1.0,
+          "rate_diff": 4.25,
+          "macro_score": 65.25
+        },
+        "latency_ms": 0.02359994687139988
+      },
+      "TechnicalAnalysis": {
+        "status": "SUCCESS",
+        "score": 96.0,
+        "direction": "LONG",
+        "confidence": 0.96,
+        "metrics": {
+          "rsi": 65.73511811936042,
+          "adx": 20.181559665457023,
+          "setup_type": "MOMENTUM_CONTINUATION",
+          "atr": 0.00040840881823723434
+        },
+        "latency_ms": 23.18410004954785
+      },
+      "SentimentCrossAsset": {
+        "status": "SUCCESS",
+        "score": 72.0,
+        "direction": "LONG",
+        "confidence": 0.72,
+        "metrics": {
+          "vix": 17.84,
+          "gold_price": 4350.4,
+          "wti_price": 102.84,
+          "btc_price": 76739.83,
+          "is_risk_on": true
+        },
+        "latency_ms": 14.142300002276897
+      }
+    },
+    "knowledge_references": [
+      "London / New York Overlap SMC FVG Retest",
+      "EUR/USD Pre-ECB Breakout Spread Expansion",
+      "USD/JPY Yield Spread & US 10Y Yield Correlation"
+    ],
+    "outcome_status": "ACTIVE_PENDING",
+    "realized_r": null,
+    "mfe_r": 0.0,
+    "mae_r": 0.0,
+    "holding_period_mins": 0,
+    "error_classification": null
+  },
+  {
+    "experience_id": "exp-SIG-202609110346-USDJPY",
+    "signal_id": "SIG-202609110346-USDJPY",
+    "scan_id": "scan-20260911-034547",
+    "created_at": "2026-09-11T03:46:18.551950+00:00",
+    "symbol": "USD/JPY",
+    "direction": "LONG",
+    "entry_price": 154.45599,
+    "stop_loss": 154.31026,
+    "take_profit": 154.67459,
+    "ml_predicted_win_prob": 0.85,
+    "composite_score": 60.93,
+    "llm_reasoning": "The long direction is supported by strong currency divergence (USD strength vs JPY weakness), favorable risk/reward metrics, and technical evidence indicating a trend pullback bounce setup. However, macro DXY bias is bearish, which slightly contradicts the long direction but is offset by risk-on sentiment and low volatility consolidation.",
+    "engine_evidence": {
+      "MacroAnalysis": {
+        "status": "SUCCESS",
+        "score": 69.0,
+        "direction": "SHORT",
+        "confidence": 0.75,
+        "metrics": {
+          "dxy_index": 99.17,
+          "us10y_yield": 4.944,
+          "us_short_yield": 3.845,
+          "yield_curve_slope": 1.099,
+          "dxy_bias": "BEARISH_USD",
+          "risk_sentiment": "RISK_OFF",
+          "base_rate": 5.25,
+          "quote_rate": 0.25,
+          "rate_diff": 5.0,
+          "macro_score": 69.0
+        },
+        "latency_ms": 0.030399998649954796
+      },
+      "MarketStructure": {
+        "status": "SUCCESS",
+        "score": 68.0,
+        "direction": "LONG",
+        "confidence": 0.68,
+        "metrics": {
+          "higher_high": false,
+          "higher_low": true,
+          "lower_high": true,
+          "lower_low": false,
+          "bos_detected": false,
+          "choch_detected": false,
+          "total_swing_highs": 10,
+          "total_swing_lows": 10
+        },
+        "latency_ms": 0.3923000767827034
+      },
+      "FundamentalAnalysis": {
+        "status": "SUCCESS",
+        "score": 51.73,
+        "direction": "LONG",
+        "confidence": 0.7,
+        "metrics": {
+          "event_risk": false,
+          "calendar_score": 51.73
+        },
+        "latency_ms": 0.31510007102042437
+      },
+      "CandleStructure": {
+        "status": "SUCCESS",
+        "score": 50.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.5,
+        "metrics": {
+          "body_ratio": 0.22,
+          "upper_wick_ratio": 0.39,
+          "lower_wick_ratio": 0.39,
+          "patterns_detected": []
+        },
+        "latency_ms": 1.0111000156030059
+      },
+      "CurrencyStrength": {
+        "status": "SUCCESS",
+        "score": 98.0,
+        "direction": "LONG",
+        "confidence": 0.98,
+        "metrics": {
+          "base_currency": "USD",
+          "quote_currency": "JPY",
+          "base_strength": 7.45,
+          "quote_strength": -2.81,
+          "strength_diff": 10.26
+        },
+        "latency_ms": 0.048200017772614956
+      },
+      "TechnicalAnalysis": {
+        "status": "SUCCESS",
+        "score": 80.0,
+        "direction": "LONG",
+        "confidence": 0.8,
+        "metrics": {
+          "rsi": 53.181009170899,
+          "adx": 15.174833692754495,
+          "setup_type": "TREND_PULLBACK_BOUNCE",
+          "atr": 0.12144153187804448
+        },
+        "latency_ms": 37.635300075635314
+      },
+      "MLPrediction": {
+        "status": "SUCCESS",
+        "score": 38.6,
+        "direction": "LONG",
+        "confidence": 0.386,
+        "metrics": {
+          "win_probability": 0.85,
+          "model_type": "Calibrated Statistical Factor Model",
+          "live_rsi": 53.18,
+          "live_adx": 1.16,
+          "dynamic_momentum_score": 0.18,
+          "brier_score": 0.142
+        },
+        "latency_ms": 6.337100057862699
+      },
+      "MarketRegime": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.8,
+        "metrics": {
+          "regime": "LOW_VOLATILITY_CONSOLIDATION",
+          "volatility_level": "LOW"
+        },
+        "latency_ms": 0.32389990519732237
+      },
+      "RiskMetrics": {
+        "status": "SUCCESS",
+        "score": 95.0,
+        "direction": "LONG",
+        "confidence": 0.85,
+        "metrics": {
+          "valid": true,
+          "entry_price": 154.45599,
+          "stop_loss": 154.31026,
+          "take_profit_1": 154.67459,
+          "take_profit_2": 154.89318,
+          "risk_pips": 14.6,
+          "reward_pips": 43.7,
+          "risk_reward": 3.0,
+          "atr": 0.12144153187804448,
+          "long_parameters": {
+            "valid": true,
+            "entry_price": 154.45599,
+            "stop_loss": 154.31026,
+            "take_profit_1": 154.67459,
+            "take_profit_2": 154.89318,
+            "risk_pips": 14.6,
+            "reward_pips": 43.7,
+            "risk_reward": 3.0
+          },
+          "short_parameters": {
+            "valid": true,
+            "entry_price": 154.45599,
+            "stop_loss": 154.60172,
+            "take_profit_1": 154.2374,
+            "take_profit_2": 154.0188,
+            "risk_pips": 14.6,
+            "reward_pips": 43.7,
+            "risk_reward": 3.0
+          }
+        },
+        "latency_ms": 1.9290000200271606
+      },
+      "SentimentCrossAsset": {
+        "status": "SUCCESS",
+        "score": 72.0,
+        "direction": "LONG",
+        "confidence": 0.72,
+        "metrics": {
+          "vix": 17.84,
+          "gold_price": 4348.3,
+          "wti_price": 103.03,
+          "btc_price": 76817.0,
+          "is_risk_on": true
+        },
+        "latency_ms": 1686.4643999142572
+      }
+    },
+    "knowledge_references": [
+      "USD/JPY Yield Spread & US 10Y Yield Correlation",
+      "London / New York Overlap SMC FVG Retest",
+      "EUR/USD Pre-ECB Breakout Spread Expansion"
+    ],
+    "outcome_status": "ACTIVE_PENDING",
+    "realized_r": null,
+    "mfe_r": 0.0,
+    "mae_r": 0.0,
+    "holding_period_mins": 0,
+    "error_classification": null
+  },
+  {
+    "experience_id": "exp-SIG-202609110346-EURUSD",
+    "signal_id": "SIG-202609110346-EURUSD",
+    "scan_id": "scan-20260911-034547",
+    "created_at": "2026-09-11T03:46:04.599790+00:00",
+    "symbol": "EUR/USD",
+    "direction": "SHORT",
+    "entry_price": 1.1605,
+    "stop_loss": 1.16086,
+    "take_profit": 1.15995,
+    "ml_predicted_win_prob": 0.15,
+    "composite_score": 64.64,
+    "llm_reasoning": "Technical evidence strongly supports a SHORT direction with high momentum continuation and favorable risk/reward metrics. Currency strength divergence and bearish market structure align with the setup, while no high-impact events are expected to disrupt the trade in the short term.",
+    "engine_evidence": {
+      "TechnicalAnalysis": {
+        "status": "SUCCESS",
+        "score": 96.0,
+        "direction": "SHORT",
+        "confidence": 0.96,
+        "metrics": {
+          "rsi": 32.569838745995696,
+          "adx": 24.940455110210042,
+          "setup_type": "MOMENTUM_CONTINUATION",
+          "atr": 0.0003023592787895389
+        },
+        "latency_ms": 18.778699915856123
+      },
+      "FundamentalAnalysis": {
+        "status": "SUCCESS",
+        "score": 41.27,
+        "direction": "SHORT",
+        "confidence": 0.7,
+        "metrics": {
+          "event_risk": false,
+          "calendar_score": 41.27
+        },
+        "latency_ms": 0.5423000548034906
+      },
+      "CandleStructure": {
+        "status": "SUCCESS",
+        "score": 84.0,
+        "direction": "LONG",
+        "confidence": 0.84,
+        "metrics": {
+          "body_ratio": 0.0,
+          "upper_wick_ratio": 0.0,
+          "lower_wick_ratio": 1.0,
+          "patterns_detected": [
+            "Bullish Pinbar / Hammer Rejection (After Pullback) (100% lower wick)"
+          ]
+        },
+        "latency_ms": 0.37999998312443495
+      },
+      "MLPrediction": {
+        "status": "SUCCESS",
+        "score": 68.9,
+        "direction": "SHORT",
+        "confidence": 0.689,
+        "metrics": {
+          "win_probability": 0.15,
+          "model_type": "Calibrated Statistical Factor Model",
+          "live_rsi": 32.57,
+          "live_adx": 49.13,
+          "dynamic_momentum_score": -0.06,
+          "brier_score": 0.142
+        },
+        "latency_ms": 3.368699923157692
+      },
+      "MarketStructure": {
+        "status": "SUCCESS",
+        "score": 68.0,
+        "direction": "SHORT",
+        "confidence": 0.68,
+        "metrics": {
+          "higher_high": false,
+          "higher_low": false,
+          "lower_high": true,
+          "lower_low": false,
+          "bos_detected": false,
+          "choch_detected": false,
+          "total_swing_highs": 11,
+          "total_swing_lows": 14
+        },
+        "latency_ms": 0.2218000590801239
+      },
+      "RiskMetrics": {
+        "status": "SUCCESS",
+        "score": 95.0,
+        "direction": "SHORT",
+        "confidence": 0.85,
+        "metrics": {
+          "valid": true,
+          "entry_price": 1.1605,
+          "stop_loss": 1.16086,
+          "take_profit_1": 1.15995,
+          "take_profit_2": 1.15941,
+          "risk_pips": 3.6,
+          "reward_pips": 10.9,
+          "risk_reward": 3.0,
+          "atr": 0.0003023592787895389,
+          "long_parameters": {
+            "valid": true,
+            "entry_price": 1.1605,
+            "stop_loss": 1.16013,
+            "take_profit_1": 1.16104,
+            "take_profit_2": 1.16159,
+            "risk_pips": 3.6,
+            "reward_pips": 10.9,
+            "risk_reward": 3.0
+          },
+          "short_parameters": {
+            "valid": true,
+            "entry_price": 1.1605,
+            "stop_loss": 1.16086,
+            "take_profit_1": 1.15995,
+            "take_profit_2": 1.15941,
+            "risk_pips": 3.6,
+            "reward_pips": 10.9,
+            "risk_reward": 3.0
+          }
+        },
+        "latency_ms": 2.5519999908283353
+      },
+      "MarketRegime": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.8,
+        "metrics": {
+          "regime": "LOW_VOLATILITY_CONSOLIDATION",
+          "volatility_level": "LOW"
+        },
+        "latency_ms": 5.217900034040213
+      },
+      "SentimentCrossAsset": {
+        "status": "SUCCESS",
+        "score": 65.0,
+        "direction": "LONG",
+        "confidence": 0.72,
+        "metrics": {
+          "vix": 17.84,
+          "gold_price": 4348.3,
+          "wti_price": 103.21,
+          "btc_price": 76832.09,
+          "is_risk_on": true
+        },
+        "latency_ms": 1.9357000710442662
+      },
+      "MacroAnalysis": {
+        "status": "SUCCESS",
+        "score": 35.25,
+        "direction": "LONG",
+        "confidence": 0.75,
+        "metrics": {
+          "dxy_index": 99.17,
+          "us10y_yield": 4.944,
+          "us_short_yield": 3.845,
+          "yield_curve_slope": 1.099,
+          "dxy_bias": "BEARISH_USD",
+          "risk_sentiment": "RISK_OFF",
+          "base_rate": 3.5,
+          "quote_rate": 5.25,
+          "rate_diff": -1.75,
+          "macro_score": 35.25
+        },
+        "latency_ms": 1290.455500013195
+      },
+      "CurrencyStrength": {
+        "status": "SUCCESS",
+        "score": 81.86,
+        "direction": "SHORT",
+        "confidence": 0.8186,
+        "metrics": {
+          "base_currency": "EUR",
+          "quote_currency": "USD",
+          "base_strength": 2.14,
+          "quote_strength": 7.45,
+          "strength_diff": -5.3100000000000005
+        },
+        "latency_ms": 8132.1872000116855
+      }
+    },
+    "knowledge_references": [
+      "London / New York Overlap SMC FVG Retest",
+      "EUR/USD Pre-ECB Breakout Spread Expansion",
+      "USD/JPY Yield Spread & US 10Y Yield Correlation"
+    ],
+    "outcome_status": "ACTIVE_PENDING",
+    "realized_r": null,
+    "mfe_r": 0.0,
+    "mae_r": 0.0,
+    "holding_period_mins": 0,
+    "error_classification": null
+  },
+  {
+    "experience_id": "exp-SIG-202609110329-USDCAD",
+    "signal_id": "SIG-202609110329-USDCAD",
+    "scan_id": "scan-20260911-032843",
+    "created_at": "2026-09-11T03:29:23.993596+00:00",
+    "symbol": "USD/CAD",
+    "direction": "LONG",
+    "entry_price": 1.38419,
+    "stop_loss": 1.38328,
+    "take_profit": 1.38556,
+    "ml_predicted_win_prob": 0.826,
+    "composite_score": 67.15,
+    "llm_reasoning": "The technical evidence, currency strength, and risk metrics strongly support the LONG direction, with favorable momentum indicators (RSI, ADX) and a robust risk/reward ratio of 3.0. Macro analysis shows some bearish USD bias, but it is outweighed by strong USD/CAD divergence and technical alignment.",
+    "engine_evidence": {
+      "MarketStructure": {
+        "status": "SUCCESS",
+        "score": 68.0,
+        "direction": "LONG",
+        "confidence": 0.68,
+        "metrics": {
+          "higher_high": true,
+          "higher_low": false,
+          "lower_high": false,
+          "lower_low": false,
+          "bos_detected": false,
+          "choch_detected": false,
+          "total_swing_highs": 7,
+          "total_swing_lows": 13
+        },
+        "latency_ms": 0.1593999331817031
+      },
+      "MarketRegime": {
+        "status": "SUCCESS",
+        "score": 75.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.8,
+        "metrics": {
+          "regime": "LOW_VOLATILITY_CONSOLIDATION",
+          "volatility_level": "LOW"
+        },
+        "latency_ms": 0.3664999967440963
+      },
+      "CurrencyStrength": {
+        "status": "SUCCESS",
+        "score": 89.6,
+        "direction": "LONG",
+        "confidence": 0.8959999999999999,
+        "metrics": {
+          "base_currency": "USD",
+          "quote_currency": "CAD",
+          "base_strength": 7.45,
+          "quote_strength": 0.85,
+          "strength_diff": 6.6000000000000005
+        },
+        "latency_ms": 0.047600013203918934
+      },
+      "MacroAnalysis": {
+        "status": "SUCCESS",
+        "score": 49.0,
+        "direction": "SHORT",
+        "confidence": 0.75,
+        "metrics": {
+          "dxy_index": 99.12,
+          "us10y_yield": 4.944,
+          "us_short_yield": 3.845,
+          "yield_curve_slope": 1.099,
+          "dxy_bias": "BEARISH_USD",
+          "risk_sentiment": "RISK_OFF",
+          "base_rate": 5.25,
+          "quote_rate": 4.25,
+          "rate_diff": 1.0,
+          "macro_score": 49.0
+        },
+        "latency_ms": 0.023499946109950542
+      },
+      "TechnicalAnalysis": {
+        "status": "SUCCESS",
+        "score": 96.0,
+        "direction": "LONG",
+        "confidence": 0.96,
+        "metrics": {
+          "rsi": 63.18764934814443,
+          "adx": 27.318909842428045,
+          "setup_type": "MOMENTUM_CONTINUATION",
+          "atr": 0.0007605486156204739
+        },
+        "latency_ms": 22.575599956326187
+      },
+      "CandleStructure": {
+        "status": "SUCCESS",
+        "score": 50.0,
+        "direction": "NEUTRAL",
+        "confidence": 0.5,
+        "metrics": {
+          "body_ratio": 0.11,
+          "upper_wick_ratio": 0.26,
+          "lower_wick_ratio": 0.62,
+          "patterns_detected": []
+        },
+        "latency_ms": 0.4824999487027526
+      },
+      "MLPrediction": {
+        "status": "SUCCESS",
+        "score": 67.8,
+        "direction": "LONG",
+        "confidence": 0.678,
+        "metrics": {
+          "win_probability": 0.826,
+          "model_type": "Calibrated Statistical Factor Model",
+          "live_rsi": 63.19,
+          "live_adx": 43.97,
+          "dynamic_momentum_score": 0.55,
+          "brier_score": 0.142
+        },
+        "latency_ms": 6.909299991093576
+      },
+      "RiskMetrics": {
+        "status": "SUCCESS",
+        "score": 95.0,
+        "direction": "LONG",
+        "confidence": 0.85,
+        "metrics": {
+          "valid": true,
+          "entry_price": 1.38419,
+          "stop_loss": 1.38328,
+          "take_profit_1": 1.38556,
+          "take_profit_2": 1.38693,
+          "risk_pips": 9.1,
+          "reward_pips": 27.4,
+          "risk_reward": 3.0,
+          "atr": 0.0007605486156204739,
+          "long_parameters": {
+            "valid": true,
+            "entry_price": 1.38419,
+            "stop_loss": 1.38328,
+            "take_profit_1": 1.38556,
+            "take_profit_2": 1.38693,
+            "risk_pips": 9.1,
+            "reward_pips": 27.4,
+            "risk_reward": 3.0
+          },
+          "short_parameters": {
+            "valid": true,
+            "entry_price": 1.38419,
+            "stop_loss": 1.3851,
+            "take_profit_1": 1.38282,
+            "take_profit_2": 1.38145,
+            "risk_pips": 9.1,
+            "reward_pips": 27.4,
+            "risk_reward": 3.0
+          }
+        },
+        "latency_ms": 2.8122999938204885
+      },
+      "FundamentalAnalysis": {
+        "status": "SUCCESS",
+        "score": 55.73,
+        "direction": "LONG",
+        "confidence": 0.7,
+        "metrics": {
+          "event_risk": false,
+          "calendar_score": 55.73
+        },
+        "latency_ms": 0.2808000426739454
+      },
+      "SentimentCrossAsset": {
+        "status": "SUCCESS",
+        "score": 78.0,
+        "direction": "SHORT",
+        "confidence": 0.72,
+        "metrics": {
+          "vix": 17.84,
+          "gold_price": 4358.2,
+          "wti_price": 103.05,
+          "btc_price": 76796.68,
+          "is_risk_on": true
+        },
+        "latency_ms": 4.112499998882413
+      }
+    },
+    "knowledge_references": [
+      "London / New York Overlap SMC FVG Retest",
+      "EUR/USD Pre-ECB Breakout Spread Expansion",
+      "USD/JPY Yield Spread & US 10Y Yield Correlation"
+    ],
+    "outcome_status": "ACTIVE_PENDING",
+    "realized_r": null,
+    "mfe_r": 0.0,
+    "mae_r": 0.0,
+    "holding_period_mins": 0,
+    "error_classification": null
+  },
+  {
     "experience_id": "exp-SIG-202608311531-XRP-US",
     "signal_id": "SIG-202608311531-XRP-US",
     "scan_id": "scan-20260831-153005",
@@ -184,12 +956,13 @@
       "London / New York Overlap SMC FVG Retest",
       "GBP/USD Test Observation"
     ],
-    "outcome_status": "ACTIVE_PENDING",
-    "realized_r": null,
+    "outcome_status": "LOSS_SL",
+    "realized_r": -1.0,
     "mfe_r": 0.0,
-    "mae_r": 0.0,
-    "holding_period_mins": 0,
-    "error_classification": null
+    "mae_r": -3.28,
+    "holding_period_mins": 15126,
+    "error_classification": null,
+    "resolved_at": "2026-09-11T03:39:37.632769+00:00"
   },
   {
     "experience_id": "exp-SIG-202608311531-ETH-US",
@@ -379,12 +1152,13 @@
       "London / New York Overlap SMC FVG Retest",
       "GBP/USD Test Observation"
     ],
-    "outcome_status": "ACTIVE_PENDING",
-    "realized_r": null,
+    "outcome_status": "LOSS_SL",
+    "realized_r": -1.0,
     "mfe_r": 0.0,
-    "mae_r": 0.0,
-    "holding_period_mins": 0,
-    "error_classification": null
+    "mae_r": -2.03,
+    "holding_period_mins": 15126,
+    "error_classification": null,
+    "resolved_at": "2026-09-11T03:39:37.742233+00:00"
   },
   {
     "experience_id": "exp-SIG-202608311531-BTC-US",
@@ -571,12 +1345,13 @@
       "London / New York Overlap SMC FVG Retest",
       "GBP/USD Test Observation"
     ],
-    "outcome_status": "ACTIVE_PENDING",
-    "realized_r": null,
+    "outcome_status": "LOSS_SL",
+    "realized_r": -1.0,
     "mfe_r": 0.0,
-    "mae_r": 0.0,
-    "holding_period_mins": 0,
-    "error_classification": null
+    "mae_r": -4.72,
+    "holding_period_mins": 15126,
+    "error_classification": null,
+    "resolved_at": "2026-09-11T03:39:37.854189+00:00"
   },
   {
     "experience_id": "exp-SIG-202608311530-AUDUSD",
@@ -763,12 +1538,13 @@
       "London / New York Overlap SMC FVG Retest",
       "GBP/USD Test Observation"
     ],
-    "outcome_status": "ACTIVE_PENDING",
-    "realized_r": null,
+    "outcome_status": "LOSS_SL",
+    "realized_r": -1.0,
     "mfe_r": 0.0,
-    "mae_r": 0.0,
-    "holding_period_mins": 0,
-    "error_classification": null
+    "mae_r": -2.44,
+    "holding_period_mins": 15127,
+    "error_classification": null,
+    "resolved_at": "2026-09-11T03:39:37.968367+00:00"
   },
   {
     "experience_id": "exp-SIG-202608311530-USDJPY",
@@ -957,12 +1733,13 @@
       "London / New York Overlap SMC FVG Retest",
       "GBP/USD Test Observation"
     ],
-    "outcome_status": "ACTIVE_PENDING",
-    "realized_r": null,
-    "mfe_r": 0.0,
+    "outcome_status": "WIN_TP2",
+    "realized_r": 2.25,
+    "mfe_r": 52.03,
     "mae_r": 0.0,
-    "holding_period_mins": 0,
-    "error_classification": null
+    "holding_period_mins": 15127,
+    "error_classification": null,
+    "resolved_at": "2026-09-11T03:39:38.072493+00:00"
   },
   {
     "experience_id": "exp-SIG-202608311530-GBPUSD",
@@ -1151,12 +1928,13 @@
       "GBP/USD Test Observation",
       "GBP/USD Test Observation"
     ],
-    "outcome_status": "ACTIVE_PENDING",
-    "realized_r": null,
+    "outcome_status": "LOSS_SL",
+    "realized_r": -1.0,
     "mfe_r": 0.0,
-    "mae_r": 0.0,
-    "holding_period_mins": 0,
-    "error_classification": null
+    "mae_r": -6.91,
+    "holding_period_mins": 15127,
+    "error_classification": null,
+    "resolved_at": "2026-09-11T03:39:38.181378+00:00"
   },
   {
     "experience_id": "exp-SIG-202608311530-EURUSD",
@@ -1345,12 +2123,13 @@
       "EUR/USD Pre-ECB Breakout Spread Expansion",
       "USD/JPY Yield Spread & US 10Y Yield Correlation"
     ],
-    "outcome_status": "ACTIVE_PENDING",
-    "realized_r": null,
+    "outcome_status": "LOSS_SL",
+    "realized_r": -1.0,
     "mfe_r": 0.0,
-    "mae_r": 0.0,
-    "holding_period_mins": 0,
-    "error_classification": null
+    "mae_r": -2.44,
+    "holding_period_mins": 15127,
+    "error_classification": null,
+    "resolved_at": "2026-09-11T03:39:38.284309+00:00"
   },
   {
     "experience_id": "exp-SIG-202608311515-XRP-US",
@@ -1537,12 +2316,13 @@
       "London / New York Overlap SMC FVG Retest",
       "GBP/USD Test Observation"
     ],
-    "outcome_status": "ACTIVE_PENDING",
-    "realized_r": null,
+    "outcome_status": "LOSS_SL",
+    "realized_r": -1.0,
     "mfe_r": 0.0,
-    "mae_r": 0.0,
-    "holding_period_mins": 0,
-    "error_classification": null
+    "mae_r": -3.8,
+    "holding_period_mins": 15142,
+    "error_classification": null,
+    "resolved_at": "2026-09-11T03:39:38.395200+00:00"
   },
   {
     "experience_id": "exp-SIG-202608311514-SOL-US",
@@ -1731,12 +2511,13 @@
       "London / New York Overlap SMC FVG Retest",
       "GBP/USD Test Observation"
     ],
-    "outcome_status": "ACTIVE_PENDING",
-    "realized_r": null,
+    "outcome_status": "LOSS_SL",
+    "realized_r": -1.0,
     "mfe_r": 0.0,
-    "mae_r": 0.0,
-    "holding_period_mins": 0,
-    "error_classification": null
+    "mae_r": -6.65,
+    "holding_period_mins": 15142,
+    "error_classification": null,
+    "resolved_at": "2026-09-11T03:39:38.511101+00:00"
   },
   {
     "experience_id": "exp-SIG-202608311514-ETH-US",
@@ -1925,12 +2706,13 @@
       "London / New York Overlap SMC FVG Retest",
       "GBP/USD Test Observation"
     ],
-    "outcome_status": "ACTIVE_PENDING",
-    "realized_r": null,
+    "outcome_status": "LOSS_SL",
+    "realized_r": -1.0,
     "mfe_r": 0.0,
-    "mae_r": 0.0,
-    "holding_period_mins": 0,
-    "error_classification": null
+    "mae_r": -1.94,
+    "holding_period_mins": 15143,
+    "error_classification": null,
+    "resolved_at": "2026-09-11T03:39:38.630884+00:00"
   },
   {
     "experience_id": "exp-SIG-202608311514-BTC-US",
@@ -2119,12 +2901,13 @@
       "London / New York Overlap SMC FVG Retest",
       "GBP/USD Test Observation"
     ],
-    "outcome_status": "ACTIVE_PENDING",
-    "realized_r": null,
+    "outcome_status": "LOSS_SL",
+    "realized_r": -1.0,
     "mfe_r": 0.0,
-    "mae_r": 0.0,
-    "holding_period_mins": 0,
-    "error_classification": null
+    "mae_r": -5.16,
+    "holding_period_mins": 15143,
+    "error_classification": null,
+    "resolved_at": "2026-09-11T03:39:38.732797+00:00"
   },
   {
     "experience_id": "exp-SIG-202608311514-USDCAD",
@@ -2313,12 +3096,13 @@
       "USD/JPY Yield Spread & US 10Y Yield Correlation",
       "GBP/USD Test Observation"
     ],
-    "outcome_status": "ACTIVE_PENDING",
-    "realized_r": null,
-    "mfe_r": 0.0,
+    "outcome_status": "EXPIRED",
+    "realized_r": 1.57,
+    "mfe_r": 1.57,
     "mae_r": 0.0,
-    "holding_period_mins": 0,
-    "error_classification": null
+    "holding_period_mins": 15143,
+    "error_classification": null,
+    "resolved_at": "2026-09-11T03:39:38.842463+00:00"
   },
   {
     "experience_id": "exp-SIG-202608311514-AUDUSD",
@@ -2505,12 +3289,13 @@
       "London / New York Overlap SMC FVG Retest",
       "GBP/USD Test Observation"
     ],
-    "outcome_status": "ACTIVE_PENDING",
-    "realized_r": null,
+    "outcome_status": "LOSS_SL",
+    "realized_r": -1.0,
     "mfe_r": 0.0,
-    "mae_r": 0.0,
-    "holding_period_mins": 0,
-    "error_classification": null
+    "mae_r": -3.3,
+    "holding_period_mins": 15143,
+    "error_classification": null,
+    "resolved_at": "2026-09-11T03:39:38.954573+00:00"
   },
   {
     "experience_id": "exp-SIG-202608311514-USDJPY",
@@ -2699,12 +3484,13 @@
       "London / New York Overlap SMC FVG Retest",
       "GBP/USD Test Observation"
     ],
-    "outcome_status": "ACTIVE_PENDING",
-    "realized_r": null,
-    "mfe_r": 0.0,
+    "outcome_status": "WIN_TP2",
+    "realized_r": 2.25,
+    "mfe_r": 50.6,
     "mae_r": 0.0,
-    "holding_period_mins": 0,
-    "error_classification": null
+    "holding_period_mins": 15143,
+    "error_classification": null,
+    "resolved_at": "2026-09-11T03:39:39.061683+00:00"
   },
   {
     "experience_id": "exp-SIG-202608311513-GBPUSD",
@@ -2891,12 +3677,13 @@
       "GBP/USD Test Observation",
       "GBP/USD Test Observation"
     ],
-    "outcome_status": "ACTIVE_PENDING",
-    "realized_r": null,
+    "outcome_status": "LOSS_SL",
+    "realized_r": -1.0,
     "mfe_r": 0.0,
-    "mae_r": 0.0,
-    "holding_period_mins": 0,
-    "error_classification": null
+    "mae_r": -7.51,
+    "holding_period_mins": 15143,
+    "error_classification": null,
+    "resolved_at": "2026-09-11T03:39:39.179895+00:00"
   },
   {
     "experience_id": "exp-SIG-202608311513-EURUSD",
@@ -3083,12 +3870,13 @@
       "EUR/USD Pre-ECB Breakout Spread Expansion",
       "USD/JPY Yield Spread & US 10Y Yield Correlation"
     ],
-    "outcome_status": "ACTIVE_PENDING",
-    "realized_r": null,
+    "outcome_status": "LOSS_SL",
+    "realized_r": -1.0,
     "mfe_r": 0.0,
-    "mae_r": 0.0,
-    "holding_period_mins": 0,
-    "error_classification": null
+    "mae_r": -2.09,
+    "holding_period_mins": 15143,
+    "error_classification": null,
+    "resolved_at": "2026-09-11T03:39:39.282198+00:00"
   },
   {
     "experience_id": "exp-SIG-202608311458-XRP-US",
@@ -3275,12 +4063,13 @@
       "London / New York Overlap SMC FVG Retest",
       "GBP/USD Test Observation"
     ],
-    "outcome_status": "ACTIVE_PENDING",
-    "realized_r": null,
+    "outcome_status": "LOSS_SL",
+    "realized_r": -1.0,
     "mfe_r": 0.0,
-    "mae_r": 0.0,
-    "holding_period_mins": 0,
-    "error_classification": null
+    "mae_r": -3.83,
+    "holding_period_mins": 15159,
+    "error_classification": null,
+    "resolved_at": "2026-09-11T03:39:39.393496+00:00"
   },
   {
     "experience_id": "exp-SIG-202608311458-SOL-US",
@@ -3467,12 +4256,13 @@
       "London / New York Overlap SMC FVG Retest",
       "GBP/USD Test Observation"
     ],
-    "outcome_status": "ACTIVE_PENDING",
-    "realized_r": null,
+    "outcome_status": "LOSS_SL",
+    "realized_r": -1.0,
     "mfe_r": 0.0,
-    "mae_r": 0.0,
-    "holding_period_mins": 0,
-    "error_classification": null
+    "mae_r": -6.59,
+    "holding_period_mins": 15159,
+    "error_classification": null,
+    "resolved_at": "2026-09-11T03:39:39.494225+00:00"
   },
   {
     "experience_id": "exp-SIG-202608311458-ETH-US",
@@ -3659,12 +4449,13 @@
       "London / New York Overlap SMC FVG Retest",
       "GBP/USD Test Observation"
     ],
-    "outcome_status": "ACTIVE_PENDING",
-    "realized_r": null,
+    "outcome_status": "LOSS_SL",
+    "realized_r": -1.0,
     "mfe_r": 0.0,
-    "mae_r": 0.0,
-    "holding_period_mins": 0,
-    "error_classification": null
+    "mae_r": -1.76,
+    "holding_period_mins": 15159,
+    "error_classification": null,
+    "resolved_at": "2026-09-11T03:39:39.618046+00:00"
   },
   {
     "experience_id": "exp-SIG-202608311458-BTC-US",
@@ -3851,12 +4642,13 @@
       "London / New York Overlap SMC FVG Retest",
       "GBP/USD Test Observation"
     ],
-    "outcome_status": "ACTIVE_PENDING",
-    "realized_r": null,
+    "outcome_status": "LOSS_SL",
+    "realized_r": -1.0,
     "mfe_r": 0.0,
-    "mae_r": 0.0,
-    "holding_period_mins": 0,
-    "error_classification": null
+    "mae_r": -4.93,
+    "holding_period_mins": 15159,
+    "error_classification": null,
+    "resolved_at": "2026-09-11T03:39:39.736811+00:00"
   },
   {
     "experience_id": "exp-SIG-202608311457-USDCAD",
@@ -4046,12 +4838,13 @@
       "USD/JPY Yield Spread & US 10Y Yield Correlation",
       "GBP/USD Test Observation"
     ],
-    "outcome_status": "ACTIVE_PENDING",
-    "realized_r": null,
-    "mfe_r": 0.0,
+    "outcome_status": "EXPIRED",
+    "realized_r": 2.16,
+    "mfe_r": 2.16,
     "mae_r": 0.0,
-    "holding_period_mins": 0,
-    "error_classification": null
+    "holding_period_mins": 15159,
+    "error_classification": null,
+    "resolved_at": "2026-09-11T03:39:39.850551+00:00"
   },
   {
     "experience_id": "exp-SIG-202608311457-AUDUSD",
@@ -4240,12 +5033,13 @@
       "London / New York Overlap SMC FVG Retest",
       "GBP/USD Test Observation"
     ],
-    "outcome_status": "ACTIVE_PENDING",
-    "realized_r": null,
+    "outcome_status": "LOSS_SL",
+    "realized_r": -1.0,
     "mfe_r": 0.0,
-    "mae_r": 0.0,
-    "holding_period_mins": 0,
-    "error_classification": null
+    "mae_r": -3.5,
+    "holding_period_mins": 15159,
+    "error_classification": null,
+    "resolved_at": "2026-09-11T03:39:39.961611+00:00"
   },
   {
     "experience_id": "exp-SIG-202608311457-USDJPY",
@@ -4434,12 +5228,13 @@
       "London / New York Overlap SMC FVG Retest",
       "GBP/USD Test Observation"
     ],
-    "outcome_status": "ACTIVE_PENDING",
-    "realized_r": null,
-    "mfe_r": 0.0,
+    "outcome_status": "WIN_TP2",
+    "realized_r": 2.25,
+    "mfe_r": 53.53,
     "mae_r": 0.0,
-    "holding_period_mins": 0,
-    "error_classification": null
+    "holding_period_mins": 15160,
+    "error_classification": null,
+    "resolved_at": "2026-09-11T03:39:40.065618+00:00"
   },
   {
     "experience_id": "exp-SIG-202608311457-EURUSD",
@@ -4628,12 +5423,13 @@
       "EUR/USD Pre-ECB Breakout Spread Expansion",
       "USD/JPY Yield Spread & US 10Y Yield Correlation"
     ],
-    "outcome_status": "ACTIVE_PENDING",
-    "realized_r": null,
+    "outcome_status": "EXPIRED",
+    "realized_r": -0.81,
     "mfe_r": 0.0,
-    "mae_r": 0.0,
-    "holding_period_mins": 0,
-    "error_classification": null
+    "mae_r": -0.81,
+    "holding_period_mins": 15160,
+    "error_classification": null,
+    "resolved_at": "2026-09-11T03:39:40.184082+00:00"
   },
   {
     "experience_id": "exp-SIG-202608311408-CLF",
@@ -4823,12 +5619,13 @@
       "London / New York Overlap SMC FVG Retest",
       "GBP/USD Test Observation"
     ],
-    "outcome_status": "ACTIVE_PENDING",
-    "realized_r": null,
-    "mfe_r": 0.0,
+    "outcome_status": "WIN_TP2",
+    "realized_r": 2.25,
+    "mfe_r": 29.82,
     "mae_r": 0.0,
-    "holding_period_mins": 0,
-    "error_classification": null
+    "holding_period_mins": 15208,
+    "error_classification": null,
+    "resolved_at": "2026-09-11T03:39:40.288591+00:00"
   },
   {
     "experience_id": "exp-SIG-202608311334-ETH-US",
@@ -5019,12 +5816,13 @@
       "London / New York Overlap SMC FVG Retest",
       "GBP/USD Test Observation"
     ],
-    "outcome_status": "ACTIVE_PENDING",
-    "realized_r": null,
+    "outcome_status": "EXPIRED",
+    "realized_r": -0.78,
     "mfe_r": 0.0,
-    "mae_r": 0.0,
-    "holding_period_mins": 0,
-    "error_classification": null
+    "mae_r": -0.78,
+    "holding_period_mins": 15243,
+    "error_classification": null,
+    "resolved_at": "2026-09-11T03:39:40.397301+00:00"
   },
   {
     "experience_id": "exp-SIG-202608311334-NZDUSD",
@@ -5213,12 +6011,13 @@
       "London / New York Overlap SMC FVG Retest",
       "GBP/USD Test Observation"
     ],
-    "outcome_status": "ACTIVE_PENDING",
-    "realized_r": null,
+    "outcome_status": "LOSS_SL",
+    "realized_r": -1.0,
     "mfe_r": 0.0,
-    "mae_r": 0.0,
-    "holding_period_mins": 0,
-    "error_classification": null
+    "mae_r": -30.69,
+    "holding_period_mins": 15243,
+    "error_classification": null,
+    "resolved_at": "2026-09-11T03:39:40.503281+00:00"
   },
   {
     "experience_id": "exp-SIG-202608311334-USDCAD",
@@ -5407,12 +6206,13 @@
       "USD/JPY Yield Spread & US 10Y Yield Correlation",
       "GBP/USD Test Observation"
     ],
-    "outcome_status": "ACTIVE_PENDING",
-    "realized_r": null,
-    "mfe_r": 0.0,
+    "outcome_status": "EXPIRED",
+    "realized_r": 2.88,
+    "mfe_r": 2.88,
     "mae_r": 0.0,
-    "holding_period_mins": 0,
-    "error_classification": null
+    "holding_period_mins": 15243,
+    "error_classification": null,
+    "resolved_at": "2026-09-11T03:39:40.621903+00:00"
   },
   {
     "experience_id": "exp-SIG-202608311333-GBPUSD",
@@ -5599,12 +6399,13 @@
       "GBP/USD Test Observation",
       "GBP/USD Test Observation"
     ],
-    "outcome_status": "ACTIVE_PENDING",
-    "realized_r": null,
+    "outcome_status": "LOSS_SL",
+    "realized_r": -1.0,
     "mfe_r": 0.0,
-    "mae_r": 0.0,
-    "holding_period_mins": 0,
-    "error_classification": null
+    "mae_r": -8.97,
+    "holding_period_mins": 15244,
+    "error_classification": null,
+    "resolved_at": "2026-09-11T03:39:40.731398+00:00"
   },
   {
     "experience_id": "exp-SIG-202608311320-ETH-US",
@@ -5794,12 +6595,13 @@
       "London / New York Overlap SMC FVG Retest",
       "GBP/USD Test Observation"
     ],
-    "outcome_status": "ACTIVE_PENDING",
-    "realized_r": null,
+    "outcome_status": "LOSS_SL",
+    "realized_r": -1.0,
     "mfe_r": 0.0,
-    "mae_r": 0.0,
-    "holding_period_mins": 0,
-    "error_classification": null
+    "mae_r": -1.06,
+    "holding_period_mins": 15256,
+    "error_classification": null,
+    "resolved_at": "2026-09-11T03:39:40.841117+00:00"
   },
   {
     "experience_id": "exp-SIG-202608311302-ETH-US",
@@ -5989,12 +6791,13 @@
       "London / New York Overlap SMC FVG Retest",
       "GBP/USD Test Observation"
     ],
-    "outcome_status": "ACTIVE_PENDING",
-    "realized_r": null,
+    "outcome_status": "EXPIRED",
+    "realized_r": -0.87,
     "mfe_r": 0.0,
-    "mae_r": 0.0,
-    "holding_period_mins": 0,
-    "error_classification": null
+    "mae_r": -0.87,
+    "holding_period_mins": 15275,
+    "error_classification": null,
+    "resolved_at": "2026-09-11T03:39:40.952873+00:00"
   },
   {
     "experience_id": "exp-SIG-202608311301-USDCAD",
@@ -6183,12 +6986,13 @@
       "USD/JPY Yield Spread & US 10Y Yield Correlation",
       "GBP/USD Test Observation"
     ],
-    "outcome_status": "ACTIVE_PENDING",
-    "realized_r": null,
-    "mfe_r": 0.0,
+    "outcome_status": "WIN_TP2",
+    "realized_r": 2.26,
+    "mfe_r": 3.27,
     "mae_r": 0.0,
-    "holding_period_mins": 0,
-    "error_classification": null
+    "holding_period_mins": 15276,
+    "error_classification": null,
+    "resolved_at": "2026-09-11T03:39:41.061256+00:00"
   },
   {
     "experience_id": "exp-SIG-202608311255-USDCAD",
@@ -6377,12 +7181,13 @@
       "USD/JPY Yield Spread & US 10Y Yield Correlation",
       "GBP/USD Test Observation"
     ],
-    "outcome_status": "ACTIVE_PENDING",
-    "realized_r": null,
-    "mfe_r": 0.0,
+    "outcome_status": "WIN_TP2",
+    "realized_r": 2.25,
+    "mfe_r": 3.55,
     "mae_r": 0.0,
-    "holding_period_mins": 0,
-    "error_classification": null
+    "holding_period_mins": 15282,
+    "error_classification": null,
+    "resolved_at": "2026-09-11T03:39:41.165092+00:00"
   },
   {
     "experience_id": "exp-SIG-202608311231-USDCAD",
@@ -6572,12 +7377,13 @@
       "USD/JPY Yield Spread & US 10Y Yield Correlation",
       "GBP/USD Test Observation"
     ],
-    "outcome_status": "ACTIVE_PENDING",
-    "realized_r": null,
-    "mfe_r": 0.0,
+    "outcome_status": "WIN_TP2",
+    "realized_r": 2.25,
+    "mfe_r": 3.55,
     "mae_r": 0.0,
-    "holding_period_mins": 0,
-    "error_classification": null
+    "holding_period_mins": 15306,
+    "error_classification": null,
+    "resolved_at": "2026-09-11T03:39:41.267976+00:00"
   },
   {
     "experience_id": "exp-SIG-202608310719-AUDUSD",
@@ -6766,12 +7572,13 @@
       "London / New York Overlap SMC FVG Retest",
       "GBP/USD Test Observation"
     ],
-    "outcome_status": "ACTIVE_PENDING",
-    "realized_r": null,
-    "mfe_r": 0.0,
+    "outcome_status": "EXPIRED",
+    "realized_r": 2.47,
+    "mfe_r": 2.47,
     "mae_r": 0.0,
-    "holding_period_mins": 0,
-    "error_classification": null
+    "holding_period_mins": 15618,
+    "error_classification": null,
+    "resolved_at": "2026-09-11T03:39:41.372613+00:00"
   },
   {
     "experience_id": "exp-SIG-202608310701-AUDUSD",
@@ -6960,12 +7767,13 @@
       "London / New York Overlap SMC FVG Retest",
       "GBP/USD Test Observation"
     ],
-    "outcome_status": "ACTIVE_PENDING",
-    "realized_r": null,
-    "mfe_r": 0.0,
+    "outcome_status": "EXPIRED",
+    "realized_r": 2.4,
+    "mfe_r": 2.4,
     "mae_r": 0.0,
-    "holding_period_mins": 0,
-    "error_classification": null
+    "holding_period_mins": 15636,
+    "error_classification": null,
+    "resolved_at": "2026-09-11T03:39:41.485050+00:00"
   },
   {
     "experience_id": "exp-SIG-202608310518-SOL-US",

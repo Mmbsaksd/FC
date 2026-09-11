@@ -2,33 +2,33 @@
   "system_status": {
     "status": "HEALTHY",
     "state": "ACTIVE_SIGNALS",
-    "scan_id": "scan-20260831-153005",
-    "last_scan_time": "2026-08-31T15:31:26.748961+00:00",
+    "scan_id": "scan-20260911-035201",
+    "last_scan_time": "2026-09-11T03:53:04.955242+00:00",
     "scan_interval_minutes": 15,
-    "monitored_assets": 14,
+    "monitored_assets": 8,
     "active_engines": "10/10",
     "completed_engines": 10,
     "failed_engines": 0,
-    "pipeline_latency_ms": 81518.9,
+    "pipeline_latency_ms": 63153.9,
     "overall_health": "OPTIMAL"
   },
   "current_scan": {
-    "scan_id": "scan-20260831-153005",
-    "timestamp": "2026-08-31T15:31:26.748961+00:00",
-    "duration_ms": 81518.9,
-    "instruments_scanned": 14,
-    "total_observations": 840,
-    "valid_observations": 840,
+    "scan_id": "scan-20260911-035201",
+    "timestamp": "2026-09-11T03:53:04.955242+00:00",
+    "duration_ms": 63153.9,
+    "instruments_scanned": 8,
+    "total_observations": 480,
+    "valid_observations": 480,
     "stale_observations": 0,
     "rejected_observations": 0,
-    "analytical_jobs_launched": 140,
-    "analytical_jobs_completed": 140,
+    "analytical_jobs_launched": 80,
+    "analytical_jobs_completed": 80,
     "failed_jobs": 0,
-    "candidates_detected": 8,
-    "candidates_sent_to_llm": 7,
-    "approved_opportunities": 7,
+    "candidates_detected": 4,
+    "candidates_sent_to_llm": 3,
+    "approved_opportunities": 1,
     "rejected_opportunities": 7,
-    "alerts_generated": 7
+    "alerts_generated": 1
   },
   "parallel_engines": [
     {
@@ -135,56 +135,56 @@
   "opportunity_lifecycle": [
     {
       "stage": "1. Market Snapshot",
-      "count": 14,
+      "count": 8,
       "pass_rate": 100.0,
       "latency_ms": 120.0,
-      "description": "Ingested 60 bars of 15M candles for 14 instruments"
+      "description": "Ingested 60 bars of 15M candles for 8 instruments"
     },
     {
       "stage": "2. Parallel Evidence",
-      "count": 140,
+      "count": 80,
       "pass_rate": 100.0,
-      "latency_ms": 81518.9,
+      "latency_ms": 63153.9,
       "description": "10 independent analytical engines executed concurrently"
     },
     {
       "stage": "3. Candidate Detection",
-      "count": 14,
+      "count": 8,
       "pass_rate": 100.0,
       "latency_ms": 2.1,
       "description": "Unified multi-engine context snapshots assembled"
     },
     {
       "stage": "4. Evidence Aggregation",
-      "count": 8,
-      "pass_rate": 57.1,
+      "count": 4,
+      "pass_rate": 50.0,
       "latency_ms": 1.4,
       "description": "Orthogonal weighted composite scoring & regime filtering"
     },
     {
       "stage": "5. LLM Decision Layer",
-      "count": 7,
-      "pass_rate": 87.5,
+      "count": 3,
+      "pass_rate": 75.0,
       "latency_ms": 450.0,
       "description": "Multi-provider AI rationale synthesis & hypothesis check"
     },
     {
       "stage": "6. Deterministic Risk Gate",
-      "count": 7,
-      "pass_rate": 100.0,
+      "count": 2,
+      "pass_rate": 66.7,
       "latency_ms": 0.5,
       "description": "Hard validation: Score >= 70, R:R >= 2.0, EV > 0"
     },
     {
       "stage": "7. Signal Generation",
-      "count": 7,
-      "pass_rate": 100.0,
+      "count": 1,
+      "pass_rate": 50.0,
       "latency_ms": 0.8,
       "description": "Structured JSON payload with complete WHY THIS TRADE rationale"
     },
     {
       "stage": "8. Alert & Paper Trading",
-      "count": 7,
+      "count": 1,
       "pass_rate": 100.0,
       "latency_ms": 85.0,
       "description": "Telegram push notifications & simulated paper trade logging"
@@ -193,7 +193,7 @@
   "rejection_breakdown": [
     {
       "reason": "Opportunity Score < 60.0",
-      "count": 6,
+      "count": 5,
       "percentage": 100.0,
       "description": "Setup did not satisfy strict quantitative risk and confidence gates."
     }
@@ -201,115 +201,67 @@
   "why_no_trade_list": [
     {
       "symbol": "EUR/USD",
-      "direction": "LONG",
-      "score": 66.75,
-      "ml_prob": 0.732,
-      "reason": "Qualified LONG Opportunity (Score: 66.75, EV: +1.88R)",
-      "status": "APPROVED"
+      "direction": "SHORT",
+      "score": 64.64,
+      "ml_prob": 0.15,
+      "reason": "LLM Decision = WATCH (Not APPROVED for trade)",
+      "status": "REJECTED"
     },
     {
       "symbol": "GBP/USD",
-      "direction": "LONG",
-      "score": 68.05,
-      "ml_prob": 0.57,
-      "reason": "Qualified LONG Opportunity (Score: 68.05, EV: +1.23R)",
-      "status": "APPROVED"
+      "direction": "SHORT",
+      "score": 57.37,
+      "ml_prob": 0.15,
+      "reason": "Opportunity Score 57.4 Below Required Threshold (60.0)",
+      "status": "REJECTED"
     },
     {
       "symbol": "USD/JPY",
-      "direction": "SHORT",
-      "score": 64.07,
-      "ml_prob": 0.167,
-      "reason": "Qualified SHORT Opportunity (Score: 64.07, EV: +-0.38R)",
-      "status": "APPROVED"
+      "direction": "LONG",
+      "score": 60.93,
+      "ml_prob": 0.85,
+      "reason": "Active setup unchanged (Alert suppressed)",
+      "status": "MONITORING_ACTIVE"
     },
     {
       "symbol": "AUD/USD",
-      "direction": "LONG",
-      "score": 65.54,
-      "ml_prob": 0.624,
-      "reason": "Qualified LONG Opportunity (Score: 65.54, EV: +1.45R)",
-      "status": "APPROVED"
+      "direction": "SHORT",
+      "score": 58.77,
+      "ml_prob": 0.15,
+      "reason": "Opportunity Score 58.8 Below Required Threshold (60.0)",
+      "status": "REJECTED"
     },
     {
       "symbol": "USD/CAD",
-      "direction": "SHORT",
-      "score": 71.42,
-      "ml_prob": 0.178,
-      "reason": "Active setup already monitored (deduplicated)",
+      "direction": "LONG",
+      "score": 71.96,
+      "ml_prob": 0.85,
+      "reason": "Active setup unchanged (Alert suppressed)",
       "status": "MONITORING_ACTIVE"
     },
     {
       "symbol": "USD/CHF",
-      "direction": "SHORT",
-      "score": 41.83,
-      "ml_prob": 0.15,
-      "reason": "Opportunity Score 41.8 Below Required Threshold (60.0)",
-      "status": "REJECTED"
+      "direction": "LONG",
+      "score": 64.03,
+      "ml_prob": 0.739,
+      "reason": "Qualified LONG Opportunity (Score: 64.03, EV: +1.92R, Tier: MODERATE_QUALITY)",
+      "status": "APPROVED"
     },
     {
       "symbol": "NZD/USD",
-      "direction": "NEUTRAL",
-      "score": 66.86,
-      "ml_prob": 0.4,
-      "reason": "LLM Decision = NO_TRADE (Not APPROVED for trade)",
+      "direction": "LONG",
+      "score": 53.47,
+      "ml_prob": 0.15,
+      "reason": "Opportunity Score 53.5 Below Required Threshold (60.0)",
       "status": "REJECTED"
     },
     {
       "symbol": "EUR/GBP",
       "direction": "LONG",
-      "score": 49.72,
-      "ml_prob": 0.464,
-      "reason": "Opportunity Score 49.7 Below Required Threshold (60.0)",
+      "score": 50.72,
+      "ml_prob": 0.243,
+      "reason": "Opportunity Score 50.7 Below Required Threshold (60.0)",
       "status": "REJECTED"
-    },
-    {
-      "symbol": "Gold",
-      "direction": "SHORT",
-      "score": 51.0,
-      "ml_prob": 0.85,
-      "reason": "Opportunity Score 51.0 Below Required Threshold (60.0)",
-      "status": "REJECTED"
-    },
-    {
-      "symbol": "Crude Oil",
-      "direction": "SHORT",
-      "score": 55.99,
-      "ml_prob": 0.85,
-      "reason": "Opportunity Score 56.0 Below Required Threshold (60.0)",
-      "status": "REJECTED"
-    },
-    {
-      "symbol": "Bitcoin (BTC)",
-      "direction": "LONG",
-      "score": 66.95,
-      "ml_prob": 0.85,
-      "reason": "Qualified LONG Opportunity (Score: 66.95, EV: +2.35R)",
-      "status": "APPROVED"
-    },
-    {
-      "symbol": "Ethereum (ETH)",
-      "direction": "LONG",
-      "score": 73.95,
-      "ml_prob": 0.85,
-      "reason": "Qualified LONG Opportunity (Score: 73.95, EV: +2.35R)",
-      "status": "APPROVED"
-    },
-    {
-      "symbol": "Solana (SOL)",
-      "direction": "LONG",
-      "score": 62.95,
-      "ml_prob": 0.85,
-      "reason": "LLM Decision = WATCH (Not APPROVED for trade)",
-      "status": "REJECTED"
-    },
-    {
-      "symbol": "XRP (Ripple)",
-      "direction": "LONG",
-      "score": 73.19,
-      "ml_prob": 0.85,
-      "reason": "Qualified LONG Opportunity (Score: 73.19, EV: +2.35R)",
-      "status": "APPROVED"
     }
   ],
   "data_quality": {
@@ -349,14 +301,14 @@
     "training_mode": "Offline Historical Factor Calibration"
   },
   "latest_snapshot": {
-    "timestamp": "2026-08-31T15:31:26.748961+00:00",
-    "raw_ticks": 14,
-    "validated": 14,
-    "technical_candidates": 8,
-    "ml_qualified": 7,
-    "risk_qualified": 7,
-    "approved_signals": 7,
-    "alerts_sent": 7,
-    "overall_conversion_pct": 50.0
+    "timestamp": "2026-09-11T03:53:04.955242+00:00",
+    "raw_ticks": 8,
+    "validated": 8,
+    "technical_candidates": 4,
+    "ml_qualified": 3,
+    "risk_qualified": 2,
+    "approved_signals": 1,
+    "alerts_sent": 1,
+    "overall_conversion_pct": 12.5
   }
 }

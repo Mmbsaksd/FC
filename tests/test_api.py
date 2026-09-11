@@ -43,6 +43,15 @@ class TestFastAPIServer(unittest.TestCase):
     def test_config_endpoint(self):
         res = self.client.get("/api/config")
         self.assertEqual(res.status_code, 200)
+        data = res.json()
+        self.assertIn("telegram", data)
+        self.assertIn("llm_providers", data)
+        self.assertIn("oanda", data)
+        # Ensure raw unmasked keys are never exposed in cleartext if present
+        for p, cfg in data.get("llm_providers", {}).items():
+            k = cfg.get("key", "")
+            if k:
+                self.assertIn("••••", k)
 
 if __name__ == '__main__':
     unittest.main()
