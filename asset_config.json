@@ -1,5 +1,7 @@
 {
   "forex_enabled": true,
-  "commodities_enabled": false,
-  "crypto_enabled": false
+  "commodities_enabled": true,
+  "crypto_enabled": true,
+  "universe_mode": "CORE",
+  "core_only": true
 }

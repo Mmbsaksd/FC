@@ -149,6 +149,8 @@ class FlightRecorder:
                 if status == "SUCCESS":
                     st["success"] += 1
                     st["last_status"] = "ONLINE"
+                elif status == "UNAVAILABLE":
+                    st["last_status"] = "ONLINE"
                 else:
                     st["failed"] += 1
                     st["last_status"] = "DEGRADED"
@@ -164,6 +166,17 @@ class FlightRecorder:
                 duration_ms=duration_ms,
                 status=status,
                 message=f"Engine [{engine_name}] evaluated {symbol}: Score={score:.1f}, Dir={direction}, Conf={confidence*100:.0f}% ({duration_ms:.1f}ms)"
+            )
+        elif status == "UNAVAILABLE":
+            sys_logger.debug(
+                component="ParallelEngine",
+                event="ENGINE_UNAVAILABLE",
+                scan_id=scan_id,
+                trace_id=trace_id,
+                instrument=symbol,
+                duration_ms=duration_ms,
+                status=status,
+                message=f"Engine [{engine_name}] gracefully skipped for {symbol} ({error_msg or 'Not applicable for asset class'})"
             )
         else:
             self.record_error(

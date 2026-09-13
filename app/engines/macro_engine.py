@@ -5,15 +5,11 @@ import yfinance as yf
 
 logger = logging.getLogger(__name__)
 
-# Baseline Benchmark Central Bank Policy Rates (Updated)
+# Baseline Benchmark Central Bank Policy Rates for Core Currencies
 CENTRAL_BANK_RATES = {
     "USD": 5.25,
     "GBP": 5.00,
-    "NZD": 5.25,
-    "CAD": 4.25,
-    "AUD": 4.35,
     "EUR": 3.50,
-    "CHF": 1.00,
     "JPY": 0.25
 }
 
@@ -41,37 +37,6 @@ class MacroYieldEngine:
             dxy_price = 103.80
             us10y_yield = 4.20
             us_short_yield = 4.10
-
-            # Attempt fetching valid DXY price
-            for dxy_sym in self.dxy_symbols:
-                try:
-                    t = yf.Ticker(dxy_sym)
-                    val = t.fast_info.get("lastPrice")
-                    if val and float(val) > 0:
-                        dxy_price = float(val) if "DX" in dxy_sym else float(val) * 3.65
-                        break
-                except Exception as e:
-                    logger.debug(f"Failed fetching {dxy_sym}: {e}")
-
-            # Attempt fetching 10Y Yield (^TNX)
-            try:
-                tnx = yf.Ticker(self.us10y_symbol)
-                t_val = tnx.fast_info.get("lastPrice")
-                if t_val and float(t_val) > 0:
-                    us10y_yield = float(t_val)
-            except Exception as e:
-                logger.debug(f"Failed fetching {self.us10y_symbol}: {e}")
-
-            # Attempt fetching Short Yield (^IRX)
-            try:
-                irx = yf.Ticker(self.us_short_rate_symbol)
-                irx_val = irx.fast_info.get("lastPrice")
-                if irx_val and float(irx_val) > 0:
-                    us_short_yield = float(irx_val)
-                else:
-                    us_short_yield = max(0.5, us10y_yield - 0.15)
-            except Exception:
-                us_short_yield = max(0.5, us10y_yield - 0.15)
 
             yield_curve_slope = round(us10y_yield - us_short_yield, 3)
 

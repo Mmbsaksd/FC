@@ -20,10 +20,22 @@ class ParallelRegimeEngine(BaseAnalysisEngine):
                 close_mean = df['close'].mean()
                 norm_vol = (high_low_range / close_mean) * 100.0
 
-                if norm_vol > 1.5:
+                asset_class = getattr(snapshot, "asset_class", "FOREX").upper()
+                if snapshot.is_crypto:
+                    asset_class = "CRYPTO"
+
+                # Asset-calibrated volatility thresholds
+                if asset_class == "CRYPTO":
+                    low_thresh, high_thresh = 0.80, 2.50
+                elif asset_class == "COMMODITY":
+                    low_thresh, high_thresh = 0.30, 1.00
+                else:  # FOREX
+                    low_thresh, high_thresh = 0.12, 0.35
+
+                if norm_vol > high_thresh:
                     regime = "HIGH_VOLATILITY_EXPANSION"
                     volatility = "HIGH"
-                elif norm_vol < 0.4:
+                elif norm_vol < low_thresh:
                     regime = "LOW_VOLATILITY_CONSOLIDATION"
                     volatility = "LOW"
                 else:

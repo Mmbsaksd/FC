@@ -58,235 +58,6 @@ function switchTab(tabId) {
     }
 }
 
-async function loadSignalOutcomes() {
-    try {
-        const [analyticsRes, activeRes, historyRes, eventsRes] = await Promise.all([
-            fetch('/api/signals/analytics'),
-            fetch('/api/signals/active'),
-            fetch('/api/signals/history'),
-            fetch('/api/signals/events')
-        ]);
-
-        const analytics = await analyticsRes.json();
-        const activeData = await activeRes.json();
-        const historyData = await historyRes.json();
-        const eventsData = await eventsRes.json();
-
-        // 1. Update Ribbon Metrics
-        document.getElementById('so-total-alerts').innerText = analytics.total_alerts || 0;
-        document.getElementById('so-active-count').innerText = analytics.active_alerts || 0;
-        document.getElementById('so-t1-hits').innerText = `${analytics.target_1_hits || 0} (${analytics.target_1_rate_pct || 0}%)`;
-        document.getElementById('so-t2-hits').innerText = `${analytics.target_2_hits || 0} (${analytics.target_2_rate_pct || 0}%)`;
-        document.getElementById('so-sl-hits').innerText = `${analytics.stop_loss_hits || 0} (${analytics.stop_loss_rate_pct || 0}%)`;
-        document.getElementById('so-win-rate').innerText = `${analytics.win_rate_pct || 0}%`;
-        document.getElementById('so-avg-r').innerText = `${analytics.average_r >= 0 ? '+' : ''}${analytics.average_r || 0}R`;
-        document.getElementById('so-expectancy').innerText = `${analytics.expectancy_r >= 0 ? '+' : ''}${analytics.expectancy_r || 0}R`;
-
-        // 2. Populate Active Signals Table
-        const activeTbody = document.getElementById('active-signals-table-body');
-        if (activeTbody) {
-            activeTbody.innerHTML = '';
-            const activeList = activeData.active_signals || [];
-            if (activeList.length === 0) {
-                activeTbody.innerHTML = `<tr><td colspan="13" style="text-align: center; color: var(--text-muted); padding: 20px;">No signals currently active. Next scan will evaluate markets.</td></tr>`;
-            } else {
-                activeList.forEach(sig => {
-                    const isLong = sig.direction === 'LONG';
-                    const currP = sig.current_price || sig.entry_price;
-                    const distT1 = Math.abs(sig.take_profit_1 - currP);
-                    const distT2 = Math.abs(sig.take_profit_2 - currP);
-                    const distSL = Math.abs(currP - sig.stop_loss);
-                    const unR = sig.unrealized_r || 0.0;
-                    const unPnl = sig.unrealized_pnl || 0.0;
-                    const mins = sig.holding_minutes || 0;
-                    const durStr = mins < 60 ? `${mins}m` : `${Math.floor(mins/60)}h ${mins%60}m`;
-
-                    activeTbody.innerHTML += `
-                        <tr>
-                            <td style="font-family: monospace; font-size: 0.8rem;">${sig.signal_id}</td>
-                            <td style="font-weight: 600;">${sig.symbol}</td>
-                            <td><span class="direction-tag ${isLong ? 'long' : 'short'}">${sig.direction}</span></td>
-                            <td>${sig.entry_price.toFixed(5)}</td>
-                            <td style="font-weight: 600; color: white;">${currP.toFixed(5)}</td>
-                            <td style="color: var(--accent-emerald);">${distT1.toFixed(5)}</td>
-                            <td style="color: var(--accent-emerald);">${distT2.toFixed(5)}</td>
-                            <td style="color: var(--accent-rose);">${distSL.toFixed(5)}</td>
-                            <td class="${unPnl >= 0 ? 'positive' : 'negative'}">${unPnl >= 0 ? '+' : ''}$${unPnl.toFixed(2)}</td>
-                            <td class="${unR >= 0 ? 'positive' : 'negative'}" style="font-weight: 600;">${unR >= 0 ? '+' : ''}${unR.toFixed(2)}R</td>
-                            <td>${durStr}</td>
-                            <td><span class="status-tag ${sig.t1_hit ? 'live' : 'idle'}">${sig.status}</span></td>
-                            <td>
-                                <button class="btn-secondary" style="padding: 4px 8px; font-size: 0.75rem;" onclick="openSignalDetailModal('${sig.signal_id}')">🔍 Detail</button>
-                            </td>
-                        </tr>
-                    `;
-                });
-            }
-        }
-
-        // 3. Populate Closed Signals Table
-        const closedTbody = document.getElementById('closed-signals-table-body');
-        if (closedTbody) {
-            closedTbody.innerHTML = '';
-            const closedList = historyData.closed_signals || [];
-            if (closedList.length === 0) {
-                closedTbody.innerHTML = `<tr><td colspan="12" style="text-align: center; color: var(--text-muted); padding: 20px;">No completed signals yet in outcome history.</td></tr>`;
-            } else {
-                closedList.slice().reverse().forEach(sig => {
-                    const isLong = sig.direction === 'LONG';
-                    const realR = sig.realized_r || 0.0;
-                    const realPnl = sig.realized_pnl || 0.0;
-                    const mins = sig.holding_minutes || 0;
-                    const durStr = mins < 60 ? `${mins}m` : `${Math.floor(mins/60)}h ${mins%60}m`;
-                    const statusClass = realR > 0 ? 'positive' : 'negative';
-
-                    closedTbody.innerHTML += `
-                        <tr>
-                            <td style="font-family: monospace; font-size: 0.8rem;">${sig.signal_id}</td>
-                            <td style="font-weight: 600;">${sig.symbol}</td>
-                            <td><span class="direction-tag ${isLong ? 'long' : 'short'}">${sig.direction}</span></td>
-                            <td>${sig.entry_price.toFixed(5)}</td>
-                            <td>${sig.take_profit_1.toFixed(5)}</td>
-                            <td>${sig.take_profit_2.toFixed(5)}</td>
-                            <td>${sig.stop_loss.toFixed(5)}</td>
-                            <td><span class="status-tag ${sig.t2_hit ? 'live' : (sig.t1_hit ? 'live' : 'failed')}">${sig.status}</span></td>
-                            <td class="${statusClass}">${realPnl >= 0 ? '+' : ''}$${realPnl.toFixed(2)}</td>
-                            <td class="${statusClass}" style="font-weight: 600;">${realR >= 0 ? '+' : ''}${realR.toFixed(2)}R</td>
-                            <td>${durStr}</td>
-                            <td>
-                                <button class="btn-secondary" style="padding: 4px 8px; font-size: 0.75rem;" onclick="openSignalDetailModal('${sig.signal_id}')">🔍 Detail</button>
-                            </td>
-                        </tr>
-                    `;
-                });
-            }
-        }
-
-        // 4. Populate Real-Time Lifecycle Event Feed
-        const feedContainer = document.getElementById('lifecycle-event-feed');
-        if (feedContainer) {
-            feedContainer.innerHTML = '';
-            const events = (eventsData.events || []).slice(0, 15);
-            if (events.length === 0) {
-                feedContainer.innerHTML = `<div style="color: var(--text-muted); font-size: 0.85rem; padding: 10px;">No lifecycle events logged yet.</div>`;
-            } else {
-                events.forEach(evt => {
-                    let badgeColor = 'var(--accent-cyan)';
-                    if (evt.event_type === 'TARGET_1_HIT' || evt.event_type === 'TARGET_2_HIT') badgeColor = 'var(--accent-emerald)';
-                    if (evt.event_type === 'STOP_LOSS_HIT') badgeColor = 'var(--accent-rose)';
-                    if (evt.event_type === 'EXPIRED') badgeColor = 'var(--accent-amber)';
-
-                    const timeStr = evt.timestamp ? new Date(evt.timestamp).toLocaleTimeString() : '--:--:--';
-                    feedContainer.innerHTML += `
-                        <div style="background: rgba(255,255,255,0.03); border-left: 3px solid ${badgeColor}; padding: 8px 12px; border-radius: 4px; font-size: 0.8rem;">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
-                                <strong style="color: ${badgeColor};">${evt.event_type}</strong>
-                                <span style="color: var(--text-muted); font-size: 0.75rem;">${timeStr}</span>
-                            </div>
-                            <div style="color: var(--text-secondary);">${evt.detail || ''}</div>
-                        </div>
-                    `;
-                });
-            }
-        }
-
-        // 5. Populate Asset Breakdown Table
-        const assetTbody = document.getElementById('asset-outcomes-table-body');
-        if (assetTbody) {
-            assetTbody.innerHTML = '';
-            (analytics.asset_breakdown || []).forEach(a => {
-                assetTbody.innerHTML += `
-                    <tr>
-                        <td style="font-weight: 600;">${a.symbol}</td>
-                        <td>${a.total_signals}</td>
-                        <td class="${a.win_rate_pct >= 50 ? 'positive' : 'negative'}">${a.win_rate_pct}%</td>
-                        <td>${a.t1_rate_pct}%</td>
-                        <td>${a.t2_rate_pct}%</td>
-                        <td class="${a.avg_r >= 0 ? 'positive' : 'negative'}">${a.avg_r >= 0 ? '+' : ''}${a.avg_r}R</td>
-                    </tr>
-                `;
-            });
-        }
-    } catch (err) {
-        console.error("Error loading signal outcomes:", err);
-    }
-}
-
-async function openSignalDetailModal(signalId) {
-    try {
-        const res = await fetch(`/api/signals/detail/${signalId}`);
-        if (!res.ok) {
-            alert("Signal detail not found");
-            return;
-        }
-        const data = await res.json();
-        const sig = data.signal;
-        const isLong = sig.direction === 'LONG';
-        const mins = sig.holding_minutes || 0;
-        const durStr = mins < 60 ? `${mins} mins` : `${Math.floor(mins/60)}h ${mins%60}m`;
-
-        document.getElementById('modal-title').innerText = `📋 SIGNAL TRACE: ${sig.symbol} (${sig.direction}) — ${sig.signal_id}`;
-
-        let html = `
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 16px;">
-                <div style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 6px;">
-                    <div style="font-size: 0.75rem; color: var(--text-muted);">Status</div>
-                    <div style="font-weight: 700; color: var(--accent-emerald);">${sig.status}</div>
-                </div>
-                <div style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 6px;">
-                    <div style="font-size: 0.75rem; color: var(--text-muted);">Score / Win Prob</div>
-                    <div style="font-weight: 700; color: white;">${sig.opportunity_score} / ${(sig.ml_probability*100).toFixed(1)}%</div>
-                </div>
-                <div style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 6px;">
-                    <div style="font-size: 0.75rem; color: var(--text-muted);">Realized R / P&L</div>
-                    <div style="font-weight: 700; color: ${sig.realized_r >= 0 ? 'var(--accent-emerald)' : 'var(--accent-rose)'};">${sig.realized_r >= 0 ? '+' : ''}${sig.realized_r}R ($${sig.realized_pnl})</div>
-                </div>
-                <div style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 6px;">
-                    <div style="font-size: 0.75rem; color: var(--text-muted);">MFE / MAE</div>
-                    <div style="font-weight: 700; color: var(--accent-cyan);">+${sig.mfe_r || 0}R / ${sig.mae_r || 0}R</div>
-                </div>
-                <div style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 6px;">
-                    <div style="font-size: 0.75rem; color: var(--text-muted);">Holding Duration</div>
-                    <div style="font-weight: 700; color: white;">${durStr}</div>
-                </div>
-            </div>
-
-            <h5 style="color: var(--accent-cyan); margin-bottom: 8px;">🎯 Target & Stop Parameters:</h5>
-            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 16px; font-size: 0.85rem;">
-                <div style="padding: 8px; background: rgba(0,0,0,0.3); border-radius: 4px;">Entry: <strong>${sig.entry_price}</strong></div>
-                <div style="padding: 8px; background: rgba(0,0,0,0.3); border-radius: 4px;">Target 1: <strong style="color: var(--accent-emerald);">${sig.take_profit_1}</strong></div>
-                <div style="padding: 8px; background: rgba(0,0,0,0.3); border-radius: 4px;">Target 2: <strong style="color: var(--accent-emerald);">${sig.take_profit_2}</strong></div>
-                <div style="padding: 8px; background: rgba(0,0,0,0.3); border-radius: 4px;">Stop Loss: <strong style="color: var(--accent-rose);">${sig.stop_loss}</strong></div>
-            </div>
-
-            <h5 style="color: var(--accent-emerald); margin-bottom: 8px;">📜 Lifecycle Event History:</h5>
-            <div style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; max-height: 180px; overflow-y: auto;">
-        `;
-
-        (sig.events || []).forEach(evt => {
-            html += `
-                <div style="background: rgba(255,255,255,0.03); padding: 6px 10px; border-radius: 4px; font-size: 0.8rem; display: flex; justify-content: space-between;">
-                    <span><strong>${evt.event}:</strong> ${evt.detail}</span>
-                    <span style="color: var(--text-muted); font-size: 0.75rem;">${new Date(evt.timestamp).toLocaleTimeString()}</span>
-                </div>
-            `;
-        });
-
-        html += `
-            </div>
-            <h5 style="color: white; margin-bottom: 6px;">🧠 Qualitative AI Rationale:</h5>
-            <p style="font-size: 0.85rem; color: var(--text-muted); font-style: italic; line-height: 1.5; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 6px;">
-                "${sig.llm_reasoning || 'Strong quantitative confirmation across analytical engines.'}"
-            </p>
-        `;
-
-        document.getElementById('modal-body').innerHTML = html;
-        document.getElementById('rationale-modal').style.display = 'flex';
-    } catch (err) {
-        console.error("Error opening signal detail:", err);
-    }
-}
-
 async function loadOverview() {
     try {
         const res = await fetch('/api/overview');
@@ -1826,7 +1597,7 @@ async function loadSignalOutcomes() {
         // 4. Fetch Real-Time Lifecycle Events Feed
         const eventsRes = await fetch('/api/signals/events');
         const eventsData = await eventsRes.json();
-        const eventsFeed = document.getElementById('lifecycle-events-feed');
+        const eventsFeed = document.getElementById('lifecycle-event-feed') || document.getElementById('lifecycle-events-feed');
         if (eventsFeed) {
             eventsFeed.innerHTML = '';
             const events = eventsData.events || [];
@@ -1840,15 +1611,16 @@ async function loadSignalOutcomes() {
                     else if (ev.event_type === 'TARGET_2_HIT') { badgeColor = 'var(--accent-emerald)'; bg = 'rgba(16,185,129,0.25)'; }
                     else if (ev.event_type === 'STOP_LOSS_HIT') { badgeColor = 'var(--accent-rose)'; bg = 'rgba(244,63,94,0.15)'; }
                     else if (ev.event_type === 'SIGNAL_CREATED') { badgeColor = 'var(--accent-cyan)'; bg = 'rgba(6,182,212,0.15)'; }
+                    else if (ev.event_type === 'EXPIRED') { badgeColor = 'var(--accent-amber)'; bg = 'rgba(245,158,11,0.15)'; }
 
-                    const timeStr = new Date(ev.timestamp).toLocaleTimeString();
+                    const timeStr = ev.timestamp ? new Date(ev.timestamp).toLocaleTimeString() : '--:--:--';
                     eventsFeed.innerHTML += `
-                        <div style="display: flex; gap: 12px; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                        <div style="display: flex; gap: 12px; align-items: flex-start; padding: 10px; background: rgba(255,255,255,0.02); border-left: 3px solid ${badgeColor}; border-radius: 4px; margin-bottom: 6px;">
                             <span style="font-size: 0.75rem; color: var(--text-muted); min-width: 65px;">${timeStr}</span>
-                            <span style="padding: 1px 6px; border-radius: 4px; font-size: 0.7rem; font-weight: 700; background: ${bg}; color: ${badgeColor}; min-width: 90px; text-align: center;">
+                            <span style="padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 700; background: ${bg}; color: ${badgeColor}; min-width: 90px; text-align: center;">
                                 ${ev.event_type}
                             </span>
-                            <div style="font-size: 0.8rem; flex: 1;">
+                            <div style="font-size: 0.82rem; flex: 1;">
                                 <strong>${ev.symbol || ''}</strong>: ${ev.detail || ''}
                             </div>
                         </div>
@@ -1893,6 +1665,7 @@ async function openSignalDetailModal(signalId) {
             modal.className = 'modal-backdrop';
             document.body.appendChild(modal);
         }
+        modal.style.display = 'flex';
 
         const isLong = s.direction === 'LONG';
         const events = s.events || [];

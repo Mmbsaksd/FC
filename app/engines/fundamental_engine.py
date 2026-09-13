@@ -20,11 +20,7 @@ class FundamentalAnalysisEngine:
             {"currency": "GBP", "event": "BOE Bank Rate", "consensus": 5.25, "actual": 5.25, "std": 0.25, "importance": "HIGH"},
             {"currency": "GBP", "event": "UK GDP QoQ", "consensus": 0.6, "actual": 0.7, "std": 0.2, "importance": "MEDIUM"},
             {"currency": "JPY", "event": "BOJ Policy Rate", "consensus": 0.25, "actual": 0.25, "std": 0.15, "importance": "HIGH"},
-            {"currency": "JPY", "event": "Tokyo Core CPI YoY", "consensus": 2.2, "actual": 2.4, "std": 0.3, "importance": "HIGH"},
-            {"currency": "AUD", "event": "RBA Cash Rate", "consensus": 4.35, "actual": 4.35, "std": 0.25, "importance": "HIGH"},
-            {"currency": "CAD", "event": "BOC Overnight Rate", "consensus": 4.75, "actual": 4.75, "std": 0.25, "importance": "HIGH"},
-            {"currency": "CHF", "event": "SNB Policy Rate", "consensus": 1.25, "actual": 1.25, "std": 0.25, "importance": "HIGH"},
-            {"currency": "NZD", "event": "RBNZ Official Cash Rate", "consensus": 5.25, "actual": 5.25, "std": 0.25, "importance": "HIGH"}
+            {"currency": "JPY", "event": "Tokyo Core CPI YoY", "consensus": 2.2, "actual": 2.4, "std": 0.3, "importance": "HIGH"}
         ]
 
     def calculate_fundamental_score(self, base_currency: str, quote_currency: str) -> Dict[str, Any]:
@@ -33,8 +29,8 @@ class FundamentalAnalysisEngine:
         Returns neutral backdrop for non-FX commodities.
         """
         # Non-FX commodities and crypto return neutral macro-fundamental backdrop
-        is_fx = (base_currency in ["USD", "EUR", "GBP", "JPY", "AUD", "CAD", "CHF", "NZD"] and
-                 quote_currency in ["USD", "EUR", "GBP", "JPY", "AUD", "CAD", "CHF", "NZD"])
+        is_fx = (base_currency in ["USD", "EUR", "GBP", "JPY"] and
+                 quote_currency in ["USD", "EUR", "GBP", "JPY"])
 
         if not is_fx:
             return {

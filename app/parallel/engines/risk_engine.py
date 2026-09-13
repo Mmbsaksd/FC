@@ -31,26 +31,30 @@ class ParallelRiskEngine(BaseAnalysisEngine):
 
             # Compute risk parameters matching direction and provide dual-bracket metrics
             calc_direction = direction if direction in ["LONG", "SHORT"] else "LONG"
+            asset_class = getattr(snapshot, "asset_class", "FOREX")
             risk_params = RiskEngine.calculate_trade_parameters(
                 symbol=snapshot.symbol,
                 direction=calc_direction,
                 current_price=snapshot.price,
                 atr=atr,
-                pip_size=snapshot.pip_size
+                pip_size=snapshot.pip_size,
+                asset_class=asset_class
             )
             long_params = RiskEngine.calculate_trade_parameters(
                 symbol=snapshot.symbol,
                 direction="LONG",
                 current_price=snapshot.price,
                 atr=atr,
-                pip_size=snapshot.pip_size
+                pip_size=snapshot.pip_size,
+                asset_class=asset_class
             )
             short_params = RiskEngine.calculate_trade_parameters(
                 symbol=snapshot.symbol,
                 direction="SHORT",
                 current_price=snapshot.price,
                 atr=atr,
-                pip_size=snapshot.pip_size
+                pip_size=snapshot.pip_size,
+                asset_class=asset_class
             )
 
             valid = risk_params.get("valid", False)

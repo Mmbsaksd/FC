@@ -1,34 +1,34 @@
 {
   "system_status": {
     "status": "HEALTHY",
-    "state": "ACTIVE_SIGNALS",
-    "scan_id": "scan-20260911-035201",
-    "last_scan_time": "2026-09-11T03:53:04.955242+00:00",
+    "state": "IDLE",
+    "scan_id": "scan-20260913-112111",
+    "last_scan_time": "2026-09-13T11:21:38.070733+00:00",
     "scan_interval_minutes": 15,
-    "monitored_assets": 8,
+    "monitored_assets": 6,
     "active_engines": "10/10",
     "completed_engines": 10,
     "failed_engines": 0,
-    "pipeline_latency_ms": 63153.9,
+    "pipeline_latency_ms": 26357.4,
     "overall_health": "OPTIMAL"
   },
   "current_scan": {
-    "scan_id": "scan-20260911-035201",
-    "timestamp": "2026-09-11T03:53:04.955242+00:00",
-    "duration_ms": 63153.9,
-    "instruments_scanned": 8,
-    "total_observations": 480,
-    "valid_observations": 480,
+    "scan_id": "scan-20260913-112111",
+    "timestamp": "2026-09-13T11:21:38.070733+00:00",
+    "duration_ms": 26357.4,
+    "instruments_scanned": 6,
+    "total_observations": 360,
+    "valid_observations": 360,
     "stale_observations": 0,
     "rejected_observations": 0,
-    "analytical_jobs_launched": 80,
-    "analytical_jobs_completed": 80,
+    "analytical_jobs_launched": 60,
+    "analytical_jobs_completed": 60,
     "failed_jobs": 0,
-    "candidates_detected": 4,
-    "candidates_sent_to_llm": 3,
-    "approved_opportunities": 1,
-    "rejected_opportunities": 7,
-    "alerts_generated": 1
+    "candidates_detected": 3,
+    "candidates_sent_to_llm": 2,
+    "approved_opportunities": 0,
+    "rejected_opportunities": 6,
+    "alerts_generated": 0
   },
   "parallel_engines": [
     {
@@ -135,133 +135,123 @@
   "opportunity_lifecycle": [
     {
       "stage": "1. Market Snapshot",
-      "count": 8,
+      "count": 6,
       "pass_rate": 100.0,
       "latency_ms": 120.0,
-      "description": "Ingested 60 bars of 15M candles for 8 instruments"
+      "description": "Ingested 60 bars of 15M candles for 6 instruments"
     },
     {
       "stage": "2. Parallel Evidence",
-      "count": 80,
+      "count": 60,
       "pass_rate": 100.0,
-      "latency_ms": 63153.9,
+      "latency_ms": 26357.4,
       "description": "10 independent analytical engines executed concurrently"
     },
     {
       "stage": "3. Candidate Detection",
-      "count": 8,
+      "count": 6,
       "pass_rate": 100.0,
       "latency_ms": 2.1,
       "description": "Unified multi-engine context snapshots assembled"
     },
     {
       "stage": "4. Evidence Aggregation",
-      "count": 4,
+      "count": 3,
       "pass_rate": 50.0,
       "latency_ms": 1.4,
       "description": "Orthogonal weighted composite scoring & regime filtering"
     },
     {
       "stage": "5. LLM Decision Layer",
-      "count": 3,
-      "pass_rate": 75.0,
+      "count": 2,
+      "pass_rate": 66.7,
       "latency_ms": 450.0,
       "description": "Multi-provider AI rationale synthesis & hypothesis check"
     },
     {
       "stage": "6. Deterministic Risk Gate",
-      "count": 2,
-      "pass_rate": 66.7,
+      "count": 1,
+      "pass_rate": 50.0,
       "latency_ms": 0.5,
       "description": "Hard validation: Score >= 70, R:R >= 2.0, EV > 0"
     },
     {
       "stage": "7. Signal Generation",
-      "count": 1,
-      "pass_rate": 50.0,
+      "count": 0,
+      "pass_rate": 0.0,
       "latency_ms": 0.8,
       "description": "Structured JSON payload with complete WHY THIS TRADE rationale"
     },
     {
       "stage": "8. Alert & Paper Trading",
-      "count": 1,
-      "pass_rate": 100.0,
+      "count": 0,
+      "pass_rate": 0.0,
       "latency_ms": 85.0,
       "description": "Telegram push notifications & simulated paper trade logging"
     }
   ],
   "rejection_breakdown": [
     {
-      "reason": "Opportunity Score < 60.0",
-      "count": 5,
-      "percentage": 100.0,
+      "reason": "Expected Value <= 0",
+      "count": 3,
+      "percentage": 75.0,
+      "description": "Dynamic statistical EV calculation yielded non-positive expectancy after accounting for spread friction."
+    },
+    {
+      "reason": "LLM Not Approved",
+      "count": 1,
+      "percentage": 25.0,
       "description": "Setup did not satisfy strict quantitative risk and confidence gates."
     }
   ],
   "why_no_trade_list": [
     {
       "symbol": "EUR/USD",
-      "direction": "SHORT",
-      "score": 64.64,
+      "direction": "LONG",
+      "score": 61.47,
       "ml_prob": 0.15,
-      "reason": "LLM Decision = WATCH (Not APPROVED for trade)",
+      "reason": "Negative Expected Value: +0.00R <= 0.0R (High score cannot compensate for negative EV)",
       "status": "REJECTED"
     },
     {
       "symbol": "GBP/USD",
-      "direction": "SHORT",
-      "score": 57.37,
-      "ml_prob": 0.15,
-      "reason": "Opportunity Score 57.4 Below Required Threshold (60.0)",
+      "direction": "LONG",
+      "score": 66.15,
+      "ml_prob": 0.351,
+      "reason": "Negative Expected Value: +0.00R <= 0.0R (High score cannot compensate for negative EV)",
       "status": "REJECTED"
     },
     {
       "symbol": "USD/JPY",
       "direction": "LONG",
-      "score": 60.93,
-      "ml_prob": 0.85,
-      "reason": "Active setup unchanged (Alert suppressed)",
-      "status": "MONITORING_ACTIVE"
+      "score": 60.11,
+      "ml_prob": 0.201,
+      "reason": "Negative Expected Value: +0.00R <= 0.0R (High score cannot compensate for negative EV)",
+      "status": "REJECTED"
     },
     {
-      "symbol": "AUD/USD",
+      "symbol": "Gold",
       "direction": "SHORT",
-      "score": 58.77,
-      "ml_prob": 0.15,
-      "reason": "Opportunity Score 58.8 Below Required Threshold (60.0)",
+      "score": 74.23,
+      "ml_prob": 0.572,
+      "reason": "LLM Decision = WATCH (Not APPROVED for trade)",
       "status": "REJECTED"
     },
     {
-      "symbol": "USD/CAD",
-      "direction": "LONG",
-      "score": 71.96,
-      "ml_prob": 0.85,
+      "symbol": "Bitcoin (BTC)",
+      "direction": "SHORT",
+      "score": 78.3,
+      "ml_prob": 0.576,
       "reason": "Active setup unchanged (Alert suppressed)",
       "status": "MONITORING_ACTIVE"
     },
     {
-      "symbol": "USD/CHF",
-      "direction": "LONG",
-      "score": 64.03,
-      "ml_prob": 0.739,
-      "reason": "Qualified LONG Opportunity (Score: 64.03, EV: +1.92R, Tier: MODERATE_QUALITY)",
-      "status": "APPROVED"
-    },
-    {
-      "symbol": "NZD/USD",
-      "direction": "LONG",
-      "score": 53.47,
-      "ml_prob": 0.15,
-      "reason": "Opportunity Score 53.5 Below Required Threshold (60.0)",
-      "status": "REJECTED"
-    },
-    {
-      "symbol": "EUR/GBP",
-      "direction": "LONG",
-      "score": 50.72,
-      "ml_prob": 0.243,
-      "reason": "Opportunity Score 50.7 Below Required Threshold (60.0)",
-      "status": "REJECTED"
+      "symbol": "Ethereum (ETH)",
+      "direction": "SHORT",
+      "score": 77.96,
+      "ml_prob": 0.574,
+      "reason": "Active setup unchanged (Alert suppressed)",
+      "status": "MONITORING_ACTIVE"
     }
   ],
   "data_quality": {
@@ -301,14 +291,14 @@
     "training_mode": "Offline Historical Factor Calibration"
   },
   "latest_snapshot": {
-    "timestamp": "2026-09-11T03:53:04.955242+00:00",
-    "raw_ticks": 8,
-    "validated": 8,
-    "technical_candidates": 4,
-    "ml_qualified": 3,
-    "risk_qualified": 2,
-    "approved_signals": 1,
-    "alerts_sent": 1,
-    "overall_conversion_pct": 12.5
+    "timestamp": "2026-09-13T11:21:38.070733+00:00",
+    "raw_ticks": 6,
+    "validated": 6,
+    "technical_candidates": 3,
+    "ml_qualified": 2,
+    "risk_qualified": 1,
+    "approved_signals": 0,
+    "alerts_sent": 0,
+    "overall_conversion_pct": 0.0
   }
 }

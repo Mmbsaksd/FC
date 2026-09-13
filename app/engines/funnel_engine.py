@@ -128,8 +128,8 @@ class PipelineFunnelEngine:
             ],
             "why_no_trade_list": candidate_evaluations if candidate_evaluations else [
                 {"symbol": "EUR/USD", "direction": "SHORT", "score": 56.6, "ml_prob": 0.54, "reason": "Opportunity Score 56.6 < 70.0 threshold. Contradictory MACD signal.", "status": "REJECTED"},
-                {"symbol": "USD/CAD", "direction": "LONG", "score": 64.6, "ml_prob": 0.62, "reason": "Opportunity Score 64.6 < 70.0 threshold. Trend pullback not yet confirmed.", "status": "REJECTED"},
-                {"symbol": "SOL-USD", "direction": "SHORT", "score": 67.3, "ml_prob": 0.66, "reason": "Score 67.3 closely below threshold 70.0. Awaiting settled candle breakdown.", "status": "REJECTED"},
+                {"symbol": "GBP/USD", "direction": "LONG", "score": 64.6, "ml_prob": 0.62, "reason": "Opportunity Score 64.6 < 70.0 threshold. Trend pullback not yet confirmed.", "status": "REJECTED"},
+                {"symbol": "BTC-USD", "direction": "SHORT", "score": 67.3, "ml_prob": 0.66, "reason": "Score 67.3 closely below threshold 70.0. Awaiting settled candle breakdown.", "status": "REJECTED"},
                 {"symbol": "Gold", "direction": "SHORT", "score": 55.1, "ml_prob": 0.51, "reason": "Neutral macro backdrop; insufficient directional momentum.", "status": "REJECTED"}
             ],
             "data_quality": {

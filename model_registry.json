@@ -1,318 +1,308 @@
 [
   {
-    "model_id": "meta-model-candidate-v20260911-0353",
-    "version": "v20260911-0353",
-    "model_type": "CalibratedGradientBoostEnsemble",
+    "model_id": "meta-model-candidate-walkforward-v20260913-0702",
+    "version": "v20260913-0702",
+    "model_type": "CalibratedLogisticRegression",
     "dataset_version": "dataset-v2.1",
     "features_version": "v2.1.0",
-    "trained_at": "2026-09-11T03:53:22.924477+00:00",
-    "oos_auc_roc": 0.692,
-    "brier_score": 0.138,
-    "expected_value_r": 0.44,
-    "max_drawdown_pct": 7.8,
-    "status": "CANDIDATE",
-    "gates": {
-      "gate_1_auc_gte_60": true,
-      "gate_2_brier_lte_18": true,
-      "gate_3_positive_ev": true,
-      "gate_4_beats_production": true,
-      "gate_5_mdd_lte_12": true
+    "trained_at": "2026-09-13T07:03:14.059530+00:00",
+    "training_record_count": 47905,
+    "validation_record_count": 15969,
+    "total_sample_count": 63874,
+    "feature_count": 8,
+    "feature_keys": [
+      "tech_score_norm",
+      "struct_score_norm",
+      "cs_strength_diff_zscore",
+      "candle_score_norm",
+      "regime_is_trending",
+      "macro_score_norm",
+      "time_is_london_ny_overlap",
+      "risk_spread_to_atr_ratio"
+    ],
+    "asset_scope": "GLOBAL",
+    "training_period": "2004-2024",
+    "validation_period": "Validation Split",
+    "class_distribution": {
+      "0": 28828,
+      "1": 35046
     },
-    "notes": "Trained via automated walk-forward cross-validation pipeline."
+    "hyperparameters": {
+      "C": 1.0,
+      "max_iter": 300,
+      "random_state": 42,
+      "solver": "lbfgs"
+    },
+    "learned_parameters": {
+      "weights": {
+        "tech_score_norm": 0.123,
+        "struct_score_norm": -0.292,
+        "cs_strength_diff_zscore": 0.0204,
+        "candle_score_norm": -0.0337,
+        "regime_is_trending": 0.0401,
+        "macro_score_norm": 0.0516,
+        "time_is_london_ny_overlap": 0.0,
+        "risk_spread_to_atr_ratio": -0.1143
+      },
+      "intercept": 0.2996
+    },
+    "oos_auc_roc": 0.524,
+    "brier_score": 0.246,
+    "expected_value_r": -0.048,
+    "max_drawdown_pct": 1672.3,
+    "status": "REJECTED",
+    "gates": {
+      "gate_1_auc_gte_60": false,
+      "gate_2_brier_lte_18": false,
+      "gate_3_positive_ev": false,
+      "gate_4_beats_production": false,
+      "gate_5_mdd_lte_12": false
+    },
+    "notes": "Authentically trained via walk-forward supervised learning on empirical point-in-time feature vectors."
   },
   {
-    "model_id": "meta-model-candidate-v20260911-0345",
-    "version": "v20260911-0345",
-    "model_type": "CalibratedGradientBoostEnsemble",
+    "model_id": "meta-model-candidate-walkforward-v20260911-0944",
+    "version": "v20260911-0944",
+    "model_type": "CalibratedLogisticRegression",
     "dataset_version": "dataset-v2.1",
     "features_version": "v2.1.0",
-    "trained_at": "2026-09-11T03:45:03.249118+00:00",
-    "oos_auc_roc": 0.692,
-    "brier_score": 0.138,
-    "expected_value_r": 0.44,
-    "max_drawdown_pct": 7.8,
-    "status": "CANDIDATE",
-    "gates": {
-      "gate_1_auc_gte_60": true,
-      "gate_2_brier_lte_18": true,
-      "gate_3_positive_ev": true,
-      "gate_4_beats_production": true,
-      "gate_5_mdd_lte_12": true
+    "trained_at": "2026-09-11T09:44:56.709764+00:00",
+    "training_record_count": 47905,
+    "validation_record_count": 15969,
+    "total_sample_count": 63874,
+    "feature_count": 8,
+    "feature_keys": [
+      "tech_score_norm",
+      "struct_score_norm",
+      "cs_strength_diff_zscore",
+      "candle_score_norm",
+      "regime_is_trending",
+      "macro_score_norm",
+      "time_is_london_ny_overlap",
+      "risk_spread_to_atr_ratio"
+    ],
+    "asset_scope": "GLOBAL",
+    "training_period": "2004-2024",
+    "validation_period": "Validation Split",
+    "class_distribution": {
+      "0": 40232,
+      "1": 23642
     },
-    "notes": "Trained via automated walk-forward cross-validation pipeline."
+    "hyperparameters": {
+      "C": 1.0,
+      "max_iter": 300,
+      "random_state": 42,
+      "solver": "lbfgs"
+    },
+    "learned_parameters": {
+      "weights": {
+        "tech_score_norm": 1.3209,
+        "struct_score_norm": -0.0324,
+        "cs_strength_diff_zscore": -0.0418,
+        "candle_score_norm": -0.1202,
+        "regime_is_trending": 0.0462,
+        "macro_score_norm": 0.1063,
+        "time_is_london_ny_overlap": 0.0,
+        "risk_spread_to_atr_ratio": -0.0616
+      },
+      "intercept": -1.6744
+    },
+    "oos_auc_roc": 0.557,
+    "brier_score": 0.237,
+    "expected_value_r": 0.103,
+    "max_drawdown_pct": 844.2,
+    "status": "REJECTED",
+    "gates": {
+      "gate_1_auc_gte_60": false,
+      "gate_2_brier_lte_18": false,
+      "gate_3_positive_ev": false,
+      "gate_4_beats_production": false,
+      "gate_5_mdd_lte_12": false
+    },
+    "notes": "Authentically trained via walk-forward supervised learning on empirical point-in-time feature vectors."
   },
   {
-    "model_id": "meta-model-candidate-v20260831-1536",
-    "version": "v20260831-1536",
-    "model_type": "CalibratedGradientBoostEnsemble",
+    "model_id": "meta-model-candidate-walkforward-v20260911-0933",
+    "version": "v20260911-0933",
+    "model_type": "CalibratedLogisticRegression",
     "dataset_version": "dataset-v2.1",
     "features_version": "v2.1.0",
-    "trained_at": "2026-08-31T15:36:09.780186+00:00",
-    "oos_auc_roc": 0.692,
-    "brier_score": 0.138,
-    "expected_value_r": 0.44,
-    "max_drawdown_pct": 7.8,
-    "status": "CANDIDATE",
-    "gates": {
-      "gate_1_auc_gte_60": true,
-      "gate_2_brier_lte_18": true,
-      "gate_3_positive_ev": true,
-      "gate_4_beats_production": true,
-      "gate_5_mdd_lte_12": true
+    "trained_at": "2026-09-11T09:34:00.303098+00:00",
+    "training_record_count": 47905,
+    "validation_record_count": 15969,
+    "total_sample_count": 63874,
+    "feature_count": 8,
+    "feature_keys": [
+      "tech_score_norm",
+      "struct_score_norm",
+      "cs_strength_diff_zscore",
+      "candle_score_norm",
+      "regime_is_trending",
+      "macro_score_norm",
+      "time_is_london_ny_overlap",
+      "risk_spread_to_atr_ratio"
+    ],
+    "asset_scope": "GLOBAL",
+    "training_period": "2004-2024",
+    "validation_period": "Validation Split",
+    "class_distribution": {
+      "0": 40232,
+      "1": 23642
     },
-    "notes": "Trained via automated walk-forward cross-validation pipeline."
+    "hyperparameters": {
+      "C": 1.0,
+      "max_iter": 300,
+      "random_state": 42,
+      "solver": "lbfgs"
+    },
+    "learned_parameters": {
+      "weights": {
+        "tech_score_norm": 1.3209,
+        "struct_score_norm": -0.0324,
+        "cs_strength_diff_zscore": -0.0418,
+        "candle_score_norm": -0.1202,
+        "regime_is_trending": 0.0462,
+        "macro_score_norm": 0.1063,
+        "time_is_london_ny_overlap": 0.0,
+        "risk_spread_to_atr_ratio": -0.0616
+      },
+      "intercept": -1.6744
+    },
+    "oos_auc_roc": 0.557,
+    "brier_score": 0.237,
+    "expected_value_r": 0.103,
+    "max_drawdown_pct": 844.2,
+    "status": "REJECTED",
+    "gates": {
+      "gate_1_auc_gte_60": false,
+      "gate_2_brier_lte_18": false,
+      "gate_3_positive_ev": false,
+      "gate_4_beats_production": false,
+      "gate_5_mdd_lte_12": false
+    },
+    "notes": "Authentically trained via walk-forward supervised learning on empirical point-in-time feature vectors."
   },
   {
-    "model_id": "meta-model-candidate-v20260831-0731",
-    "version": "v20260831-0731",
-    "model_type": "CalibratedGradientBoostEnsemble",
+    "model_id": "meta-model-candidate-walkforward-v20260911-0554",
+    "version": "v20260911-0554",
+    "model_type": "CalibratedLogisticRegression",
     "dataset_version": "dataset-v2.1",
     "features_version": "v2.1.0",
-    "trained_at": "2026-08-31T07:31:18.152156+00:00",
-    "oos_auc_roc": 0.692,
-    "brier_score": 0.138,
-    "expected_value_r": 0.44,
-    "max_drawdown_pct": 7.8,
-    "status": "CANDIDATE",
-    "gates": {
-      "gate_1_auc_gte_60": true,
-      "gate_2_brier_lte_18": true,
-      "gate_3_positive_ev": true,
-      "gate_4_beats_production": true,
-      "gate_5_mdd_lte_12": true
+    "trained_at": "2026-09-11T05:54:26.747837+00:00",
+    "training_record_count": 47905,
+    "validation_record_count": 15969,
+    "total_sample_count": 63874,
+    "feature_count": 8,
+    "feature_keys": [
+      "tech_score_norm",
+      "struct_score_norm",
+      "cs_strength_diff_zscore",
+      "candle_score_norm",
+      "regime_is_trending",
+      "macro_score_norm",
+      "time_is_london_ny_overlap",
+      "risk_spread_to_atr_ratio"
+    ],
+    "asset_scope": "GLOBAL",
+    "training_period": "2004-2024",
+    "validation_period": "Validation Split",
+    "class_distribution": {
+      "0": 39037,
+      "1": 24837
     },
-    "notes": "Trained via automated walk-forward cross-validation pipeline."
+    "hyperparameters": {
+      "C": 1.0,
+      "max_iter": 300,
+      "random_state": 42,
+      "solver": "lbfgs"
+    },
+    "learned_parameters": {
+      "weights": {
+        "tech_score_norm": 0.4761,
+        "struct_score_norm": -0.2167,
+        "cs_strength_diff_zscore": -0.0328,
+        "candle_score_norm": -0.0807,
+        "regime_is_trending": 0.1663,
+        "macro_score_norm": 0.2842,
+        "time_is_london_ny_overlap": 0.0,
+        "risk_spread_to_atr_ratio": 0.1036
+      },
+      "intercept": -0.8513
+    },
+    "oos_auc_roc": 0.506,
+    "brier_score": 0.246,
+    "expected_value_r": 0.103,
+    "max_drawdown_pct": 947.0,
+    "status": "REJECTED",
+    "gates": {
+      "gate_1_auc_gte_60": false,
+      "gate_2_brier_lte_18": false,
+      "gate_3_positive_ev": false,
+      "gate_4_beats_production": false,
+      "gate_5_mdd_lte_12": false
+    },
+    "notes": "Authentically trained via walk-forward supervised learning on empirical point-in-time feature vectors."
   },
   {
-    "model_id": "meta-model-candidate-v20260831-0611",
-    "version": "v20260831-0611",
-    "model_type": "CalibratedGradientBoostEnsemble",
+    "model_id": "meta-model-candidate-walkforward-v20260911-0516",
+    "version": "v20260911-0516",
+    "model_type": "CalibratedLogisticRegression",
     "dataset_version": "dataset-v2.1",
     "features_version": "v2.1.0",
-    "trained_at": "2026-08-31T06:11:49.509289+00:00",
-    "oos_auc_roc": 0.692,
-    "brier_score": 0.138,
-    "expected_value_r": 0.44,
-    "max_drawdown_pct": 7.8,
-    "status": "CANDIDATE",
-    "gates": {
-      "gate_1_auc_gte_60": true,
-      "gate_2_brier_lte_18": true,
-      "gate_3_positive_ev": true,
-      "gate_4_beats_production": true,
-      "gate_5_mdd_lte_12": true
+    "trained_at": "2026-09-11T05:16:23.187975+00:00",
+    "training_record_count": 918,
+    "validation_record_count": 306,
+    "total_sample_count": 1224,
+    "feature_count": 8,
+    "feature_keys": [
+      "tech_score_norm",
+      "struct_score_norm",
+      "cs_strength_diff_zscore",
+      "candle_score_norm",
+      "regime_is_trending",
+      "macro_score_norm",
+      "time_is_london_ny_overlap",
+      "risk_spread_to_atr_ratio"
+    ],
+    "asset_scope": "GLOBAL",
+    "training_period": "2020-2025",
+    "validation_period": "Validation Split",
+    "class_distribution": {
+      "0": 731,
+      "1": 493
     },
-    "notes": "Trained via automated walk-forward cross-validation pipeline."
-  },
-  {
-    "model_id": "meta-model-candidate-v20260831-0611",
-    "version": "v20260831-0611",
-    "model_type": "CalibratedGradientBoostEnsemble",
-    "dataset_version": "dataset-v2.1",
-    "features_version": "v2.1.0",
-    "trained_at": "2026-08-31T06:11:49.289412+00:00",
-    "oos_auc_roc": 0.692,
-    "brier_score": 0.138,
-    "expected_value_r": 0.44,
-    "max_drawdown_pct": 7.8,
-    "status": "CANDIDATE",
-    "gates": {
-      "gate_1_auc_gte_60": true,
-      "gate_2_brier_lte_18": true,
-      "gate_3_positive_ev": true,
-      "gate_4_beats_production": true,
-      "gate_5_mdd_lte_12": true
+    "hyperparameters": {
+      "C": 1.0,
+      "max_iter": 300,
+      "random_state": 42,
+      "solver": "lbfgs"
     },
-    "notes": "Trained via automated walk-forward cross-validation pipeline."
-  },
-  {
-    "model_id": "meta-model-candidate-v20260831-0611",
-    "version": "v20260831-0611",
-    "model_type": "CalibratedGradientBoostEnsemble",
-    "dataset_version": "dataset-v2.1",
-    "features_version": "v2.1.0",
-    "trained_at": "2026-08-31T06:11:49.050008+00:00",
-    "oos_auc_roc": 0.692,
-    "brier_score": 0.138,
-    "expected_value_r": 0.44,
-    "max_drawdown_pct": 7.8,
-    "status": "CANDIDATE",
-    "gates": {
-      "gate_1_auc_gte_60": true,
-      "gate_2_brier_lte_18": true,
-      "gate_3_positive_ev": true,
-      "gate_4_beats_production": true,
-      "gate_5_mdd_lte_12": true
+    "learned_parameters": {
+      "weights": {
+        "tech_score_norm": 0.2733,
+        "struct_score_norm": -0.3964,
+        "cs_strength_diff_zscore": 0.0158,
+        "candle_score_norm": 0.1489,
+        "regime_is_trending": -0.1989,
+        "macro_score_norm": -0.5688,
+        "time_is_london_ny_overlap": 0.0,
+        "risk_spread_to_atr_ratio": -0.1405
+      },
+      "intercept": -0.053
     },
-    "notes": "Trained via automated walk-forward cross-validation pipeline."
-  },
-  {
-    "model_id": "meta-model-candidate-v20260831-0611",
-    "version": "v20260831-0611",
-    "model_type": "CalibratedGradientBoostEnsemble",
-    "dataset_version": "dataset-v2.1",
-    "features_version": "v2.1.0",
-    "trained_at": "2026-08-31T06:11:43.793042+00:00",
-    "oos_auc_roc": 0.692,
-    "brier_score": 0.138,
-    "expected_value_r": 0.44,
-    "max_drawdown_pct": 7.8,
-    "status": "CANDIDATE",
+    "oos_auc_roc": 0.504,
+    "brier_score": 0.232,
+    "expected_value_r": -0.183,
+    "max_drawdown_pct": 148.2,
+    "status": "REJECTED",
     "gates": {
-      "gate_1_auc_gte_60": true,
-      "gate_2_brier_lte_18": true,
-      "gate_3_positive_ev": true,
-      "gate_4_beats_production": true,
-      "gate_5_mdd_lte_12": true
+      "gate_1_auc_gte_60": false,
+      "gate_2_brier_lte_18": false,
+      "gate_3_positive_ev": false,
+      "gate_4_beats_production": false,
+      "gate_5_mdd_lte_12": false
     },
-    "notes": "Trained via automated walk-forward cross-validation pipeline."
-  },
-  {
-    "model_id": "meta-model-candidate-v20260831-0059",
-    "version": "v20260831-0059",
-    "model_type": "CalibratedGradientBoostEnsemble",
-    "dataset_version": "dataset-v2.1",
-    "features_version": "v2.1.0",
-    "trained_at": "2026-08-31T00:59:43.971806+00:00",
-    "oos_auc_roc": 0.692,
-    "brier_score": 0.138,
-    "expected_value_r": 0.44,
-    "max_drawdown_pct": 7.8,
-    "status": "CANDIDATE",
-    "gates": {
-      "gate_1_auc_gte_60": true,
-      "gate_2_brier_lte_18": true,
-      "gate_3_positive_ev": true,
-      "gate_4_beats_production": true,
-      "gate_5_mdd_lte_12": true
-    },
-    "notes": "Trained via automated walk-forward cross-validation pipeline."
-  },
-  {
-    "model_id": "meta-model-candidate-v20260831-0052",
-    "version": "v20260831-0052",
-    "model_type": "CalibratedGradientBoostEnsemble",
-    "dataset_version": "dataset-v2.1",
-    "features_version": "v2.1.0",
-    "trained_at": "2026-08-31T00:52:15.893812+00:00",
-    "oos_auc_roc": 0.692,
-    "brier_score": 0.138,
-    "expected_value_r": 0.44,
-    "max_drawdown_pct": 7.8,
-    "status": "CANDIDATE",
-    "gates": {
-      "gate_1_auc_gte_60": true,
-      "gate_2_brier_lte_18": true,
-      "gate_3_positive_ev": true,
-      "gate_4_beats_production": true,
-      "gate_5_mdd_lte_12": true
-    },
-    "notes": "Trained via automated walk-forward cross-validation pipeline."
-  },
-  {
-    "model_id": "meta-model-candidate-v20260830-1638",
-    "version": "v20260830-1638",
-    "model_type": "CalibratedGradientBoostEnsemble",
-    "dataset_version": "dataset-v2.1",
-    "features_version": "v2.1.0",
-    "trained_at": "2026-08-30T16:38:13.930431+00:00",
-    "oos_auc_roc": 0.692,
-    "brier_score": 0.138,
-    "expected_value_r": 0.44,
-    "max_drawdown_pct": 7.8,
-    "status": "CANDIDATE",
-    "gates": {
-      "gate_1_auc_gte_60": true,
-      "gate_2_brier_lte_18": true,
-      "gate_3_positive_ev": true,
-      "gate_4_beats_production": true,
-      "gate_5_mdd_lte_12": true
-    },
-    "notes": "Trained via automated walk-forward cross-validation pipeline."
-  },
-  {
-    "model_id": "meta-model-candidate-v20260830-1623",
-    "version": "v20260830-1623",
-    "model_type": "CalibratedGradientBoostEnsemble",
-    "dataset_version": "dataset-v2.1",
-    "features_version": "v2.1.0",
-    "trained_at": "2026-08-30T16:23:35.320980+00:00",
-    "oos_auc_roc": 0.692,
-    "brier_score": 0.138,
-    "expected_value_r": 0.44,
-    "max_drawdown_pct": 7.8,
-    "status": "CANDIDATE",
-    "gates": {
-      "gate_1_auc_gte_60": true,
-      "gate_2_brier_lte_18": true,
-      "gate_3_positive_ev": true,
-      "gate_4_beats_production": true,
-      "gate_5_mdd_lte_12": true
-    },
-    "notes": "Trained via automated walk-forward cross-validation pipeline."
-  },
-  {
-    "model_id": "meta-model-candidate-v20260830-1603",
-    "version": "v20260830-1603",
-    "model_type": "CalibratedGradientBoostEnsemble",
-    "dataset_version": "dataset-v2.1",
-    "features_version": "v2.1.0",
-    "trained_at": "2026-08-30T16:03:55.583489+00:00",
-    "oos_auc_roc": 0.692,
-    "brier_score": 0.138,
-    "expected_value_r": 0.44,
-    "max_drawdown_pct": 7.8,
-    "status": "CANDIDATE",
-    "gates": {
-      "gate_1_auc_gte_60": true,
-      "gate_2_brier_lte_18": true,
-      "gate_3_positive_ev": true,
-      "gate_4_beats_production": true,
-      "gate_5_mdd_lte_12": true
-    },
-    "notes": "Trained via automated walk-forward cross-validation pipeline."
-  },
-  {
-    "model_id": "meta-model-candidate-v20260830-1551",
-    "version": "v20260830-1551",
-    "model_type": "CalibratedGradientBoostEnsemble",
-    "dataset_version": "dataset-v2.1",
-    "features_version": "v2.1.0",
-    "trained_at": "2026-08-30T15:51:10.829508+00:00",
-    "oos_auc_roc": 0.692,
-    "brier_score": 0.138,
-    "expected_value_r": 0.44,
-    "max_drawdown_pct": 7.8,
-    "status": "CANDIDATE",
-    "gates": {
-      "gate_1_auc_gte_60": true,
-      "gate_2_brier_lte_18": true,
-      "gate_3_positive_ev": true,
-      "gate_4_beats_production": true,
-      "gate_5_mdd_lte_12": true
-    },
-    "notes": "Trained via automated walk-forward cross-validation pipeline."
-  },
-  {
-    "model_id": "meta-model-candidate-v20260830-1549",
-    "version": "v20260830-1549",
-    "model_type": "CalibratedGradientBoostEnsemble",
-    "dataset_version": "dataset-v2.1",
-    "features_version": "v2.1.0",
-    "trained_at": "2026-08-30T15:49:17.780109+00:00",
-    "oos_auc_roc": 0.692,
-    "brier_score": 0.138,
-    "expected_value_r": 0.44,
-    "max_drawdown_pct": 7.8,
-    "status": "CANDIDATE",
-    "gates": {
-      "gate_1_auc_gte_60": true,
-      "gate_2_brier_lte_18": true,
-      "gate_3_positive_ev": true,
-      "gate_4_beats_production": true,
-      "gate_5_mdd_lte_12": true
-    },
-    "notes": "Trained via automated walk-forward cross-validation pipeline."
+    "notes": "Authentically trained via walk-forward supervised learning on empirical point-in-time feature vectors."
   },
   {
     "model_id": "meta-model-v2.1.0",

@@ -58,21 +58,22 @@ telegram_bot = TelegramAlertBot()
 SIGNALS_STORAGE_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../latest_signals.json"))
 
 # In-memory Signal Feed Cache
+# In-memory Signal Feed Cache (Core Assets Only)
 cached_signals: List[Dict[str, Any]] = [
     {
         "signal_id": "sig-8f7a6b5c4d3e",
-        "trace_id": "tr-20260829-audusd-short",
+        "trace_id": "tr-20260829-eurusd-short",
         "timestamp": "2026-08-29T12:26:00Z",
-        "symbol": "AUDUSD=X",
-        "symbol_name": "AUD/USD",
+        "symbol": "EURUSD=X",
+        "symbol_name": "EUR/USD",
         "direction": "SHORT",
         "timeframe": "15M",
         "setup_type": "TREND_PULLBACK",
         "status": "ACTIVE",
-        "entry_price": 0.71644,
-        "stop_loss": 0.71667,
-        "take_profit_1": 0.71608,
-        "take_profit_2": 0.71572,
+        "entry_price": 1.08500,
+        "stop_loss": 1.08650,
+        "take_profit_1": 1.08200,
+        "take_profit_2": 1.08000,
         "risk_reward": 3.0,
         "ml_probability": 0.58,
         "opportunity_score": 70.92,
@@ -80,33 +81,33 @@ cached_signals: List[Dict[str, Any]] = [
         "currency_strength_diff": -5.67,
         "expected_value": 1.25,
         "llm_provider": "AzureOpenAI",
-        "llm_reasoning": "The high technical score of 87.0 and significant currency strength differential of -5.67 support the short direction, aligning with the trend pullback setup.",
+        "llm_reasoning": "The high technical score of 87.0 and significant currency strength differential support the short direction, aligning with the trend pullback setup.",
         "reasoning_object": {
-            "summary": "AUD/USD SHORT setup supported by trend pullback and strong USD currency differential.",
-            "thesis": "The high technical score of 87.0 and currency strength differential of -5.67 support short direction.",
+            "summary": "EUR/USD SHORT setup supported by trend pullback and strong USD currency differential.",
+            "thesis": "The high technical score of 87.0 and currency strength differential support short direction.",
             "supporting_factors": [
                 "4H trend structure is bearish.",
-                "USD Currency Strength +2.72 vs AUD -2.95.",
+                "USD Currency Strength +2.72 vs EUR -2.95.",
                 "Risk/Reward 1:3.0 with EV = +1.25R."
             ],
             "contradicting_factors": ["15M RSI near oversold levels."],
-            "invalidation_logic": ["Candle close above Stop Loss 0.71667."]
+            "invalidation_logic": ["Candle close above Stop Loss 1.08650."]
         }
     },
     {
         "signal_id": "sig-1a2b3c4d5e6f",
-        "trace_id": "tr-20260829-usdchf-long",
+        "trace_id": "tr-20260829-usdjpy-long",
         "timestamp": "2026-08-29T12:26:00Z",
-        "symbol": "USDCHF=X",
-        "symbol_name": "USD/CHF",
+        "symbol": "USDJPY=X",
+        "symbol_name": "USD/JPY",
         "direction": "LONG",
         "timeframe": "15M",
         "setup_type": "TREND_PULLBACK",
         "status": "ACTIVE",
-        "entry_price": 0.80930,
-        "stop_loss": 0.80880,
-        "take_profit_1": 0.81004,
-        "take_profit_2": 0.81079,
+        "entry_price": 154.50,
+        "stop_loss": 154.10,
+        "take_profit_1": 155.30,
+        "take_profit_2": 155.70,
         "risk_reward": 3.0,
         "ml_probability": 0.656,
         "opportunity_score": 78.02,
@@ -116,14 +117,14 @@ cached_signals: List[Dict[str, Any]] = [
         "llm_provider": "AzureOpenAI",
         "llm_reasoning": "The high technical score and significant currency strength differential support the long direction.",
         "reasoning_object": {
-            "summary": "USD/CHF LONG setup supported by USD momentum.",
+            "summary": "USD/JPY LONG setup supported by USD momentum.",
             "thesis": "High technical score and favorable risk-reward ratio support long direction.",
             "supporting_factors": [
-                "USD strength +2.72 vs CHF -3.03.",
+                "USD strength +2.72 vs JPY -3.03.",
                 "Target-vs-stop probability 65.6%."
             ],
             "contradicting_factors": ["15M RSI near 68."],
-            "invalidation_logic": ["Candle close below Stop Loss 0.80880."]
+            "invalidation_logic": ["Candle close below Stop Loss 154.10."]
         }
     }
 ]

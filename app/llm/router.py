@@ -42,11 +42,27 @@ class LLMRouter:
         if res_gemini.get("provider") == "Gemini":
             return res_gemini
 
-        # 4. Local quantitative fallback
+        # 4. Local quantitative fallback (Explicitly tagged, grounded in real metrics)
+        score = candidate.get("opportunity_score", 0.0)
+        ml_prob = candidate.get("ml_probability", 0.60)
+        supporting = candidate.get("supporting_evidence", [])
+        contradictions = candidate.get("contradicting_evidence", [])
+        conf = round(float(ml_prob), 2)
+
+        reason_parts = [
+            f"Deterministic quantitative evaluation (Score: {score:.1f}, ML Prob: {ml_prob*100:.1f}%)"
+        ]
+        if supporting:
+            reason_parts.append(f"Supported by: {'; '.join(supporting[:2])}")
+        if contradictions:
+            reason_parts.append(f"Contradicted by: {'; '.join(contradictions[:2])}")
+
         return {
             "approved": True,
-            "confidence": round(candidate.get("ml_probability", 0.70), 2),
-            "reasoning": "Quantitative indicators, currency strength, and ML probability pass initial filter.",
-            "contradictions": [],
-            "provider": "QuantitativeFallback"
+            "confidence": conf,
+            "reasoning": " | ".join(reason_parts),
+            "contradictions": contradictions,
+            "provider": "QuantitativeFallback",
+            "model": "deterministic-rules-engine",
+            "is_llm_fallback": True
         }

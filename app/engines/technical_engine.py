@@ -94,10 +94,8 @@ class TechnicalAnalysisEngine:
         """
         Evaluates current technical state and outputs Technical Score (0-100) and Direction.
         """
-        if df.empty or len(df) < 5:
-            return {"score": 50.0, "direction": "NEUTRAL", "setup_type": "NONE"}
-
-        df = TechnicalAnalysisEngine.calculate_indicators(df)
+        if 'ema_20' not in df.columns or 'adx_14' not in df.columns:
+            df = TechnicalAnalysisEngine.calculate_indicators(df)
         last = df.iloc[-1]
         prev = df.iloc[-2]
 

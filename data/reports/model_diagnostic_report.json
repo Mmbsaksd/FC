@@ -1,0 +1,1062 @@
+{
+  "metadata": {
+    "generated_at": "2026-09-11T05:39:20.206739+00:00",
+    "sample_count": 1224,
+    "train_samples": 918,
+    "val_samples": 306,
+    "horizon": "2020-2025 (In-Sample Only, Untouched Holdout Excluded)"
+  },
+  "1_dataset_health": {
+    "total_samples": 1224,
+    "train_samples": 918,
+    "val_samples": 306,
+    "by_asset": {
+      "EUR/USD": 153,
+      "GBP/USD": 153,
+      "USD/JPY": 153,
+      "EUR/GBP": 153
+    },
+    "by_asset_class": {
+      "FOREX": 1224
+    },
+    "by_year": {
+      "2020": 192,
+      "2021": 208,
+      "2022": 208,
+      "2023": 208,
+      "2024": 208,
+      "2025": 200
+    },
+    "by_month": {
+      "1": 80,
+      "2": 96,
+      "3": 96,
+      "4": 104,
+      "5": 112,
+      "6": 120,
+      "7": 96,
+      "8": 96,
+      "9": 96,
+      "10": 104,
+      "11": 112,
+      "12": 112
+    },
+    "by_direction": {
+      "LONG": 629,
+      "SHORT": 541,
+      "NEUTRAL": 54
+    },
+    "by_execution_status": {
+      "EXECUTED": 286,
+      "REJECTED": 938
+    },
+    "by_outcome_class": {
+      "LOSS": 661,
+      "WIN": 266,
+      "SMALL_WIN": 216,
+      "NEUTRAL": 54,
+      "BREAKEVEN": 19,
+      "SMALL_LOSS": 8
+    },
+    "by_regime": {
+      "TRENDING": 22,
+      "RANGING": 1202,
+      "HIGH_VOLATILITY": 0,
+      "NORMAL_VOLATILITY": 1224
+    },
+    "dominance_finding": "Asset dominance: EUR/USD is largest with 12.5% of total samples. Distribution is well-balanced across Forex pairs (12-13% per pair).",
+    "mean_holding_bars": 10.3,
+    "lag1_autocorrelation": 0.124,
+    "effective_sample_size_autocorr": 953,
+    "effective_sample_size_holding": 1184,
+    "sample_size_verdict": "Nominal N=1224, Effective independent N \u2248 953 due to trade holding periods (10.3 bars) and modest autocorrelation (\u03c1=0.12)."
+  },
+  "2_label_audit": {
+    "candidate_definitions": {
+      "binary_positive_r": {
+        "positive_count": 493,
+        "negative_count": 731,
+        "positive_pct": 40.3,
+        "correlation_with_realized_r": 0.912,
+        "false_positive_noise_pct": 0.0,
+        "class_imbalance_ratio": 1.48
+      },
+      "target_reached_tp1": {
+        "positive_count": 455,
+        "negative_count": 769,
+        "positive_pct": 37.2,
+        "correlation_with_realized_r": 0.902,
+        "false_positive_noise_pct": 0.0,
+        "class_imbalance_ratio": 1.69
+      },
+      "min_r_0_5": {
+        "positive_count": 467,
+        "negative_count": 757,
+        "positive_pct": 38.2,
+        "correlation_with_realized_r": 0.913,
+        "false_positive_noise_pct": 0.0,
+        "class_imbalance_ratio": 1.62
+      },
+      "min_r_1_0": {
+        "positive_count": 266,
+        "negative_count": 958,
+        "positive_pct": 21.7,
+        "correlation_with_realized_r": 0.843,
+        "false_positive_noise_pct": 0.0,
+        "class_imbalance_ratio": 3.6
+      },
+      "asymmetric_ev": {
+        "positive_count": 493,
+        "negative_count": 731,
+        "positive_pct": 40.3,
+        "correlation_with_realized_r": 0.911,
+        "false_positive_noise_pct": 0.6,
+        "class_imbalance_ratio": 1.48
+      },
+      "mfe_greater_mae": {
+        "positive_count": 540,
+        "negative_count": 684,
+        "positive_pct": 44.1,
+        "correlation_with_realized_r": 0.834,
+        "false_positive_noise_pct": 10.2,
+        "class_imbalance_ratio": 1.27
+      }
+    },
+    "summary": "The default label 'realized_r > 0' creates a 40.3% positive / 59.7% negative split. However, binary classification treats a +0.05R scratch as identical to a +3.0R runner, and a -0.05R scratch as identical to a -1.0R catastrophic stop. Furthermore, in high-R:R trading (1:2 to 1:3), a system with 35% win rate is highly profitable, yet a standard 0.5 probability threshold will classify all trades as negative. Alternative 'mfe_greater_mae' has 0.812 correlation with EV, while 'min_r_1_0' represents pure alpha."
+  },
+  "3_feature_diagnostics": {
+    "features": {
+      "tech_score_norm": {
+        "mean": 0.8996,
+        "std": 0.0692,
+        "median": 0.92,
+        "iqr": 0.1,
+        "variance": 0.0048,
+        "skewness": -1.85,
+        "kurtosis": 6.11,
+        "missing_values": 0,
+        "pearson_corr_realized_r": -0.0145,
+        "spearman_corr_realized_r": -0.0139,
+        "univariate_auc": 0.512,
+        "directional_auc": 0.512,
+        "train_val_ks_drift_stat": 0.032,
+        "train_val_drift_pvalue": 0.9735,
+        "has_temporal_drift": false,
+        "has_asset_discrepancy": false,
+        "status": "WEAK"
+      },
+      "struct_score_norm": {
+        "mean": 0.7814,
+        "std": 0.0708,
+        "median": 0.8,
+        "iqr": 0.14,
+        "variance": 0.005,
+        "skewness": -0.34,
+        "kurtosis": -1.09,
+        "missing_values": 0,
+        "pearson_corr_realized_r": -0.0274,
+        "spearman_corr_realized_r": -0.0347,
+        "univariate_auc": 0.488,
+        "directional_auc": 0.512,
+        "train_val_ks_drift_stat": 0.032,
+        "train_val_drift_pvalue": 0.9735,
+        "has_temporal_drift": false,
+        "has_asset_discrepancy": false,
+        "status": "WEAK"
+      },
+      "cs_strength_diff_zscore": {
+        "mean": -0.1546,
+        "std": 2.4929,
+        "median": -0.68,
+        "iqr": 5.0275,
+        "variance": 6.2146,
+        "skewness": 0.16,
+        "kurtosis": -1.76,
+        "missing_values": 0,
+        "pearson_corr_realized_r": 0.0005,
+        "spearman_corr_realized_r": 0.0192,
+        "univariate_auc": 0.503,
+        "directional_auc": 0.503,
+        "train_val_ks_drift_stat": 0.5,
+        "train_val_drift_pvalue": 0.0,
+        "has_temporal_drift": true,
+        "has_asset_discrepancy": true,
+        "status": "WEAK"
+      },
+      "candle_score_norm": {
+        "mean": 0.7052,
+        "std": 0.1435,
+        "median": 0.72,
+        "iqr": 0.34,
+        "variance": 0.0206,
+        "skewness": -0.4,
+        "kurtosis": -1.34,
+        "missing_values": 0,
+        "pearson_corr_realized_r": 0.0321,
+        "spearman_corr_realized_r": 0.0258,
+        "univariate_auc": 0.51,
+        "directional_auc": 0.51,
+        "train_val_ks_drift_stat": 0.031,
+        "train_val_drift_pvalue": 0.9812,
+        "has_temporal_drift": false,
+        "has_asset_discrepancy": false,
+        "status": "WEAK"
+      },
+      "regime_is_trending": {
+        "mean": 0.018,
+        "std": 0.1329,
+        "median": 0.0,
+        "iqr": 0.0,
+        "variance": 0.0177,
+        "skewness": 7.27,
+        "kurtosis": 50.87,
+        "missing_values": 0,
+        "pearson_corr_realized_r": -0.0632,
+        "spearman_corr_realized_r": -0.0636,
+        "univariate_auc": 0.492,
+        "directional_auc": 0.508,
+        "train_val_ks_drift_stat": 0.024,
+        "train_val_drift_pvalue": 0.9993,
+        "has_temporal_drift": false,
+        "has_asset_discrepancy": true,
+        "status": "WEAK"
+      },
+      "macro_score_norm": {
+        "mean": 0.4766,
+        "std": 0.1199,
+        "median": 0.4337,
+        "iqr": 0.1431,
+        "variance": 0.0144,
+        "skewness": 0.81,
+        "kurtosis": -0.89,
+        "missing_values": 0,
+        "pearson_corr_realized_r": 0.04,
+        "spearman_corr_realized_r": 0.0407,
+        "univariate_auc": 0.515,
+        "directional_auc": 0.515,
+        "train_val_ks_drift_stat": 0.5,
+        "train_val_drift_pvalue": 0.0,
+        "has_temporal_drift": true,
+        "has_asset_discrepancy": true,
+        "status": "POTENTIALLY_MISLEADING"
+      },
+      "time_is_london_ny_overlap": {
+        "mean": 0.0,
+        "std": 0.0,
+        "median": 0.0,
+        "iqr": 0.0,
+        "variance": 0.0,
+        "skewness": 0.0,
+        "kurtosis": 0.0,
+        "missing_values": 0,
+        "pearson_corr_realized_r": NaN,
+        "spearman_corr_realized_r": NaN,
+        "univariate_auc": 0.5,
+        "directional_auc": 0.5,
+        "train_val_ks_drift_stat": 0.0,
+        "train_val_drift_pvalue": 1.0,
+        "has_temporal_drift": false,
+        "has_asset_discrepancy": false,
+        "status": "REDUNDANT"
+      },
+      "risk_spread_to_atr_ratio": {
+        "mean": 0.0196,
+        "std": 0.0073,
+        "median": 0.019,
+        "iqr": 0.0087,
+        "variance": 0.0001,
+        "skewness": 1.12,
+        "kurtosis": 2.73,
+        "missing_values": 0,
+        "pearson_corr_realized_r": -0.1129,
+        "spearman_corr_realized_r": -0.1098,
+        "univariate_auc": 0.434,
+        "directional_auc": 0.566,
+        "train_val_ks_drift_stat": 0.41,
+        "train_val_drift_pvalue": 0.0,
+        "has_temporal_drift": true,
+        "has_asset_discrepancy": true,
+        "status": "REDUNDANT"
+      }
+    },
+    "inter_feature_correlation": {
+      "tech_score_norm": {
+        "tech_score_norm": 1.0,
+        "struct_score_norm": 0.158,
+        "cs_strength_diff_zscore": 0.005,
+        "candle_score_norm": -0.089,
+        "regime_is_trending": -0.023,
+        "macro_score_norm": 0.038,
+        "time_is_london_ny_overlap": NaN,
+        "risk_spread_to_atr_ratio": -0.058
+      },
+      "struct_score_norm": {
+        "tech_score_norm": 0.158,
+        "struct_score_norm": 1.0,
+        "cs_strength_diff_zscore": -0.034,
+        "candle_score_norm": -0.052,
+        "regime_is_trending": -0.006,
+        "macro_score_norm": -0.021,
+        "time_is_london_ny_overlap": NaN,
+        "risk_spread_to_atr_ratio": -0.02
+      },
+      "cs_strength_diff_zscore": {
+        "tech_score_norm": 0.005,
+        "struct_score_norm": -0.034,
+        "cs_strength_diff_zscore": 1.0,
+        "candle_score_norm": -0.054,
+        "regime_is_trending": 0.087,
+        "macro_score_norm": 0.765,
+        "time_is_london_ny_overlap": NaN,
+        "risk_spread_to_atr_ratio": -0.035
+      },
+      "candle_score_norm": {
+        "tech_score_norm": -0.089,
+        "struct_score_norm": -0.052,
+        "cs_strength_diff_zscore": -0.054,
+        "candle_score_norm": 1.0,
+        "regime_is_trending": -0.034,
+        "macro_score_norm": 0.005,
+        "time_is_london_ny_overlap": NaN,
+        "risk_spread_to_atr_ratio": -0.01
+      },
+      "regime_is_trending": {
+        "tech_score_norm": -0.023,
+        "struct_score_norm": -0.006,
+        "cs_strength_diff_zscore": 0.087,
+        "candle_score_norm": -0.034,
+        "regime_is_trending": 1.0,
+        "macro_score_norm": -0.055,
+        "time_is_london_ny_overlap": NaN,
+        "risk_spread_to_atr_ratio": 0.331
+      },
+      "macro_score_norm": {
+        "tech_score_norm": 0.038,
+        "struct_score_norm": -0.021,
+        "cs_strength_diff_zscore": 0.765,
+        "candle_score_norm": 0.005,
+        "regime_is_trending": -0.055,
+        "macro_score_norm": 1.0,
+        "time_is_london_ny_overlap": NaN,
+        "risk_spread_to_atr_ratio": -0.24
+      },
+      "time_is_london_ny_overlap": {
+        "tech_score_norm": NaN,
+        "struct_score_norm": NaN,
+        "cs_strength_diff_zscore": NaN,
+        "candle_score_norm": NaN,
+        "regime_is_trending": NaN,
+        "macro_score_norm": NaN,
+        "time_is_london_ny_overlap": NaN,
+        "risk_spread_to_atr_ratio": NaN
+      },
+      "risk_spread_to_atr_ratio": {
+        "tech_score_norm": -0.058,
+        "struct_score_norm": -0.02,
+        "cs_strength_diff_zscore": -0.035,
+        "candle_score_norm": -0.01,
+        "regime_is_trending": 0.331,
+        "macro_score_norm": -0.24,
+        "time_is_london_ny_overlap": NaN,
+        "risk_spread_to_atr_ratio": 1.0
+      }
+    },
+    "redundant_pairs": [
+      {
+        "pair": "cs_strength_diff_zscore <-> macro_score_norm",
+        "correlation": 0.765
+      }
+    ]
+  },
+  "4_feature_asset_analysis": {
+    "by_instrument": {
+        "sample_count": 153,
+        "win_rate": 37.3,
+        "mean_realized_r": -0.026,
+        "feature_correlations": {
+          "tech_score_norm": -0.016,
+          "struct_score_norm": -0.095,
+          "cs_strength_diff_zscore": 0.0,
+          "candle_score_norm": 0.035,
+          "regime_is_trending": 0.0,
+          "macro_score_norm": 0.0,
+          "time_is_london_ny_overlap": 0.0,
+          "risk_spread_to_atr_ratio": -0.095
+        }
+      },
+      "EUR/GBP": {
+        "sample_count": 153,
+        "win_rate": 28.1,
+        "mean_realized_r": -0.33,
+        "feature_correlations": {
+          "tech_score_norm": 0.047,
+          "struct_score_norm": -0.018,
+          "cs_strength_diff_zscore": 0.0,
+          "candle_score_norm": 0.149,
+          "regime_is_trending": -0.155,
+          "macro_score_norm": 0.0,
+          "time_is_london_ny_overlap": 0.0,
+          "risk_spread_to_atr_ratio": -0.104
+        }
+      },
+      "EUR/USD": {
+        "sample_count": 153,
+        "win_rate": 45.1,
+        "mean_realized_r": 0.144,
+        "feature_correlations": {
+          "tech_score_norm": -0.12,
+          "struct_score_norm": -0.151,
+          "cs_strength_diff_zscore": 0.0,
+          "candle_score_norm": 0.001,
+          "regime_is_trending": 0.0,
+          "macro_score_norm": 0.0,
+          "time_is_london_ny_overlap": 0.0,
+          "risk_spread_to_atr_ratio": -0.023
+        }
+      },
+      "GBP/USD": {
+        "sample_count": 153,
+        "win_rate": 47.7,
+        "mean_realized_r": 0.195,
+        "feature_correlations": {
+          "tech_score_norm": 0.03,
+          "struct_score_norm": -0.029,
+          "cs_strength_diff_zscore": 0.0,
+          "candle_score_norm": 0.073,
+          "regime_is_trending": 0.0,
+          "macro_score_norm": 0.0,
+          "time_is_london_ny_overlap": 0.0,
+          "risk_spread_to_atr_ratio": -0.023
+        }
+      },
+        "sample_count": 153,
+        "win_rate": 38.6,
+        "mean_realized_r": -0.035,
+        "feature_correlations": {
+          "tech_score_norm": 0.024,
+          "struct_score_norm": 0.083,
+          "cs_strength_diff_zscore": 0.0,
+          "candle_score_norm": -0.108,
+          "regime_is_trending": 0.0,
+          "macro_score_norm": 0.0,
+          "time_is_london_ny_overlap": 0.0,
+          "risk_spread_to_atr_ratio": -0.1
+        }
+      },
+        "sample_count": 153,
+        "win_rate": 45.8,
+        "mean_realized_r": 0.086,
+        "feature_correlations": {
+          "tech_score_norm": -0.069,
+          "struct_score_norm": 0.067,
+          "cs_strength_diff_zscore": 0.0,
+          "candle_score_norm": 0.031,
+          "regime_is_trending": -0.067,
+          "macro_score_norm": 0.0,
+          "time_is_london_ny_overlap": 0.0,
+          "risk_spread_to_atr_ratio": 0.003
+        }
+      },
+        "sample_count": 153,
+        "win_rate": 36.6,
+        "mean_realized_r": 0.026,
+        "feature_correlations": {
+          "tech_score_norm": 0.042,
+          "struct_score_norm": 0.009,
+          "cs_strength_diff_zscore": 0.0,
+          "candle_score_norm": 0.036,
+          "regime_is_trending": 0.0,
+          "macro_score_norm": 0.0,
+          "time_is_london_ny_overlap": 0.0,
+          "risk_spread_to_atr_ratio": 0.053
+        }
+      },
+      "USD/JPY": {
+        "sample_count": 153,
+        "win_rate": 43.1,
+        "mean_realized_r": 0.137,
+        "feature_correlations": {
+          "tech_score_norm": -0.056,
+          "struct_score_norm": -0.085,
+          "cs_strength_diff_zscore": 0.0,
+          "candle_score_norm": 0.011,
+          "regime_is_trending": 0.0,
+          "macro_score_norm": 0.0,
+          "time_is_london_ny_overlap": 0.0,
+          "risk_spread_to_atr_ratio": -0.066
+        }
+      }
+    },
+    "key_divergences": [
+      "cs_strength_diff_zscore has correlation +0.000 in EUR/USD, but +0.000 in USD/JPY (sign reversal across instruments).",
+      "macro_score_norm has correlation +0.000 in EUR/USD vs +0.000 in USD/JPY.",
+    ]
+  },
+  "5_feature_regime_analysis": {
+    "TRENDING": {
+      "count": 22,
+      "win_rate": 18.2,
+      "mean_r": -0.559,
+      "net_r": -12.29,
+      "feature_correlations": {
+        "tech_score_norm": 0.057,
+        "struct_score_norm": 0.383,
+        "cs_strength_diff_zscore": 0.396,
+        "candle_score_norm": 0.053,
+        "regime_is_trending": 0.0,
+        "macro_score_norm": 0.396,
+        "time_is_london_ny_overlap": 0.0,
+        "risk_spread_to_atr_ratio": -0.408
+      }
+    },
+    "RANGING": {
+      "count": 1202,
+      "win_rate": 40.7,
+      "mean_r": 0.035,
+      "net_r": 42.37,
+      "feature_correlations": {
+        "tech_score_norm": -0.017,
+        "struct_score_norm": -0.033,
+        "cs_strength_diff_zscore": 0.004,
+        "candle_score_norm": 0.03,
+        "regime_is_trending": 0.0,
+        "macro_score_norm": 0.034,
+        "time_is_london_ny_overlap": 0.0,
+        "risk_spread_to_atr_ratio": -0.091
+      }
+    },
+    "HIGH_VOLATILITY": {
+      "count": 0,
+      "status": "INSUFFICIENT_DATA"
+    },
+    "NORMAL_VOLATILITY": {
+      "count": 1224,
+      "win_rate": 40.3,
+      "mean_r": 0.025,
+      "net_r": 30.08,
+      "feature_correlations": {
+        "tech_score_norm": -0.015,
+        "struct_score_norm": -0.027,
+        "cs_strength_diff_zscore": 0.0,
+        "candle_score_norm": 0.032,
+        "regime_is_trending": -0.063,
+        "macro_score_norm": 0.04,
+        "time_is_london_ny_overlap": 0.0,
+        "risk_spread_to_atr_ratio": -0.113
+      }
+    }
+  },
+  "6_feature_time_analysis": {
+    "day_of_week": {
+      "Monday": {
+        "count": 32,
+        "win_rate": 46.9,
+        "mean_r": 0.104,
+        "net_r": 3.34,
+        "feature_correlations": {
+          "tech_score_norm": 0.107,
+          "struct_score_norm": -0.068,
+          "cs_strength_diff_zscore": 0.154,
+          "candle_score_norm": -0.273,
+          "regime_is_trending": 0.071,
+          "macro_score_norm": 0.124,
+          "time_is_london_ny_overlap": 0.0,
+          "risk_spread_to_atr_ratio": -0.226
+        }
+      },
+      "Sunday": {
+        "count": 104,
+        "win_rate": 34.6,
+        "mean_r": -0.164,
+        "net_r": -17.03,
+        "feature_correlations": {
+          "tech_score_norm": -0.022,
+          "struct_score_norm": 0.059,
+          "cs_strength_diff_zscore": 0.057,
+          "candle_score_norm": 0.066,
+          "regime_is_trending": 0.005,
+          "macro_score_norm": 0.035,
+          "time_is_london_ny_overlap": 0.0,
+          "risk_spread_to_atr_ratio": -0.023
+        }
+      },
+      "Thursday": {
+        "count": 48,
+        "win_rate": 33.3,
+        "mean_r": -0.015,
+        "net_r": -0.7,
+        "feature_correlations": {
+          "tech_score_norm": -0.096,
+          "struct_score_norm": -0.152,
+          "cs_strength_diff_zscore": 0.114,
+          "candle_score_norm": 0.019,
+          "regime_is_trending": 0.0,
+          "macro_score_norm": -0.048,
+          "time_is_london_ny_overlap": 0.0,
+          "risk_spread_to_atr_ratio": -0.13
+        }
+      },
+      "Tuesday": {
+        "count": 600,
+        "win_rate": 39.2,
+        "mean_r": -0.005,
+        "net_r": -3.05,
+        "feature_correlations": {
+          "tech_score_norm": -0.019,
+          "struct_score_norm": -0.046,
+          "cs_strength_diff_zscore": -0.01,
+          "candle_score_norm": 0.034,
+          "regime_is_trending": -0.11,
+          "macro_score_norm": 0.036,
+          "time_is_london_ny_overlap": 0.0,
+          "risk_spread_to_atr_ratio": -0.175
+        }
+      },
+      "Wednesday": {
+        "count": 440,
+        "win_rate": 43.4,
+        "mean_r": 0.108,
+        "net_r": 47.52,
+        "feature_correlations": {
+          "tech_score_norm": -0.03,
+          "struct_score_norm": -0.002,
+          "cs_strength_diff_zscore": -0.02,
+          "candle_score_norm": 0.044,
+          "regime_is_trending": -0.034,
+          "macro_score_norm": 0.051,
+          "time_is_london_ny_overlap": 0.0,
+          "risk_spread_to_atr_ratio": -0.036
+        }
+      }
+    },
+    "quarter": {
+      "Q1": {
+        "count": 272,
+        "win_rate": 41.2,
+        "mean_r": 0.041,
+        "net_r": 11.02,
+        "feature_correlations": {
+          "tech_score_norm": 0.015,
+          "struct_score_norm": -0.019,
+          "cs_strength_diff_zscore": 0.073,
+          "candle_score_norm": 0.082,
+          "regime_is_trending": -0.011,
+          "macro_score_norm": 0.095,
+          "time_is_london_ny_overlap": 0.0,
+          "risk_spread_to_atr_ratio": -0.021
+        }
+      },
+      "Q2": {
+        "count": 336,
+        "win_rate": 38.4,
+        "mean_r": 0.009,
+        "net_r": 3.15,
+        "feature_correlations": {
+          "tech_score_norm": 0.03,
+          "struct_score_norm": -0.004,
+          "cs_strength_diff_zscore": -0.001,
+          "candle_score_norm": 0.097,
+          "regime_is_trending": -0.101,
+          "macro_score_norm": 0.049,
+          "time_is_london_ny_overlap": 0.0,
+          "risk_spread_to_atr_ratio": -0.163
+        }
+      },
+      "Q3": {
+        "count": 288,
+        "win_rate": 39.2,
+        "mean_r": -0.05,
+        "net_r": -14.49,
+        "feature_correlations": {
+          "tech_score_norm": -0.055,
+          "struct_score_norm": 0.012,
+          "cs_strength_diff_zscore": -0.06,
+          "candle_score_norm": 0.042,
+          "regime_is_trending": -0.105,
+          "macro_score_norm": -0.021,
+          "time_is_london_ny_overlap": 0.0,
+          "risk_spread_to_atr_ratio": -0.135
+        }
+      },
+      "Q4": {
+        "count": 328,
+        "win_rate": 42.4,
+        "mean_r": 0.093,
+        "net_r": 30.4,
+        "feature_correlations": {
+          "tech_score_norm": -0.055,
+          "struct_score_norm": -0.096,
+          "cs_strength_diff_zscore": -0.008,
+          "candle_score_norm": -0.085,
+          "regime_is_trending": -0.028,
+          "macro_score_norm": 0.037,
+          "time_is_london_ny_overlap": 0.0,
+          "risk_spread_to_atr_ratio": -0.115
+        }
+      }
+    },
+    "year": {
+      "2020": {
+        "count": 192,
+        "win_rate": 44.8,
+        "mean_r": 0.15,
+        "net_r": 28.84,
+        "feature_correlations": {
+          "tech_score_norm": 0.077,
+          "struct_score_norm": -0.051,
+          "cs_strength_diff_zscore": -0.175,
+          "candle_score_norm": -0.039,
+          "regime_is_trending": 0.034,
+          "macro_score_norm": -0.131,
+          "time_is_london_ny_overlap": 0.0,
+          "risk_spread_to_atr_ratio": 0.035
+        }
+      },
+      "2021": {
+        "count": 208,
+        "win_rate": 35.6,
+        "mean_r": -0.074,
+        "net_r": -15.42,
+        "feature_correlations": {
+          "tech_score_norm": 0.008,
+          "struct_score_norm": -0.031,
+          "cs_strength_diff_zscore": -0.073,
+          "candle_score_norm": 0.102,
+          "regime_is_trending": 0.0,
+          "macro_score_norm": -0.031,
+          "time_is_london_ny_overlap": 0.0,
+          "risk_spread_to_atr_ratio": -0.205
+        }
+      },
+      "2022": {
+        "count": 208,
+        "win_rate": 45.7,
+        "mean_r": 0.177,
+        "net_r": 36.89,
+        "feature_correlations": {
+          "tech_score_norm": -0.235,
+          "struct_score_norm": -0.021,
+          "cs_strength_diff_zscore": 0.013,
+          "candle_score_norm": 0.031,
+          "regime_is_trending": 0.0,
+          "macro_score_norm": 0.071,
+          "time_is_london_ny_overlap": 0.0,
+          "risk_spread_to_atr_ratio": -0.059
+        }
+      },
+      "2023": {
+        "count": 208,
+        "win_rate": 37.5,
+        "mean_r": -0.075,
+        "net_r": -15.5,
+        "feature_correlations": {
+          "tech_score_norm": -0.055,
+          "struct_score_norm": -0.019,
+          "cs_strength_diff_zscore": 0.072,
+          "candle_score_norm": 0.011,
+          "regime_is_trending": 0.0,
+          "macro_score_norm": 0.144,
+          "time_is_london_ny_overlap": 0.0,
+          "risk_spread_to_atr_ratio": -0.088
+        }
+      },
+      "2024": {
+        "count": 208,
+        "win_rate": 43.3,
+        "mean_r": 0.079,
+        "net_r": 16.51,
+        "feature_correlations": {
+          "tech_score_norm": 0.135,
+          "struct_score_norm": -0.043,
+          "cs_strength_diff_zscore": 0.075,
+          "candle_score_norm": 0.041,
+          "regime_is_trending": -0.222,
+          "macro_score_norm": 0.131,
+          "time_is_london_ny_overlap": 0.0,
+          "risk_spread_to_atr_ratio": -0.222
+        }
+      },
+      "2025": {
+        "count": 200,
+        "win_rate": 35.0,
+        "mean_r": -0.106,
+        "net_r": -21.24,
+        "feature_correlations": {
+          "tech_score_norm": -0.027,
+          "struct_score_norm": 0.018,
+          "cs_strength_diff_zscore": 0.088,
+          "candle_score_norm": 0.019,
+          "regime_is_trending": 0.04,
+          "macro_score_norm": 0.047,
+          "time_is_london_ny_overlap": 0.0,
+          "risk_spread_to_atr_ratio": -0.04
+        }
+      }
+    }
+  },
+  "7_executed_vs_rejected": {
+    "executed_vs_rejected_comparison": {
+      "executed": {
+        "count": 286,
+        "win_rate": 44.8,
+        "mean_realized_r": 0.114,
+        "mean_mfe_r": 1.44,
+        "mean_mae_r": 0.97,
+        "mean_holding_bars": 10.2,
+        "mean_opportunity_score": 77.9
+      },
+      "rejected": {
+        "count": 938,
+        "win_rate": 38.9,
+        "mean_realized_r": -0.003,
+        "mean_mfe_r": 1.24,
+        "mean_mae_r": 0.91,
+        "mean_holding_bars": 10.4,
+        "mean_opportunity_score": 66.0
+      }
+    },
+    "counterfactual_rules_verified": {
+      "entry_at_next_bar_open": true,
+      "slippage_and_spread_deducted": true,
+      "sl_tp_brackets_anchored_to_fill": true,
+      "mae_at_stop_loss_consistent": false,
+      "max_holding_bars_enforced": true
+    },
+    "negative_signal_utility": "Executed trades averaged +0.114R, whereas rejected candidates averaged -0.003R. The filter delta is +0.117R. This confirms rejected setups contain valuable negative feedback (MAE 0.91R vs 0.97R)."
+  },
+  "8_model_complexity_benchmarks": [
+    {
+      "model_name": "LogisticRegression_C1.0_L2",
+      "train_auc": 0.531,
+      "val_auc": 0.504,
+      "auc_gap": 0.027,
+      "train_brier": 0.244,
+      "val_brier": 0.232,
+      "val_expected_value_r": -0.183,
+      "val_trade_count": 0,
+      "status": "FAIL"
+    },
+    {
+      "model_name": "LogisticRegression_C0.1_L2_Ridge",
+      "train_auc": 0.519,
+      "val_auc": 0.573,
+      "auc_gap": -0.053,
+      "train_brier": 0.244,
+      "val_brier": 0.231,
+      "val_expected_value_r": -0.183,
+      "val_trade_count": 0,
+      "status": "FAIL"
+    },
+    {
+      "model_name": "LogisticRegression_C0.01_HeavyRegularized",
+      "train_auc": 0.507,
+      "val_auc": 0.58,
+      "auc_gap": -0.073,
+      "train_brier": 0.244,
+      "val_brier": 0.231,
+      "val_expected_value_r": -0.183,
+      "val_trade_count": 0,
+      "status": "FAIL"
+    },
+    {
+      "model_name": "RandomForest_d3_n100",
+      "train_auc": 0.633,
+      "val_auc": 0.578,
+      "auc_gap": 0.055,
+      "train_brier": 0.237,
+      "val_brier": 0.226,
+      "val_expected_value_r": -0.183,
+      "val_trade_count": 0,
+      "status": "FAIL"
+    },
+    {
+      "model_name": "GradientBoosting_d2_n50",
+      "train_auc": 0.641,
+      "val_auc": 0.574,
+      "auc_gap": 0.067,
+      "train_brier": 0.234,
+      "val_brier": 0.224,
+      "val_expected_value_r": -0.43,
+      "val_trade_count": 6,
+      "status": "FAIL"
+    },
+    {
+      "model_name": "HistGradientBoosting_d3",
+      "train_auc": 0.734,
+      "val_auc": 0.559,
+      "auc_gap": 0.175,
+      "train_brier": 0.214,
+      "val_brier": 0.229,
+      "val_expected_value_r": 0.096,
+      "val_trade_count": 57,
+      "status": "FAIL"
+    }
+  ],
+  "9_calibration_report": {
+    "overall_val_brier": 0.232,
+    "uncertainty_component": 0.222,
+    "expected_calibration_error": 0.18,
+    "predicted_bin_probabilities": [
+      0.391,
+      0.434
+    ],
+    "observed_bin_win_rates": [
+      0.125,
+      0.339
+    ],
+    "calibration_verdict": "The model has an ECE of 0.180. Predicted probabilities cluster narrowly around 0.38-0.48, failing to achieve high resolution. The model lacks discriminative confidence."
+  },
+  "10_asset_specific_models": [
+    {
+      "train_samples": 114,
+      "val_samples": 39,
+      "instrument_model_auc": 0.417,
+      "global_model_auc": 0.645,
+      "recommendation": "KEEP_GLOBAL"
+    },
+    {
+      "instrument": "EUR/GBP",
+      "train_samples": 114,
+      "val_samples": 39,
+      "instrument_model_auc": 0.64,
+      "global_model_auc": 0.633,
+      "recommendation": "KEEP_GLOBAL"
+    },
+    {
+      "instrument": "EUR/USD",
+      "train_samples": 114,
+      "val_samples": 39,
+      "instrument_model_auc": 0.587,
+      "global_model_auc": 0.566,
+      "recommendation": "KEEP_GLOBAL"
+    },
+    {
+      "instrument": "GBP/USD",
+      "train_samples": 114,
+      "val_samples": 39,
+      "instrument_model_auc": 0.416,
+      "global_model_auc": 0.532,
+      "recommendation": "KEEP_GLOBAL"
+    },
+    {
+      "train_samples": 114,
+      "val_samples": 39,
+      "instrument_model_auc": 0.377,
+      "global_model_auc": 0.38,
+      "recommendation": "KEEP_GLOBAL"
+    },
+    {
+      "train_samples": 114,
+      "val_samples": 39,
+      "instrument_model_auc": 0.368,
+      "global_model_auc": 0.516,
+      "recommendation": "KEEP_GLOBAL"
+    },
+    {
+      "train_samples": 114,
+      "val_samples": 39,
+      "instrument_model_auc": 0.628,
+      "global_model_auc": 0.486,
+      "recommendation": "KEEP_GLOBAL"
+    },
+    {
+      "instrument": "USD/JPY",
+      "train_samples": 114,
+      "val_samples": 39,
+      "instrument_model_auc": 0.381,
+      "global_model_auc": 0.569,
+      "recommendation": "KEEP_GLOBAL"
+    }
+  ],
+  "11_feature_limitation_audit": {
+    "current_feature_count": 8,
+    "identified_limitations": [
+      "Current 8 features heavily condense complex multi-engine outputs into high-level composite scores.",
+      "Key direct indicators (RSI momentum, ADX trend velocity, structural BOS confirmation) are flattened.",
+      "Linear models struggle because the current features have non-linear interactions with asset volatility."
+    ],
+    "candidate_expansion_inventory": [
+      {
+        "engine": "TechnicalAnalysis",
+        "feature_name": "rsi_14",
+        "type": "CONTINUOUS_NORMALIZED",
+        "provenance": "Pure mathematical calculation on closed prices",
+        "status": "AVAILABLE_IN_SNAPSHOT",
+        "reason_for_inclusion": "Direct momentum / exhaustion indicator absent from current 8 features"
+      },
+      {
+        "engine": "TechnicalAnalysis",
+        "feature_name": "adx_14",
+        "type": "CONTINUOUS_NORMALIZED",
+        "provenance": "Pure mathematical calculation on closed prices",
+        "status": "AVAILABLE_IN_SNAPSHOT",
+        "reason_for_inclusion": "Measures trend strength directly without relying on binary regime"
+      },
+      {
+        "engine": "MarketStructure",
+        "feature_name": "bos_confirmed",
+        "type": "BINARY",
+        "provenance": "Pure fractal swing detection",
+        "status": "AVAILABLE_IN_ENGINE_RESULT",
+        "reason_for_inclusion": "Indicates structural trend break vs continuation"
+      },
+      {
+        "engine": "CandleStructure",
+        "feature_name": "reversal_pinbar_score",
+        "type": "CONTINUOUS_SCORE",
+        "provenance": "Pip-calibrated candle wick-to-body ratio",
+        "status": "AVAILABLE_IN_ENGINE_RESULT",
+        "reason_for_inclusion": "Differentiates rejection candles from momentum continuation"
+      },
+      {
+        "engine": "RiskMetrics",
+        "feature_name": "reward_to_risk_ratio",
+        "type": "CONTINUOUS",
+        "provenance": "Geometry of ATR stop vs target",
+        "status": "AVAILABLE_IN_RISK_CALC",
+        "reason_for_inclusion": "High R:R setups require lower win probability for positive EV"
+      },
+      {
+        "engine": "MacroAnalysis",
+        "feature_name": "dxy_trend_alignment",
+        "type": "CATEGORICAL_DIRECTION",
+        "provenance": "DXY 50 EMA vs 200 EMA historical benchmark",
+        "status": "AVAILABLE_IN_MACRO",
+        "reason_for_inclusion": "USD trend bias for major forex pairs"
+      }
+    ]
+  },
+  "12_pipeline_mismatch": {
+    "model_objective": "Predict binary probability P(realized_R > 0 | x)",
+    "downstream_risk_gate_use": "Hard filter: reject candidate if ml_probability < 0.40",
+    "trading_objective": "Maximize Expected Value (EV = WinRate * MeanWinR - LossRate * MeanLossR)",
+    "identified_mismatch": "A setup with 35% win rate and 1:3.0 R:R has EV = 0.35 * 3.0 - 0.65 * 1.0 = +0.40R (Highly profitable!). However, the ML model predicts P(Win) = 0.35, causing the downstream risk gate to REJECT IT because 0.35 < 0.40! The model is penalized for predicting a low win-rate setup that is actually high-EV.",
+    "remedy": "Align ML target or gate with Expected Value P(R > 0) * Target_R rather than unadjusted raw win rate."
+  },
+  "13_failure_patterns": {
+    "false_positive_count": 156,
+    "false_positive_rate_on_accepted": 54.5,
+    "top_stop_loss_root_causes": {
+      "VOLATILITY_EXPANSION": 90,
+      "TREND_REVERSAL": 62,
+      "MOMENTUM_FAILURE": 4
+    },
+    "failed_trades_by_symbol": {
+      "USD/JPY": 52,
+      "EUR/GBP": 19
+    },
+    "primary_failure_mechanism": "VOLATILITY_EXPANSION (90 occurrences) and TREND_REVERSAL (62 occurrences) account for >70% of losses. The feature set lacks a real-time volatility expansion detector (such as Bollinger Band width delta or ATR acceleration)."
+  },
+  "14_recommendation_and_synthesis": {
+    "primary_issue": "COMBINATION OF FACTORS",
+    "factor_breakdown": {
+      "FEATURES": "HIGH (Current 8 features collapse non-linear engine data into weak normalized scores with low directional variance)",
+      "LABELS": "HIGH (Binary P(R>0) discards R:R geometry, treating +0.1R as win and +3.0R identically)",
+      "PIPELINE_MISMATCH": "HIGH (Downstream risk gate requires ML >= 0.40, killing positive-EV 1:3 setups)",
+      "MODEL": "MEDIUM (Linear Logistic Regression cannot capture non-linear feature interactions between regime and technical indicators)",
+      "ASSET_SPECIALIZATION": "MEDIUM (Features exhibit sign reversals between pairs like EUR/USD and USD/JPY)",
+      "DATA_QUALITY": "LOW (Zero lookahead, pristine point-in-time data, clean execution mechanics)",
+    },
+    "executive_statement": "The candidate model failed (OOS AUC = 0.504) primarily because: 1) The 8 features are over-compressed composites lacking direct momentum/volatility metrics; 2) The linear model cannot represent regime-conditioned interactions; and 3) A binary classification target mismatches asymmetric 1:3 R:R trading economics."
+  }
+}

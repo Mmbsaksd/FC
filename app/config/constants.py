@@ -2,26 +2,22 @@
 Application Constants and Defaults
 """
 
-# Tracked FX Majors and Key Commodities for Initial Scope
+# Tracked High-Liquidity Core Universe (Six Core Markets Only)
 TRACKED_INSTRUMENTS = [
     {"symbol": "EURUSD=X", "name": "EUR/USD", "type": "FOREX", "base": "EUR", "quote": "USD", "pip_size": 0.0001, "oanda_symbol": "EUR_USD"},
     {"symbol": "GBPUSD=X", "name": "GBP/USD", "type": "FOREX", "base": "GBP", "quote": "USD", "pip_size": 0.0001, "oanda_symbol": "GBP_USD"},
     {"symbol": "USDJPY=X", "name": "USD/JPY", "type": "FOREX", "base": "USD", "quote": "JPY", "pip_size": 0.01, "oanda_symbol": "USD_JPY"},
-    {"symbol": "AUDUSD=X", "name": "AUD/USD", "type": "FOREX", "base": "AUD", "quote": "USD", "pip_size": 0.0001, "oanda_symbol": "AUD_USD"},
-    {"symbol": "USDCAD=X", "name": "USD/CAD", "type": "FOREX", "base": "USD", "quote": "CAD", "pip_size": 0.0001, "oanda_symbol": "USD_CAD"},
-    {"symbol": "USDCHF=X", "name": "USD/CHF", "type": "FOREX", "base": "USD", "quote": "CHF", "pip_size": 0.0001, "oanda_symbol": "USD_CHF"},
-    {"symbol": "NZDUSD=X", "name": "NZD/USD", "type": "FOREX", "base": "NZD", "quote": "USD", "pip_size": 0.0001, "oanda_symbol": "NZD_USD"},
-    {"symbol": "EURGBP=X", "name": "EUR/GBP", "type": "FOREX", "base": "EUR", "quote": "GBP", "pip_size": 0.0001, "oanda_symbol": "EUR_GBP"},
     {"symbol": "GC=F",     "name": "Gold",    "type": "COMMODITY", "base": "XAU", "quote": "USD", "pip_size": 0.10, "oanda_symbol": "XAU_USD"},
-    {"symbol": "CL=F",     "name": "Crude Oil", "type": "COMMODITY", "base": "WTI", "quote": "USD", "pip_size": 0.01, "oanda_symbol": "WTICO_USD"},
     {"symbol": "BTC-USD",  "name": "Bitcoin (BTC)",  "type": "CRYPTO", "base": "BTC", "quote": "USD", "pip_size": 1.00, "oanda_symbol": "BTC_USD"},
-    {"symbol": "ETH-USD",  "name": "Ethereum (ETH)", "type": "CRYPTO", "base": "ETH", "quote": "USD", "pip_size": 0.10, "oanda_symbol": "ETH_USD"},
-    {"symbol": "SOL-USD",  "name": "Solana (SOL)",   "type": "CRYPTO", "base": "SOL", "quote": "USD", "pip_size": 0.01, "oanda_symbol": "SOL_USD"},
-    {"symbol": "XRP-USD",  "name": "XRP (Ripple)",   "type": "CRYPTO", "base": "XRP", "quote": "USD", "pip_size": 0.0001, "oanda_symbol": "XRP_USD"}
+    {"symbol": "ETH-USD",  "name": "Ethereum (ETH)", "type": "CRYPTO", "base": "ETH", "quote": "USD", "pip_size": 0.10, "oanda_symbol": "ETH_USD"}
 ]
 
-# Major Currencies for Strength Matrix
-MAJOR_CURRENCIES = ["USD", "EUR", "GBP", "JPY", "CHF", "CAD", "AUD", "NZD"]
+# Universe Classifications (Core Only)
+CORE_INSTRUMENT_SYMBOLS = ["EURUSD=X", "GBPUSD=X", "USDJPY=X", "GC=F", "BTC-USD", "ETH-USD"]
+SECONDARY_INSTRUMENT_SYMBOLS = []
+
+# Major Currencies for Strength Matrix (Core FX Pairs)
+MAJOR_CURRENCIES = ["USD", "EUR", "GBP", "JPY"]
 
 # Timeframes Supported
 TIMEFRAMES = {

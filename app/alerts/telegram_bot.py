@@ -3,6 +3,7 @@ import time
 import logging
 import requests
 from typing import Dict, Any, Optional
+from datetime import datetime, timezone
 
 from app.config.settings import settings
 from app.observability.flight_recorder import flight_recorder
@@ -339,12 +340,16 @@ _Analytical decision support only. Not financial advice._"""
 ⏱️ *Holding Duration:* {dur_str}
 🆔 *Signal ID:* `{sig_id}`"""
 
-        elif event_type == "EXPIRED":
-            return f"""⏱️ *SIGNAL EXPIRED (4H Max Horizon)* ℹ️
+        elif event_type == "BREAKEVEN_PROTECTED":
+            sl = trade.get("stop_loss", curr_p)
+            mfe = trade.get("mfe_r", 0.0)
+            return f"""🛡️ *BREAKEVEN PROTECTION ACTIVATED* 🔒
 
 {dir_emoji} *Asset:* `{sym}` ({dir_val})
-📊 *Closed at Market Price:* `{curr_p:.5f}` (Entry: `{entry:.5f}`)
-💵 *Final Result:* `{real_r:+.2f}R` (${real_pnl:+.2f})
+📈 *Current MFE:* `+{mfe:.2f}R` (Current Price: `{curr_p:.5f}`)
+🛡️ *New Stop Loss:* `{sl:.5f}` (+0.05R locked)
+⏱️ *Time in Trade:* {dur_str}
+💡 *Status:* Capital protected against reversal!
 🆔 *Signal ID:* `{sig_id}`"""
 
         return ""

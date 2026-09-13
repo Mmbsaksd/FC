@@ -39,6 +39,9 @@ class ParallelCandleEngine(BaseAnalysisEngine):
             upper_wick_ratio = upper_wick / total_range
             lower_wick_ratio = lower_wick / total_range
 
+            # Asset-aware price tolerance (half a pip/tick for the instrument)
+            pip_tol = max(1e-5, getattr(snapshot, "pip_size", 0.0001) * 0.5)
+
             patterns_detected = []
             bullish_votes = 0
             bearish_votes = 0
@@ -61,13 +64,13 @@ class ParallelCandleEngine(BaseAnalysisEngine):
                 score = max(score, 88.0)
 
             # 3. Real Body Bullish Engulfing
-            if p_c < p_o and c > o and o <= (p_c + 0.00005) and c >= (p_o - 0.00005) and body_size > abs(p_c - p_o):
+            if p_c < p_o and c > o and o <= (p_c + pip_tol) and c >= (p_o - pip_tol) and body_size > abs(p_c - p_o):
                 patterns_detected.append("Bullish Engulfing (Real Body Engulfing)")
                 bullish_votes += 2
                 score = max(score, 85.0)
 
             # 4. Real Body Bearish Engulfing
-            if p_c > p_o and c < o and o >= (p_c - 0.00005) and c <= (p_o + 0.00005) and body_size > abs(p_c - p_o):
+            if p_c > p_o and c < o and o >= (p_c - pip_tol) and c <= (p_o + pip_tol) and body_size > abs(p_c - p_o):
                 patterns_detected.append("Bearish Engulfing (Real Body Engulfing)")
                 bearish_votes += 2
                 score = max(score, 85.0)

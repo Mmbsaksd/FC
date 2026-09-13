@@ -680,8 +680,8 @@
                     <!-- Forex Switch -->
                     <div style="background: rgba(0,0,0,0.3); padding: 14px 18px; border-radius: 8px; border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
                         <div>
-                            <div style="font-weight: 600; font-size: 1rem; color: white;">🌐 Forex (8 Majors)</div>
-                            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">EUR, GBP, JPY, AUD, CAD, CHF, NZD</div>
+                            <div style="font-weight: 600; font-size: 1rem; color: white;">🌐 Forex (3 Core Majors)</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">EUR/USD, GBP/USD, USD/JPY</div>
                         </div>
                         <input type="checkbox" id="asset-toggle-forex" checked style="width: 22px; height: 22px; accent-color: var(--accent-emerald); cursor: pointer;" onchange="saveAssetConfig()">
                     </div>
@@ -689,8 +689,8 @@
                     <!-- Commodities Switch -->
                     <div style="background: rgba(0,0,0,0.3); padding: 14px 18px; border-radius: 8px; border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
                         <div>
-                            <div style="font-weight: 600; font-size: 1rem; color: white;">🏆 Commodities</div>
-                            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Gold (XAU/USD), Crude Oil (WTI)</div>
+                            <div style="font-weight: 600; font-size: 1rem; color: white;">🏆 Commodities (Core Gold)</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Gold (XAU/USD / GC=F)</div>
                         </div>
                         <input type="checkbox" id="asset-toggle-commodities" checked style="width: 22px; height: 22px; accent-color: var(--accent-emerald); cursor: pointer;" onchange="saveAssetConfig()">
                     </div>
@@ -698,8 +698,8 @@
                     <!-- Crypto Switch -->
                     <div style="background: rgba(0,0,0,0.3); padding: 14px 18px; border-radius: 8px; border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
                         <div>
-                            <div style="font-weight: 600; font-size: 1rem; color: white;">⚡ Crypto Assets</div>
-                            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Bitcoin, Ethereum, Solana, XRP</div>
+                            <div style="font-weight: 600; font-size: 1rem; color: white;">⚡ Crypto Assets (2 Core)</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Bitcoin (BTC-USD), Ethereum (ETH-USD)</div>
                         </div>
                         <input type="checkbox" id="asset-toggle-crypto" checked style="width: 22px; height: 22px; accent-color: var(--accent-emerald); cursor: pointer;" onchange="saveAssetConfig()">
                     </div>
@@ -1055,6 +1055,6 @@
         </div>
     </div>
 
-    <script src="/static/app.js?v=3.1"></script>
+    <script src="/static/app.js?v=4.0"></script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 import time
 import logging
+import numpy as np
 from app.parallel.base_engine import BaseAnalysisEngine, MarketSnapshot, AnalysisResult
 from app.engines.currency_strength import CurrencyStrengthEngine
 
@@ -13,14 +14,44 @@ class ParallelCurrencyStrengthEngine(BaseAnalysisEngine):
     def analyze(self, snapshot: MarketSnapshot) -> AnalysisResult:
         start = time.perf_counter()
         try:
-            scores = self.cs_engine.calculate_currency_strength(timeframe="1H")
             base = snapshot.base_currency
             quote = snapshot.quote_currency
+            asset_class = getattr(snapshot, "asset_class", "FOREX").upper()
 
-            base_score = scores.get(base, 0.0)
-            quote_score = scores.get(quote, 0.0)
+            # Currency strength matrix strictly applies to fiat Forex pairs
+            from app.config.constants import MAJOR_CURRENCIES
+            if asset_class != "FOREX" or base not in MAJOR_CURRENCIES or quote not in MAJOR_CURRENCIES:
+                return AnalysisResult(
+                    engine_name=self.name,
+                    status="UNAVAILABLE",
+                    score=50.0,
+                    direction="NEUTRAL",
+                    confidence=0.0,
+                    evidence=[f"Currency Strength matrix skipped: {base}/{quote} ({asset_class}) is not a fiat cross"],
+                    contradictions=[],
+                    metrics={
+                        "base_currency": base,
+                        "quote_currency": quote,
+                        "asset_class": asset_class,
+                        "applicable": False
+                    },
+                    latency_ms=(time.perf_counter() - start) * 1000.0
+                )
 
-            diff = base_score - quote_score
+            if snapshot.candles is not None and len(snapshot.candles) >= 5:
+                # Point-in-time momentum calculation across lookback window
+                lookback = min(15, len(snapshot.candles) - 1)
+                start_p = float(snapshot.candles['close'].iloc[-lookback])
+                end_p = float(snapshot.candles['close'].iloc[-1])
+                ret = ((end_p - start_p) / start_p * 100.0) if start_p > 0 else 0.0
+                diff = float(np.clip(ret * 2.5, -10.0, 10.0))
+                base_score = round(diff / 2.0, 2)
+                quote_score = round(-diff / 2.0, 2)
+            else:
+                scores = self.cs_engine.calculate_currency_strength(timeframe="1H")
+                base_score = scores.get(base, 0.0)
+                quote_score = scores.get(quote, 0.0)
+                diff = base_score - quote_score
             score = min(98.0, 50.0 + (abs(diff) * 6.0))
             direction = "LONG" if diff > 0 else ("SHORT" if diff < 0 else "NEUTRAL")
 

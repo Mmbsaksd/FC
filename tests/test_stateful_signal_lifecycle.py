@@ -166,7 +166,8 @@ class TestStatefulSignalLifecycle(unittest.TestCase):
         passed, reason = self.gate.validate_candidate(
             candidate_decision=cand,
             context_meta={"data_quality": "VALID", "spread_pips": 1.0},
-            risk_metrics={"risk_reward": 2.0}
+            risk_metrics={"risk_reward": 2.0},
+            mode="CHAMPION"
         )
         self.assertFalse(passed)
         self.assertIn("Weak ML Probability", reason)

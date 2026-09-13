@@ -51,10 +51,14 @@ class ExperienceMemory:
         composite_score: float,
         llm_reasoning: str,
         engine_evidence: Dict[str, Any],
-        knowledge_refs: List[str] = None
+        knowledge_refs: List[str] = None,
+        features: Dict[str, Any] = None,
+        why_this_trade: Dict[str, Any] = None,
+        supporting_evidence: List[str] = None,
+        contradicting_evidence: List[str] = None
     ) -> Dict[str, Any]:
         """
-        Creates an experience trace upon signal generation.
+        Creates an experience trace upon signal generation with complete decision-time state.
         """
         exp_id = f"exp-{signal_id}"
         record = {
@@ -70,9 +74,17 @@ class ExperienceMemory:
             "ml_predicted_win_prob": ml_probability,
             "composite_score": composite_score,
             "llm_reasoning": llm_reasoning,
+            "why_this_trade": why_this_trade or {},
+            "features_at_entry": features or {},
+            "supporting_evidence": supporting_evidence or [],
+            "contradicting_evidence": contradicting_evidence or [],
             "engine_evidence": engine_evidence,
             "knowledge_references": knowledge_refs or [],
             "outcome_status": "ACTIVE_PENDING",
+            "exit_reason": None,
+            "root_cause": None,
+            "root_cause_evidence": None,
+            "features_at_exit": None,
             "realized_r": None,
             "mfe_r": 0.0,
             "mae_r": 0.0,
@@ -91,7 +103,11 @@ class ExperienceMemory:
         mfe_r: float,
         mae_r: float,
         holding_period_mins: int,
-        error_class: Optional[str] = None
+        error_class: Optional[str] = None,
+        exit_reason: Optional[str] = None,
+        root_cause: Optional[str] = None,
+        root_cause_evidence: Optional[str] = None,
+        features_at_exit: Optional[Dict[str, Any]] = None
     ):
         """
         Updates experience trace when trade outcome resolves.
@@ -104,9 +120,13 @@ class ExperienceMemory:
                 rec["mae_r"] = mae_r
                 rec["holding_period_mins"] = holding_period_mins
                 rec["resolved_at"] = datetime.now(timezone.utc).isoformat()
-                rec["error_classification"] = error_class
+                rec["error_classification"] = error_class or root_cause
+                rec["exit_reason"] = exit_reason
+                rec["root_cause"] = root_cause
+                rec["root_cause_evidence"] = root_cause_evidence
+                rec["features_at_exit"] = features_at_exit
                 self._save_records()
-                logger.info(f"Updated Experience Memory for signal {signal_id}: {outcome_status} ({realized_r}R)")
+                logger.info(f"Updated Experience Memory for signal {signal_id}: {outcome_status} ({realized_r}R, RootCause: {root_cause})")
                 return
 
     def record_trade_outcome(
@@ -118,7 +138,11 @@ class ExperienceMemory:
         holding_time_minutes: int = 0,
         max_favorable_excursion: float = 0.0,
         max_adverse_excursion: float = 0.0,
-        error_class: Optional[str] = None
+        error_class: Optional[str] = None,
+        exit_reason: Optional[str] = None,
+        root_cause: Optional[str] = None,
+        root_cause_evidence: Optional[str] = None,
+        features_at_exit: Optional[Dict[str, Any]] = None
     ):
         """Standard outcome recording alias for experience memory."""
         self.update_outcome_experience(
@@ -128,7 +152,11 @@ class ExperienceMemory:
             mfe_r=max_favorable_excursion,
             mae_r=max_adverse_excursion,
             holding_period_mins=holding_time_minutes,
-            error_class=error_class
+            error_class=error_class or root_cause,
+            exit_reason=exit_reason,
+            root_cause=root_cause,
+            root_cause_evidence=root_cause_evidence,
+            features_at_exit=features_at_exit
         )
 
     def get_summary_metrics(self) -> Dict[str, Any]:

@@ -176,10 +176,10 @@ class KnowledgeDiscoveryEngine:
 
     def _infer_asset_class(self, symbol: str) -> str:
         s = symbol.upper()
-        if any(c in s for c in ["BTC", "ETH", "SOL", "XRP", "-USD"]):
+        if any(c in s for c in ["BTC", "ETH", "-USD"]):
             return "CRYPTO"
-        elif any(c in s for c in ["XAU", "GOLD", "OIL", "WTI", "BRENT"]):
-            return "COMMODITIES"
+        elif any(c in s for c in ["XAU", "GOLD", "GC=F"]):
+            return "COMMODITY"
         return "FOREX"
 
     def evaluate_promotion_gates(self) -> Dict[str, Any]:

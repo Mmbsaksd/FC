@@ -41,6 +41,10 @@ class AnalysisResult:
     latency_ms: float = 0.0
     error_message: Optional[str] = None
 
+    @property
+    def execution_time_ms(self) -> float:
+        return self.latency_ms
+
 class BaseAnalysisEngine(ABC):
     """
     Abstract Base Class for all parallel analysis engines.

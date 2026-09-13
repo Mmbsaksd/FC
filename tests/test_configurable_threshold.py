@@ -48,18 +48,18 @@ class TestConfigurableThreshold(unittest.TestCase):
 
         # Case 1: Threshold = 60.0 -> Score 67.0 >= 60.0 => PASS
         settings.MIN_OPPORTUNITY_SCORE = 60.0
-        passed, reason = gate.validate_candidate(candidate, context_meta, risk_metrics)
+        passed, reason = gate.validate_candidate(candidate, context_meta, risk_metrics, mode="CHAMPION")
         self.assertTrue(passed, f"Expected PASS at threshold 60.0, got: {reason}")
 
         # Case 2: Threshold = 70.0 -> Score 67.0 < 70.0 => REJECT
         settings.MIN_OPPORTUNITY_SCORE = 70.0
-        passed, reason = gate.validate_candidate(candidate, context_meta, risk_metrics)
+        passed, reason = gate.validate_candidate(candidate, context_meta, risk_metrics, mode="CHAMPION")
         self.assertFalse(passed)
         self.assertIn("Below Required Threshold (70.0)", reason)
 
         # Case 3: Threshold = 80.0 -> Score 67.0 < 80.0 => REJECT
         settings.MIN_OPPORTUNITY_SCORE = 80.0
-        passed, reason = gate.validate_candidate(candidate, context_meta, risk_metrics)
+        passed, reason = gate.validate_candidate(candidate, context_meta, risk_metrics, mode="CHAMPION")
         self.assertFalse(passed)
         self.assertIn("Below Required Threshold (80.0)", reason)
 
@@ -76,13 +76,13 @@ class TestConfigurableThreshold(unittest.TestCase):
 
         # 1. Stale Data must still be REJECTED
         stale_meta = {"data_quality": "STALE", "spread_pips": 1.0}
-        passed, reason = gate.validate_candidate(candidate, stale_meta, {"risk_reward": 2.5})
+        passed, reason = gate.validate_candidate(candidate, stale_meta, {"risk_reward": 2.5}, mode="CHAMPION")
         self.assertFalse(passed)
         self.assertIn("Data Quality", reason)
 
         # 2. Bad R:R (1.4 < 2.0) must still be REJECTED
         valid_meta = {"data_quality": "VALID", "spread_pips": 1.0}
-        passed, reason = gate.validate_candidate(candidate, valid_meta, {"risk_reward": 1.4})
+        passed, reason = gate.validate_candidate(candidate, valid_meta, {"risk_reward": 1.4}, mode="CHAMPION")
         self.assertFalse(passed)
         self.assertIn("Risk/Reward", reason)
 

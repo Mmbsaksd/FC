@@ -94,6 +94,15 @@ class SQLiteManager:
                 outcome TEXT,
                 llm_reasoning TEXT,
                 evidence_json TEXT,
+                why_this_trade_json TEXT,
+                supporting_evidence_json TEXT,
+                contradicting_evidence_json TEXT,
+                neutral_evidence_json TEXT,
+                features_json TEXT,
+                exit_reason TEXT,
+                root_cause TEXT,
+                root_cause_evidence TEXT,
+                features_at_exit_json TEXT,
                 created_at TEXT NOT NULL,
                 updated_at TEXT NOT NULL
             );
@@ -164,6 +173,9 @@ class SQLiteManager:
                 outcome_class TEXT,
                 holding_period_mins INTEGER,
                 regime TEXT,
+                exit_reason TEXT,
+                root_cause TEXT,
+                root_cause_evidence TEXT,
                 created_at TEXT NOT NULL,
                 resolved_at TEXT,
                 FOREIGN KEY (signal_id) REFERENCES signals(signal_id) ON DELETE CASCADE
@@ -222,12 +234,34 @@ class SQLiteManager:
             # Run column migrations if upgrading existing database
             cursor.execute("PRAGMA table_info(signals)")
             cols = [col["name"] for col in cursor.fetchall()]
-            if "setup_key" not in cols:
-                cursor.execute("ALTER TABLE signals ADD COLUMN setup_key TEXT")
-            if "version" not in cols:
-                cursor.execute("ALTER TABLE signals ADD COLUMN version INTEGER DEFAULT 1")
-            if "quality_tier" not in cols:
-                cursor.execute("ALTER TABLE signals ADD COLUMN quality_tier TEXT DEFAULT 'HIGH_QUALITY'")
+            new_signal_cols = {
+                "setup_key": "TEXT",
+                "version": "INTEGER DEFAULT 1",
+                "quality_tier": "TEXT DEFAULT 'HIGH_QUALITY'",
+                "why_this_trade_json": "TEXT",
+                "supporting_evidence_json": "TEXT",
+                "contradicting_evidence_json": "TEXT",
+                "neutral_evidence_json": "TEXT",
+                "features_json": "TEXT",
+                "exit_reason": "TEXT",
+                "root_cause": "TEXT",
+                "root_cause_evidence": "TEXT",
+                "features_at_exit_json": "TEXT"
+            }
+            for col_name, col_type in new_signal_cols.items():
+                if col_name not in cols:
+                    cursor.execute(f"ALTER TABLE signals ADD COLUMN {col_name} {col_type}")
+
+            cursor.execute("PRAGMA table_info(ml_training_records)")
+            ml_cols = [col["name"] for col in cursor.fetchall()]
+            new_ml_cols = {
+                "exit_reason": "TEXT",
+                "root_cause": "TEXT",
+                "root_cause_evidence": "TEXT"
+            }
+            for col_name, col_type in new_ml_cols.items():
+                if col_name not in ml_cols:
+                    cursor.execute(f"ALTER TABLE ml_training_records ADD COLUMN {col_name} {col_type}")
 
             # INDEXES FOR OPTIMAL QUERY PERFORMANCE
             cursor.execute("CREATE INDEX IF NOT EXISTS idx_signals_status ON signals(status);")
@@ -392,17 +426,25 @@ class SQLiteManager:
         with self._get_connection() as conn:
             cursor = conn.cursor()
             try:
+                features = signal.get("features", signal.get("feature_vector", {}))
+                engine_evidence = signal.get("engine_evidence", signal.get("evidence", {}))
+                why_this_trade = signal.get("why_this_trade", {})
+                supporting_evidence = signal.get("supporting_evidence", [])
+                contradicting_evidence = signal.get("contradicting_evidence", [])
+                neutral_evidence = signal.get("neutral_evidence", [])
+
                 cursor.execute("""
                 INSERT INTO signals (
                     signal_id, fingerprint, setup_key, scan_id, trace_id, symbol, raw_symbol, asset_class,
                     direction, entry_price, stop_loss, take_profit_1, take_profit_2,
                     tp1_r, tp2_r, risk_reward, opportunity_score, ml_probability, quality_tier,
-                    status, version, current_price, created_at, updated_at, llm_reasoning, evidence_json
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    status, version, current_price, created_at, updated_at, llm_reasoning, evidence_json,
+                    why_this_trade_json, supporting_evidence_json, contradicting_evidence_json, neutral_evidence_json, features_json
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """, (
                     sig_id, fingerprint, setup_key, signal.get("scan_id", "scan-unknown"), signal.get("trace_id", "trace-unknown"),
                     symbol, signal.get("raw_symbol", signal.get("symbol", "")),
-                    "Forex" if "/" in symbol else "Commodity",
+                    signal.get("asset_class") or ("CRYPTO" if any(c in symbol.upper() for c in ["BTC", "ETH"]) else ("FOREX" if "/" in symbol else "COMMODITY")),
                     direction, entry, sl, tp1, tp2, tp1_r, tp2_r,
                     float(signal.get("risk_reward", 2.0)),
                     float(signal.get("opportunity_score", 70.0)),
@@ -410,7 +452,12 @@ class SQLiteManager:
                     signal.get("quality_tier", "HIGH_QUALITY"),
                     "MONITORING", 1, entry, now_iso, now_iso,
                     signal.get("llm_reasoning", ""),
-                    json.dumps(signal.get("engine_evidence", signal.get("evidence", {})), default=str)
+                    json.dumps(engine_evidence, default=str),
+                    json.dumps(why_this_trade, default=str),
+                    json.dumps(supporting_evidence, default=str),
+                    json.dumps(contradicting_evidence, default=str),
+                    json.dumps(neutral_evidence, default=str),
+                    json.dumps(features, default=str)
                 ))
 
                 # Record Initial Version 1 in signal_revisions
@@ -604,7 +651,19 @@ class SQLiteManager:
                 except Exception as e:
                     logger.error(f"Error saving ML training record: {e}")
 
-    def update_ml_training_outcome(self, signal_id: str, outcome_class: str, realized_r: float, realized_pnl: float, mfe_r: float, mae_r: float, holding_mins: int):
+    def update_ml_training_outcome(
+        self,
+        signal_id: str,
+        outcome_class: str,
+        realized_r: float,
+        realized_pnl: float,
+        mfe_r: float,
+        mae_r: float,
+        holding_mins: int,
+        exit_reason: Optional[str] = None,
+        root_cause: Optional[str] = None,
+        root_cause_evidence: Optional[str] = None
+    ):
         """Updates ground-truth outcome label when a trade closes."""
         now_iso = datetime.now(timezone.utc).isoformat()
         with self._get_connection() as conn:
@@ -612,9 +671,12 @@ class SQLiteManager:
                 conn.execute("""
                 UPDATE ml_training_records
                 SET outcome_class = ?, realized_r = ?, realized_pnl = ?,
-                    mfe_r = ?, mae_r = ?, holding_period_mins = ?, resolved_at = ?
+                    mfe_r = ?, mae_r = ?, holding_period_mins = ?, resolved_at = ?,
+                    exit_reason = COALESCE(?, exit_reason),
+                    root_cause = COALESCE(?, root_cause),
+                    root_cause_evidence = COALESCE(?, root_cause_evidence)
                 WHERE signal_id = ?
-                """, (outcome_class, realized_r, realized_pnl, mfe_r, mae_r, holding_mins, now_iso, signal_id))
+                """, (outcome_class, realized_r, realized_pnl, mfe_r, mae_r, holding_mins, now_iso, exit_reason, root_cause, root_cause_evidence, signal_id))
                 conn.commit()
             except Exception as e:
                 logger.error(f"Error updating ML training outcome: {e}")
@@ -643,8 +705,10 @@ class SQLiteManager:
                     json.dumps(snapshot.get("indicators", {}), default=str)
                 ))
                 conn.commit()
+                return snap_id
             except Exception as e:
                 logger.error(f"Error saving market snapshot: {e}")
+                return None
 
     def save_engine_result(self, scan_id: str, engine_name: str, symbol: str, direction: str, score: float, confidence: float, exec_ms: float, features: Dict[str, Any]):
         """Persists individual engine evaluation."""

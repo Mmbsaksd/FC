@@ -24,7 +24,7 @@ class TestAssetAndProviderRouting(unittest.TestCase):
         """Test enabling only Commodities excludes Forex and Crypto."""
         self.asset_manager.save_config(forex_enabled=False, commodities_enabled=True, crypto_enabled=False)
         active = self.asset_manager.get_active_instruments()
-        self.assertEqual(len(active), 2)
+        self.assertEqual(len(active), 1)
         for inst in active:
             self.assertEqual(inst["type"], "COMMODITY")
 
@@ -32,15 +32,15 @@ class TestAssetAndProviderRouting(unittest.TestCase):
         """Test enabling only Crypto excludes Forex and Commodities."""
         self.asset_manager.save_config(forex_enabled=False, commodities_enabled=False, crypto_enabled=True)
         active = self.asset_manager.get_active_instruments()
-        self.assertEqual(len(active), 4)
+        self.assertEqual(len(active), 2)
         for inst in active:
             self.assertEqual(inst["type"], "CRYPTO")
 
     def test_asset_class_all_enabled_restoration(self):
-        """Restore all 3 asset classes and verify full count."""
+        """Restore all 3 asset classes and verify full core count (6)."""
         self.asset_manager.save_config(forex_enabled=True, commodities_enabled=True, crypto_enabled=True)
         active = self.asset_manager.get_active_instruments()
-        self.assertEqual(len(active), 14)
+        self.assertEqual(len(active), 6)
 
     def test_provider_hierarchy_status(self):
         """Verify provider hierarchy correctly detects status."""

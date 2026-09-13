@@ -33,6 +33,8 @@ from app.parallel.aggregator import EvidenceAggregator
 from app.llm.decision_engine import LLMDecisionEngine
 from app.risk.risk_engine import RiskEngine
 from app.risk.final_gate import DeterministicFinalRiskGate
+from app.risk.candidate_qualifier import candidate_qualifier
+from app.observability.decision_auditor import decision_auditor
 
 # Advanced ML, Memory & Intelligence Layer
 from app.ml.feature_extractor import feature_extractor
@@ -247,8 +249,9 @@ def run_market_scan():
             fastest_engine=fastest
         )
 
-        # Step 3: Aggregate Evidence & Build Complete Market Context
-        context = aggregator.aggregate_evidence(snapshot, engine_results)
+        # Step 3: Aggregate Evidence & Build Complete Market Context (Direction-Aware Candidate / Champion)
+        pipeline_mode = os.getenv("FC_PIPELINE_MODE", "CANDIDATE").upper()
+        context = aggregator.aggregate_evidence(snapshot, engine_results, scan_id=scan_id, mode=pipeline_mode)
         flight_recorder.record_evidence_summary(
             scan_id=scan_id,
             trace_id=trace_id,
@@ -263,14 +266,38 @@ def run_market_scan():
         named_features, feat_vector = feature_extractor.extract_features(snapshot, engine_results, pretrained_embeddings=pt_embeddings)
         meta_prediction = central_meta_model.predict_probability(named_features, direction=context.dominant_direction)
         
-        ml_prob = meta_prediction.get("win_probability", 0.60)
+        ml_prob = meta_prediction.get("win_probability", 0.50)
         # Update context score/probability with Meta-Model insights
         if "MLPrediction" in context.engine_results:
             context.engine_results["MLPrediction"]["metrics"]["win_probability"] = ml_prob
             context.engine_results["MLPrediction"]["metrics"]["brier_score"] = meta_prediction.get("brier_score", 0.14)
 
-        # Step 5: Centralized LLM Reasoning & Decision (with Knowledge Retrieval & Visual Verification)
-        decision_res = llm_decision_engine.evaluate_market_context(context, snapshot=snapshot)
+        # Step 4b: Pre-calculate Trade Geometry & Stage-1 Candidate Qualification
+        risk_metrics = engine_results.get("RiskMetrics", {}).metrics if "RiskMetrics" in engine_results else {}
+        prelim_dir = context.dominant_direction if context.dominant_direction in ["LONG", "SHORT"] else "LONG"
+        atr_val = risk_metrics.get("atr", pip_size * 20.0) if isinstance(risk_metrics, dict) else (pip_size * 20.0)
+
+        calculated_trade_params = RiskEngine.calculate_trade_parameters(
+            symbol=symbol,
+            direction=prelim_dir,
+            current_price=close_price,
+            atr=atr_val,
+            pip_size=pip_size,
+            asset_class=snapshot.asset_class
+        )
+        rr_val = float(calculated_trade_params.get("risk_reward", 2.5))
+        real_ev = RiskEngine.calculate_expected_value(win_prob=ml_prob, risk_reward=rr_val, estimated_spread_pips=spread_pips)
+        context.expected_value_r = real_ev
+
+        # Stage-1 Candidate Qualification (Replaces arbitrary Opportunity Score < 70 cutoff)
+        is_qualified, qual_reason, qual_metrics = candidate_qualifier.evaluate_qualification(
+            context, calculated_trade_params, ml_probability=ml_prob
+        )
+
+        # Step 5: Centralized LLM Reasoning & Adjudication
+        decision_res = llm_decision_engine.evaluate_market_context(context, snapshot=snapshot, mode=pipeline_mode)
+        dir_choice = decision_res.get("direction", prelim_dir)
+
         flight_recorder.record_llm_execution(
             scan_id=scan_id,
             trace_id=trace_id,
@@ -284,27 +311,23 @@ def run_market_scan():
         )
 
         # Step 6: Deterministic Final Hard Risk Gate
-        risk_metrics = engine_results.get("RiskMetrics", {}).metrics if "RiskMetrics" in engine_results else {}
-        dir_choice = decision_res.get("direction", "NEUTRAL")
-        atr_val = risk_metrics.get("atr", pip_size * 20.0) if isinstance(risk_metrics, dict) else (pip_size * 20.0)
-
-        # Calculate trade parameters strictly matching candidate signal direction
-        calculated_trade_params = RiskEngine.calculate_trade_parameters(
-            symbol=symbol,
-            direction=dir_choice if dir_choice in ["LONG", "SHORT"] else "LONG",
-            current_price=close_price,
-            atr=atr_val,
-            pip_size=pip_size
-        )
+        # Re-calculate trade parameters strictly matching final signal direction if direction flipped
+        if dir_choice != prelim_dir and dir_choice in ["LONG", "SHORT"]:
+            calculated_trade_params = RiskEngine.calculate_trade_parameters(
+                symbol=symbol,
+                direction=dir_choice,
+                current_price=close_price,
+                atr=atr_val,
+                pip_size=pip_size,
+                asset_class=snapshot.asset_class
+            )
 
         passed_gate, gate_reason = final_risk_gate.validate_candidate(
             decision_res,
             context.snapshot_meta,
-            calculated_trade_params
+            calculated_trade_params,
+            mode=pipeline_mode
         )
-
-        rr_val = float(calculated_trade_params.get("risk_reward", 2.5))
-        real_ev = RiskEngine.calculate_expected_value(win_prob=ml_prob, risk_reward=rr_val, estimated_spread_pips=spread_pips)
 
         flight_recorder.record_risk_validation(
             scan_id=scan_id,
@@ -315,6 +338,40 @@ def run_market_scan():
             rr=rr_val,
             ev=real_ev,
             reason=gate_reason
+        )
+
+        # Step 6b: Comprehensive Structured Decision Audit Logging
+        cand_id = f"cand-{symbol.replace('=', '').replace('^', '')[:6]}-{scan_id[-15:]}"
+        decision_auditor.record_decision_audit(
+            candidate_id=cand_id,
+            scan_id=scan_id,
+            instrument=symbol_name,
+            asset_class=snapshot.asset_class,
+            timestamp=snapshot.timestamp,
+            direction=dir_choice,
+            engine_outputs=context.engine_results,
+            weighted_contributions=context.weighted_contributions,
+            long_evidence=context.long_evidence,
+            short_evidence=context.short_evidence,
+            neutral_evidence=context.neutral_evidence,
+            directional_consensus=context.directional_consensus,
+            composite_opportunity_score=decision_res.get("opportunity_score", context.composite_opportunity_score),
+            ml_probability=ml_prob,
+            expected_value_r=real_ev,
+            risk_reward=rr_val,
+            entry_price=calculated_trade_params["entry_price"],
+            stop_loss=calculated_trade_params["stop_loss"],
+            take_profit=calculated_trade_params["take_profit_1"],
+            candidate_qualified=is_qualified,
+            qualification_reason=qual_reason,
+            llm_decision=decision_res.get("decision", "NO_TRADE"),
+            llm_reason=decision_res.get("llm_reasoning", ""),
+            llm_supporting_factors=context.supporting_evidence,
+            llm_contradicting_factors=context.contradicting_evidence,
+            final_risk_passed=passed_gate,
+            final_decision="TRADE" if (passed_gate and decision_res.get("decision") == "TRADE") else decision_res.get("decision", "NO_TRADE"),
+            rejection_stage="DETERMINISTIC_FINAL_RISK_GATE" if not passed_gate else None,
+            rejection_reason=gate_reason if not passed_gate else None
         )
 
         # Record decision snapshot in Training Memory (look-ahead free)
@@ -337,6 +394,8 @@ def run_market_scan():
             elif "Contradict" in gate_reason: cat = "Contradictory Evidence"
             elif "Regime" in gate_reason: cat = "Choppy Market Regime"
             elif "ML" in gate_reason: cat = "Weak ML Probability (< 0.50)"
+            elif "LLM Decision" in gate_reason: cat = "LLM Not Approved"
+            elif "Geometry" in gate_reason: cat = "Invalid Price Geometry"
 
             flight_recorder.record_candidate_rejection(
                 scan_id=scan_id,
@@ -346,6 +405,14 @@ def run_market_scan():
                 reason_code="REJECT_GATE",
                 detail=gate_reason,
                 score=decision_res["opportunity_score"]
+            )
+            db_manager.save_observability_event(
+                scan_id=scan_id,
+                component="DeterministicFinalRiskGate",
+                event_type="CANDIDATE_REJECTED",
+                severity="INFO",
+                duration_ms=0.0,
+                message=f"Rejected {symbol_name} {dir_choice}: {gate_reason} (Score: {decision_res['opportunity_score']:.1f}, ML: {ml_prob*100:.1f}%)"
             )
 
             rejections_list.append({
@@ -382,6 +449,7 @@ def run_market_scan():
             "symbol": symbol_name,
             "symbol_name": symbol_name,
             "raw_symbol": symbol,
+            "asset_class": snapshot.asset_class,
             "direction": dir_choice,
             "setup_type": context.engine_results.get("TechnicalAnalysis", {}).get("metrics", {}).get("setup_type", "MOMENTUM_CONTINUATION"),
             "opportunity_score": decision_res["opportunity_score"],
@@ -399,6 +467,13 @@ def run_market_scan():
             "why_this_trade": decision_res["why_this_trade"],
             "retrieved_knowledge": [k.get("title") for k in decision_res.get("retrieved_knowledge", [])],
             "visual_verification": decision_res.get("visual_verification", {}),
+            "features": named_features,
+            "engine_evidence": context.engine_results,
+            "supporting_evidence": context.supporting_evidence,
+            "contradicting_evidence": context.contradicting_evidence,
+            "neutral_evidence": context.neutral_factors,
+            "model_version": getattr(central_meta_model, "version", "meta-model-v2.1"),
+            "regime": context.engine_results.get("MarketRegime", {}).get("metrics", {}).get("regime", "NORMAL"),
             "expires_at": (pd.Timestamp.now(tz="UTC") + pd.Timedelta(hours=4)).isoformat(),
             "timeframe": scan_timeframe
         }
@@ -480,7 +555,7 @@ def run_market_scan():
         if not is_created:
             continue
 
-        # Record to Experience Memory
+        # Record to Experience Memory with full decision-time truth
         experience_memory.record_signal_experience(
             signal_id=signal_id,
             scan_id=scan_id,
@@ -493,7 +568,22 @@ def run_market_scan():
             composite_score=decision_res["opportunity_score"],
             llm_reasoning=decision_res["llm_reasoning"],
             engine_evidence=context.engine_results,
-            knowledge_refs=candidate_summary["retrieved_knowledge"]
+            knowledge_refs=candidate_summary["retrieved_knowledge"],
+            features=named_features,
+            why_this_trade=decision_res["why_this_trade"],
+            supporting_evidence=context.supporting_evidence,
+            contradicting_evidence=context.contradicting_evidence
+        )
+
+        # Record decision snapshot in Training Memory (Zero look-ahead leakage)
+        training_memory.record_decision_snapshot(
+            snapshot_time=candidate_summary["timestamp"],
+            symbol=symbol_name,
+            direction=dir_choice,
+            features=named_features,
+            entry_price=calculated_trade_params["entry_price"],
+            stop_loss=calculated_trade_params["stop_loss"],
+            take_profit=calculated_trade_params["take_profit_1"]
         )
 
         flight_recorder.record_signal_creation(candidate_summary, scan_id=scan_id, trace_id=trace_id)

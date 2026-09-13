@@ -31,11 +31,8 @@ def run_realtime_check():
         p_sym = sym
         if "BTC" in sym or "Bitcoin" in sym: p_sym = "BTC-USD"
         elif "ETH" in sym or "Ethereum" in sym: p_sym = "ETH-USD"
-        elif "SOL" in sym or "Solana" in sym: p_sym = "SOL-USD"
-        elif "XRP" in sym or "Ripple" in sym: p_sym = "XRP-USD"
         elif "/" in sym: p_sym = sym.replace("/", "") + "=X"
-        elif "Gold" in sym: p_sym = "GC=F"
-        elif "Oil" in sym: p_sym = "CL=F"
+        elif "Gold" in sym or "XAU" in sym: p_sym = "GC=F"
         
         try:
             df = provider.fetch_ohlcv(p_sym, timeframe="15M", limit=5)
